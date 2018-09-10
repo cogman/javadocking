@@ -125,11 +125,7 @@ public class CompositeLineDocks extends JPanel {
 	// Main method.
 
 	public static void main(String args[]) {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = CompositeLineDocks::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 

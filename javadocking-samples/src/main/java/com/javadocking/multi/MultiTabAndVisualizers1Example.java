@@ -241,11 +241,7 @@ public class MultiTabAndVisualizers1Example extends JPanel {
 	}
 
 	public static void main(String args[]) {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = MultiTabAndVisualizers1Example::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 

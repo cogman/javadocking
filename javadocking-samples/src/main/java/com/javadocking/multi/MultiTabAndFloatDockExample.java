@@ -136,11 +136,7 @@ public class MultiTabAndFloatDockExample extends JPanel {
 	}
 
 	public static void main(String args[]) {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = MultiTabAndFloatDockExample::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 

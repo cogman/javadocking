@@ -137,11 +137,7 @@ public class MultiFrameExample {
 	// Main method.
 
 	public static void main(String args[]) {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = MultiFrameExample::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 

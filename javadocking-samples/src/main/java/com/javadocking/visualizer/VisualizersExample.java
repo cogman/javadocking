@@ -146,11 +146,7 @@ public class VisualizersExample extends JPanel {
 	}
 
 	public static void main(String args[]) {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = VisualizersExample::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 

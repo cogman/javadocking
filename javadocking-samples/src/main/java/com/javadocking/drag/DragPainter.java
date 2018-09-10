@@ -115,11 +115,7 @@ public class DragPainter extends JPanel {
 	}
 
 	public static void createAndShowGUI() {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = DragPainter::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 

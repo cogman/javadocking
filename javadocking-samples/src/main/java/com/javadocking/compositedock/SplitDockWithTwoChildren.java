@@ -102,11 +102,7 @@ public class SplitDockWithTwoChildren extends JPanel {
 	// Main method.
 
 	public static void createAndShowGUI() {
-		Runnable doCreateAndShowGUI = new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		};
+		Runnable doCreateAndShowGUI = SplitDockWithTwoChildren::createAndShowGUI;
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 
