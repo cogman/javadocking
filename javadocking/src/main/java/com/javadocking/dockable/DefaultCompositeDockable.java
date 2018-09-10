@@ -151,7 +151,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	public String getID() {
 
 		// Create the ID. It's the concatenation of the IDs of the children.
-		StringBuffer compositeId = new StringBuffer();
+		StringBuilder compositeId = new StringBuilder();
 		for (int index = 0; index < getDockableCount(); index++) {
 			if (index != 0) {
 				compositeId.append(ID_SEPARATOR);

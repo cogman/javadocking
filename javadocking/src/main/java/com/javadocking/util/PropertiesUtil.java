@@ -364,7 +364,7 @@ public class PropertiesUtil {
 		// Check if the array is not null or if the size is 0.
 		if ((value != null) && (value.length > 0)) {
 			// Create the string for the string array.
-			StringBuffer totalString = new StringBuffer(value[0]);
+			StringBuilder totalString = new StringBuilder(value[0]);
 			for (int index = 1; index < value.length; index++) {
 				// Separate the strings with a comma.
 				totalString.append(COMMA);
@@ -435,7 +435,7 @@ public class PropertiesUtil {
 		// Check if the array is not null or if the size is 0.
 		if ((value != null) && (value.length > 0)) {
 			// Create the string for the integer array.
-			StringBuffer totalString = new StringBuffer();
+			StringBuilder totalString = new StringBuilder();
 			totalString.append(value[0]);
 			for (int index = 1; index < value.length; index++) {
 				// Separate the strings with a comma.
@@ -564,7 +564,7 @@ public class PropertiesUtil {
 		// Check if the array is not null or if the size is 0.
 		if ((value != null) && (value.length > 0)) {
 			// Create the string for the double array.
-			StringBuffer totalString = new StringBuffer("" + value[0]);
+			StringBuilder totalString = new StringBuilder("" + value[0]);
 			for (int index = 1; index < value.length; index++) {
 				// Separate the strings with a comma.
 				totalString.append(COMMA);

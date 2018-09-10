@@ -197,7 +197,7 @@ public class Position {
 		// Check if the position is not null.
 		if (value != null) {
 			// Create the string for the position.
-			StringBuffer positionString = new StringBuffer("(");
+			StringBuilder positionString = new StringBuilder("(");
 			for (int dimension = 0; dimension < value.getDimensions() - 1; dimension++) {
 				positionString.append(value.getPosition(dimension));
 				positionString.append(COMMA);
@@ -288,7 +288,7 @@ public class Position {
 	public String toString() {
 
 		// Create the string for the position.
-		StringBuffer positionString = new StringBuffer("(");
+		StringBuilder positionString = new StringBuilder("(");
 		for (int dimension = 0; dimension < getDimensions() - 1; dimension++) {
 			positionString.append(getPosition(dimension));
 			positionString.append(COMMA);
