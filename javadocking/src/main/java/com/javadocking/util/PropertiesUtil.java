@@ -190,7 +190,7 @@ public class PropertiesUtil {
 	 * @param value      The default value of the property.
 	 */
 	public static void setInteger(Properties properties, String name, int value) {
-		properties.put(name, (new Integer(value)).toString());
+		properties.put(name, Integer.toString(value));
 	}
 
 	/**
