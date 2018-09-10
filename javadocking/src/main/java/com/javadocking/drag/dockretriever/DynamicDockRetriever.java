@@ -39,10 +39,6 @@ import java.util.Set;
 public class DynamicDockRetriever implements DockRetriever {
 
 	/**
-	 * The root dock of the dock, where the dockable is currently docked.
-	 */
-	private Dock currentRootDock;
-	/**
 	 * The child of the root dock of the dock, where the dockable is currently docked.
 	 */
 	private Dock currentChildOfRootDock;
@@ -385,7 +381,10 @@ public class DynamicDockRetriever implements DockRetriever {
 	private boolean isFloating() {
 
 		// Get the root dock and the dock under the root.
-		currentRootDock = currentDockable.getDock();
+		/**
+		 * The root dock of the dock, where the dockable is currently docked.
+		 */
+		Dock currentRootDock = currentDockable.getDock();
 		currentChildOfRootDock = null;
 		while (currentRootDock.getParentDock() != null) {
 			currentChildOfRootDock = currentRootDock;

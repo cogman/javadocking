@@ -162,11 +162,6 @@ public class DynamicTabDragger implements Dragger {
 	 * The tabbed pane that contained the dragged dockable.
 	 */
 	private JTabbedPane sourceTabbedPane;
-	/**
-	 * The index of the tab that contains the dragged dockable, when the dragged dockable is not
-	 * a composite dockable.
-	 */
-	private int oldTabIndex;
 
 	// Cursors.
 	/**
@@ -205,7 +200,11 @@ public class DynamicTabDragger implements Dragger {
 					dockableOffset = SwingUtilities.convertPoint(mouseComponent, dockableOffset, sourceTabbedPane);
 
 					// Get the selected tab and its dockable.
-					oldTabIndex = sourceTabbedPane.indexAtLocation(dockableOffset.x, dockableOffset.y);
+					/**
+					 * The index of the tab that contains the dragged dockable, when the dragged dockable is not
+					 * a composite dockable.
+					 */
+					final int oldTabIndex = sourceTabbedPane.indexAtLocation(dockableOffset.x, dockableOffset.y);
 					if (oldTabIndex >= 0) {
 						// One tab is selected. The dockable that is docked in the tab will be dragged.
 						Component tabComponent = sourceTabbedPane.getComponentAt(oldTabIndex);

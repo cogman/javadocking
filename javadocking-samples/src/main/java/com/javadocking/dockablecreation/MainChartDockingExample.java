@@ -54,10 +54,6 @@ public class MainChartDockingExample extends JPanel {
 
 	// Fields.
 
-	/**
-	 * All the dockables of the application.
-	 */
-	private Dockable[] dockables;
 	private int chartCount = 0;
 	private DockingPath dockingPath;
 	private JMenu windowMenu;
@@ -80,7 +76,10 @@ public class MainChartDockingExample extends JPanel {
 
 
 		// The dockables.
-		dockables = new Dockable[5];
+		/**
+		 * All the dockables of the application.
+		 */
+		final Dockable[] dockables = new Dockable[5];
 		JPanel buttonPanel = createButtonPanel();
 		JPanel helloPanel = createHelloPanel();
 		JPanel chartPanel1 = new DynamicChart();

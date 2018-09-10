@@ -69,10 +69,6 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 	 */
 	private Image smallImage;
 	/**
-	 * The size of the small image of the dockable component.
-	 */
-	private Dimension smallImageSize;
-	/**
 	 * The position of this header.
 	 */
 	private int position = Position.TOP;
@@ -125,6 +121,10 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 		try {
 			// Create the image.
 			Component component = dockable.getContent();
+			/**
+			 * The size of the small image of the dockable component.
+			 */
+			Dimension smallImageSize;
 			if ((component.getSize().width <= 0) || (component.getSize().height <= 0)) {
 				JWindow frame = new JWindow();
 				frame.setLocation(-5000000, -5000000);

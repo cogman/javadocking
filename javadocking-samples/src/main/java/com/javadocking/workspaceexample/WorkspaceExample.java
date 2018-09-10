@@ -82,10 +82,6 @@ public class WorkspaceExample extends JPanel {
 	// Fields.
 
 	/**
-	 * The ID for the owner window.
-	 */
-	private String frameId = "frame";
-	/**
 	 * The model with the docks, dockables, and visualizers (a minimizer and a maximizer).
 	 */
 	private FloatDockModel dockModel;
@@ -227,6 +223,10 @@ public class WorkspaceExample extends JPanel {
 
 		// Try to decode the dock model from file.
 		MyDockModelPropertiesDecoder dockModelDecoder = new MyDockModelPropertiesDecoder();
+		/**
+		 * The ID for the owner window.
+		 */
+		final String frameId = "frame";
 		if (dockModelDecoder.canDecodeSource(SOURCE)) {
 			try {
 				// Create the map with the dockables, that the decoder needs.

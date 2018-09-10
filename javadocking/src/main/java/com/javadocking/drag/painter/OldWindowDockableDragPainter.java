@@ -27,10 +27,6 @@ public class OldWindowDockableDragPainter implements DockableDragPainter {
 	 */
 	private Point windowLocation = new Point();
 	/**
-	 * On this component the dragged dockable is shown.
-	 */
-	private Component dragComponent;
-	/**
 	 * The factory that creates the drag component.
 	 */
 	private DragComponentFactory dragComponentFactory;
@@ -80,7 +76,10 @@ public class OldWindowDockableDragPainter implements DockableDragPainter {
 
 			// Create the drag rectangle.
 			//TODO optimize
-			dragComponent = dragComponentFactory.createDragComponent(dockable, dock, rectangle);
+			/**
+			 * On this component the dragged dockable is shown.
+			 */
+			final Component dragComponent = dragComponentFactory.createDragComponent(dockable, dock, rectangle);
 			panel.removeAll();
 			panel.add(dragComponent);
 			if (!window.isVisible()) {

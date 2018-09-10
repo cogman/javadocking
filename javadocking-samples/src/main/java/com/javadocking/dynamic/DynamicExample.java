@@ -46,15 +46,6 @@ public class DynamicExample extends JPanel {
 
 	// Fields.
 
-	/**
-	 * The ID for the owner window.
-	 */
-	private String frameId = "frame";
-	/**
-	 * The model with the docks and dockables that are visible.
-	 */
-	private FloatDockModel dockModel;
-
 	// Constructors.
 
 	public DynamicExample(JFrame frame) {
@@ -110,7 +101,14 @@ public class DynamicExample extends JPanel {
 
 		// Create the dock model for the docks because they could not be
 		// retrieved from a file.
-		dockModel = new FloatDockModel("workspace.dck");
+		/**
+		 * The model with the docks and dockables that are visible.
+		 */
+		final FloatDockModel dockModel = new FloatDockModel("workspace.dck");
+		/**
+		 * The ID for the owner window.
+		 */
+		final String frameId = "frame";
 		dockModel.addOwner(frameId, frame);
 
 		// Give the dock model to the docking manager.

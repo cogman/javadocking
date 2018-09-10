@@ -49,10 +49,6 @@ public class MultiWorkspaceExample extends JPanel {
 	public static final int FRAME_HEIGHT = 550;
 
 	/**
-	 * The ID for the owner window.
-	 */
-	private String frameId = "frame";
-	/**
 	 * The model with the docks, dockables, and visualizers (a minimizer and a maximizer).
 	 */
 	private DockModel dockModel;
@@ -147,6 +143,10 @@ public class MultiWorkspaceExample extends JPanel {
 
 				// Create the map with the owner windows, that the decoder needs.
 				Map ownersMap = new HashMap();
+				/**
+				 * The ID for the owner window.
+				 */
+				final String frameId = "frame";
 				ownersMap.put(frameId, frame);
 
 				// Create the map with the visualizers, that the decoder needs.

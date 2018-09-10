@@ -21,10 +21,6 @@ class TransparentWindow extends JWindow {
 	 */
 	private Image windowImage;
 	/**
-	 * The graphics of the window image.
-	 */
-	private Graphics windowImageGraphics;
-	/**
 	 * The painter that paints the content on the window.
 	 */
 	private RectanglePainter rectanglePainter = new DefaultRectanglePainter();
@@ -47,7 +43,10 @@ class TransparentWindow extends JWindow {
 		if (windowImage == null) {
 			windowImage = createImage(getWidth(), getHeight());
 		}
-		windowImageGraphics = windowImage.getGraphics();
+		/**
+		 * The graphics of the window image.
+		 */
+		final Graphics windowImageGraphics = windowImage.getGraphics();
 		windowImageGraphics.drawImage(screenImage, 0, 0, getWidth(), getHeight(), getX(), getY(), getX() + getWidth(), getY() + getHeight(), null);
 		rectanglePainter.paintRectangle(windowImageGraphics, 0, 0, getWidth(), getHeight());
 		graphics.drawImage(windowImage, 0, 0, null);

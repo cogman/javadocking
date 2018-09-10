@@ -74,23 +74,6 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	 */
 	private static final String PROPERTY_DOCKABLE_IDS = "dockableIds";
 
-	/**
-	 * The relative top offset of the priority rectangle.
-	 */
-	private static double priorityRectangleRelativeTopOffset = 2.0 / 8.0;
-	/**
-	 * The relative left offset of the priority rectangle.
-	 */
-	private static double priorityRectangleRelativeLeftOffset = 2.0 / 8.0;
-	/**
-	 * The relative bottom offset of the priority rectangle.
-	 */
-	private static double priorityRectangleRelativeBottomOffset = 2.0 / 8.0;
-	/**
-	 * The relative right offset of the priority rectangle.
-	 */
-	private static double priorityRectangleRelativeRightOffset = 2.0 / 8.0;
-
 	// Fields.
 
 	/**
@@ -584,6 +567,16 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	 */
 	protected void getPriorityRectangle(Rectangle rectangle) {
 		Dimension size = getSize();
+		/**
+		 * The relative right offset of the priority rectangle.
+		 */
+		final double priorityRectangleRelativeRightOffset = 2.0 / 8.0; /**
+		 * The relative bottom offset of the priority rectangle.
+		 */final double priorityRectangleRelativeBottomOffset = 2.0 / 8.0; /**
+		 * The relative left offset of the priority rectangle.
+		 */final double priorityRectangleRelativeLeftOffset = 2.0 / 8.0; /**
+		 * The relative top offset of the priority rectangle.
+		 */final double priorityRectangleRelativeTopOffset = 2.0 / 8.0;
 		rectangle.setBounds((int) (size.width * priorityRectangleRelativeLeftOffset),
 				(int) (size.height * priorityRectangleRelativeTopOffset),
 				(int) (size.width * (1 - priorityRectangleRelativeLeftOffset - priorityRectangleRelativeRightOffset)),
