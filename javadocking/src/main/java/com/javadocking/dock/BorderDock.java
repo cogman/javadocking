@@ -74,7 +74,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	/**
 	 * When the border dock is set to this mode, the docking mode for dockables
-	 * in child docks should have one of the folowing values:
+	 * in child docks should have one of the following values:
 	 * <ul>
 	 * <li>for {@link Position#TOP}: {@link DockingMode#TOP},</li>
 	 * <li>for {@link Position#BOTTOM}: {@link DockingMode#BOTTOM},</li>
@@ -85,7 +85,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	public static final int MODE_GENERAL = 0;
 	/**
 	 * When the border dock is set to this mode, the docking mode for dockables
-	 * in child docks should have one of the folowing values:
+	 * in child docks should have one of the following values:
 	 * <ul>
 	 * <li>for {@link Position#TOP}: {@link DockingMode#HORIZONTAL_TOOLBAR},</li>
 	 * <li>for {@link Position#BOTTOM}: {@link DockingMode#HORIZONTAL_TOOLBAR},</li>
@@ -96,7 +96,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	public static final int MODE_TOOL_BAR = 1;
 	/**
 	 * When the border dock is set to this mode, the docking mode for dockables
-	 * in child docks should have one of the folowing values:
+	 * in child docks should have one of the following values:
 	 * <ul>
 	 * <li>for {@link Position#TOP}: {@link DockingMode#HORIZONTAL_MINIMIZE},</li>
 	 * <li>for {@link Position#BOTTOM}: {@link DockingMode#HORIZONTAL_MINIMIZE},</li>
@@ -316,7 +316,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 			return Priority.CANNOT_DOCK;
 		}
 
-		// Get the positon and docking mode.
+		// Get the position and docking mode.
 		int dockingModes = dockable.getDockingModes();
 		int dockPosition = getDockPosition(relativeLocation);
 		int dockingMode = getDockingMode(dockPosition);
@@ -586,7 +586,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 			added = true;
 		}
 
-		// Could we add the child dock in the givne position?
+		// Could we add the child dock in the given position?
 		if (!added) {
 			// Add the dock in the first free position.
 			if ((centerChildDock == null) && (centerComponent != null)) {
@@ -1170,7 +1170,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
-	// Private metods.
+	// Private methods.
 
 
 	private int[] getAlternatePositions(int position) {

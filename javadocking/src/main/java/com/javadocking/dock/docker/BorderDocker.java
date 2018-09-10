@@ -73,9 +73,8 @@ public class BorderDocker implements Docker {
 			if (lastDock != null) {
 				// Try to add the dockable to this dock.
 				if (lastDock.getDockPriority(dockable, DEFAULT_LOCATION) != Priority.CANNOT_DOCK) {
-					//boolean succes = lastDock.addDockable(dockable, DEFAULT_LOCATION, DEFAULT_LOCATION);
-					boolean succes = DockingManager.getDockingExecutor().changeDocking(dockable, lastDock, DEFAULT_LOCATION, DEFAULT_LOCATION);
-					if (succes) {
+					boolean success = DockingManager.getDockingExecutor().changeDocking(dockable, lastDock, DEFAULT_LOCATION, DEFAULT_LOCATION);
+					if (success) {
 						lastDockables.add(dockable);
 						return true;
 					}
@@ -180,7 +179,7 @@ public class BorderDocker implements Docker {
 					(position != Position.LEFT) &&
 					(position != Position.RIGHT) &&
 					(position != Position.TOP)) {
-				throw new IllegalArgumentException("invalid child position at ndex [" + index + "].");
+				throw new IllegalArgumentException("invalid child position at index [" + index + "].");
 			}
 			childPositionsCopy[index] = position;
 		}

@@ -340,7 +340,7 @@ public class ButtonDockable implements Dockable {
 
 	}
 
-	// Private metods.
+	// Private methods.
 
 	public int hashCode() {
 		return getID().hashCode();

@@ -103,7 +103,7 @@ public class ButtonSample extends JPanel {
 		buttonDockables[37] = createButtonDockable("ButtonDockableChartBar", "Bar Chart", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/chart_bar.png")), "Bar Chart!");
 		buttonDockables[38] = createButtonDockable("ButtonDockableChartCurve", "Curve Chart", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/chart_curve.png")), "Curve Chart!");
 		buttonDockables[39] = createButtonDockable("ButtonDockableChartLine", "Line Chart", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/chart_line.png")), "Chart!");
-		buttonDockables[40] = createButtonDockable("ButtonDockableChartOrganisation", "Organisation Chart", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/chart_organisation.png")), "Oraganisation Chart!");
+		buttonDockables[40] = createButtonDockable("ButtonDockableChartOrganisation", "Organisation Chart", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/chart_organisation.png")), "Organisation Chart!");
 		buttonDockables[41] = createButtonDockable("ButtonDockableChartPie", "Pie Chart", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/chart_pie.png")), "Pie Chart!");
 
 		// Create the border dock for the buttons.
