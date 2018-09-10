@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.TabDock;
@@ -16,11 +8,12 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class TabDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public TabDockSample(JFrame frame)
-	{
+public class TabDockSample extends JPanel {
+
+	public TabDockSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -56,7 +49,7 @@ public class TabDockSample extends JPanel
 		// Create the split pane.
 		JSplitPane splitPane = DockingManager.getComponentFactory().createJSplitPane();
 		add(splitPane, BorderLayout.CENTER);
-		
+
 		// Add the docks.
 		splitPane.setLeftComponent(dock1);
 		splitPane.setRightComponent(dock2);
@@ -73,7 +66,7 @@ public class TabDockSample extends JPanel
 		int height = 400;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 }

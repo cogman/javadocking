@@ -1,6 +1,5 @@
 package com.javadocking.util;
 
-public class DragProperties
-{
+public class DragProperties {
 
 }

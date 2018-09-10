@@ -7,24 +7,23 @@ import com.javadocking.dockable.Dockable;
 /**
  * This is an interface for a factory that creates {@link com.javadocking.drag.Dragger}s
  * for the dockables of a given {@link com.javadocking.dock.Dock} or for a given {@link Dockable}.
- * 
+ *
  * @author Heidi Rakels.
  */
-public interface DraggerFactory
-{
+public interface DraggerFactory {
 	/**
 	 * Creates a dragger for the dockables of the given dock.
-	 * 
-	 * @param 	dock 		The dock for which a dragger should be created.
-	 * @return 				The created dragger.
+	 *
+	 * @param dock The dock for which a dragger should be created.
+	 * @return The created dragger.
 	 */
-	public Dragger createDragger(Dock dock);
-	
+	Dragger createDragger(Dock dock);
+
 	/**
 	 * Creates a dragger for the given dockable.
-	 * 
-	 * @param 	dockable 	The dockable for which a dragger should be created.
-	 * @return 				The created dragger.
+	 *
+	 * @param dockable The dockable for which a dragger should be created.
+	 * @return The created dragger.
 	 */
-	public Dragger createDragger(Dockable dockable);
+	Dragger createDragger(Dockable dockable);
 }

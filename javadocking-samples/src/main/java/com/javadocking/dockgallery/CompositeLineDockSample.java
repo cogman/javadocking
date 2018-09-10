@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.CompositeLineDock;
 import com.javadocking.dock.Position;
@@ -19,11 +11,12 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class CompositeLineDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public CompositeLineDockSample(JFrame frame)
-	{
+public class CompositeLineDockSample extends JPanel {
+
+	public CompositeLineDockSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -62,7 +55,7 @@ public class CompositeLineDockSample extends JPanel
 		SingleDock singleDock2 = new SingleDock();
 		SingleDock singleDock3 = new SingleDock();
 		SingleDock singleDock4 = new SingleDock();
-		
+
 		// Add the dockable.
 		singleDock1.addDockable(dockable1, SingleDock.SINGLE_POSITION);
 		singleDock2.addDockable(dockable2, SingleDock.SINGLE_POSITION);
@@ -92,14 +85,14 @@ public class CompositeLineDockSample extends JPanel
 		// Add the root docks to the dock model.
 		dockModel.addRootDock("tabDock", tabDock, frame);
 		dockModel.addRootDock("lineDock", lineDock, frame);
-		
+
 		// Set the frame properties.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = 600;
 		int height = 600;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 }

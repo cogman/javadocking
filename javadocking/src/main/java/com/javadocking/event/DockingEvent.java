@@ -1,8 +1,8 @@
 package com.javadocking.event;
 
-import java.util.EventObject;
-
 import com.javadocking.dock.Dock;
+
+import java.util.EventObject;
 
 /**
  * <p>
@@ -21,63 +21,62 @@ import com.javadocking.dock.Dock;
  * <li>When a dockable or child dock is moved to another dock, the origin dock and destination dock are different.</li>
  * </ul>
  *
- * 
  * @author Heidi Rakels.
  */
-public class DockingEvent extends EventObject
-{
+public class DockingEvent extends EventObject {
 
 	// Fields.
 
-	/** The dock from which the dockable or child dock is removed or moved. 
-	 * Null when the dockable was closed before or the child dock is added. */
-	private Dock		originDock;
-	/** The dock to which the dockable or child dock is added or moved. 
-	 * Null when the dockable is closed or the child dock is removed. */
-	private Dock		destinationDock;
-	
+	/**
+	 * The dock from which the dockable or child dock is removed or moved.
+	 * Null when the dockable was closed before or the child dock is added.
+	 */
+	private Dock originDock;
+	/**
+	 * The dock to which the dockable or child dock is added or moved.
+	 * Null when the dockable is closed or the child dock is removed.
+	 */
+	private Dock destinationDock;
+
 	/**
 	 * Constructs a docking event for the given dock.
-	 * 
-	 * @param 	source			The object on which the event initially occurred.
-	 * @param 	originDock		The dock from which the dockable or child dock is removed or moved. 
-	 * 							Null when the dockable was closed before or the child dock is added.
-	 * @param 	destinationDock	The dock to which the dockable or child dock is added or moved. 
-	 * 							Null when the dockable is closed or the child dock is removed.
-	 * @throws	IllegalArgumentException 	If the dock is null.
+	 *
+	 * @param source          The object on which the event initially occurred.
+	 * @param originDock      The dock from which the dockable or child dock is removed or moved.
+	 *                        Null when the dockable was closed before or the child dock is added.
+	 * @param destinationDock The dock to which the dockable or child dock is added or moved.
+	 *                        Null when the dockable is closed or the child dock is removed.
+	 * @throws IllegalArgumentException If the dock is null.
 	 */
-	public DockingEvent(Object source, Dock originDock, Dock destinationDock)
-	{
-		
+	public DockingEvent(Object source, Dock originDock, Dock destinationDock) {
+
 		super(source);
-		
+
 		this.originDock = originDock;
 		this.destinationDock = destinationDock;
-		
+
 	}
 
 	// Getters / Setters.
 
 	/**
-	 * Gets the dock from which the dockable or child dock is removed or moved. 
-	 * 
-	 * @return					The dock from which the dockable or child dock is removed or moved. 
-	 * 							Null when the dockable was closed before or the child dock is added.
+	 * Gets the dock from which the dockable or child dock is removed or moved.
+	 *
+	 * @return The dock from which the dockable or child dock is removed or moved.
+	 * Null when the dockable was closed before or the child dock is added.
 	 */
-	public Dock getOriginDock()
-	{
+	public Dock getOriginDock() {
 		return originDock;
 	}
-	
+
 	/**
-	 * Gets the dock to which the dockable or child dock is added or moved. 
-	 * 
-	 * @return					The dock to which the dockable or child dock is added or moved. 
-	 * 							Null when the dockable is closed or the child dock is removed.
+	 * Gets the dock to which the dockable or child dock is added or moved.
+	 *
+	 * @return The dock to which the dockable or child dock is added or moved.
+	 * Null when the dockable is closed or the child dock is removed.
 	 */
-	public Dock getDestinationDock()
-	{
+	public Dock getDestinationDock() {
 		return destinationDock;
 	}
-	
+
 }

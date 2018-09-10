@@ -1,65 +1,55 @@
 package com.javadocking.drag.painter;
 
-import java.awt.AWTException;
-import java.awt.BufferCapabilities;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.Window;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 /**
  * This is a window that has the screen as background.
  * The image of the screen is made when {@link #captureScreen()} is called.
  * The window can be repainted by calliong {@link #doRepaint()}.
- * 
-
+ *
  * @author Heidi Rakels.
  */
-class TransparentWindowAlt extends Window 
-{
-	
-	/** The image of the screen. */
-	private Image screenImage;
-	/** The painter that paints the content on the window. */
-	private RectanglePainter rectanglePainter = new DefaultRectanglePainter();
+class TransparentWindowAlt extends Window {
+
 	private static BufferCapabilities bufCap;
 	private static BufferStrategy strategy;
-	//private static BufferCapabilities.FlipContents flipContents;
-	int frames = 0;
 
-	static
-	{
+	static {
 		// Determine if page flipping is supported
-	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    GraphicsDevice gd = ge.getDefaultScreenDevice();
-	    GraphicsConfiguration gc = gd.getDefaultConfiguration();
-	    bufCap = gc.getBufferCapabilities();
-	    boolean page = bufCap.isPageFlipping();
-	    
-	    if (page) {
-	        System.out.println("Page flipping");
-	    } else {
-	    	System.out.println("no page flipping");
-	        // Page flipping is not supported
-	    }
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		GraphicsConfiguration gc = gd.getDefaultConfiguration();
+		bufCap = gc.getBufferCapabilities();
+		boolean page = bufCap.isPageFlipping();
+
+		if (page) {
+			System.out.println("Page flipping");
+		} else {
+			System.out.println("no page flipping");
+			// Page flipping is not supported
+		}
 
 	}
+
+	//private static BufferCapabilities.FlipContents flipContents;
+	int frames = 0;
+	/**
+	 * The image of the screen.
+	 */
+	private Image screenImage;
+	/**
+	 * The painter that paints the content on the window.
+	 */
+	private RectanglePainter rectanglePainter = new DefaultRectanglePainter();
 	// Constructors.
 
 	/**
 	 * Constructs a transparent window.
-	 * 
-	 * @param	rectanglePainter	The painter that paints the content on the window.
+	 *
+	 * @param    rectanglePainter    The painter that paints the content on the window.
 	 */
-	public TransparentWindowAlt(RectanglePainter rectanglePainter, Window owner)
-	{
+	public TransparentWindowAlt(RectanglePainter rectanglePainter, Window owner) {
 		super(owner);
 		this.rectanglePainter = rectanglePainter;
 //		System.out.println("isDisplayable = " + isDisplayable());
@@ -72,18 +62,16 @@ class TransparentWindowAlt extends Window
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) 
-	{
+	public void paint(Graphics graphics) {
 
 //		 this component must be displayable before its
-        // paint method is called for the first time
-		if(strategy == null)
-        {
-            init();
-        }
+		// paint method is called for the first time
+		if (strategy == null) {
+			init();
+		}
 
-        Graphics g = strategy.getDrawGraphics();
-        
+		Graphics g = strategy.getDrawGraphics();
+
 //        if (!flipContents.equals(BufferCapabilities.FlipContents.BACKGROUND)) {
 //            // Clear background
 //            g.setColor(Color.white);
@@ -91,8 +79,8 @@ class TransparentWindowAlt extends Window
 //
 //       }
 
- 		g.drawImage(screenImage, 0, 0, getWidth(), getHeight(), getX(), getY(), getX() + getWidth(), getY() + getHeight(), null);
- 		rectanglePainter.paintRectangle(g, 0, 0, getWidth(), getHeight());
+		g.drawImage(screenImage, 0, 0, getWidth(), getHeight(), getX(), getY(), getX() + getWidth(), getY() + getHeight(), null);
+		rectanglePainter.paintRectangle(g, 0, 0, getWidth(), getHeight());
 /*			
 		for(i=50;i<500;i++){
 			for(j=50;j<500;j++){
@@ -105,13 +93,13 @@ class TransparentWindowAlt extends Window
 */
 //		g.drawImage(offscreen,0,0,null); 
 
-        // Done drawing
-        g.dispose();
+		// Done drawing
+		g.dispose();
 
-        // Flip the back buffer to the screen
-        strategy.show();
-		
-		
+		// Flip the back buffer to the screen
+		strategy.show();
+
+
 //		if (windowImage == null) 
 //		{
 //			windowImage = createImage(getWidth(), getHeight());
@@ -128,43 +116,38 @@ class TransparentWindowAlt extends Window
 
 	/**
 	 * Repaints the window.
-	 *
 	 */
-	public void doRepaint() 
-	{
-		
+	public void doRepaint() {
+
 		Graphics g = getGraphics();
 		paint(g);
-		
+
 	}
-	
+
 	/**
 	 * Creates an image of the screen.
 	 */
-	public void captureScreen() 
-	{
+	public void captureScreen() {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		try {
 			Robot r = new Robot();
 			Rectangle rect = new Rectangle(0, 0, d.width, d.height);
 			screenImage = r.createScreenCapture(rect);
-		} catch (AWTException awe)
-		{
+		} catch (AWTException awe) {
 			System.out.println("Robot exception.");
 		}
 	}
-	
-	private void init() 
-	{
-	    int numBuffers = 2;  // Includes front buffer
-        createBufferStrategy(numBuffers);
-    
-        // Determine the state of a back buffer after it has been displayed on the screen.
-        // This information is used to optimize performance. For example, if your application
-        // needs to initialize a back buffer with a background color, there is
-        // no need to do so if the flip contents is BACKGROUND.
-        strategy = getBufferStrategy();
-        bufCap = strategy.getCapabilities();
+
+	private void init() {
+		int numBuffers = 2;  // Includes front buffer
+		createBufferStrategy(numBuffers);
+
+		// Determine the state of a back buffer after it has been displayed on the screen.
+		// This information is used to optimize performance. For example, if your application
+		// needs to initialize a back buffer with a background color, there is
+		// no need to do so if the flip contents is BACKGROUND.
+		strategy = getBufferStrategy();
+		bufCap = strategy.getCapabilities();
 //        flipContents = bufCap.getFlipContents();
 //        if (flipContents.equals(BufferCapabilities.FlipContents.UNDEFINED)) {
 //            // The contents is unknown after a flip

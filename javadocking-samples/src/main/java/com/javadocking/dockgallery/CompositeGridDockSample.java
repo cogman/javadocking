@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.CompositeGridDock;
 import com.javadocking.dock.Position;
@@ -19,12 +11,13 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
+import javax.swing.*;
+import java.awt.*;
 
-public class CompositeGridDockSample extends JPanel
-{
 
-	public CompositeGridDockSample(JFrame frame)
-	{
+public class CompositeGridDockSample extends JPanel {
+
+	public CompositeGridDockSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -44,7 +37,7 @@ public class CompositeGridDockSample extends JPanel
 		SmallPanel smallText7 = new SmallPanel("I am window 7");
 		SmallPanel smallText8 = new SmallPanel("I am window 8");
 		SmallPanel smallText9 = new SmallPanel("I am window 9");
-		SmallPanel smallText10= new SmallPanel("I am window 10");
+		SmallPanel smallText10 = new SmallPanel("I am window 10");
 
 		// Create the dockable with the content.
 		// Our dockables can not float.
@@ -57,7 +50,7 @@ public class CompositeGridDockSample extends JPanel
 		Dockable dockable7 = new DefaultDockable("Window7", smallText7, "Window 7", null, DockingMode.ALL - DockingMode.FLOAT);
 		Dockable dockable8 = new DefaultDockable("Window8", smallText8, "Window 8", null, DockingMode.ALL - DockingMode.FLOAT);
 		Dockable dockable9 = new DefaultDockable("Window9", smallText9, "Window 9", null, DockingMode.ALL - DockingMode.FLOAT);
-		Dockable dockable10= new DefaultDockable("Window10",smallText10,"Window 10",null, DockingMode.ALL - DockingMode.FLOAT);
+		Dockable dockable10 = new DefaultDockable("Window10", smallText10, "Window 10", null, DockingMode.ALL - DockingMode.FLOAT);
 
 		// Create the docks.
 		TabDock tabDock = new TabDock();
@@ -98,18 +91,18 @@ public class CompositeGridDockSample extends JPanel
 		splitPane.setRightComponent(tabDock);
 		splitPane.setDividerLocation(400);
 		splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-		
+
 		// Add the root docks to the dock model.
 		dockModel.addRootDock("tabDock", tabDock, frame);
 		dockModel.addRootDock("gridDock", gridDock, frame);
-		
+
 		// Set the frame properties.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = 600;
 		int height = 600;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 

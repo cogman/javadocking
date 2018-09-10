@@ -1,12 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SingleDock;
@@ -18,13 +11,14 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class SplitDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public SplitDockSample(JFrame frame)
-	{
+public class SplitDockSample extends JPanel {
+
+	public SplitDockSample(JFrame frame) {
 		super(new BorderLayout());
-		
+
 		// Set the frame properties.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = 800;
@@ -60,10 +54,10 @@ public class SplitDockSample extends JPanel
 		SplitDock southEastDock = new SplitDock();
 		SplitDock eastDock = new SplitDock();
 		SplitDock rootDock = new SplitDock();
-		
+
 		// Add the root dock to the panel.
 		add(rootDock);
-		
+
 		// Create a single dock factory as leaf child dock factory for the split docks (because you don't want tabs).
 		DockFactory leafChildDockFactory = new SingleDockFactory();
 		northEastDock.setChildDockFactory(leafChildDockFactory);
@@ -86,7 +80,7 @@ public class SplitDockSample extends JPanel
 		singleDock3.addDockable(dockable3, SingleDock.SINGLE_POSITION);
 		singleDock4.addDockable(dockable4, SingleDock.SINGLE_POSITION);
 		singleDock5.addDockable(dockable5, SingleDock.SINGLE_POSITION);
-		
+
 		// Add the single leaf docks to the split docks.
 		rootDock.addChildDock(singleDock1, new Position(Position.LEFT));
 		rootDock.addChildDock(eastDock, new Position(Position.RIGHT));

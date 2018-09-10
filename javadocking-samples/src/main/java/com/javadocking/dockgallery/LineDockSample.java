@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.LineDock;
 import com.javadocking.dock.Position;
@@ -17,11 +9,12 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class LineDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public LineDockSample(JFrame frame)
-	{
+public class LineDockSample extends JPanel {
+
+	public LineDockSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -78,7 +71,7 @@ public class LineDockSample extends JPanel
 		splitPane.setRightComponent(lineDock);
 		splitPane.setDividerLocation(400);
 		splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-		
+
 		// Add the root docks to the dock model.
 		dockModel.addRootDock("tabDock", tabDock, frame);
 		dockModel.addRootDock("lineDock", lineDock, frame);
@@ -89,7 +82,7 @@ public class LineDockSample extends JPanel
 		int height = 600;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 }

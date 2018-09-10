@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.GridDock;
 import com.javadocking.dock.Position;
@@ -17,11 +9,12 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class GridDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public GridDockSample(JFrame frame)
-	{
+public class GridDockSample extends JPanel {
+
+	public GridDockSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -41,7 +34,7 @@ public class GridDockSample extends JPanel
 		SmallPanel smallText7 = new SmallPanel("I am window 7");
 		SmallPanel smallText8 = new SmallPanel("I am window 8");
 		SmallPanel smallText9 = new SmallPanel("I am window 9");
-		SmallPanel smallText10= new SmallPanel("I am window 10");
+		SmallPanel smallText10 = new SmallPanel("I am window 10");
 
 		// Create the dockable with the content.
 		// Our dockables can not float.
@@ -54,7 +47,7 @@ public class GridDockSample extends JPanel
 		DefaultDockable dockable7 = new DefaultDockable("Window7", smallText7, "Window 7", null, DockingMode.ALL);
 		DefaultDockable dockable8 = new DefaultDockable("Window8", smallText8, "Window 8", null, DockingMode.ALL);
 		DefaultDockable dockable9 = new DefaultDockable("Window9", smallText9, "Window 9", null, DockingMode.ALL);
-		DefaultDockable dockable10= new DefaultDockable("Window10",smallText10,"Window 10",null, DockingMode.ALL);
+		DefaultDockable dockable10 = new DefaultDockable("Window10", smallText10, "Window 10", null, DockingMode.ALL);
 
 		// Create the docks.
 		TabDock tabDock = new TabDock();
@@ -95,7 +88,7 @@ public class GridDockSample extends JPanel
 		int height = 600;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 }

@@ -2,48 +2,53 @@
 <html>
 <body bgcolor="white">
 <p>
-Contains the interfaces and implementations for docks. 
+    Contains the interfaces and implementations for docks.
 </p>
 <p>
-Docks can contain {@link com.javadocking.dockable.Dockable}s or other docks.
-The dockables can be moved from one dock to another dock.
-The docks stay always on the same place.
+    Docks can contain {@link com.javadocking.dockable.Dockable}s or other docks.
+    The dockables can be moved from one dock to another dock.
+    The docks stay always on the same place.
 </p>
 <p>
-The main interface for a dock is {@link com.javadocking.dock.Dock}.
-There are 2 important extensions of this interface: {@link com.javadocking.dock.LeafDock}
-and {@link com.javadocking.dock.CompositeDock}.
+    The main interface for a dock is {@link com.javadocking.dock.Dock}.
+    There are 2 important extensions of this interface: {@link com.javadocking.dock.LeafDock}
+    and {@link com.javadocking.dock.CompositeDock}.
 </p>
 <p>
-Information on using docks is in 
-<a href="http://www.javadocking.com/developerguide/leafdock.html" target="_blank">How to Use Laef Docks</a> and 
-<a href="http://www.javadocking.com/developerguide/compositedock.html" target="_blank">How to Use Composite Docks</a> in 
-<i>The Sanaware Developer Guide</i>.
+    Information on using docks is in
+    <a href="http://www.javadocking.com/developerguide/leafdock.html" target="_blank">How to Use Laef Docks</a> and
+    <a href="http://www.javadocking.com/developerguide/compositedock.html" target="_blank">How to Use Composite
+        Docks</a> in
+    <i>The Sanaware Developer Guide</i>.
 </p>
 <p>
-A leaf dock is a dock that contains dockables.
-A composite dock is a dock 
-that contains other docks.
+    A leaf dock is a dock that contains dockables.
+    A composite dock is a dock
+    that contains other docks.
 </p>
 <p>
-Some implementations of leaf docks are:
+    Some implementations of leaf docks are:
 <ul>
-<li>A {@link com.javadocking.dock.SingleDock} can contain 0 or one dockables.</li>
-<li>A {@link com.javadocking.dock.TabDock} can contain multiple dockables that are ordered in tabs of a tabbed pane.</li>
-<li>A {@link com.javadocking.dock.LineDock} can contain multiple dockables that are ordered in a line.</li>
-<li>A {@link com.javadocking.dock.GridDock} can contain multiple dockables that are ordered in a grid.</li>
+    <li>A {@link com.javadocking.dock.SingleDock} can contain 0 or one dockables.</li>
+    <li>A {@link com.javadocking.dock.TabDock} can contain multiple dockables that are ordered in tabs of a tabbed
+        pane.
+    </li>
+    <li>A {@link com.javadocking.dock.LineDock} can contain multiple dockables that are ordered in a line.</li>
+    <li>A {@link com.javadocking.dock.GridDock} can contain multiple dockables that are ordered in a grid.</li>
 </ul>
 </p>
 <p>
-Some implementations of composite docks are:
+    Some implementations of composite docks are:
 <ul>
-<li>A {@link com.javadocking.dock.SplitDock} can contain 0, 1 or 2 docks. 
-	When there are 2 docks they are organized in a splitt pane.</li>
-<li>A {@link com.javadocking.dock.BorderDock} contains at least one dock in the center. It can also contain
-	a dock in the north, south, east and west.</li>
-<li>A {@link com.javadocking.dock.CompositeLineDock} can contain multiple docks that are ordered in a line.</li>
-<li>A {@link com.javadocking.dock.CompositeGridDock} can contain multiple docks that are ordered in a grid.</li>
-<li>A {@link com.javadocking.dock.FloatDock} can contain multiple docks that are organized in floating windows.</li>
+    <li>A {@link com.javadocking.dock.SplitDock} can contain 0, 1 or 2 docks.
+        When there are 2 docks they are organized in a splitt pane.
+    </li>
+    <li>A {@link com.javadocking.dock.BorderDock} contains at least one dock in the center. It can also contain
+        a dock in the north, south, east and west.
+    </li>
+    <li>A {@link com.javadocking.dock.CompositeLineDock} can contain multiple docks that are ordered in a line.</li>
+    <li>A {@link com.javadocking.dock.CompositeGridDock} can contain multiple docks that are ordered in a grid.</li>
+    <li>A {@link com.javadocking.dock.FloatDock} can contain multiple docks that are organized in floating windows.</li>
 </ul>
 
 </p>

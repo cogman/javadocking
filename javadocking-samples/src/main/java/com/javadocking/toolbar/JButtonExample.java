@@ -1,50 +1,24 @@
 package com.javadocking.toolbar;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import com.javadocking.DockingManager;
-import com.javadocking.dock.BorderDock;
-import com.javadocking.dock.CompositeLineDock;
-import com.javadocking.dock.LineDock;
-import com.javadocking.dock.Position;
-import com.javadocking.dock.SplitDock;
-import com.javadocking.dock.TabDock;
+import com.javadocking.dock.*;
 import com.javadocking.dock.factory.CompositeToolBarDockFactory;
 import com.javadocking.dock.factory.ToolBarDockFactory;
-import com.javadocking.dockable.ButtonDockable;
-import com.javadocking.dockable.DefaultDockable;
-import com.javadocking.dockable.Dockable;
-import com.javadocking.dockable.DockingMode;
-import com.javadocking.dockable.DraggableContent;
+import com.javadocking.dockable.*;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * This example shows {@link javax.swing.JButton}s in a tool bar at the borders of a window.
  * The buttons can be dragged and docked alone and together.
- * 
+ *
  * @author Heidi Rakels
  */
-public class JButtonExample extends JPanel
-{
+public class JButtonExample extends JPanel {
 
 	// Static fields.
 
@@ -53,8 +27,7 @@ public class JButtonExample extends JPanel
 
 	// Constructor.
 
-	public JButtonExample(JFrame frame)
-	{
+	public JButtonExample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -67,7 +40,7 @@ public class JButtonExample extends JPanel
 		// Create the content components.
 		TextPanel textPanel1 = new TextPanel("I am window 1.");
 		TextPanel textPanel2 = new TextPanel("I am window 2.");
-		
+
 		// Create the dockables around the content components.
 		Icon icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/text12.gif"));
 		Dockable dockable1 = new DefaultDockable("Window1", textPanel1, "Window 1", icon);
@@ -76,34 +49,34 @@ public class JButtonExample extends JPanel
 		// Create the child tab dock.
 		TabDock tabDock1 = new TabDock();
 		TabDock tabDock2 = new TabDock();
-		
+
 		// Add the dockables to the tab dock.
 		tabDock1.addDockable(dockable1, new Position(0));
 		tabDock2.addDockable(dockable2, new Position(1));
 
 		// Create the split dock.
 		SplitDock splitDock = new SplitDock();
-		
+
 		// Add the child docks to the split dock.
 		splitDock.addChildDock(tabDock1, new Position(Position.LEFT));
 		splitDock.addChildDock(tabDock2, new Position(Position.RIGHT));
 		splitDock.setDividerLocation(340);
-		
+
 		// Create the buttons with a dockable around.
 		Dockable[] buttonDockables = new Dockable[12];
-		buttonDockables[0]  = createButtonDockable("ButtonDockableAdd",              "Add",               new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/add.png")),               "Add!");
-		buttonDockables[1]  = createButtonDockable("ButtonDockableAccept",           "Accept",            new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/accept.png")),            "Accept!");
-		buttonDockables[2]  = createButtonDockable("ButtonDockableCancel",           "Cancel",            new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/cancel.png")),            "Cancel!");
-		buttonDockables[3]  = createButtonDockable("ButtonDockableUndo",             "Undo",              new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/undo.png")),              "Undo!");
-		buttonDockables[4]  = createButtonDockable("ButtonDockableRedo",             "Redo",              new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/redo.png")),              "Redo!");
-		buttonDockables[5]  = createButtonDockable("ButtonDockableRefresh",          "Refresh",           new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/refresh.png")),           "Refresh!");
-		buttonDockables[6]  = createButtonDockable("ButtonDockableBin",              "Bin",               new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/bin.png")),               "Bin!");
-		buttonDockables[7]  = createButtonDockable("ButtonDockableIcons",            "Icons",             new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/icons.png")),             "Icons!");
-		buttonDockables[8]  = createButtonDockable("ButtonDockableList",             "List",              new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/list.png")),              "List!");
-		buttonDockables[9]  = createButtonDockable("ButtonDockableImages",           "Images",            new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/images.png")),            "Images!");
-		buttonDockables[10] = createButtonDockable("ButtonDockableDivide",           "Divide",            new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/divide.png")),            "Divide!");
-		buttonDockables[11] = createButtonDockable("ButtonDockableJoin",             "Join",              new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/join.png")),              "Join!");
-		
+		buttonDockables[0] = createButtonDockable("ButtonDockableAdd", "Add", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/add.png")), "Add!");
+		buttonDockables[1] = createButtonDockable("ButtonDockableAccept", "Accept", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/accept.png")), "Accept!");
+		buttonDockables[2] = createButtonDockable("ButtonDockableCancel", "Cancel", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/cancel.png")), "Cancel!");
+		buttonDockables[3] = createButtonDockable("ButtonDockableUndo", "Undo", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/undo.png")), "Undo!");
+		buttonDockables[4] = createButtonDockable("ButtonDockableRedo", "Redo", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/redo.png")), "Redo!");
+		buttonDockables[5] = createButtonDockable("ButtonDockableRefresh", "Refresh", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/refresh.png")), "Refresh!");
+		buttonDockables[6] = createButtonDockable("ButtonDockableBin", "Bin", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/bin.png")), "Bin!");
+		buttonDockables[7] = createButtonDockable("ButtonDockableIcons", "Icons", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/icons.png")), "Icons!");
+		buttonDockables[8] = createButtonDockable("ButtonDockableList", "List", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/list.png")), "List!");
+		buttonDockables[9] = createButtonDockable("ButtonDockableImages", "Images", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/images.png")), "Images!");
+		buttonDockables[10] = createButtonDockable("ButtonDockableDivide", "Divide", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/divide.png")), "Divide!");
+		buttonDockables[11] = createButtonDockable("ButtonDockableJoin", "Join", new ImageIcon(getClass().getResource("/com/javadocking/resources/icons/join.png")), "Join!");
+
 		// Create the border dock.
 		BorderDock borderDock = new BorderDock(new CompositeToolBarDockFactory(), splitDock);
 		borderDock.setMode(BorderDock.MODE_TOOL_BAR);
@@ -127,30 +100,52 @@ public class JButtonExample extends JPanel
 		toolBarDock2.addDockable(buttonDockables[6], new Position(0));
 		toolBarDock2.addDockable(buttonDockables[7], new Position(1));
 		toolBarDock2.addDockable(buttonDockables[8], new Position(2));
-		toolBarDock2.addDockable(buttonDockables[9],new Position(3));
-		toolBarDock2.addDockable(buttonDockables[10],new Position(4));
-		toolBarDock2.addDockable(buttonDockables[11],new Position(5));
-		
+		toolBarDock2.addDockable(buttonDockables[9], new Position(3));
+		toolBarDock2.addDockable(buttonDockables[10], new Position(4));
+		toolBarDock2.addDockable(buttonDockables[11], new Position(5));
+
 		// Add the docks.
-		add((Component)borderDock, BorderLayout.CENTER);
-		
+		add(borderDock, BorderLayout.CENTER);
+
 		dockModel.addRootDock("borderDock", borderDock, frame);
 
 	}
-	
+
+	public static void createAndShowGUI() {
+
+		// Create the frame.
+		JFrame frame = new JFrame("Split dock");
+
+		// Create the panel and add it to the frame.
+		JButtonExample panel = new JButtonExample(frame);
+		frame.getContentPane().add(panel);
+
+		// Set the frame properties and show it.
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setVisible(true);
+
+	}
+
+	public static void main(String args[]) {
+		Runnable doCreateAndShowGUI = JButtonExample::createAndShowGUI;
+		SwingUtilities.invokeLater(doCreateAndShowGUI);
+	}
+
 	/**
 	 * Creates a dockable with a button as content.
-	 * 
-	 * @param id			The ID of the dockable that has to be created.
-	 * @param title			The title of the dialog that will be displayed.
-	 * @param description	The action dscription.
-	 * @param icon			The icon that will be put on the button.
-	 * @param message		The message that will be displayed when the action is performed.
-	 * @return				The dockable with a button as content.
+	 *
+	 * @param id          The ID of the dockable that has to be created.
+	 * @param title       The title of the dialog that will be displayed.
+	 * @param description The action dscription.
+	 * @param icon        The icon that will be put on the button.
+	 * @param message     The message that will be displayed when the action is performed.
+	 * @return The dockable with a button as content.
 	 */
-	private Dockable createButtonDockable(String id, String title, Icon icon, String message)
-	{
-		
+	private Dockable createButtonDockable(String id, String title, Icon icon, String message) {
+
 		// Create the action.
 		MessageAction action = new MessageAction(this, title, title, icon, "Action!");
 
@@ -165,48 +160,48 @@ public class JButtonExample extends JPanel
 
 		return buttonDockable;
 	}
-	
+
+	// Private classes.
+
 	/**
 	 * Adds a drag listener on the content component of a dockable.
 	 */
-	private void createDockableDragger(Dockable dockable)
-	{
-		
+	private void createDockableDragger(Dockable dockable) {
+
 		// Create the dragger for the dockable.
 		DragListener dragListener = DockingManager.getDockableDragListenerFactory().createDragListener(dockable);
 		dockable.getContent().addMouseListener(dragListener);
 		dockable.getContent().addMouseMotionListener(dragListener);
-		
+
 	}
-	
+
+	// Main method.
+
 	/**
 	 * This is the class for the content.
 	 */
-	private class TextPanel extends JPanel implements DraggableContent
-	{
-		
-		private JLabel label; 
-		
-		public TextPanel(String text)
-		{
+	private class TextPanel extends JPanel implements DraggableContent {
+
+		private JLabel label;
+
+		public TextPanel(String text) {
 			super(new FlowLayout());
-			
+
 			// The panel.
-			setMinimumSize(new Dimension(80,80));
-			setPreferredSize(new Dimension(150,150));
+			setMinimumSize(new Dimension(80, 80));
+			setPreferredSize(new Dimension(150, 150));
 			setBackground(Color.white);
 			setBorder(BorderFactory.createLineBorder(Color.lightGray));
-			
+
 			// The label.
 			label = new JLabel(text);
 			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			add(label);
 		}
-		
+
 		// Implementations of DraggableContent.
 
-		public void addDragListener(DragListener dragListener)
-		{
+		public void addDragListener(DragListener dragListener) {
 			addMouseListener(dragListener);
 			addMouseMotionListener(dragListener);
 			label.addMouseListener(dragListener);
@@ -214,17 +209,13 @@ public class JButtonExample extends JPanel
 		}
 	}
 
-	// Private classes.
-
-	private class MessageAction extends AbstractAction
-	{
+	private class MessageAction extends AbstractAction {
 
 		private Component parentComponent;
 		private String message;
 		private String name;
-		
-		public MessageAction(Component parentComponent, String name, String description, Icon icon, String message)
-		{
+
+		public MessageAction(Component parentComponent, String name, String description, Icon icon, String message) {
 			super(null, icon);
 			putValue(Action.SHORT_DESCRIPTION, description);
 			this.message = message;
@@ -232,46 +223,12 @@ public class JButtonExample extends JPanel
 			this.parentComponent = parentComponent;
 		}
 
-		public void actionPerformed(ActionEvent actionEvent)
-		{
+		public void actionPerformed(ActionEvent actionEvent) {
 			JOptionPane.showMessageDialog(parentComponent,
 					message, name, JOptionPane.INFORMATION_MESSAGE);
 		}
-		
-	}
-	
-	// Main method.
-	
-	public static void createAndShowGUI()
-	{
-		
-		// Create the frame.
-		JFrame frame = new JFrame("Split dock");
 
-		// Create the panel and add it to the frame.
-		JButtonExample panel = new JButtonExample(frame);
-		frame.getContentPane().add(panel);
-		
-		// Set the frame properties and show it.
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setVisible(true);
-		
 	}
 
-	public static void main(String args[]) 
-	{
-        Runnable doCreateAndShowGUI = new Runnable() 
-        {
-            public void run() 
-            {
-                createAndShowGUI();
-            }
-        };
-        SwingUtilities.invokeLater(doCreateAndShowGUI);
-    }
-	
 }
 

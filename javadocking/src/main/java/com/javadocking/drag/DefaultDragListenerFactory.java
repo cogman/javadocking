@@ -5,12 +5,11 @@ import com.javadocking.dockable.Dockable;
 
 /**
  * This drag listener factory returns a {@link DefaultDragListener} as drag listener.
- * 
+ *
  * @author Heidi Rakels.
  */
-public class DefaultDragListenerFactory implements DragListenerFactory
-{
-	
+public class DefaultDragListenerFactory implements DragListenerFactory {
+
 	// Implementations of DragListenerFactory.
 
 	public DragListener createDragListener(Dock dock) {
@@ -20,5 +19,5 @@ public class DefaultDragListenerFactory implements DragListenerFactory
 	public DragListener createDragListener(Dockable dockable) {
 		return new DefaultDragListener(dockable);
 	}
-	
+
 }

@@ -1,99 +1,89 @@
 package com.javadocking.drag.painter;
 
-import java.awt.AWTException;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
-
-import javax.swing.JWindow;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * This is a window that has the screen as background.
  * The image of the screen is made when {@link #captureScreen()} is called.
  * The window can be repainted by calliong {@link #doRepaint()}.
- * 
+ *
  * @author Heidi Rakels.
  */
-class TransparentWindow extends JWindow 
-{
-	
-	/** The image of the screen. */
+class TransparentWindow extends JWindow {
+
+	/**
+	 * The image of the screen.
+	 */
 	private Image screenImage;
-	/** The image with the dimensions of the window. It will be filled with a part of the screen. */
+	/**
+	 * The image with the dimensions of the window. It will be filled with a part of the screen.
+	 */
 	private Image windowImage;
-	/** The graphics of the window image. */
-	private Graphics windowImageGraphics;
-	/** The painter that paints the content on the window. */
+	/**
+	 * The painter that paints the content on the window.
+	 */
 	private RectanglePainter rectanglePainter = new DefaultRectanglePainter();
 
 	// Constructors.
 
 	/**
 	 * Constructs a transparent window.
-	 * 
-	 * @param	rectanglePainter	The painter that paints the content on the window.
+	 *
+	 * @param    rectanglePainter    The painter that paints the content on the window.
 	 */
-	public TransparentWindow(RectanglePainter rectanglePainter)
-	{
+	public TransparentWindow(RectanglePainter rectanglePainter) {
 		this.rectanglePainter = rectanglePainter;
 	}
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) 
-	{
+	public void paint(Graphics graphics) {
 
-		if (windowImage == null) 
-		{
+		if (windowImage == null) {
 			windowImage = createImage(getWidth(), getHeight());
 		}
-		windowImageGraphics = windowImage.getGraphics();
+		/**
+		 * The graphics of the window image.
+		 */
+		final Graphics windowImageGraphics = windowImage.getGraphics();
 		windowImageGraphics.drawImage(screenImage, 0, 0, getWidth(), getHeight(), getX(), getY(), getX() + getWidth(), getY() + getHeight(), null);
 		rectanglePainter.paintRectangle(windowImageGraphics, 0, 0, getWidth(), getHeight());
 		graphics.drawImage(windowImage, 0, 0, null);
 		windowImageGraphics.dispose();
-		
+
 	}
-	
-	public void dispose() 
-	{
+
+	public void dispose() {
 		super.dispose();
-		
+
 		// Flush the images.
-		if (screenImage != null)
-		{
+		if (screenImage != null) {
 			screenImage.flush();
 			screenImage = null;
 		}
-		if (windowImage != null)
-		{
+		if (windowImage != null) {
 			windowImage.flush();
 			windowImage = null;
 		}
 	}
-	
+
 	// Public methods.
 
 	/**
 	 * Repaints the window.
-	 *
 	 */
-	public void doRepaint() 
-	{
-		
+	public void doRepaint() {
+
 		Graphics g = getGraphics();
 		paint(g);
-		
+
 	}
-	
+
 	/**
 	 * Creates an image of the screen.
 	 */
-	public void captureScreen() 
-	{
+	public void captureScreen() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		try {
 			Robot robot = new Robot();
@@ -104,5 +94,5 @@ class TransparentWindow extends JWindow
 			System.out.println("Robot exception.");
 		}
 	}
-	
+
 }

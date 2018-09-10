@@ -2,38 +2,39 @@
 <html>
 <body bgcolor="white">
 <p>
-Contains the interfaces and implementations for dockables. 
+    Contains the interfaces and implementations for dockables.
 </p>
 <p>
-A dockable is a wrapper around its content. The content should be a java.awt.Component.
-The dockable provides the functionality to move the content from one {@link com.javadocking.dock.Dock} to another dock.
-The dockables can be moved, the docks stay always at the same place.
+    A dockable is a wrapper around its content. The content should be a java.awt.Component.
+    The dockable provides the functionality to move the content from one {@link com.javadocking.dock.Dock} to another
+    dock.
+    The dockables can be moved, the docks stay always at the same place.
 </p>
 <p>
-Information on using dockables is in 
-<a href="http://www.javadocking.com/developerguide/dockable.html" target="_blank">How to Use Dockables</a> in
-<i>The Sanaware Developer Guide</i>.
-Information on adding, moving, and removing dockables is in 
-<a href="http://www.javadocking.com/developerguide/adddockable.html" target="_blank">How to Add, Move, and Remove Dockables</a>
+    Information on using dockables is in
+    <a href="http://www.javadocking.com/developerguide/dockable.html" target="_blank">How to Use Dockables</a> in
+    <i>The Sanaware Developer Guide</i>.
+    Information on adding, moving, and removing dockables is in
+    <a href="http://www.javadocking.com/developerguide/adddockable.html" target="_blank">How to Add, Move, and Remove
+        Dockables</a>
 </p>
 <p>
-The main interface for a dockable is {@link com.javadocking.dockable.Dockable}.
-There is 1 important extensions of this interface: {@link com.javadocking.dockable.CompositeDockable}
-for dockables that are a composition of multiple dockables.
+    The main interface for a dockable is {@link com.javadocking.dockable.Dockable}.
+    There is 1 important extensions of this interface: {@link com.javadocking.dockable.CompositeDockable}
+    for dockables that are a composition of multiple dockables.
 </p>
 <p>
-Some implementations of {@link com.javadocking.dockable.Dockable} are:
+    Some implementations of {@link com.javadocking.dockable.Dockable} are:
 <ul>
-<li>A {@link com.javadocking.dockable.DefaultDockable} for normal dockables.</li>
-<li>An {@link com.javadocking.dockable.ActionDockable} for decorating dockables with actions.</li>
+    <li>A {@link com.javadocking.dockable.DefaultDockable} for normal dockables.</li>
+    <li>An {@link com.javadocking.dockable.ActionDockable} for decorating dockables with actions.</li>
 </ul>
 </p>
 <p>
-An implementation of {@link com.javadocking.dockable.CompositeDockable} is:
+    An implementation of {@link com.javadocking.dockable.CompositeDockable} is:
 <ul>
-<li>A {@link com.javadocking.dockable.DefaultCompositeDockable}.</li>
+    <li>A {@link com.javadocking.dockable.DefaultCompositeDockable}.</li>
 </ul>
-
 
 
 </body>

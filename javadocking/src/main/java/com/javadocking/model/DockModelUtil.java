@@ -1,43 +1,34 @@
 package com.javadocking.model;
 
-import java.awt.Window;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import com.javadocking.dock.Dock;
 import com.javadocking.dock.HidableFloatDock;
 
+import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This class contains a collection of static utility methods for dock models.
- * 
+ *
  * @author Heidi Rakels.
  */
-public class DockModelUtil 
-{
+public class DockModelUtil {
 
-	public static Set getVisibleFloatDocks(DockModel dockModel, Window ownerWindow) 
-	{
+	public static Set getVisibleFloatDocks(DockModel dockModel, Window ownerWindow) {
 		Set keys = dockModel.getFloatDockKeys(ownerWindow);
 		Set visibleDocks = new HashSet();
-		Iterator iterator = keys.iterator();
-		while(iterator.hasNext()) 
-		{
-			String key = (String)iterator.next();
+		for (Object key1 : keys) {
+			String key = (String) key1;
 			Dock dock = dockModel.getRootDock(key);
-			if (dock instanceof HidableFloatDock) 
-			{
-				if (!((HidableFloatDock)dock).isHidden())
-				{
+			if (dock instanceof HidableFloatDock) {
+				if (!((HidableFloatDock) dock).isHidden()) {
 					visibleDocks.add(dock);
 				}
-			}
-			else 
-			{
+			} else {
 				visibleDocks.add(dock);
 			}
 		}
 		return visibleDocks;
 	}
-	
+
 }

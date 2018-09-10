@@ -1,17 +1,11 @@
 package com.javadocking.util;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.border.Border;
 
 /**
  * <p>
@@ -23,130 +17,129 @@ import javax.swing.border.Border;
  * <p>
  * When the button is clicked, the action is performed.
  * </p>
- * 
+ *
  * @author Heidi Rakels.
  */
-public class ToolBarButton extends JLabel
-{
+public class ToolBarButton extends JLabel {
 
 	// Static fields.
 
-	/** The button will always have this size. */
+	/**
+	 * The button will always have this size.
+	 */
 	private static final Dimension DEFAULT_SIZE = new Dimension(24, 24);
-	/** The border width of the button. */
+	/**
+	 * The border width of the button.
+	 */
 	private static final int BORDER = 4;
-	/** The empty border of the button. */
+	/**
+	 * The empty border of the button.
+	 */
 	private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER);
-	/** The border of the button when the mouse is over it. */
+	/**
+	 * The border of the button when the mouse is over it.
+	 */
 	private static final Border LINE_BORDER = BorderFactory.createCompoundBorder(
 			BorderFactory.createCompoundBorder(
-					BorderFactory.createEmptyBorder(BORDER - 2, BORDER - 2, BORDER - 2, BORDER - 2), 
+					BorderFactory.createEmptyBorder(BORDER - 2, BORDER - 2, BORDER - 2, BORDER - 2),
 					BorderFactory.createLineBorder(Color.gray)),
 			BorderFactory.createEmptyBorder(1, 1, 1, 1));
-	
+
 	// Fields.
 
-	/** The action that will be performed when this button is clicked. */
+	/**
+	 * The action that will be performed when this button is clicked.
+	 */
 	private Action action;
 
 	// Constructors.
 
 	/**
-	 * Constructs an icon button with the given action. 
-	 * 
-	 * @param	action 		The action that will be performed when this button is clicked.
+	 * Constructs an icon button with the given action.
+	 *
+	 * @param    action The action that will be performed when this button is clicked.
 	 */
-	public ToolBarButton(Action action)
-	{
-		
+	public ToolBarButton(Action action) {
+
 		setDimensions();
 		setAction(action);
 		addMouseListener(new ClickListener());
 		setBorder(EMPTY_BORDER);
 		setOpaque(false);
-		
+
 	}
-	
+
 	// Getters / Setters.
 
 	/**
 	 * Gets the action that will be performed when this button is clicked.
-	 * 
-	 * @return				The action that will be performed when this button is clicked.
+	 *
+	 * @return The action that will be performed when this button is clicked.
 	 */
-	public Action getAction()
-	{
+	public Action getAction() {
 		return action;
 	}
 
 	/**
 	 * Sets the action that will be performed when this button is clicked.
-	 * 
-	 * @param action		The action that will be performed when this button is clicked.
+	 *
+	 * @param action The action that will be performed when this button is clicked.
 	 */
-	public void setAction(Action action)
-	{
-		
-		if (action == null)
-		{
+	public void setAction(Action action) {
+
+		if (action == null) {
 			throw new IllegalArgumentException("Acion is null.");
 		}
-		
+
 		this.action = action;
-		if (action instanceof AbstractAction)
-		{
-			ImageIcon icon = (ImageIcon)action.getValue(Action.SMALL_ICON);
+		if (action instanceof AbstractAction) {
+			ImageIcon icon = (ImageIcon) action.getValue(Action.SMALL_ICON);
 			this.setIcon(icon);
-			String description = (String)action.getValue(Action.SHORT_DESCRIPTION);
+			String description = (String) action.getValue(Action.SHORT_DESCRIPTION);
 			this.setToolTipText(description);
 		}
-		
+
 	}
 
 	// Private classes.
 
 	/**
+	 * Sets the preferred, maximum and minimum size of the button.
+	 */
+	private void setDimensions() {
+
+		setPreferredSize(DEFAULT_SIZE);
+		setMaximumSize(DEFAULT_SIZE);
+		setMinimumSize(DEFAULT_SIZE);
+
+	}
+
+	// Private metods.
+
+	/**
 	 * This mouse listener performs the action when the mouse is clicked.
 	 */
-	private class ClickListener extends MouseAdapter
-	{
+	private class ClickListener extends MouseAdapter {
 
 		// Overwritten methods of MouseAdapter.
 
-		public void mouseClicked(MouseEvent mouseEvent)
-		{
+		public void mouseClicked(MouseEvent mouseEvent) {
 			// Create the action event.
-			ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, (String)action.getValue(Action.SHORT_DESCRIPTION), mouseEvent.getModifiers());
-			
+			ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, (String) action.getValue(Action.SHORT_DESCRIPTION), mouseEvent.getModifiers());
+
 			// Perform the action.
 			action.actionPerformed(actionEvent);
 		}
 
-		public void mouseEntered(MouseEvent mouseEvent)
-		{
+		public void mouseEntered(MouseEvent mouseEvent) {
 			setBorder(LINE_BORDER);
 		}
 
-		public void mouseExited(MouseEvent mouseEvent)
-		{
+		public void mouseExited(MouseEvent mouseEvent) {
 			setBorder(EMPTY_BORDER);
 		}
-		
-	}
-	
-	// Private metods.
 
-	/**
-	 * Sets the preferred, maximum and minimum size of the button.
-	 */
-	private void setDimensions()
-	{
-		
-		setPreferredSize(DEFAULT_SIZE);
-		setMaximumSize(DEFAULT_SIZE);
-		setMinimumSize(DEFAULT_SIZE);
-		
 	}
 
-	
+
 }

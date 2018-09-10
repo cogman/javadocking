@@ -1,20 +1,5 @@
 package com.javadocking.leafdock;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
-
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.SwingUtilities;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.TabDock;
@@ -25,15 +10,17 @@ import com.javadocking.dockable.DraggableContent;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
- * This example shows 2 tab docks and 2 dockables. 
+ * This example shows 2 tab docks and 2 dockables.
  * The dockables can be dragged from one dock to the other.
  * They can be dragged alone, but also in group.
- * 
+ *
  * @author Heidi Rakels
  */
-public class TabDocks extends JPanel
-{
+public class TabDocks extends JPanel {
 
 	// Static fields.
 
@@ -42,8 +29,7 @@ public class TabDocks extends JPanel
 
 	// Constructor.
 
-	public TabDocks(JFrame frame)
-	{
+	public TabDocks(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -59,7 +45,7 @@ public class TabDocks extends JPanel
 
 		// We don't want the dockables to float.
 		int dockingModes = DockingMode.ALL - DockingMode.FLOAT;
-		
+
 		// Create the dockables around the content components.
 		Icon icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/text12.gif"));
 		Dockable dockable1 = new DefaultDockable("Window1", textPanel1, "Window 1", icon, dockingModes);
@@ -72,11 +58,11 @@ public class TabDocks extends JPanel
 		// Add the dockables to the left tab dock.
 		leftDock.addDockable(dockable1, new Position(0));
 		leftDock.addDockable(dockable2, new Position(1));
-		
+
 		// Add the 2 root docks to the dock model.
 		dockModel.addRootDock("leftTabDock", leftDock, frame);
 		dockModel.addRootDock("rightTabDock", rightDock, frame);
-			
+
 		// Create the split panes.
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPane.setDividerLocation(300);
@@ -84,40 +70,62 @@ public class TabDocks extends JPanel
 		// Add the root docks to the split pane.
 		splitPane.setLeftComponent(leftDock);
 		splitPane.setRightComponent(rightDock);
-		
+
 		// Add the split pane to the panel.
 		add(splitPane, BorderLayout.CENTER);
-		
+
 	}
-	
+
+	public static void createAndShowGUI() {
+
+		// Create the frame.
+		JFrame frame = new JFrame("Tab docks");
+
+		// Create the panel and add it to the frame.
+		TabDocks panel = new TabDocks(frame);
+		frame.getContentPane().add(panel);
+
+		// Set the frame properties and show it.
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setVisible(true);
+
+	}
+
+	// Main method.
+
+	public static void main(String args[]) {
+		Runnable doCreateAndShowGUI = TabDocks::createAndShowGUI;
+		SwingUtilities.invokeLater(doCreateAndShowGUI);
+	}
+
 	/**
 	 * This is the class for the content.
 	 */
-	private class TextPanel extends JPanel implements DraggableContent
-	{
-		
-		private JLabel label; 
-		
-		public TextPanel(String text)
-		{
+	private class TextPanel extends JPanel implements DraggableContent {
+
+		private JLabel label;
+
+		public TextPanel(String text) {
 			super(new FlowLayout());
-			
+
 			// The panel.
-			setMinimumSize(new Dimension(80,80));
-			setPreferredSize(new Dimension(150,150));
+			setMinimumSize(new Dimension(80, 80));
+			setPreferredSize(new Dimension(150, 150));
 			setBackground(Color.white);
 			setBorder(BorderFactory.createLineBorder(Color.lightGray));
-			
+
 			// The label.
 			label = new JLabel(text);
 			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			add(label);
 		}
-		
+
 		// Implementations of DraggableContent.
 
-		public void addDragListener(DragListener dragListener)
-		{
+		public void addDragListener(DragListener dragListener) {
 			addMouseListener(dragListener);
 			addMouseMotionListener(dragListener);
 			label.addMouseListener(dragListener);
@@ -125,38 +133,5 @@ public class TabDocks extends JPanel
 		}
 	}
 
-	// Main method.
-	
-	public static void createAndShowGUI()
-	{
-		
-		// Create the frame.
-		JFrame frame = new JFrame("Tab docks");
-
-		// Create the panel and add it to the frame.
-		TabDocks panel = new TabDocks(frame);
-		frame.getContentPane().add(panel);
-		
-		// Set the frame properties and show it.
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setVisible(true);
-		
-	}
-
-	public static void main(String args[]) 
-	{
-        Runnable doCreateAndShowGUI = new Runnable() 
-        {
-            public void run() 
-            {
-                createAndShowGUI();
-            }
-        };
-        SwingUtilities.invokeLater(doCreateAndShowGUI);
-    }
-	
 }
 
