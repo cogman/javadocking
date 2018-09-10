@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.List;
 
@@ -410,10 +411,10 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 		try {
 			String className = SingleDockFactory.class.getName();
 			className = PropertiesUtil.getString(properties, prefix + "childDockFactory", className);
-			Class clazz = Class.forName(className);
-			childDockFactory = (DockFactory) clazz.newInstance();
+			Class<? extends DockFactory> clazz = Class.forName(className).asSubclass(DockFactory.class);
+			childDockFactory = clazz.getDeclaredConstructor().newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();

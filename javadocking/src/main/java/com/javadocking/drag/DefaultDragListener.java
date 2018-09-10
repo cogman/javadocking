@@ -102,7 +102,7 @@ public class DefaultDragListener implements DragListener {
 	/**
 	 * When one of these buttons are pressed when the mouse is pressed or released, dragging is canceled.
 	 */
-	private int cancelButtonMask = InputEvent.BUTTON3_MASK;
+	private int cancelButtonMask = InputEvent.BUTTON3_DOWN_MASK;
 	/**
 	 * When one of these buttons are pressed when the mouse is pressed or released, dragging is canceled.
 	 */
@@ -110,7 +110,7 @@ public class DefaultDragListener implements DragListener {
 	/**
 	 * When these buttons are pressed when the mouse is pressed, dragging is started.
 	 */
-	private int startButtonMask = InputEvent.BUTTON1_MASK;
+	private int startButtonMask = InputEvent.BUTTON3_DOWN_MASK;
 	/**
 	 * When these buttons are pressed when the mouse is pressed, dragging is started.
 	 */
@@ -383,7 +383,7 @@ public class DefaultDragListener implements DragListener {
 			buttonOk = true;
 		} else {
 			// Is the start mouse button pressed?
-			if ((mouseEvent.getModifiers() & startButtonMask) != 0) {
+			if ((mouseEvent.getModifiersEx() & startButtonMask) != 0) {
 				buttonOk = true;
 			}
 		}
@@ -419,7 +419,7 @@ public class DefaultDragListener implements DragListener {
 			buttonOk = false;
 		} else {
 			// Is the cancel mouse button pressed?
-			if ((mouseEvent.getModifiers() & cancelButtonMask) != 0) {
+			if ((mouseEvent.getModifiersEx() & cancelButtonMask) != 0) {
 				buttonOk = true;
 			}
 		}

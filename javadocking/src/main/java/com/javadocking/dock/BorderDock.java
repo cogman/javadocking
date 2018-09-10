@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Properties;
 
@@ -485,10 +486,10 @@ public class BorderDock extends JPanel implements CompositeDock {
 		try {
 			String className = SingleDockFactory.class.getName();
 			className = PropertiesUtil.getString(properties, prefix + "childDockFactory", className);
-			Class clazz = Class.forName(className);
-			childDockFactory = (DockFactory) clazz.newInstance();
+			Class<?> clazz = Class.forName(className);
+			childDockFactory = clazz.asSubclass(DockFactory.class).getDeclaredConstructor().newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();

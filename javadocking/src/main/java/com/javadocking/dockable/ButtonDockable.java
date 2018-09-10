@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
 
 /**
@@ -321,32 +322,18 @@ public class ButtonDockable implements Dockable {
 		dockingEventSupport.fireDockingChanged(dockableEvent);
 	}
 
-	/**
-	 * Returns true if the given object is a {@link Dockable} with the same ID
-	 * as this dockable.
-	 *
-	 * @param    object
-	 * @return True if the given object is a {@link Dockable} with the same ID
-	 * as this dockable, false otherwise.
-	 */
-	public boolean equals(Object object) {
-
-		if (!(object instanceof Dockable)) {
-			return false;
-		}
-
-		Dockable other = (Dockable) object;
-		return this.getID().equals(other.getID());
-
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final ButtonDockable that = (ButtonDockable) o;
+		return Objects.equals(getID(), that.getID());
 	}
 
-	// Private methods.
-
+	@Override
 	public int hashCode() {
-		return getID().hashCode();
+		return Objects.hash(getID());
 	}
-
-	// Getters / Setters.
 
 	/**
 	 * Adds a drag listener on the content component of the dockable.

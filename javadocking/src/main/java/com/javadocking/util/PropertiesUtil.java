@@ -236,7 +236,7 @@ public class PropertiesUtil {
 	 * @param value      The default value of the property.
 	 */
 	public static void setDouble(Properties properties, String name, double value) {
-		properties.put(name, (new Double(value)).toString());
+		properties.put(name, Double.toString(value));
 	}
 
 	/**
