@@ -93,15 +93,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 			Class leafChildDockFactoryClazz = Class.forName(leafChildDockFactoryClassName);
 			childDockFactory = (DockFactory) leafChildDockFactoryClazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new TabDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new TabDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new TabDockFactory();
@@ -114,15 +106,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 			Class alternativeDockFactoryClazz = Class.forName(alternativeDockFactoryClassName);
 			alternativeDockFactory = (DockFactory) alternativeDockFactoryClazz.newInstance();
 			alternativeDockFactory.loadProperties(prefix + "alternativeDockFactory.", properties);
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the alternative dock factory.");
-			exception.printStackTrace();
-			alternativeDockFactory = new LeafDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the alternative dock factory.");
-			exception.printStackTrace();
-			alternativeDockFactory = new LeafDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the alternative dock factory.");
 			exception.printStackTrace();
 			alternativeDockFactory = new LeafDockFactory();

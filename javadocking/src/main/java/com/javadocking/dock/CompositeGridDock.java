@@ -405,15 +405,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 			Class clazz = Class.forName(className);
 			childDockFactory = (DockFactory) clazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new SingleDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new SingleDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();

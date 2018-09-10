@@ -428,11 +428,7 @@ public class EmptyDock extends JPanel {
 		JMenuItem menuItem = new JMenuItem("Exit", KeyEvent.VK_E);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		menuItem.getAccessibleContext().setAccessibleDescription("Exit te application");
-		menuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
+		menuItem.addActionListener(arg0 -> System.exit(0));
 		fileMenu.add(menuItem);
 
 		// The JMenuItems for the dockables.

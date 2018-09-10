@@ -162,15 +162,7 @@ public class FloatDockModel extends DefaultDockModel {
 			Class clazz = Class.forName(className);
 			floatDockFactory = (FloatDockFactory) clazz.newInstance();
 			floatDockFactory.loadProperties(prefix + "floatDockFactory.", properties);
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the float dock factory.");
-			exception.printStackTrace();
-			floatDockFactory = new DefaultFloatDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the float dock factory.");
-			exception.printStackTrace();
-			floatDockFactory = new DefaultFloatDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the float dock factory.");
 			exception.printStackTrace();
 			floatDockFactory = new DefaultFloatDockFactory();

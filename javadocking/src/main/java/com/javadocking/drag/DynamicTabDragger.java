@@ -779,11 +779,7 @@ public class DynamicTabDragger implements Dragger {
 	 */
 	private void startFloatDelay() {
 
-		ActionListener taskPerformer = new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				floatDelayFinished();
-			}
-		};
+		ActionListener taskPerformer = evt -> floatDelayFinished();
 		timer = new Timer(FLOAT_DELAY, taskPerformer);
 		timer.setRepeats(false);
 		timer.start();

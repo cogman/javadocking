@@ -119,15 +119,7 @@ public class TabDockFactory implements DockFactory {
 			} else {
 				alternativeDockFactory = null;
 			}
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the alternative dock factory.");
-			exception.printStackTrace();
-			alternativeDockFactory = new LeafDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the alternative dock factory.");
-			exception.printStackTrace();
-			alternativeDockFactory = new LeafDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the alternative dock factory.");
 			exception.printStackTrace();
 			alternativeDockFactory = new LeafDockFactory();

@@ -466,11 +466,7 @@ public class DefaultDragListener implements DragListener {
 	 */
 	private void startDragDelay() {
 
-		ActionListener taskPerformer = new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				dragDelayFinished();
-			}
-		};
+		ActionListener taskPerformer = evt -> dragDelayFinished();
 		timer = new Timer(DELAY, taskPerformer);
 		timer.setRepeats(false);
 		timer.start();

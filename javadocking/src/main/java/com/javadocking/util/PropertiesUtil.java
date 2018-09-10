@@ -281,14 +281,8 @@ public class PropertiesUtil {
 
 			// Try to make the color without alfa.
 			return new Color(redValue, greenValue, blueValue);
-		} catch (NumberFormatException numberFormatException) {
-			// Exception while parsing the integers.
-			return defaultValue;
-		} catch (NoSuchElementException noSuchElementException) {
+		} catch (NoSuchElementException | IllegalArgumentException noSuchElementException) {
 			// Exception in the StringTokenizer.
-			return defaultValue;
-		} catch (IllegalArgumentException illegalArgumentException) {
-			// Exception while creating the color.
 			return defaultValue;
 		}
 

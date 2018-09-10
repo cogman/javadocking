@@ -69,11 +69,7 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 				childDockFactory = (DockFactory) clazz.newInstance();
 				childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
 			}
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new SingleDockFactory();
-		} catch (IllegalAccessException exception) {
+		} catch (ClassNotFoundException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();

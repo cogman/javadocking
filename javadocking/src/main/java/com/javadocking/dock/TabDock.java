@@ -1014,18 +1014,25 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 		// Implementations of PropertyChangeListener.
 
 		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-			if (propertyChangeEvent.getPropertyName().equals("description")) {
-				Position position = getDockablePosition(dockable);
-				int index = position.getPosition(0);
-				tabbedPane.setToolTipTextAt(index, dockable.getDescription());
-			} else if (propertyChangeEvent.getPropertyName().equals("title")) {
-				Position position = getDockablePosition(dockable);
-				int index = position.getPosition(0);
-				tabbedPane.setTitleAt(index, dockable.getTitle());
-			} else if (propertyChangeEvent.getPropertyName().equals("icon")) {
-				Position position = getDockablePosition(dockable);
-				int index = position.getPosition(0);
-				tabbedPane.setIconAt(index, dockable.getIcon());
+			switch (propertyChangeEvent.getPropertyName()) {
+				case "description": {
+					Position position = getDockablePosition(dockable);
+					int index = position.getPosition(0);
+					tabbedPane.setToolTipTextAt(index, dockable.getDescription());
+					break;
+				}
+				case "title": {
+					Position position = getDockablePosition(dockable);
+					int index = position.getPosition(0);
+					tabbedPane.setTitleAt(index, dockable.getTitle());
+					break;
+				}
+				case "icon": {
+					Position position = getDockablePosition(dockable);
+					int index = position.getPosition(0);
+					tabbedPane.setIconAt(index, dockable.getIcon());
+					break;
+				}
 			}
 		}
 

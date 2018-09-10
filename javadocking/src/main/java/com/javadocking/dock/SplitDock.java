@@ -610,15 +610,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 			Class leafChildDockFactoryClazz = Class.forName(leafChildDockFactoryClassName);
 			childDockFactory = (DockFactory) leafChildDockFactoryClazz.newInstance();
 			childDockFactory.loadProperties(prefix + "leafChildDockFactory.", properties);
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the leaf child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new TabDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the leaf child dock factory.");
-			exception.printStackTrace();
-			childDockFactory = new TabDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the leaf child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new TabDockFactory();
@@ -631,15 +623,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 			Class splitChildDockFactoryClazz = Class.forName(splitChildDockFactoryClassName);
 			compositeChildDockFactory = (CompositeDockFactory) splitChildDockFactoryClazz.newInstance();
 			compositeChildDockFactory.loadProperties(prefix + "splitChildDockFactory.", properties);
-		} catch (ClassNotFoundException exception) {
-			System.out.println("Could not create the split child dock factory.");
-			exception.printStackTrace();
-			compositeChildDockFactory = new SplitDockFactory();
-		} catch (IllegalAccessException exception) {
-			System.out.println("Could not create the split child dock factory.");
-			exception.printStackTrace();
-			compositeChildDockFactory = new SplitDockFactory();
-		} catch (InstantiationException exception) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the split child dock factory.");
 			exception.printStackTrace();
 			compositeChildDockFactory = new SplitDockFactory();
