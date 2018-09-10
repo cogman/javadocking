@@ -101,12 +101,8 @@ public class ActionDockable implements Dockable {
 		// Create a new matrix with the rows of the action matrix of the delegate 
 		// and the rows of the action matrix of this decorator.
 		Action[][] combinedActions = new Action[delegateActions.length + currentActionsToAdd.length][];
-		for (int index = 0; index < delegateActions.length; index++) {
-			combinedActions[index] = delegateActions[index];
-		}
-		for (int index = 0; index < currentActionsToAdd.length; index++) {
-			combinedActions[delegateActions.length + index] = currentActionsToAdd[index];
-		}
+		System.arraycopy(delegateActions, 0, combinedActions, 0, delegateActions.length);
+		System.arraycopy(currentActionsToAdd, 0, combinedActions, delegateActions.length, currentActionsToAdd.length);
 
 		return combinedActions;
 

@@ -101,17 +101,17 @@ public class SelectableDockHeader extends JPanel implements SelectableHeader {
 		// Get the dockables of the dock.
 		List dockables = new ArrayList();
 		DockingUtil.retrieveDockables(dock, dockables);
-		String title = "";
+		StringBuilder title = new StringBuilder();
 		if (dockables.size() > 0) {
-			title = ((Dockable) dockables.get(0)).getTitle();
+			title = new StringBuilder(((Dockable) dockables.get(0)).getTitle());
 		}
 		for (int index = 1; index < dockables.size(); index++) {
-			title += ", " + ((Dockable) dockables.get(index)).getTitle();
+			title.append(", ").append(((Dockable) dockables.get(index)).getTitle());
 		}
 
 		// Create the center with the label.
 		titleLabel = DockingManager.getComponentFactory().createJLabel();
-		titleLabel.setText(title);
+		titleLabel.setText(title.toString());
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		add(titleLabel);
 

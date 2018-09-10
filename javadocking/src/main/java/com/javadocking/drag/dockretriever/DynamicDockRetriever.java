@@ -307,8 +307,7 @@ public class DynamicDockRetriever implements DockRetriever {
 		if (dockPossibilities.reserveDocks != null) {
 			// Try to add the float dock.
 			if (floatDocks.size() > 0) {
-				List possibleDocks = new ArrayList();
-				possibleDocks.addAll(floatDocks);
+				List possibleDocks = new ArrayList(floatDocks);
 				dockPossibilities.preferenceDocks = possibleDocks;
 			}
 			return dockPossibilities;

@@ -798,19 +798,13 @@ public class CompositeTabDock extends JPanel implements CompositeDock {
 	 */
 	protected String getTitle(Dockable dockable) {
 
-		String separator = " ,";
-
 		if (dockable instanceof CompositeDockable) {
-			String title = "";
-			boolean empty = true;
+			StringBuilder title = new StringBuilder();
 			CompositeDockable compositeDockable = (CompositeDockable) dockable;
 			for (int index = 0; index < compositeDockable.getDockableCount(); index++) {
-				if (!empty) {
-					title += separator;
-				}
-				title += getTitle(compositeDockable.getDockable(index));
+				title.append(getTitle(compositeDockable.getDockable(index)));
 			}
-			return title;
+			return title.toString();
 		}
 
 		if (dockable.getTitle() != null) {

@@ -110,7 +110,7 @@ public class PropertiesUtil {
 	 * @param value      The default value of the property.
 	 */
 	public static void setBoolean(Properties properties, String name, boolean value) {
-		properties.put(name, (new Boolean(value)).toString());
+		properties.put(name, (Boolean.valueOf(value)).toString());
 	}
 
 	/**
