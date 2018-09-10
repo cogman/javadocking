@@ -317,7 +317,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 					childDockable.setLastDockingMode(DockingMode.TAB);
 
 					// Do we have to select the tab of this dockable?
-					if ((selectedDockable != null) && (childDockable.equals(selectedDockable))) {
+					if ((childDockable.equals(selectedDockable))) {
 						tabbedPane.setSelectedComponent(dockablePanel);
 					}
 				}
@@ -686,7 +686,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 					tabPosition++;
 
 					// Do we have to select this dockable?
-					if ((selectedDockable != null) && (childDockable.equals(selectedDockable))) {
+					if ((childDockable.equals(selectedDockable))) {
 						tabbedPane.setSelectedComponent(childDockablePanel);
 					}
 				}

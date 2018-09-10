@@ -174,7 +174,7 @@ public class TypeLeafDockFactory implements DockFactory {
 
 		// We have a single dockable.
 		Object dockableObject = dockable.getContent();
-		if ((dockableObject != null) && (dockableObject instanceof Component)) {
+		if ((dockableObject instanceof Component)) {
 			if ((dockingModes & DockingMode.TOOL_GRID) != 0) {
 				return new GridDock(DockingMode.TOOL_GRID);
 			}

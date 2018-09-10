@@ -319,7 +319,7 @@ public class CompositeTabDock extends JPanel implements CompositeDock {
 					}
 
 					// Do we have to select the tab of this dockable?
-					if ((selectedDockable != null) && (childDockable.equals(selectedDockable))) {
+					if ((childDockable.equals(selectedDockable))) {
 						tabbedPane.setSelectedComponent((Component) childDock);
 					}
 
