@@ -7,7 +7,6 @@ import com.javadocking.util.PropertiesUtil;
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 

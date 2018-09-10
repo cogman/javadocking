@@ -5,7 +5,6 @@ import com.javadocking.dock.HidableFloatDock;
 
 import java.awt.*;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**

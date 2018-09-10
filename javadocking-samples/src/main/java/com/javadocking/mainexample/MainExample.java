@@ -24,7 +24,6 @@ import com.javadocking.visualizer.SingleMaximizer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
