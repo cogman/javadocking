@@ -10,6 +10,8 @@ import com.javadocking.model.DefaultFloatDockFactory;
 import com.javadocking.model.FloatDockFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,7 @@ public class FloatDockSample extends JPanel {
 	private static final int FLOAT_WINDOW_X = 150;
 	private static final int FLOAT_WINDOW_Y = 60;
 
-	public FloatDockSample(JFrame frame) {
+	public FloatDockSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the factory for the float docks.
@@ -104,7 +106,8 @@ public class FloatDockSample extends JPanel {
 			super(childDockFactory);
 		}
 
-		public FloatDock createFloatDock(Window owner) {
+		@Nullable
+		public FloatDock createFloatDock(@NotNull Window owner) {
 			FloatDock floatDock = super.createFloatDock(owner);
 			floatDock.setDockPriority(Priority.CAN_DOCK_WITH_PRIORITY);
 			return floatDock;

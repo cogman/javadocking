@@ -13,6 +13,8 @@ import com.javadocking.event.DockingListener;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,14 +75,17 @@ public class FloatDock implements CompositeDock {
 	/**
 	 * This factory creates the leaf child docks.
 	 */
+	@Nullable
 	private DockFactory childDockFactory;
 	/**
 	 * The list with the child docks of this dock.
 	 */
+	@NotNull
 	private List childDocks = new LinkedList();
 	/**
 	 * The mapping between the dockables and there floating windows.
 	 */
+	@NotNull
 	private Map childDockWindows = new HashMap();
 	/**
 	 * This is the priority for docking dockables in this dock.
@@ -94,20 +99,24 @@ public class FloatDock implements CompositeDock {
 	 * This is the listener that will listen to the window closing events of all the floating windows
 	 * created by this class. When the window is closed, the child dock is removed from this dock.
 	 */
+	@NotNull
 	private WindowClosingListener windowClosingListener = new WindowClosingListener();
 	/**
 	 * This is the listener that will listen to the window focus events of all the floating windows
 	 * created by this class.
 	 */
+	@NotNull
 	private List windowFocusListeners = new ArrayList();
 	/**
 	 * Listens to the window events on the owner window of the float dock. Does the appropriate
 	 * actions with the child windows.
 	 */
+	@NotNull
 	private OwnerWindowListener ownerWindowListener = new OwnerWindowListener();
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 
@@ -117,6 +126,7 @@ public class FloatDock implements CompositeDock {
 	 * It cannot be removed now because there are still listeners for dragging that are busy.
 	 * We only want to lose the listeners when dragging is finished. This is only used with dynamic dragging.
 	 */
+	@Nullable
 	private Dock ghostChildDock;
 
 	// Constructors.
@@ -135,7 +145,7 @@ public class FloatDock implements CompositeDock {
 	 *
 	 * @param    owner                The window that owns the floating windows created by this dock.
 	 */
-	public FloatDock(Window owner) {
+	public FloatDock(@NotNull Window owner) {
 		this(owner, new SplitDockFactory());
 	}
 
@@ -146,7 +156,7 @@ public class FloatDock implements CompositeDock {
 	 * @param    owner                The window that owns the floating windows created by this dock.
 	 * @param    childDockFactory    The factory for creating child docks.
 	 */
-	public FloatDock(Window owner, DockFactory childDockFactory) {
+	public FloatDock(@NotNull Window owner, DockFactory childDockFactory) {
 		this.childDockFactory = childDockFactory;
 		setOwner(owner);
 	}
@@ -172,7 +182,7 @@ public class FloatDock implements CompositeDock {
 	 * @return When the dockable can be added the value of the property
 	 * <code>dockPriority</code> is returned, otherwise {@link Priority#CANNOT_DOCK}.
 	 */
-	public int getDockPriority(Dockable dockableToAdd, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockableToAdd, Point relativeLocation) {
 
 		// If the dockable is floatable, it can be docked in the float dock.
 		if ((dockableToAdd.getDockingModes() & DockingMode.FLOAT) != 0) {
@@ -186,7 +196,7 @@ public class FloatDock implements CompositeDock {
 
 	}
 
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation, Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation, @NotNull Point dockableOffset, @NotNull Rectangle rectangle) {
 
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
@@ -215,7 +225,7 @@ public class FloatDock implements CompositeDock {
 
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation, Point dockableOffset) {
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation, @NotNull Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
 		if (getDockPriority(dockableToAdd, relativeLocation) == Priority.CANNOT_DOCK) {
@@ -262,6 +272,7 @@ public class FloatDock implements CompositeDock {
 	/**
 	 * Always returns null, because this dock can't have a parent dock.
 	 */
+	@Nullable
 	public CompositeDock getParentDock() {
 		return null;
 	}
@@ -272,7 +283,7 @@ public class FloatDock implements CompositeDock {
 	public void setParentDock(CompositeDock parentDock) {
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 
 		// Save the dock priority
 		PropertiesUtil.setInteger(properties, prefix + "dockPriority", getDockPriority());
@@ -305,7 +316,7 @@ public class FloatDock implements CompositeDock {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map newChildDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map newChildDocks, Map dockablesMap, @NotNull Window owner) throws IOException {
 
 		// Load the class and properties of the child dock factory.
 		try {
@@ -314,7 +325,7 @@ public class FloatDock implements CompositeDock {
 			Class clazz = Class.forName(className);
 			childDockFactory = (DockFactory) clazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();
@@ -439,6 +450,7 @@ public class FloatDock implements CompositeDock {
 		return childDocks.size();
 	}
 
+	@NotNull
 	public Dock getChildDock(int index) throws IndexOutOfBoundsException {
 		// Check if the index is in the bounds.
 		if ((index < 0) || (index >= getChildDockCount())) {
@@ -448,6 +460,7 @@ public class FloatDock implements CompositeDock {
 		return (Dock) childDocks.get(index);
 	}
 
+	@NotNull
 	public Position getChildDockPosition(Dock childDock) throws IllegalArgumentException {
 
 		// Get the (x,y) position.
@@ -476,7 +489,7 @@ public class FloatDock implements CompositeDock {
 	 *                 <li>The third dimension value will be the z-order of the dialog</li>
 	 *                 </ul>
 	 */
-	public void addChildDock(Dock dock, Position position) throws IllegalStateException {
+	public void addChildDock(@NotNull Dock dock, @NotNull Position position) throws IllegalStateException {
 
 		// Get the (x, y)location.
 		Point point;
@@ -489,11 +502,12 @@ public class FloatDock implements CompositeDock {
 		addChildDock(dock, point, null);
 	}
 
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
 
-	public void setChildDockFactory(DockFactory childDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory childDockFactory) {
 
 		if (childDockFactory == null) {
 			throw new IllegalArgumentException("The child dock factory cannot be null.");
@@ -519,7 +533,7 @@ public class FloatDock implements CompositeDock {
 	 *
 	 * @param owner The window that owns the floating windows created by this dock.
 	 */
-	public void setOwner(Window owner) {
+	public void setOwner(@NotNull Window owner) {
 		this.owner = owner;
 		if (this.owner != null) {
 			owner.addWindowListener(ownerWindowListener);
@@ -529,6 +543,7 @@ public class FloatDock implements CompositeDock {
 	}
 
 
+	@NotNull
 	protected Map getChildDockWindows() {
 		return childDockWindows;
 	}
@@ -586,7 +601,7 @@ public class FloatDock implements CompositeDock {
 	 * @param relativeLocation The new location for the child dock.
 	 * @param dockableOffset   The mouse location where the dragging started, relatively to the child dock.
 	 */
-	public void moveDock(Dock childDock, Point relativeLocation, Point dockableOffset) {
+	public void moveDock(Dock childDock, @NotNull Point relativeLocation, @NotNull Point dockableOffset) {
 
 		// Inform the listeners about the move.
 		dockingEventSupport.fireDockingWillChange(new ChildDockEvent(this, this, this, childDock));
@@ -627,7 +642,7 @@ public class FloatDock implements CompositeDock {
 	 * @param size     The size for the dialog. This may be null. In that case the preferred
 	 *                 size is taken.
 	 */
-	public void addChildDock(Dock dock, Point location, Dimension size) {
+	public void addChildDock(@NotNull Dock dock, @NotNull Point location, @Nullable Dimension size) {
 
 		// Inform the listeners.
 		dockingEventSupport.fireDockingWillChange(new ChildDockEvent(this, null, this, dock));
@@ -683,7 +698,7 @@ public class FloatDock implements CompositeDock {
 	 * @param location The location where the floating window will be put,
 	 *                 if the requested location is outside the screen.
 	 */
-	protected void getDefaultFloatingWindowLocation(Point location) {
+	protected void getDefaultFloatingWindowLocation(@NotNull Point location) {
 
 		// Return the position of the defaultWindowLocation.
 		location.move(DEFAULT_WINDOW_LOCATION.x, DEFAULT_WINDOW_LOCATION.y);
@@ -700,7 +715,7 @@ public class FloatDock implements CompositeDock {
 	 * @param location The location that contains the normal location for the floating window.
 	 *                 If this location is outside the screen, it is moved to the default floating window location.
 	 */
-	private void checkFloatingWindowLocation(Point location) {
+	private void checkFloatingWindowLocation(@NotNull Point location) {
 		if (!SwingUtil.isLocationInScreenBounds(location)) {
 			getDefaultFloatingWindowLocation(location);
 		}
@@ -717,7 +732,7 @@ public class FloatDock implements CompositeDock {
 	private class WindowClosingListener implements WindowListener {
 		// Implementations of WindowListener.
 
-		public void windowClosing(WindowEvent windowEvent) {
+		public void windowClosing(@NotNull WindowEvent windowEvent) {
 
 			// Get the window.
 			Container contentPane = SwingUtil.getContentPane(windowEvent.getWindow());

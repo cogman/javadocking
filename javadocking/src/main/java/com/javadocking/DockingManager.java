@@ -10,6 +10,7 @@ import com.javadocking.drag.painter.*;
 import com.javadocking.model.DefaultDockingPathModel;
 import com.javadocking.model.DockModel;
 import com.javadocking.model.DockingPathModel;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
@@ -49,10 +50,12 @@ public class DockingManager {
 	/**
 	 * The dock model of the application.
 	 */
+	@Nullable
 	private static DockModel dockModel;
 	/**
 	 * The docking path model of the application.
 	 */
+	@Nullable
 	private static DockingPathModel dockingPathModel = new DefaultDockingPathModel();
 	/**
 	 * The factory that provides the {@link com.javadocking.drag.Dragger}s
@@ -214,6 +217,7 @@ public class DockingManager {
 	 *
 	 * @return The dock model that contains all the docks of the application.
 	 */
+	@Nullable
 	public static DockModel getDockModel() {
 		return dockModel;
 	}
@@ -227,7 +231,7 @@ public class DockingManager {
 	 * @param newDockModel The dock model that contains all the docks of the application.
 	 * @throws NullPointerException    If the dock model is null.
 	 */
-	public static void setDockModel(DockModel newDockModel) {
+	public static void setDockModel(@Nullable DockModel newDockModel) {
 		if (newDockModel == null) {
 			throw new NullPointerException("Dock model null");
 		}
@@ -241,6 +245,7 @@ public class DockingManager {
 	 *
 	 * @return The docking path model of the application.
 	 */
+	@Nullable
 	public static DockingPathModel getDockingPathModel() {
 		return dockingPathModel;
 	}
@@ -251,7 +256,7 @@ public class DockingManager {
 	 * @param newDockingPathModel The docking path model of the application.
 	 * @throws NullPointerException    If the docking path model is null.
 	 */
-	public static void setDockingPathModel(DockingPathModel newDockingPathModel) {
+	public static void setDockingPathModel(@Nullable DockingPathModel newDockingPathModel) {
 		if (newDockingPathModel == null) {
 			throw new NullPointerException("Docking path model null");
 		}

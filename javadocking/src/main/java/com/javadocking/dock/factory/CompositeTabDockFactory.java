@@ -8,6 +8,8 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -27,15 +29,17 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 	 * When the dockable cannot be added the creation of the dock is delegated
 	 * to this alternative dock factory.
 	 */
+	@Nullable
 	private DockFactory alternativeDockFactory = new LeafDockFactory();
 	/**
 	 * This is the factory that is used to create a dock for a single dockable.
 	 */
+	@Nullable
 	private DockFactory childDockFactory = new SingleDockFactory(null);
 
 	// Implementations of DockFactory.
 
-	public Dock createDock(Dockable dockable, int dockingMode) {
+	public Dock createDock(@NotNull Dockable dockable, int dockingMode) {
 
 		// Try to create a dock with the child dock factory.
 		Dock dock = childDockFactory.createDock(dockable, dockingMode);
@@ -55,7 +59,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 
 	}
 
-	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode) {
+	public Dimension getDockPreferredSize(@NotNull Dockable dockable, int dockingMode) {
 
 		// Try to create a dock with the child dock factory.
 		Dock dock = childDockFactory.createDock(dockable, dockingMode);
@@ -91,7 +95,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		// Load the class and properties of the leaf child dock factory.
 		try {
@@ -100,7 +104,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 			Class leafChildDockFactoryClazz = Class.forName(leafChildDockFactoryClassName);
 			childDockFactory = (DockFactory) leafChildDockFactoryClazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new TabDockFactory();
@@ -113,7 +117,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 			Class alternativeDockFactoryClazz = Class.forName(alternativeDockFactoryClassName);
 			alternativeDockFactory = (DockFactory) alternativeDockFactoryClazz.newInstance();
 			alternativeDockFactory.loadProperties(prefix + "alternativeDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the alternative dock factory.");
 			exception.printStackTrace();
 			alternativeDockFactory = new LeafDockFactory();
@@ -129,6 +133,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 	 *
 	 * @return The alternative dock factory.
 	 */
+	@Nullable
 	public DockFactory getAlternativeDockFactory() {
 		return alternativeDockFactory;
 	}
@@ -140,7 +145,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 	 * @param alternativeDockFactory The alternative dock factory. Should not be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setAlternativeDockFactory(DockFactory alternativeDockFactory) {
+	public void setAlternativeDockFactory(@Nullable DockFactory alternativeDockFactory) {
 
 		if (alternativeDockFactory == null) {
 			throw new IllegalArgumentException("The alternative dock factory cannot be null.");
@@ -156,6 +161,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 	 *
 	 * @return The leaf child dock factory.
 	 */
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
@@ -167,7 +173,7 @@ public class CompositeTabDockFactory implements CompositeDockFactory {
 	 * @param leafChildDockFactory The leaf child dock factory. Should not be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setChildDockFactory(DockFactory leafChildDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory leafChildDockFactory) {
 
 		if (leafChildDockFactory == null) {
 			throw new IllegalArgumentException("The leaf dock factory cannot be null.");

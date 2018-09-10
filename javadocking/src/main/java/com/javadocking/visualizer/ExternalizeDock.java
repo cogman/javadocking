@@ -2,6 +2,7 @@ package com.javadocking.visualizer;
 
 import com.javadocking.dock.LeafDock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This is an interface for a leaf dock that can contain an externalized dockable.
@@ -29,6 +30,7 @@ public interface ExternalizeDock extends LeafDock {
 	 *
 	 * @return The externalizer of this externalize dock.
 	 */
+	@Nullable
 	Externalizer getExternalizer();
 
 	/**

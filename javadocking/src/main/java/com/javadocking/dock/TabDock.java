@@ -11,6 +11,8 @@ import com.javadocking.event.DockingEventSupport;
 import com.javadocking.event.DockingListener;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -101,14 +103,17 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	/**
 	 * The mapping between the components used for the dockables and the dockables that are docked in this dock.
 	 */
+	@NotNull
 	private Map panelDockableMapping = new HashMap();
 	/**
 	 * The mapping between the contents of the dockable and the components that are used for the dockables.
 	 */
+	@NotNull
 	private Map contentPanelMapping = new HashMap();
 	/**
 	 * The mapping between the dockables and the listeners for description changes.
 	 */
+	@NotNull
 	private Map descriptionListenerMapping = new HashMap();
 
 	/**
@@ -125,13 +130,16 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 * priorityRectangleBottomOffset and priorityRectangleRightOffset. We keep it as field
 	 * because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle priorityRectangle = new Rectangle();
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 	// For hiding.
+	@NotNull
 	private List hiddenDockables = new ArrayList();
 
 
@@ -178,7 +186,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 * <li>all of its child dockables have a content component that is not null.</li>
 	 * </ul>
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Check if the dockable may be docked in a tabbed dock.
 		if ((dockable.getDockingModes() & DockingMode.TAB) == 0) {
@@ -231,7 +239,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	}
 
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation, Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation, Point dockableOffset, @NotNull Rectangle rectangle) {
 
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
@@ -244,7 +252,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation, Point dockableOffset) {
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation, Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
 		if (getDockPriority(dockableToAdd, relativeLocation) == Priority.CANNOT_DOCK) {
@@ -360,7 +368,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	}
 
-	public boolean removeDockable(Dockable dockableToRemove) {
+	public boolean removeDockable(@NotNull Dockable dockableToRemove) {
 		// Verify the conditions for removing the dockable.
 		if (!canRemoveDockable(dockableToRemove)) {
 			return false;
@@ -467,7 +475,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 		}
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map childDockIds, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map childDockIds, @NotNull Map dockablesMap, Window owner) throws IOException {
 
 		// Load the IDs of the dockables.
 		String[] dockableIdArray = new String[0];
@@ -525,6 +533,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	// Implementations of LeafDock.
 
+	@NotNull
 	public Dockable getDockable(int index) throws IndexOutOfBoundsException {
 		// Check if the index is in the bounds.
 		if ((index < 0) || (index >= getDockableCount())) {
@@ -542,7 +551,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 		return panelDockableMapping.values().contains(dockable);
 	}
 
-	public boolean moveDockable(Dockable dockableToMove, Point relativeLocation) {
+	public boolean moveDockable(Dockable dockableToMove, @NotNull Point relativeLocation) {
 
 		// Don't move a composite dockable. 
 		if (dockableToMove instanceof CompositeDockable) {
@@ -598,7 +607,8 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	}
 
-	public Position getDockablePosition(Dockable dockable) throws IllegalArgumentException {
+	@NotNull
+	public Position getDockablePosition(@NotNull Dockable dockable) throws IllegalArgumentException {
 
 		// Get the panel of the dockable.
 		Component dockablePanel = (Component) contentPanelMapping.get(dockable.getContent());
@@ -611,7 +621,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	}
 
-	public void addDockable(Dockable dockableToAdd, Position position) {
+	public void addDockable(@NotNull Dockable dockableToAdd, @NotNull Position position) {
 
 		// Get the position in the tabs.
 		int tabPosition = getDockableCount();
@@ -702,7 +712,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 	// Implementations of DockableHider.
 
-	public void hideDockable(Dockable dockableToHide) throws IllegalArgumentException {
+	public void hideDockable(@NotNull Dockable dockableToHide) throws IllegalArgumentException {
 
 		// Check if the dockable is docked in this dock.
 		if (!panelDockableMapping.containsValue(dockableToHide)) {
@@ -731,6 +741,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 		return hiddenDockables.size();
 	}
 
+	@NotNull
 	public Dockable getHiddenDockable(int index) {
 
 		// Check if the index is in the bounds.
@@ -742,7 +753,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	}
 
 
-	public void restoreDockable(Dockable dockableToRestore) {
+	public void restoreDockable(@NotNull Dockable dockableToRestore) {
 
 		// Check if the dockable is docked in this dock.
 		if (!(panelDockableMapping.values().contains(dockableToRestore))) {
@@ -776,6 +787,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 * @return The dockable in the given dock that has the given component as inner component,
 	 * if it exists, null otherwise.
 	 */
+	@Nullable
 	public Dockable retrieveDockableOfComponent(Component component) {
 
 		if (!(component instanceof JPanel)) {
@@ -807,7 +819,8 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 * @param dockable The dockable for whicha a component has to be created.
 	 * @return The component for the dockable.
 	 */
-	protected JPanel createComponentOfDockable(Dockable dockable) {
+	@NotNull
+	protected JPanel createComponentOfDockable(@NotNull Dockable dockable) {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(dockable.getContent(), BorderLayout.CENTER);
@@ -826,7 +839,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 * @param    dockable        The tab for this dockable should be selected.
 	 * @return True if the dockable could be selected, false otherwise.
 	 */
-	public boolean setSelectedDockable(Dockable dockable) {
+	public boolean setSelectedDockable(@NotNull Dockable dockable) {
 
 		boolean selected = false;
 
@@ -872,6 +885,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 *
 	 * @return The dockable that is selected in the tab dock.
 	 */
+	@Nullable
 	public Dockable getSelectedDockable() {
 
 		// Are there dockables?
@@ -978,7 +992,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 	 *
 	 * @param    rectangle The rectangle that will get the position and size of the priority rectangle for this dock.
 	 */
-	protected void getPriorityRectangle(Rectangle rectangle) {
+	protected void getPriorityRectangle(@NotNull Rectangle rectangle) {
 		Dimension size = getSize();
 		rectangle.setBounds((int) (size.width * priorityRectangleRelativeLeftOffset),
 				(int) (size.height * priorityRectangleRelativeTopOffset),
@@ -1013,7 +1027,7 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 
 		// Implementations of PropertyChangeListener.
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 			switch (propertyChangeEvent.getPropertyName()) {
 				case "description": {
 					Position position = getDockablePosition(dockable);

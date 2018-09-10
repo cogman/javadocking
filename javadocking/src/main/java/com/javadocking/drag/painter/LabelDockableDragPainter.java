@@ -3,6 +3,8 @@ package com.javadocking.drag.painter;
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Dock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class LabelDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The window that shows the title of the dockable.
 	 */
+	@Nullable
 	private JWindow window;
 	/**
 	 * The content of the window.
@@ -30,10 +33,12 @@ public class LabelDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The dockable that is currently shown in the window. Can be null, when no dockable is shown.
 	 */
+	@Nullable
 	private Dockable dockable;
 	/**
 	 * The position where the window will be placed.
 	 */
+	@NotNull
 	private Point windowLocation = new Point();
 	/**
 	 * The label is shifted this distance from the mouse.
@@ -64,7 +69,7 @@ public class LabelDockableDragPainter implements DockableDragPainter {
 
 	}
 
-	public void paintDockableDrag(Dockable newDockable, Dock dock, Rectangle rectangle, Point locationInDestinationDock) {
+	public void paintDockableDrag(@NotNull Dockable newDockable, @Nullable Dock dock, Rectangle rectangle, @NotNull Point locationInDestinationDock) {
 
 		// Create the window.
 		if (window == null) {

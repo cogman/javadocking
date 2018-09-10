@@ -5,6 +5,8 @@ import com.javadocking.dock.Dock;
 import com.javadocking.dock.LeafDock;
 import com.javadocking.dock.TabDock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * <p>
@@ -22,6 +24,7 @@ public class DynamicDraggerFactory implements DraggerFactory {
 	 * It creates for a {@link com.javadocking.dock.TabDock} a {@link DynamicTabDragger}.
 	 * For other types of docks a {@link DynamicDragger} is returned.
 	 */
+	@Nullable
 	public Dragger createDragger(Dock dock) {
 		if (dock instanceof TabDock) {
 			return new DynamicTabDragger();
@@ -35,6 +38,7 @@ public class DynamicDraggerFactory implements DraggerFactory {
 	/**
 	 * It creates a {@link DynamicDragger}.
 	 */
+	@NotNull
 	public Dragger createDragger(Dockable dockable) {
 		return new DynamicDockableDragger(dockable);
 	}

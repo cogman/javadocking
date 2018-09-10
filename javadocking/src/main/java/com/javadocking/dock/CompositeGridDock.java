@@ -10,6 +10,8 @@ import com.javadocking.event.DockingEventSupport;
 import com.javadocking.event.DockingListener;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -97,10 +99,12 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	/**
 	 * The child docks of this dock.
 	 */
+	@NotNull
 	private List childDocks = new ArrayList();
 	/**
 	 * This factory creates the child docks.
 	 */
+	@Nullable
 	private DockFactory childDockFactory;
 	/**
 	 * The number of columns in the grid.
@@ -116,11 +120,13 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 * This is the rectangle in which a dockable can be docked with priority.
 	 * We keep it as field because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle priorityRectangle = new Rectangle();
 	/**
 	 * This is a rectangle for doing calculations.
 	 * We keep it as field because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle helpRectangle = new Rectangle();
 	/**
 	 * This is the deepest panel that contains the child docks.
@@ -129,6 +135,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 
@@ -138,6 +145,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 * It cannot be removed now because it contains an old dock that still has listeners for dragging that are busy.
 	 * We only want to lose the listeners when dragging is finished. This is only used with dynamic dragging.
 	 */
+	@Nullable
 	private JPanel ghostDockPanel;
 
 	// Constructors.
@@ -182,7 +190,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 * the dockable can be added, if a child dock can be created for every child dockable of the composite.</li>
 	 * </ul>
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Check if the dockable may be docked in a grid dock.
 		if (!checkDockingModes(dockable)) {
@@ -242,8 +250,8 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 	}
 
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation,
-										Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation,
+										Point dockableOffset, @NotNull Rectangle rectangle) {
 
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
@@ -293,7 +301,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation, Point dockableOffset) {
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation, Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
 		if (getDockPriority(dockableToAdd, relativeLocation) == Priority.CANNOT_DOCK) {
@@ -366,7 +374,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 		this.parentDock = parentDock;
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 
 		// Save the fill mode and the column count.
 		PropertiesUtil.setInteger(properties, prefix + "fillMode", fillMode);
@@ -391,7 +399,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map newChildDocks, Map dockables, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map newChildDocks, Map dockables, Window owner) throws IOException {
 
 		// Set the fill mode.
 		int fillMode = FILL_FLOW_HORIZONTAL;
@@ -405,7 +413,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 			Class clazz = Class.forName(className);
 			childDockFactory = (DockFactory) clazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();
@@ -462,7 +470,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 	// Implementations of CompositeDock.
 
-	public void addChildDock(Dock dock, Position position) throws IllegalStateException {
+	public void addChildDock(@NotNull Dock dock, @NotNull Position position) throws IllegalStateException {
 
 		// Get the position in the grid.
 		int gridPosition = getChildDockCount();
@@ -494,6 +502,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 		return childDocks.size();
 	}
 
+	@NotNull
 	public Dock getChildDock(int index) throws IndexOutOfBoundsException {
 
 		// Check if the index is in the bounds.
@@ -505,6 +514,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 	}
 
+	@NotNull
 	public Position getChildDockPosition(Dock childDock) throws IllegalArgumentException {
 
 		int position = childDocks.indexOf(childDock);
@@ -598,11 +608,12 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 	}
 
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
 
-	public void setChildDockFactory(DockFactory childDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory childDockFactory) {
 
 		if (childDockFactory == null) {
 			throw new IllegalArgumentException("The child dock factory cannot be null.");
@@ -653,7 +664,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 * @return The position where the dockable should be docked in the dock.
 	 * The position is the future index of the dockable in the grid.
 	 */
-	protected int getDockPosition(Dockable newDockable, Point relativePosition) {
+	protected int getDockPosition(Dockable newDockable, @NotNull Point relativePosition) {
 
 		// Are there no child docks already?
 		if (childDocks.size() == 0) {
@@ -699,7 +710,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 * @return True if the given dockable can be added to this dock with priority,
 	 * false otherwise.
 	 */
-	protected boolean canAddDockableWithPriority(Dockable dockable, Point relativeLocation) {
+	protected boolean canAddDockableWithPriority(Dockable dockable, @NotNull Point relativeLocation) {
 		// Are there no dockables already?
 		if (childDocks.size() == 0) {
 			// There is priority if we are not near the border of the dock.
@@ -870,7 +881,7 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 * as possible docking mode.
 	 * @param    dockable                The dockable to add.
 	 */
-	protected boolean checkDockingModes(Dockable dockable) {
+	protected boolean checkDockingModes(@NotNull Dockable dockable) {
 		int dockPositions = dockable.getDockingModes();
 		return (dockPositions & DockingMode.GRID) != 0;
 

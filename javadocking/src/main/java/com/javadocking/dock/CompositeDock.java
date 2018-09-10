@@ -2,6 +2,7 @@ package com.javadocking.dock;
 
 
 import com.javadocking.dock.factory.DockFactory;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * <p>
@@ -85,6 +86,7 @@ public interface CompositeDock extends Dock {
 	 * @return The child dock with the specified index.
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getChildDockCount()).
 	 */
+	@Nullable
 	Dock getChildDock(int index) throws IndexOutOfBoundsException;
 
 	/**
@@ -102,6 +104,7 @@ public interface CompositeDock extends Dock {
 	 *
 	 * @return The factory that creates the child docks for this composite dock.
 	 */
+	@Nullable
 	DockFactory getChildDockFactory();
 
 	/**

@@ -24,6 +24,8 @@ import com.javadocking.visualizer.DockingMinimizer;
 import com.javadocking.visualizer.Externalizer;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -97,7 +99,7 @@ public class WorkspaceExample extends JPanel {
 
 	// Constructors.
 
-	public WorkspaceExample(JFrame frame) {
+	public WorkspaceExample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Set our custom component factory.
@@ -539,6 +541,7 @@ public class WorkspaceExample extends JPanel {
 	 * @throws IllegalArgumentException If the given ID is null.
 	 * @return The created dockable.
 	 */
+	@NotNull
 	private Dockable createDockable(String id, Component content, String title, Icon icon, String description) {
 
 		// Create the dockable.
@@ -557,6 +560,7 @@ public class WorkspaceExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addAllActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
@@ -571,6 +575,7 @@ public class WorkspaceExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addLimitActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
@@ -589,6 +594,7 @@ public class WorkspaceExample extends JPanel {
 	 * @param message The message that will be displayed when the action is performed.
 	 * @return The dockable with a button as content.
 	 */
+	@NotNull
 	private Dockable createButtonDockable(String id, String title, Icon icon, String message) {
 
 		// Create the action.
@@ -610,7 +616,7 @@ public class WorkspaceExample extends JPanel {
 	/**
 	 * Adds a drag listener on the content component of a dockable.
 	 */
-	private void createDockableDragger(Dockable dockable) {
+	private void createDockableDragger(@NotNull Dockable dockable) {
 
 		// Create the dragger for the dockable.
 		DragListener dragListener = DockingManager.getDockableDragListenerFactory().createDragListener(dockable);
@@ -625,6 +631,7 @@ public class WorkspaceExample extends JPanel {
 	 * @param dockables The dockables for which a menu item has to be created.
 	 * @return The created menu bar.
 	 */
+	@NotNull
 	private JMenuBar createMenu(Dockable[] dockables, DockingPath centerDockingPath) {
 		// Create the menu bar.
 		JMenuBar menuBar = new JMenuBar();
@@ -713,7 +720,7 @@ public class WorkspaceExample extends JPanel {
 	 *
 	 * @param lafClassName The class name of the new look and feel.
 	 */
-	private void setLookAndFeel(LAF laf) {
+	private void setLookAndFeel(@NotNull LAF laf) {
 
 		try {
 			UIManager.setLookAndFeel(laf.getClassName());
@@ -821,7 +828,7 @@ public class WorkspaceExample extends JPanel {
 	private class WorkspaceSaver implements WindowListener {
 		private DockingPath dockingPath;
 
-		private WorkspaceSaver(DockingPath centerDockingPath) {
+		private WorkspaceSaver(@Nullable DockingPath centerDockingPath) {
 			if (centerDockingPath != null) {
 				this.dockingPath = DefaultDockingPath.copyDockingPath("centerDockingPath", centerDockingPath);
 			}
@@ -981,7 +988,7 @@ public class WorkspaceExample extends JPanel {
 
 		// Constructor.
 
-		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, DockableDragPainter additionalDockableDragPainter, boolean selected) {
+		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, @Nullable DockableDragPainter additionalDockableDragPainter, boolean selected) {
 			super(title);
 
 			// Create the dockable drag painter and dragger factory.
@@ -1048,7 +1055,7 @@ public class WorkspaceExample extends JPanel {
 
 		}
 
-		public void itemStateChanged(ItemEvent itemEvent) {
+		public void itemStateChanged(@NotNull ItemEvent itemEvent) {
 
 			dockable.removeDockingListener(this);
 			if (itemEvent.getStateChange() == ItemEvent.DESELECTED) {
@@ -1062,7 +1069,7 @@ public class WorkspaceExample extends JPanel {
 
 		}
 
-		public void dockingChanged(DockingEvent dockingEvent) {
+		public void dockingChanged(@NotNull DockingEvent dockingEvent) {
 			if (dockingEvent.getDestinationDock() != null) {
 				dockableMenuItem.removeItemListener(this);
 				dockableMenuItem.setSelected(true);
@@ -1081,6 +1088,7 @@ public class WorkspaceExample extends JPanel {
 
 	private class WorkspaceComponentFactory extends SampleComponentFactory {
 
+		@NotNull
 		public DockHeader createDockHeader(LeafDock dock, int orientation) {
 			return new PointDockHeader(dock, orientation);
 		}
@@ -1096,7 +1104,7 @@ public class WorkspaceExample extends JPanel {
 			this.centerDockingPath = centerDockingPath;
 		}
 
-		protected void saveProperties(DockModel dockModel, DockingPathModel dockingPathModel, Properties properties, Map dockKeys) {
+		protected void saveProperties(@NotNull DockModel dockModel, DockingPathModel dockingPathModel, Properties properties, Map dockKeys) {
 			super.saveProperties(dockModel, dockingPathModel, properties, dockKeys);
 			if (centerDockingPath != null) {
 				centerDockingPath.saveProperties(CENTER_DOCKING_PATH_ID, properties, dockKeys);
@@ -1107,9 +1115,10 @@ public class WorkspaceExample extends JPanel {
 	}
 
 	private class MyDockModelPropertiesDecoder extends DockModelPropertiesDecoder {
+		@Nullable
 		private DockingPath centerDockingPath;
 
-		protected DockModel decodeProperties(Properties properties, String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap, Map docks) throws IOException {
+		protected DockModel decodeProperties(@NotNull Properties properties, String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap, Map docks) throws IOException {
 			DockModel dockModel = super.decodeProperties(properties, sourceName, dockablesMap, ownersMap, visualizersMap, docks);
 			if (dockModel != null) {
 				centerDockingPath = new DefaultDockingPath();
@@ -1123,6 +1132,7 @@ public class WorkspaceExample extends JPanel {
 			return dockModel;
 		}
 
+		@Nullable
 		public DockingPath getCenterDockingPath() {
 			return centerDockingPath;
 		}

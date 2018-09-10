@@ -1,5 +1,7 @@
 package com.javadocking.drag.painter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 
 /**
@@ -30,7 +32,7 @@ class PaintWindow extends Window {
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) {
+	public void paint(@NotNull Graphics graphics) {
 
 		Image windowImage = createImage(getWidth(), getHeight());
 		Graphics windowImageGraphics = windowImage.getGraphics();

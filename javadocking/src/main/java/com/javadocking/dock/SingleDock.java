@@ -14,6 +14,8 @@ import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
 import com.javadocking.visualizer.ExternalizeDock;
 import com.javadocking.visualizer.Externalizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,6 +81,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	/**
 	 * The only dockable that is docked in this dock.
 	 */
+	@Nullable
 	private Dockable dockable;
 	/**
 	 * True if the dockable is externalized in this dock.
@@ -95,6 +98,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	/**
 	 * With this handle the dockable of this dock can be dragged.
 	 */
+	@Nullable
 	private DockHeader header;
 	/**
 	 * The position where the header will be placed.
@@ -111,18 +115,21 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	 * priorityRectangleBottomOffset and priorityRectangleRightOffset. We keep it as field
 	 * because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle priorityRectangle = new Rectangle();
 
 	// For event handling.
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 	// For ghosts.
 	/**
 	 * The header that can have a listener that is still working.
 	 */
+	@Nullable
 	private DockHeader ghostHeader;
 
 	// For hiding.
@@ -156,7 +163,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	 * <li>this dock is not already full.</li>
 	 * </ul>
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Check if the dockable may be docked in a single dock.
 		if ((dockable.getDockingModes() & DockingMode.SINGLE) == 0) {
@@ -189,7 +196,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	/**
 	 * Sets the rectangle on the whole dock, if the dockable can be docked.
 	 */
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation, Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation, Point dockableOffset, @NotNull Rectangle rectangle) {
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
 		if (priority != Priority.CANNOT_DOCK) {
@@ -200,7 +207,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 		return priority;
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation, Point dockableOffset) {
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation, Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
 		if (getDockPriority(dockableToAdd, relativeLocation) == Priority.CANNOT_DOCK) {
@@ -224,11 +231,11 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	}
 
-	public boolean canRemoveDockable(Dockable dockableToRemove) {
+	public boolean canRemoveDockable(@NotNull Dockable dockableToRemove) {
 		return dockableToRemove.equals(dockable);
 	}
 
-	public boolean removeDockable(Dockable dockableToRemove) {
+	public boolean removeDockable(@NotNull Dockable dockableToRemove) {
 
 		// Verify the conditions for removing the dockable.
 		if (!canRemoveDockable(dockableToRemove)) {
@@ -284,7 +291,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 		this.parentDock = parentDock;
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDocks) {
+	public void saveProperties(String prefix, @NotNull Properties properties, Map childDocks) {
 		if (dockable != null) {
 			// Save the ID of the dockable.
 			PropertiesUtil.setString(properties, prefix + PROPERTY_DOCKABLE_IDS, dockable.getID());
@@ -293,7 +300,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 		PropertiesUtil.setBoolean(properties, prefix + "externalized", externalized);
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map childDocks, @NotNull Map dockablesMap, Window owner) throws IOException {
 
 		// Get the externalization.
 		boolean externalized = false;
@@ -339,6 +346,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	// Implementations of LeafDock.
 
+	@Nullable
 	public Dockable getDockable(int index) throws IndexOutOfBoundsException {
 		// Check if the index is in the bounds.
 		if ((index < 0) || (index >= getDockableCount())) {
@@ -356,11 +364,11 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 		}
 	}
 
-	public boolean containsDockable(Dockable otherDockable) {
+	public boolean containsDockable(@NotNull Dockable otherDockable) {
 		return otherDockable.equals(dockable);
 	}
 
-	public boolean moveDockable(Dockable dockableToMove, Point relativeLocation) {
+	public boolean moveDockable(@NotNull Dockable dockableToMove, Point relativeLocation) {
 
 		// Check if the dockable is docked in this dock.
 		if (!dockableToMove.equals(dockable)) {
@@ -373,7 +381,8 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	}
 
-	public Position getDockablePosition(Dockable childDockable) throws IllegalArgumentException {
+	@NotNull
+	public Position getDockablePosition(@NotNull Dockable childDockable) throws IllegalArgumentException {
 
 		if (childDockable.equals(dockable)) {
 			return SINGLE_POSITION;
@@ -383,7 +392,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	}
 
-	public void addDockable(Dockable dockableToAdd, Position position) {
+	public void addDockable(@NotNull Dockable dockableToAdd, Position position) {
 
 		// TODO composite dockable with one component?
 		// Are we empty?
@@ -422,7 +431,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	// Implementations of DockableHider.
 
-	public void hideDockable(Dockable dockableToHide) throws IllegalArgumentException {
+	public void hideDockable(@NotNull Dockable dockableToHide) throws IllegalArgumentException {
 
 		// Check if the dockable is docked in this dock.
 		if (!dockableToHide.equals(dockable)) {
@@ -453,6 +462,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 		return 0;
 	}
 
+	@Nullable
 	public Dockable getHiddenDockable(int index) {
 
 		// Check if the index is in the bounds.
@@ -468,7 +478,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	}
 
-	public void restoreDockable(Dockable dockableToRestore) {
+	public void restoreDockable(@NotNull Dockable dockableToRestore) {
 
 		// Check if the dockable is docked in this dock.
 		if (!dockableToRestore.equals(dockable)) {
@@ -488,7 +498,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	// Implementations of Externalizer.
 
-	public void externalizeDockable(Dockable dockableToExternalize) {
+	public void externalizeDockable(@NotNull Dockable dockableToExternalize) {
 
 		// Inform the listeners.
 		dockingEventSupport.fireDockingWillChange(new DockableEvent(this, null, this, dockableToExternalize));
@@ -525,6 +535,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 
 	}
 
+	@Nullable
 	public Externalizer getExternalizer() {
 
 		if (isExternalized()) {
@@ -565,7 +576,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	 *
 	 * @param    rectangle The rectangle that will get the position and size of the priority rectangle for this dock.
 	 */
-	protected void getPriorityRectangle(Rectangle rectangle) {
+	protected void getPriorityRectangle(@NotNull Rectangle rectangle) {
 		Dimension size = getSize();
 		/**
 		 * The relative right offset of the priority rectangle.
@@ -649,6 +660,7 @@ public class SingleDock extends JPanel implements LeafDock, DockableHider, Exter
 	 *
 	 * @return The only dockable in a tree of dockables, if it exists. Otherwise null.
 	 */
+	@Nullable
 	private Dockable getDeepestSingleChild(Dockable dockable) {
 
 		if (dockable instanceof CompositeDockable) {

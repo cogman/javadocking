@@ -18,13 +18,14 @@ import com.javadocking.util.SampleComponentFactory;
 import com.javadocking.visualizer.DockingMinimizer;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ImageMinimizeHeaderSample extends JPanel {
 
-	public ImageMinimizeHeaderSample(JFrame frame) {
+	public ImageMinimizeHeaderSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -159,6 +160,7 @@ public class ImageMinimizeHeaderSample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);
@@ -176,7 +178,8 @@ public class ImageMinimizeHeaderSample extends JPanel {
 
 		// Overwritten methods.
 
-		public SelectableHeader createMinimizeHeader(Dockable dockable, int position) {
+		@NotNull
+		public SelectableHeader createMinimizeHeader(@NotNull Dockable dockable, int position) {
 			return new ImageMinimzeHeader(dockable, position);
 		}
 

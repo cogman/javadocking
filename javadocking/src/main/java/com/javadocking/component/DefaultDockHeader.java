@@ -3,6 +3,7 @@ package com.javadocking.component;
 import com.javadocking.dock.LeafDock;
 import com.javadocking.dock.Position;
 import com.javadocking.drag.DragListener;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -148,7 +149,7 @@ public class DefaultDockHeader extends JPanel implements DockHeader {
 
 	}
 
-	public void paint(Graphics graphics) {
+	public void paint(@NotNull Graphics graphics) {
 		super.paint(graphics);
 		graphics.setColor(Color.darkGray);
 

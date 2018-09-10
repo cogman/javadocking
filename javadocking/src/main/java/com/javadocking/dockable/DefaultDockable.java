@@ -8,6 +8,8 @@ import com.javadocking.event.DockableEvent;
 import com.javadocking.event.DockingEventSupport;
 import com.javadocking.event.DockingListener;
 import com.javadocking.visualizer.Externalizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,10 +37,12 @@ public class DefaultDockable implements Dockable {
 	/**
 	 * The ID of the dockable.
 	 */
+	@Nullable
 	private String id;
 	/**
 	 * The content of the dockable.
 	 */
+	@Nullable
 	private Component content;
 	/**
 	 * The title of the dockable.
@@ -85,10 +89,12 @@ public class DefaultDockable implements Dockable {
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 	// Constructors.
@@ -143,7 +149,7 @@ public class DefaultDockable implements Dockable {
 	 *                     defined by {@link DockingMode}.
 	 * @throws IllegalArgumentException If the given ID is null.
 	 */
-	public DefaultDockable(String id, Component content, String title, Icon icon, int dockingModes) {
+	public DefaultDockable(@Nullable String id, @Nullable Component content, String title, Icon icon, int dockingModes) {
 
 		// Set the ID.
 		if (id == null) {
@@ -170,6 +176,7 @@ public class DefaultDockable implements Dockable {
 
 	// Implementations of Dockable.
 
+	@Nullable
 	public String getID() {
 		return id;
 	}
@@ -186,6 +193,7 @@ public class DefaultDockable implements Dockable {
 
 	}
 
+	@Nullable
 	public Component getContent() {
 		return content;
 	}
@@ -324,6 +332,7 @@ public class DefaultDockable implements Dockable {
 
 	}
 
+	@Nullable
 	public Object getVisualizer() {
 
 		if (state == DockableState.NORMAL) {
@@ -373,6 +382,7 @@ public class DefaultDockable implements Dockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public Action[][] getActions() {
 		return null;
 	}
@@ -428,6 +438,7 @@ public class DefaultDockable implements Dockable {
 		return getID().hashCode();
 	}
 
+	@NotNull
 	public String toString() {
 		return "dockable [" + getID() + "]";
 	}

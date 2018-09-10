@@ -11,6 +11,7 @@ import com.javadocking.model.DefaultDockingPath;
 import com.javadocking.model.DockingPath;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -158,6 +159,7 @@ public class WindowMinimizerExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);
@@ -274,7 +276,7 @@ public class WindowMinimizerExample extends JPanel {
 			return minimizerPanel.canVisualizeDockable(dockableToVisualize);
 		}
 
-		public void visualizeDockable(Dockable dockableToVisualize) {
+		public void visualizeDockable(@NotNull Dockable dockableToVisualize) {
 
 			minimizerPanel.visualizeDockable(dockableToVisualize);
 			if (minimizerPanel.getVisualizedDockableCount() > 0) {
@@ -291,6 +293,7 @@ public class WindowMinimizerExample extends JPanel {
 			return minimizerPanel.getVisualizedDockableCount();
 		}
 
+		@NotNull
 		public Dockable getVisualizedDockable(int index) throws IndexOutOfBoundsException {
 
 			return minimizerPanel.getVisualizedDockable(index);
@@ -311,7 +314,7 @@ public class WindowMinimizerExample extends JPanel {
 		 * Loads the properties of this maximizer. The dockables that were maximized,
 		 * when the model was saved, are not maximized again.
 		 */
-		public void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException {
+		public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map dockablesMap, Window owner) throws IOException {
 
 			// Set the position of the dialog.
 			int xPosition = 0;
@@ -329,7 +332,7 @@ public class WindowMinimizerExample extends JPanel {
 		 * Saves the properties of this maximizer. The dockables that are maximized,
 		 * are not saved.
 		 */
-		public void saveProperties(String prefix, Properties properties) {
+		public void saveProperties(String prefix, @NotNull Properties properties) {
 
 			// Save the position of the dialog.
 			PropertiesUtil.setInteger(properties, prefix + "xPosition", dialog.getLocation().x);

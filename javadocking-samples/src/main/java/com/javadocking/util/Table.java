@@ -1,5 +1,7 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -56,6 +58,7 @@ public class Table extends JPanel {
 			return 4;
 		}
 
+		@NotNull
 		public Object getValueAt(int row, int col) {
 			return "Hello";
 		}

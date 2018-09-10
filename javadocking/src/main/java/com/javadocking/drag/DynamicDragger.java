@@ -7,6 +7,8 @@ import com.javadocking.drag.dockretriever.DockRetriever;
 import com.javadocking.drag.dockretriever.DynamicDockRetriever;
 import com.javadocking.util.CollectionUtil;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -63,6 +65,7 @@ public class DynamicDragger implements Dragger {
 	/**
 	 * The dockRetriever.
 	 */
+	@NotNull
 	private DockRetriever dockRetriever = new DynamicDockRetriever();
 	/**
 	 * When dragging starts this is false. Once the dragged dockable is undocked and docked in another
@@ -80,14 +83,17 @@ public class DynamicDragger implements Dragger {
 	/**
 	 * The timer to delay the floaing.
 	 */
+	@Nullable
 	private Timer timer;
 	/**
 	 * The dock of the dockable before dragging.
 	 */
+	@Nullable
 	private LeafDock originDock;
 	/**
 	 * The dock where the dragged dockable was before.
 	 */
+	@Nullable
 	private LeafDock previousDock;
 	/**
 	 * True when the mouse has been outside the precious dock.
@@ -96,6 +102,7 @@ public class DynamicDragger implements Dragger {
 	/**
 	 * The rectangle of the previous dock in screen coordinates.
 	 */
+	@NotNull
 	private Rectangle previousDockRectangle = new Rectangle();
 	/**
 	 * The dock, where the dragged dockable is currently docked.
@@ -108,35 +115,43 @@ public class DynamicDragger implements Dragger {
 	/**
 	 * The child of the root dock of the dock, where the dragged dockable is currently docked.
 	 */
+	@Nullable
 	private Dock currentChildOfRootDock;
 	/**
 	 * The current location of the mouse in screen coordinates.
 	 */
+	@NotNull
 	private Point screenLocation = new Point();
 	/**
 	 * This is the current location of the mouse in the dock where the dockable will be docked for the current mouse location.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point locationInDestinationDock = new Point();
 	/**
 	 * The rectangle where the dockable will be docked for the current mouse location.
 	 */
+	@NotNull
 	private Rectangle dockableDragRectangle = new Rectangle();
 	/**
 	 * The offset of the clicked point.
 	 */
+	@NotNull
 	private Point dockableOffset = new Point();
 	/**
 	 * A point that is used in calculations.
 	 */
+	@NotNull
 	private Point helpPoint = new Point();
 	/**
 	 * The dockable that is dragged. It can be a composite.
 	 */
+	@Nullable
 	private Dockable draggedDockable;
 	/**
 	 * The only dockable that is dragged by this dragger.
 	 */
+	@Nullable
 	private Dockable fixedDockable;
 	/**
 	 * True when the dockable is removed already at least one time from a dock during dragging.
@@ -150,12 +165,14 @@ public class DynamicDragger implements Dragger {
 	/**
 	 * These are the single docks that canhave ghosts.
 	 */
+	@NotNull
 	private Set singleDocksWithGhosts = new HashSet();
 
 	// Cursors.
 	/**
 	 * Manages the cursors used for dragging dockables.
 	 */
+	@NotNull
 	private DragCursorManager cursorManager = new DragCursorManager();
 
 	// Constructors.
@@ -171,7 +188,7 @@ public class DynamicDragger implements Dragger {
 	 *
 	 * @param    fixedDockable        The only dockable that is dragged by this dragger.
 	 */
-	public DynamicDragger(Dockable fixedDockable) {
+	public DynamicDragger(@Nullable Dockable fixedDockable) {
 		if (fixedDockable == null) {
 			throw new IllegalArgumentException("Dockable null");
 		}
@@ -180,7 +197,7 @@ public class DynamicDragger implements Dragger {
 
 	// Implementations of Dragger.
 
-	public boolean startDragging(MouseEvent mouseEvent) {
+	public boolean startDragging(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -279,7 +296,7 @@ public class DynamicDragger implements Dragger {
 	 * The dockable is docked immediately in this location.
 	 * If we cannot dock for the current location, the 'cannot dock' cursor is shown.
 	 */
-	public void drag(MouseEvent mouseEvent) {
+	public void drag(@NotNull MouseEvent mouseEvent) {
 
 		if (TEST) System.out.println("drag");
 
@@ -486,7 +503,7 @@ public class DynamicDragger implements Dragger {
 
 	}
 
-	public void showPopupMenu(MouseEvent mouseEvent) {
+	public void showPopupMenu(@NotNull MouseEvent mouseEvent) {
 
 		// Get the component of the mouse event.  
 		Component mouseComponent = (Component) mouseEvent.getSource();

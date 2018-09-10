@@ -4,6 +4,8 @@ import com.javadocking.dock.CompositeDock;
 import com.javadocking.dock.Dock;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.visualizer.Visualizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.IOException;
@@ -74,7 +76,7 @@ class DockModelPropertiesUtil {
 	 * @param properties The properties object to which the properties should be added.
 	 * @param docks      The encoded docks should also be added to this map. The keys are the key that are used for encoding the docks.
 	 */
-	public static void saveDockModelProperties(DockModel dockModel, String prefix, Properties properties, Map docks) {
+	public static void saveDockModelProperties(DockModel dockModel, String prefix, @NotNull Properties properties, Map docks) {
 
 		// Create the id manager.
 		DockKeyManager dockKeyManager = new DockKeyManager(docks);
@@ -186,7 +188,7 @@ class DockModelPropertiesUtil {
 	 * <li>map value: the visualizer (java.awt.window).</li>
 	 * </ul>
 	 */
-	public static void loadDockModelProperties(DockModel dockModel, String prefix, Properties properties, Map dockablesMap, Map ownersMap, Map docksMap, Map visualizersMap, boolean loadOwnerRectangle) throws IOException {
+	public static void loadDockModelProperties(@NotNull DockModel dockModel, String prefix, @NotNull Properties properties, Map dockablesMap, @NotNull Map ownersMap, @NotNull Map docksMap, @NotNull Map visualizersMap, boolean loadOwnerRectangle) throws IOException {
 
 		// Get the owner IDs.
 		String[] ownerIdsArray = null;
@@ -256,7 +258,7 @@ class DockModelPropertiesUtil {
 	/**
 	 * Saves the properties of the visualizer in the properties object.
 	 */
-	private static void saveVisualizer(Visualizer visualizer, String prefix, Properties properties, String visualizerKey, Map dockKeys) {
+	private static void saveVisualizer(Visualizer visualizer, String prefix, @NotNull Properties properties, String visualizerKey, Map dockKeys) {
 
 		String propertiesPrefix = visualizerKey + ".";
 
@@ -316,7 +318,7 @@ class DockModelPropertiesUtil {
 	/**
 	 * Saves the properties of the dock and its children in the properties object.
 	 */
-	private static void saveDock(Dock dock, String prefix, Properties properties, DockKeyManager dockKeyManager, String rootDockKey) {
+	private static void saveDock(Dock dock, String prefix, @NotNull Properties properties, DockKeyManager dockKeyManager, @Nullable String rootDockKey) {
 		// Generate an id for this dock.
 		String dockId = dockKeyManager.createKey(dock);
 		String propertiesPrefix = dockId + ".";
@@ -382,7 +384,7 @@ class DockModelPropertiesUtil {
 	 * </ul>
 	 * @return The created dock with its key in the dock model if it is a root dock.
 	 */
-	private static DockWithKey loadDock(String dockId, String prefix, Properties properties, Map dockablesMap, Window ownersMap, Map docksMap) throws IOException {
+	private static DockWithKey loadDock(String dockId, String prefix, @NotNull Properties properties, Map dockablesMap, Window ownersMap, @NotNull Map docksMap) throws IOException {
 		String propertiesPrefix = dockId + ".";
 
 		// Create the dock object with the class name property.
@@ -515,12 +517,14 @@ class DockModelPropertiesUtil {
 
 		// Public methods.
 
+		@NotNull
 		public String createKey(Dock dock) {
 			String key = KEY_PREFIX + count++;
 			dockKeys.put(dock, key);
 			return key;
 		}
 
+		@NotNull
 		public String getKey(Dock dock) {
 			return (String) dockKeys.get(dock);
 		}

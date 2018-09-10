@@ -2,6 +2,8 @@ package com.javadocking.event;
 
 import com.javadocking.dock.Dock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * <p>
@@ -19,6 +21,7 @@ public class DockableEvent extends DockingEvent {
 	/**
 	 * The dockable that is added to a dock, moved in a dock, moved to another dock, or removed from a dock.
 	 */
+	@Nullable
 	private Dockable dockable;
 
 
@@ -34,7 +37,7 @@ public class DockableEvent extends DockingEvent {
 	 *                        or removed from a dock.
 	 * @throws IllegalArgumentException If the dock or dockable are null.
 	 */
-	public DockableEvent(Object source, Dock originDock, Dock destinationDock, Dockable dockable) {
+	public DockableEvent(@NotNull Object source, Dock originDock, Dock destinationDock, @Nullable Dockable dockable) {
 
 		super(source, originDock, destinationDock);
 
@@ -56,6 +59,7 @@ public class DockableEvent extends DockingEvent {
 	 * @return The dockable that is added to a dock, moved in a dock, moved to another dock,
 	 * or removed from a dock.
 	 */
+	@Nullable
 	public Dockable getDockable() {
 		return dockable;
 	}

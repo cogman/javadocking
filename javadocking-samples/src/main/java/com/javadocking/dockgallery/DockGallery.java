@@ -5,6 +5,7 @@ import com.javadocking.drag.StaticDraggerFactory;
 import com.javadocking.drag.painter.*;
 import com.javadocking.util.LookAndFeelUtil;
 import com.javadocking.util.SampleComponentFactory;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,8 +96,10 @@ public class DockGallery extends JFrame {
 			putValue(Action.NAME, getTitle());
 		}
 
+		@NotNull
 		public abstract String getTitle();
 
+		@NotNull
 		public abstract String getDescription();
 
 		/**
@@ -105,6 +108,7 @@ public class DockGallery extends JFrame {
 		 * @param frame
 		 * @return The content pane with docks and dockables for the given frame.
 		 */
+		@NotNull
 		public abstract Component createContentPane(JFrame frame);
 
 		public void actionPerformed(ActionEvent actionEvent) {
@@ -131,210 +135,255 @@ public class DockGallery extends JFrame {
 	}
 
 	private class TabDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Tab docks";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with tab docks";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new TabDockSample(frame);
 		}
 	}
 
 	private class SplitDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Split docks";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with split docks";
 		}
 
-		public Component createContentPane(JFrame frame) {
+		@NotNull
+		public Component createContentPane(@NotNull JFrame frame) {
 			return new SplitDockSample(frame);
 		}
 	}
 
 	private class SplitAndTabDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Split and tab docks";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with split docks and tab docks";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new SplitAndTabDockSample(frame);
 		}
 	}
 
 	private class TabFloatDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Float docks with tabs";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with float docks that use tab docks";
 		}
 
-		public Component createContentPane(JFrame frame) {
+		@NotNull
+		public Component createContentPane(@NotNull JFrame frame) {
 			return new TabFloatDockSample(frame);
 		}
 	}
 
 	private class FloatDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Float docks";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with float docks that use single docks";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new FloatDockSample(frame);
 		}
 	}
 
 	private class LineDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Line dock";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a line dock";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new LineDockSample(frame);
 		}
 	}
 
 	private class CompositeLineDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Composite line dock";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a composite line dock";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new CompositeLineDockSample(frame);
 		}
 	}
 
 	private class GridDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Grid dock";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a grid dock";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new GridDockSample(frame);
 		}
 	}
 
 	private class CompositeGridDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Composite grid dock";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a composite grid dock";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new CompositeGridDockSample(frame);
 		}
 	}
 
 	private class BorderDockAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Border dock";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a border dock";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new BorderDockSample(frame);
 		}
 	}
 
 	private class DynamicAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Dynamic dragging";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with dynamic dragging";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new DynamicSample(frame);
 		}
 	}
 
 	private class DragRectangleAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Drag Rectangle";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with custom drag rectangles";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new DragRectangleSample(frame);
 		}
 	}
 
 	private class DragPainterAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Drag Painters";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with multiple drag painters";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new DragPainterSample(frame);
 		}
 	}
 
 	private class DecoratedDockableAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Decorated Dockable";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with decorated dockables";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new DecoratedDockableSample(frame);
 		}
 	}
 
 	private class VisualizerAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Visualizers";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a minimizer, a maximizer, and an externalizer";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new VisualizerSample(frame);
 		}
@@ -343,28 +392,34 @@ public class DockGallery extends JFrame {
 	// Main method.
 
 	private class ImageMinimizeHeaderAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Minimizer with images";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with images for the minimized dockables";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new ImageMinimizeHeaderSample(frame);
 		}
 	}
 
 	private class ButtonAction extends DockAction {
+		@NotNull
 		public String getTitle() {
 			return "Buttons and Tool Bars";
 		}
 
+		@NotNull
 		public String getDescription() {
 			return "Simple demo with a draggable buttons and draggable tool bars";
 		}
 
+		@NotNull
 		public Component createContentPane(JFrame frame) {
 			return new ButtonSample(frame);
 		}

@@ -3,6 +3,8 @@ package com.javadocking.component;
 import com.javadocking.dock.LeafDock;
 import com.javadocking.dock.Position;
 import com.javadocking.drag.DragListener;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +31,7 @@ public class PointDockHeader extends JPanel implements DockHeader {
 	 */
 	private static final int HEADER_SIZE = 9;
 
+	@Nullable
 	private static final Image POINT;
 	private static final int POINT_DISTANCE = 4;
 
@@ -132,7 +135,7 @@ public class PointDockHeader extends JPanel implements DockHeader {
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) {
+	public void paint(@NotNull Graphics graphics) {
 		super.paint(graphics);
 
 		if ((position == Position.TOP) || (position == Position.BOTTOM)) {

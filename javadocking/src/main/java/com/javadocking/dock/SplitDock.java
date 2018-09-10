@@ -10,6 +10,8 @@ import com.javadocking.event.DockingListener;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -157,38 +159,46 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * The child dock when there is only one child. When there are zero or 2 child docks
 	 * this is null.
 	 */
+	@Nullable
 	private Dock singleChildDock;
 	/**
 	 * The left or top child dock when there are 2 child docks. When there are zero or 1 child docks this is null.
 	 */
+	@Nullable
 	private Dock leftChildDock;
 	/**
 	 * The right or bottom child dock when there are 2 child docks. When there are zero or 1 child docks this is null.
 	 */
+	@Nullable
 	private Dock rightChildDock;
 	/**
 	 * This factory creates the leaf child docks.
 	 */
+	@Nullable
 	private DockFactory childDockFactory;
 	/**
 	 * This factory creates the new split docks.
 	 * This dock factory should create a <code>SplitDock</code> when it is used with the modes
 	 * DockingMode.LEFT, DockingMode.RIHT, DockingMode.TOP or DockingMode.BOTTOM.
 	 */
+	@Nullable
 	private CompositeDockFactory compositeChildDockFactory;
 	/**
 	 * This is the split pane that contains the 2 child docks. When there are zero or 1 child docks this is null.
 	 * It is created by the component factory of the {@link DockingManager}.
 	 */
+	@Nullable
 	private JSplitPane splitPane;
 	/**
 	 * This is the rectangle in which a dockable can be docked with priority. We keep it as field
 	 * because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle priorityRectangle = new Rectangle();
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 	// Ghosts.
@@ -197,12 +207,14 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * It cannot be removed now because there are still listeners for dragging that are busy.
 	 * We only want to lose the listeners when dragging is finished. This is only used with dynamic dragging.
 	 */
+	@Nullable
 	private Dock ghostSingleChild;
 	/**
 	 * This is an old split pane that has to be removed later. It is already made invisible.
 	 * It cannot be removed now because it contains an old dock that still has listeners for dragging that are busy.
 	 * We only want to lose the listeners when dragging is finished. This is only used with dynamic dragging.
 	 */
+	@Nullable
 	private JSplitPane ghostSplitPane;
 
 	/**
@@ -309,7 +321,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * position. In that case {@link Priority#CANNOT_DOCK} is returned.
 	 * </p>
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Check if the dockable may be docked in a split dock.
 		int dockPositions = dockable.getDockingModes();
@@ -393,7 +405,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 
 	}
 
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation, Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation, Point dockableOffset, @NotNull Rectangle rectangle) {
 
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
@@ -432,7 +444,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation, Point dockableOffset) {
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation, Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
 		if (getDockPriority(dockableToAdd, relativeLocation) == Priority.CANNOT_DOCK) {
@@ -563,7 +575,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 		this.parentDock = parentDock;
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 
 		// Save the class of the child dock factory and its properties.
 		String leafChildDockFactoryClassName = childDockFactory.getClass().getName();
@@ -599,7 +611,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @Nullable Map childDocks, Map dockablesMap, Window owner) throws IOException {
 
 		// Load the class and properties of the leaf child dock factory.
 		try {
@@ -608,7 +620,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 			Class leafChildDockFactoryClazz = Class.forName(leafChildDockFactoryClassName);
 			childDockFactory = (DockFactory) leafChildDockFactoryClazz.newInstance();
 			childDockFactory.loadProperties(prefix + "leafChildDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the leaf child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new TabDockFactory();
@@ -621,7 +633,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 			Class splitChildDockFactoryClazz = Class.forName(splitChildDockFactoryClassName);
 			compositeChildDockFactory = (CompositeDockFactory) splitChildDockFactoryClazz.newInstance();
 			compositeChildDockFactory.loadProperties(prefix + "splitChildDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the split child dock factory.");
 			exception.printStackTrace();
 			compositeChildDockFactory = new SplitDockFactory();
@@ -707,6 +719,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 
 	}
 
+	@Nullable
 	public Dock getChildDock(int index) throws IndexOutOfBoundsException {
 
 		// Check if the index is in the bounds.
@@ -729,7 +742,8 @@ public class SplitDock extends JPanel implements CompositeDock {
 		return null;
 	}
 
-	public Position getChildDockPosition(Dock childDock) throws IllegalArgumentException {
+	@NotNull
+	public Position getChildDockPosition(@NotNull Dock childDock) throws IllegalArgumentException {
 
 		if (childDock.equals(singleChildDock)) {
 			return new Position(Position.CENTER);
@@ -907,7 +921,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 
 	}
 
-	public void addChildDock(Dock dockToAdd, Position position) throws IllegalStateException {
+	public void addChildDock(@NotNull Dock dockToAdd, @NotNull Position position) throws IllegalStateException {
 
 		// Check if this dock is full.
 		if (isFull()) {
@@ -1031,6 +1045,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 *
 	 * @return The dock factory that creates the leaf child docks for this dock.
 	 */
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
@@ -1043,7 +1058,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * @param childDockFactory The dock factory that creates the leaf child docks for this dock.
 	 * @throws IllegalArgumentException When the child dock factory is null.
 	 */
-	public void setChildDockFactory(DockFactory childDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory childDockFactory) {
 
 		if (childDockFactory == null) {
 			throw new IllegalArgumentException("The leaf child dock factory cannot be null.");
@@ -1077,6 +1092,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 *
 	 * @return The dock factory that creates the split child docks for this dock.
 	 */
+	@Nullable
 	public CompositeDockFactory getCompositeChildDockFactory() {
 		return compositeChildDockFactory;
 	}
@@ -1087,7 +1103,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * @param splitDockFactory The dock factory that creates the split child docks for this dock.
 	 * @throws IllegalArgumentException When the child dock factory is null.
 	 */
-	public void setCompositeChildDockFactory(CompositeDockFactory splitDockFactory) {
+	public void setCompositeChildDockFactory(@Nullable CompositeDockFactory splitDockFactory) {
 
 		if (splitDockFactory == null) {
 			throw new IllegalArgumentException("The split dock factory cannot be null.");
@@ -1214,7 +1230,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 *                 </ul>
 	 * @param    rectangle                    Gets the size and position of the calculated priority rectangle.
 	 */
-	protected void getPriorityRectangle(Rectangle rectangle, int position) {
+	protected void getPriorityRectangle(@NotNull Rectangle rectangle, int position) {
 
 		Dimension size = getSize();
 		switch (position) {
@@ -1260,7 +1276,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * @return True if the given dockable can be added to this dock with priority,
 	 * false otherwise.
 	 */
-	protected boolean canAddDockableWithPriority(Dockable dockable, Point relativeLocation) {
+	protected boolean canAddDockableWithPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// If the dock is empty, the dockable will be docked in the center.
 		if (isEmpty()) {
@@ -1332,7 +1348,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 	 * @param relativeLocation The mouse location, where the dockable will be added.
 	 * @return The position where the dockable should be docked in the dock.
 	 */
-	protected int getDockPosition(Point relativeLocation, Dockable newDockable) {
+	protected int getDockPosition(@NotNull Point relativeLocation, @NotNull Dockable newDockable) {
 
 		// When the dock is empty, the dockable will be docked in the center.
 		if (isEmpty()) {

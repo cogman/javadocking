@@ -8,6 +8,8 @@ import com.javadocking.dockable.CompositeDockable;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +28,23 @@ public class DefaultDockingPath implements DockingPath {
 	/**
 	 * The ID of the docking path.
 	 */
+	@Nullable
 	private String id;
 	/**
 	 * The key of the root dock of this path.
 	 */
+	@Nullable
 	private String rootDockKey;
 	/**
 	 * The docks of the path. The dock with index 0 is the root dock.
 	 */
+	@Nullable
 	private Dock[] docks;
 	/**
 	 * The positions of the docks or the in this path.
 	 * The last position can be the position of a dockable in a leaf dock.
 	 */
+	@Nullable
 	private Position[] positions;
 
 	// Constructors.
@@ -61,7 +67,7 @@ public class DefaultDockingPath implements DockingPath {
 	 * of positions are different.
 	 * @throws NullPointerException        If one of the docks or one of the positions in the array is null.
 	 */
-	public DefaultDockingPath(String id, String rootDockKey, Dock[] docks, Position[] positions) {
+	public DefaultDockingPath(String id, String rootDockKey, @Nullable Dock[] docks, @Nullable Position[] positions) {
 
 		// Check the arguments.
 		if (docks == null) {
@@ -105,6 +111,7 @@ public class DefaultDockingPath implements DockingPath {
 	 * @throws IllegalArgumentException    If the dockable is not docked in a dock, or if the dockable does not belong
 	 * to the given dock model.
 	 */
+	@NotNull
 	public static DefaultDockingPath createDockingPath(Dockable dockable) {
 
 		// Check that the dockable is not a composite.
@@ -175,6 +182,7 @@ public class DefaultDockingPath implements DockingPath {
 	 * @throws IllegalArgumentException    If there does not exist a path in the docking path model
 	 * of the docking manager for the dockable whose path is used.
 	 */
+	@NotNull
 	public static DefaultDockingPath copyDockingPath(Dockable dockableForPath, DockingPath dockingPathToCopy) {
 
 		// Check that the dockable is not a composite.
@@ -197,7 +205,8 @@ public class DefaultDockingPath implements DockingPath {
 	 * @throws IllegalArgumentException    If there does not exist a path in the docking path model
 	 * of the docking manager for the dockable whose path is used.
 	 */
-	public static DefaultDockingPath copyDockingPath(String id, DockingPath dockingPathToCopy) {
+	@NotNull
+	public static DefaultDockingPath copyDockingPath(@Nullable String id, @Nullable DockingPath dockingPathToCopy) {
 		// Check that the id is not null.
 		if (id == null) {
 			throw new NullPointerException("id");
@@ -235,18 +244,22 @@ public class DefaultDockingPath implements DockingPath {
 
 	// Implementations of DockingPath.
 
+	@Nullable
 	public String getID() {
 		return id;
 	}
 
+	@Nullable
 	public String getRootDockKey() {
 		return rootDockKey;
 	}
 
+	@Nullable
 	public Position getPositionInDock(int index) {
 		return positions[index];
 	}
 
+	@Nullable
 	public Dock getDock(int index) {
 		return docks[index];
 	}
@@ -255,7 +268,7 @@ public class DefaultDockingPath implements DockingPath {
 		return docks.length;
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map dockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map dockIds) {
 
 		// Save the ID.
 		PropertiesUtil.setString(properties, prefix + ".id", id);
@@ -279,7 +292,7 @@ public class DefaultDockingPath implements DockingPath {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map idDockMap) {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map idDockMap) {
 
 		// Load the ID.
 		id = PropertiesUtil.getString(properties, prefix + ".id", id);

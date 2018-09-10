@@ -6,6 +6,7 @@ import com.javadocking.dock.factory.CompositeDockFactory;
 import com.javadocking.dock.factory.DockFactory;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class TypeSplitDock extends SplitDock {
 		this.main = main;
 	}
 
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(Dockable dockable, @NotNull Point relativeLocation) {
 
 		if (!(dockable instanceof TypeDockable)) {
 			return Priority.CANNOT_DOCK;
@@ -48,12 +49,12 @@ public class TypeSplitDock extends SplitDock {
 		return super.getDockPriority(dockable, relativeLocation);
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException {
 		main = PropertiesUtil.getBoolean(properties, prefix + "main", main);
 		super.loadProperties(prefix, properties, childDocks, dockablesMap, owner);
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 		super.saveProperties(prefix, properties, childDockIds);
 		PropertiesUtil.setBoolean(properties, prefix + "main", main);
 	}

@@ -17,6 +17,7 @@ import com.javadocking.util.ToolBarButton;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.LineMinimizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -56,7 +57,7 @@ public class MultiWorkspaceExample extends JPanel {
 
 	// Constructor.
 
-	public MultiWorkspaceExample(JFrame frame) {
+	public MultiWorkspaceExample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the content components.
@@ -473,6 +474,7 @@ public class MultiWorkspaceExample extends JPanel {
 
 	}
 
+	@NotNull
 	private Dockable[] createButtonDockables() {
 		// Create the buttons with a dockable around.
 		Dockable[] buttonDockables = new Dockable[42];
@@ -530,6 +532,7 @@ public class MultiWorkspaceExample extends JPanel {
 	 * @param message The message that will be displayed when the action is performed.
 	 * @return The dockable with a button as content.
 	 */
+	@NotNull
 	private Dockable createButtonDockable(String id, String title, Icon icon, String message) {
 
 		// Create the action.
@@ -551,7 +554,7 @@ public class MultiWorkspaceExample extends JPanel {
 	/**
 	 * Adds a drag listener on the content component of a dockable.
 	 */
-	private void createDockableDragger(Dockable dockable) {
+	private void createDockableDragger(@NotNull Dockable dockable) {
 
 		// Create the dragger for the dockable.
 		DragListener dragListener = DockingManager.getDockableDragListenerFactory().createDragListener(dockable);
@@ -565,6 +568,7 @@ public class MultiWorkspaceExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);

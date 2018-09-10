@@ -3,6 +3,7 @@ package com.javadocking.dock;
 import com.javadocking.dock.factory.DockFactory;
 import com.javadocking.dock.factory.SplitDockFactory;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.beans.PropertyChangeSupport;
@@ -31,6 +32,7 @@ public class HidableFloatDock extends FloatDock {
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
 	/**
@@ -47,7 +49,7 @@ public class HidableFloatDock extends FloatDock {
 	 *
 	 * @param    owner                The window that owns the floating windows created by this dock.
 	 */
-	public HidableFloatDock(Window owner) {
+	public HidableFloatDock(@NotNull Window owner) {
 		super(owner);
 	}
 
@@ -58,7 +60,7 @@ public class HidableFloatDock extends FloatDock {
 	 * @param    owner                The window that owns the floating windows created by this dock.
 	 * @param    childDockFactory    The factory for creating child docks.
 	 */
-	public HidableFloatDock(Window owner, DockFactory childDockFactory) {
+	public HidableFloatDock(@NotNull Window owner, DockFactory childDockFactory) {
 		super(owner, childDockFactory);
 	}
 
@@ -83,7 +85,7 @@ public class HidableFloatDock extends FloatDock {
 
 	// Overwritten methods.
 
-	public void addChildDock(Dock dock, Point location, Dimension size) {
+	public void addChildDock(@NotNull Dock dock, @NotNull Point location, Dimension size) {
 		super.addChildDock(dock, location, size);
 		Window window = (Window) getChildDockWindows().get(dock);
 		if (window != null) {
@@ -96,12 +98,12 @@ public class HidableFloatDock extends FloatDock {
 
 	// Private methods.
 
-	public void loadProperties(String prefix, Properties properties, Map newChildDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map newChildDocks, Map dockablesMap, @NotNull Window owner) throws IOException {
 		hidden = PropertiesUtil.getBoolean(properties, prefix + PROPERTY_HIDDEN, hidden);
 		super.loadProperties(prefix, properties, newChildDocks, dockablesMap, owner);
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 		PropertiesUtil.setBoolean(properties, prefix + PROPERTY_HIDDEN, hidden);
 		super.saveProperties(prefix, properties, childDockIds);
 	}

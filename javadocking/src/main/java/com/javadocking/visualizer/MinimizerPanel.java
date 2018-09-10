@@ -6,6 +6,8 @@ import com.javadocking.dock.Position;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockableState;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,14 +60,17 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 	/**
 	 * The minimized dockables of this panel.
 	 */
+	@NotNull
 	private List minimizedDockables = new ArrayList();
 	/**
 	 * Mapping between the minimized dockables and their minimizd components.
 	 */
+	@NotNull
 	private Map minimizedHeaders = new HashMap();
 	/**
 	 * Listens to selection changes of the headers.
 	 */
+	@NotNull
 	private SelectionChangeListener selectionChangeListener = new SelectionChangeListener();
 
 	// Constructors.
@@ -97,7 +102,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		return DockableState.MINIMIZED;
 	}
 
-	public boolean canVisualizeDockable(Dockable dockableToVisualize) {
+	public boolean canVisualizeDockable(@Nullable Dockable dockableToVisualize) {
 
 		// Check the dockable is not null.
 		if (dockableToVisualize == null) {
@@ -109,7 +114,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 
 	}
 
-	public void visualizeDockable(Dockable dockableToVisualize) {
+	public void visualizeDockable(@Nullable Dockable dockableToVisualize) {
 
 		// Check the dockable is not null.
 		if (dockableToVisualize == null) {
@@ -142,6 +147,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		return minimizedDockables.size();
 	}
 
+	@NotNull
 	public Dockable getVisualizedDockable(int index) throws IndexOutOfBoundsException {
 
 		// Check if the index is in the bounds.
@@ -174,7 +180,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 	 * Loads the properties of this maximizer. The dockables that were maximized,
 	 * when the model was saved, are not maximized again.
 	 */
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map dockablesMap, Window owner) throws IOException {
 
 		// Get the orientation.
 		int orientation = ORIENTATION_HORIZONTAL;
@@ -234,7 +240,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 	 * Saves the properties of this maximizer. The dockables that are maximized,
 	 * are not saved.
 	 */
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		// Save the position of the header.
 		PropertiesUtil.setInteger(properties, prefix + "headerPosition", headerPosition);
@@ -434,7 +440,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 
 		// Implementations of PropertyChangeListener.
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 
 			if (propertyChangeEvent.getPropertyName().equals("selected")) {
 				Object newValue = propertyChangeEvent.getNewValue();

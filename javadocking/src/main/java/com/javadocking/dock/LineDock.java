@@ -13,6 +13,7 @@ import com.javadocking.event.DockingListener;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,6 +101,7 @@ public class LineDock extends JPanel implements LeafDock {
 	/**
 	 * The dockables that are docked in this dock.
 	 */
+	@NotNull
 	private List childDockables = new ArrayList();
 	/**
 	 * With this handle all the dockables of this dock can be dragged.
@@ -135,21 +137,25 @@ public class LineDock extends JPanel implements LeafDock {
 	 * This is the rectangle in which a dockable can be docked with priority.
 	 * We keep it as field because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle priorityRectangle = new Rectangle();
 	/**
 	 * This is a rectangle for doing calculations.
 	 * We keep it as field because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle helpRectangle = new Rectangle();
 	/**
 	 * This is the position of the mouse in the dockablePanel.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point dockablePanelPosition = new Point();
 	/**
 	 * This is the position of the dockable.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point dockablePosition = new Point();
 
 	/**
@@ -161,6 +167,7 @@ public class LineDock extends JPanel implements LeafDock {
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 	/**
 	 * When true, {@link #retrieveDockingRectangle(Dockable, Point, Point, Rectangle)} sets a rectangle
@@ -243,7 +250,7 @@ public class LineDock extends JPanel implements LeafDock {
 	 * <li>all of its child dockables have a content component that is not null.</li>
 	 * </ul>
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Check if the dockable may be docked in a line dock.
 		if (!checkDockingModes(dockable)) {
@@ -305,8 +312,8 @@ public class LineDock extends JPanel implements LeafDock {
 
 	}
 
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation,
-										Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation,
+										Point dockableOffset, @NotNull Rectangle rectangle) {
 
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
@@ -521,7 +528,7 @@ public class LineDock extends JPanel implements LeafDock {
 
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation, Point dockableOffset) {
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation, Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
 		if (getDockPriority(dockableToAdd, relativeLocation) == Priority.CANNOT_DOCK) {
@@ -664,7 +671,7 @@ public class LineDock extends JPanel implements LeafDock {
 		this.parentDock = parentDock;
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, Map childDockIds) {
 
 		// Save the grid and orientation.
 		PropertiesUtil.setInteger(properties, prefix + "orientation", orientation);
@@ -684,7 +691,7 @@ public class LineDock extends JPanel implements LeafDock {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map newChildDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map newChildDocks, @NotNull Map dockablesMap, Window owner) throws IOException {
 
 		// Set the docking mode.
 		int horizontalDockingMode = DockingMode.HORIZONTAL_LINE;
@@ -741,6 +748,7 @@ public class LineDock extends JPanel implements LeafDock {
 		return childDockables.size();
 	}
 
+	@NotNull
 	public Dockable getDockable(int index) throws IndexOutOfBoundsException {
 
 		// Check if the index is in the bounds.
@@ -756,7 +764,7 @@ public class LineDock extends JPanel implements LeafDock {
 		return childDockables.contains(dockable);
 	}
 
-	public boolean moveDockable(Dockable dockableToMove, Point relativeLocation) {
+	public boolean moveDockable(Dockable dockableToMove, @NotNull Point relativeLocation) {
 
 		// Don't move a composite dockable. 
 		if (dockableToMove instanceof CompositeDockable) {
@@ -800,6 +808,7 @@ public class LineDock extends JPanel implements LeafDock {
 
 	}
 
+	@NotNull
 	public Position getDockablePosition(Dockable dockable) throws IllegalArgumentException {
 
 		int position = childDockables.indexOf(dockable);
@@ -811,7 +820,7 @@ public class LineDock extends JPanel implements LeafDock {
 
 	}
 
-	public void addDockable(Dockable dockable, Position position) {
+	public void addDockable(Dockable dockable, @NotNull Position position) {
 
 		// Is it a composite dockable?
 		if (dockable instanceof CompositeDockable) {
@@ -972,7 +981,7 @@ public class LineDock extends JPanel implements LeafDock {
 	 * Otherwise false is returned.
 	 * @param    dockable                The dockable to add.
 	 */
-	protected boolean checkDockingModes(Dockable dockable) {
+	protected boolean checkDockingModes(@NotNull Dockable dockable) {
 		int dockPositions = dockable.getDockingModes();
 		if ((getOrientation() == ORIENTATION_HORIZONTAL) &&
 				((dockPositions & horizontalDockingMode) == 0)) {
@@ -990,7 +999,7 @@ public class LineDock extends JPanel implements LeafDock {
 	 * @param dockable The dockable whose property <code>lastDockingMode</code> is set to
 	 *                 <code>horizontalDockingMode</code> or <code>verticalDockingMode</code>.
 	 */
-	private void setLastDockingMode(Dockable dockable) {
+	private void setLastDockingMode(@NotNull Dockable dockable) {
 
 		if (getOrientation() == ORIENTATION_HORIZONTAL) {
 			dockable.setLastDockingMode(horizontalDockingMode);
@@ -1016,7 +1025,7 @@ public class LineDock extends JPanel implements LeafDock {
 	 * @return The position where the dockable should be docked in the dock.
 	 * The position is the future index of the dockable in the line.
 	 */
-	private int getDockPosition(Dockable newDockable, Point relativePosition) {
+	private int getDockPosition(Dockable newDockable, @NotNull Point relativePosition) {
 
 		// Are there no child dockables already?
 		if (childDockables.size() == 0) {
@@ -1079,7 +1088,7 @@ public class LineDock extends JPanel implements LeafDock {
 	 * @return True if the given dockable can be added to this dock with priority,
 	 * false otherwise.
 	 */
-	protected boolean canAddDockableWithPriority(Dockable dockable, Point relativeLocation) {
+	protected boolean canAddDockableWithPriority(Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Are there no dockables already?
 		if (childDockables.size() == 0) {

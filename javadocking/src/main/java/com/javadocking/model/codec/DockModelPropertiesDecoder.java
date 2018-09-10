@@ -8,6 +8,7 @@ import com.javadocking.model.DockModel;
 import com.javadocking.model.DockingPathModel;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
@@ -42,11 +43,11 @@ public class DockModelPropertiesDecoder implements DockModelDecoder {
 
 	// Implementations of DockModelDecoder.
 
-	public boolean canDecodeSource(String sourceName) {
+	public boolean canDecodeSource(@NotNull String sourceName) {
 		return sourceName.endsWith(DockModelPropertiesEncoder.EXTENSION);
 	}
 
-	public DockModel decode(String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap) throws IOException {
+	public DockModel decode(@NotNull String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap) throws IOException {
 		// Load the properties.
 		Properties properties = PropertiesUtil.loadProperties(sourceName);
 		Map docks = new HashMap();
@@ -56,7 +57,7 @@ public class DockModelPropertiesDecoder implements DockModelDecoder {
 
 	// Protected methods.
 
-	protected DockModel decodeProperties(Properties properties, String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap, Map docks) throws IOException {
+	protected DockModel decodeProperties(@NotNull Properties properties, String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap, Map docks) throws IOException {
 		// Check he version.
 		String version = null;
 		version = PropertiesUtil.getString(properties, PROPERTY_VERSION, version);
@@ -97,7 +98,7 @@ public class DockModelPropertiesDecoder implements DockModelDecoder {
 
 	// Private methods.
 
-	private DockModel createDockModel(Properties properties) throws IOException {
+	private DockModel createDockModel(@NotNull Properties properties) throws IOException {
 
 		// Create the dock model object with the class name property.
 		String className = null;

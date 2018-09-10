@@ -3,6 +3,7 @@ package com.javadocking.component;
 import com.javadocking.dock.LeafDock;
 import com.javadocking.dock.Position;
 import com.javadocking.drag.DragListener;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class PointGripDockHeader extends JPanel implements DockHeader {
 	 * It is the minimum height when the orientation is horizontal.
 	 */
 	private static final int HEADER_SIZE = 14;
+	@NotNull
 	private static final Stroke STROKE;
 	private static Color light = Color.white;
 	private static Color shadow = Color.gray;
@@ -137,7 +139,7 @@ public class PointGripDockHeader extends JPanel implements DockHeader {
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) {
+	public void paint(@NotNull Graphics graphics) {
 		super.paint(graphics);
 		graphics.setColor(Color.darkGray);
 

@@ -4,6 +4,8 @@ import com.javadocking.dock.FloatDock;
 import com.javadocking.dock.factory.DockFactory;
 import com.javadocking.dock.factory.SingleDockFactory;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -25,6 +27,7 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 	 * The factory that will create child docks for the float docks
 	 * created by this factory.
 	 */
+	@Nullable
 	private DockFactory childDockFactory;
 
 	// Constructors.
@@ -49,7 +52,8 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 
 	// Implementations of FloatDockProvider.
 
-	public FloatDock createFloatDock(Window owner) {
+	@Nullable
+	public FloatDock createFloatDock(@NotNull Window owner) {
 
 		if (childDockFactory != null) {
 			return new FloatDock(owner, childDockFactory);
@@ -58,7 +62,7 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 		}
 	}
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		// Load the class and properties of the child dock factory.
 		try {
@@ -69,7 +73,7 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 				childDockFactory = (DockFactory) clazz.newInstance();
 				childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
 			}
-		} catch (ClassNotFoundException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();
@@ -81,7 +85,7 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		if (childDockFactory != null) {
 			// Save the class of the child dock factory and its properties.
@@ -101,6 +105,7 @@ public class DefaultFloatDockFactory implements FloatDockFactory {
 	 * @return The factory that will create child docks for the float docks
 	 * created by this factory.
 	 */
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}

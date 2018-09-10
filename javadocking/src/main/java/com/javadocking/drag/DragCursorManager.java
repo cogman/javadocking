@@ -1,5 +1,8 @@
 package com.javadocking.drag;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,18 +19,22 @@ class DragCursorManager {
 	/**
 	 * The old cursor of the glass pane.
 	 */
+	@Nullable
 	private Cursor oldCursor;
 	/**
 	 * The cursor that is currently on the glass pane of the component.
 	 */
+	@Nullable
 	private Cursor cursor;
 	/**
 	 * The component for which the cursor is set.
 	 */
+	@Nullable
 	private Component cursorComponent;
 	/**
 	 * The glass pane of the component.
 	 */
+	@Nullable
 	private Component glassPane;
 	/**
 	 * True if the glass pane was visible before the new cursor was put on the glass pane, false otherwise.
@@ -42,7 +49,7 @@ class DragCursorManager {
 	 * @param component The component where the mouse currently is.
 	 * @param newCursor The cursor for the component.
 	 */
-	public void setCursor(Component component, Cursor newCursor) {
+	public void setCursor(@NotNull Component component, @NotNull Cursor newCursor) {
 		// Do nothing if the cursor is the same and the component is the same.
 		if ((newCursor.equals(cursor) && component.equals(cursorComponent))) {
 			return;

@@ -1,5 +1,8 @@
 package com.javadocking.dock;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -163,7 +166,7 @@ public class Position {
 
 			// Get the position strings.
 			StringTokenizer tokenizer = new StringTokenizer(stringValue, "[{(,/)}]");
-			List positionList = new ArrayList();
+			List<Integer> positionList = new ArrayList<>();
 			while (tokenizer.hasMoreElements()) {
 				String positionString = tokenizer.nextToken();
 				int position = Integer.parseInt(positionString);
@@ -173,7 +176,7 @@ public class Position {
 			// Create the array with the positions.
 			int[] positions = new int[positionList.size()];
 			for (int index = 0; index < positionList.size(); index++) {
-				positions[index] = (Integer) positionList.get(index);
+				positions[index] = positionList.get(index);
 			}
 
 			// Make the position.
@@ -192,7 +195,7 @@ public class Position {
 	 * @param name       The name of the property.
 	 * @param value      The default value of the property.
 	 */
-	public static void setPositionProperty(Properties properties, String name, Position value) {
+	public static void setPositionProperty(@NotNull Properties properties, String name, @Nullable Position value) {
 
 		// Check if the position is not null.
 		if (value != null) {
@@ -285,6 +288,7 @@ public class Position {
 
 	}
 
+	@NotNull
 	public String toString() {
 
 		// Create the string for the position.

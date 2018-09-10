@@ -15,6 +15,7 @@ import com.javadocking.model.DockingPath;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.model.codec.DockModelPropertiesDecoder;
 import com.javadocking.model.codec.DockModelPropertiesEncoder;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -226,6 +227,7 @@ public class CodecExample extends JPanel {
 	 * @param dockables The dockables for which a menu item has to be created.
 	 * @return The created menu bar.
 	 */
+	@NotNull
 	private JMenuBar createMenu(Dockable[] dockables) {
 
 		// Create the menu bar.
@@ -372,7 +374,7 @@ public class CodecExample extends JPanel {
 
 		}
 
-		public void itemStateChanged(ItemEvent itemEvent) {
+		public void itemStateChanged(@NotNull ItemEvent itemEvent) {
 
 			dockable.removeDockingListener(this);
 			if (itemEvent.getStateChange() == ItemEvent.DESELECTED) {
@@ -386,7 +388,7 @@ public class CodecExample extends JPanel {
 
 		}
 
-		public void dockingChanged(DockingEvent dockingEvent) {
+		public void dockingChanged(@NotNull DockingEvent dockingEvent) {
 			if (dockingEvent.getDestinationDock() != null) {
 				dockableMenuItem.removeItemListener(this);
 				dockableMenuItem.setSelected(true);

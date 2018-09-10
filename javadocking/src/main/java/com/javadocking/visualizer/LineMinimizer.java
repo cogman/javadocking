@@ -2,6 +2,8 @@ package com.javadocking.visualizer;
 
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockableState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +32,7 @@ public class LineMinimizer extends JPanel implements Visualizer {
 	/**
 	 * The content from this panel.
 	 */
+	@Nullable
 	private Component content;
 	/**
 	 * The panel with the minimizers.
@@ -76,7 +79,7 @@ public class LineMinimizer extends JPanel implements Visualizer {
 		return minimizerPanel.canVisualizeDockable(dockableToVisualize);
 	}
 
-	public void visualizeDockable(Dockable dockableToVisualize) {
+	public void visualizeDockable(@NotNull Dockable dockableToVisualize) {
 
 		minimizerPanel.visualizeDockable(dockableToVisualize);
 		if (minimizerPanel.getVisualizedDockableCount() > 0) {
@@ -144,6 +147,7 @@ public class LineMinimizer extends JPanel implements Visualizer {
 	 *
 	 * @return The content from this panel, if there is one; otherwise null.
 	 */
+	@Nullable
 	public Component getContent() {
 		return content;
 	}
@@ -155,7 +159,7 @@ public class LineMinimizer extends JPanel implements Visualizer {
 	 * @throws IllegalStateException    If there is already a content.
 	 * @throws NullPointerException    If the component is null.
 	 */
-	public void setContent(Component component) {
+	public void setContent(@Nullable Component component) {
 
 		// Check if the content is not null.
 		if (component == null) {

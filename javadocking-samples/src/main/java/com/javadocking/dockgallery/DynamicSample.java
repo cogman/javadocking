@@ -9,13 +9,14 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.drag.DynamicDraggerFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DynamicSample extends JPanel {
 
-	public DynamicSample(JFrame frame) {
+	public DynamicSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.

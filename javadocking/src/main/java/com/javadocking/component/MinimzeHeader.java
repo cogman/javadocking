@@ -7,6 +7,7 @@ import com.javadocking.dockable.action.ShowActionMode;
 import com.javadocking.drag.DragListener;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.visualizer.Visualizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -83,7 +84,7 @@ public class MinimzeHeader extends SelectableDockableHeader implements Draggable
 	 * <li>{@link com.javadocking.dock.Position#BOTTOM}.</li>
 	 * </ul>
 	 */
-	public MinimzeHeader(Dockable dockable, int position) {
+	public MinimzeHeader(@NotNull Dockable dockable, int position) {
 		this(dockable, position, ShowActionMode.NO_ACTIONS, ShowActionMode.ALL_ACTIONS);
 	}
 
@@ -117,7 +118,7 @@ public class MinimzeHeader extends SelectableDockableHeader implements Draggable
 	 * @param    showActionMode    Defines which actions are shown in the header, when the header is not selected.
 	 * @param    selectedShowActionMode    Defines which actions are shown in the header, when the header is selected.
 	 */
-	public MinimzeHeader(Dockable dockable, int position, ShowActionMode showActionMode, ShowActionMode selectedShowActionMode) {
+	public MinimzeHeader(@NotNull Dockable dockable, int position, ShowActionMode showActionMode, ShowActionMode selectedShowActionMode) {
 
 		super(dockable, position, showActionMode, selectedShowActionMode);
 
@@ -304,7 +305,7 @@ public class MinimzeHeader extends SelectableDockableHeader implements Draggable
 
 		// Implementations of MouseListener.
 
-		public void mouseReleased(MouseEvent mouseEvent) {
+		public void mouseReleased(@NotNull MouseEvent mouseEvent) {
 			if (SwingUtilities.isRightMouseButton(mouseEvent)) {
 				react = false;
 
@@ -335,7 +336,7 @@ public class MinimzeHeader extends SelectableDockableHeader implements Draggable
 			}
 		}
 
-		public void mouseClicked(MouseEvent mouseEvent) {
+		public void mouseClicked(@NotNull MouseEvent mouseEvent) {
 
 			if (react) {
 				if (mouseEvent.getClickCount() == 2) {

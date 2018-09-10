@@ -3,6 +3,8 @@ package com.javadocking.drag;
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Dock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -81,14 +83,17 @@ public class DefaultDragListener implements DragListener {
 	/**
 	 * The drag listener listens to drag events for this dock. Is null when dockable is not null.
 	 */
+	@Nullable
 	private Dock dock;
 	/**
 	 * The drag listener listens to drag events for this dockable. Is null when dock is not null.
 	 */
+	@Nullable
 	private Dockable dockable;
 	/**
 	 * This dragger does the real dragging.
 	 */
+	@Nullable
 	private Dragger dragger;
 	/**
 	 * True when we are dragging, false otherwise.
@@ -113,6 +118,7 @@ public class DefaultDragListener implements DragListener {
 	/**
 	 * The timer to delay the dragging.
 	 */
+	@Nullable
 	private Timer timer;
 	/**
 	 * The ID of the last interesting mouse event.
@@ -131,7 +137,7 @@ public class DefaultDragListener implements DragListener {
 	 * @throws IllegalArgumentException If the dock is null.
 	 * @param    dock            The drag listener listens to drag events for this dock.
 	 */
-	public DefaultDragListener(Dock dock) {
+	public DefaultDragListener(@Nullable Dock dock) {
 		if (dock == null) {
 			throw new IllegalArgumentException("Dock null.");
 		}
@@ -144,7 +150,7 @@ public class DefaultDragListener implements DragListener {
 	 * @throws IllegalArgumentException If the dockable is null.
 	 * @param    dockable            The drag listener listens to drag events for this dockable.
 	 */
-	public DefaultDragListener(Dockable dockable) {
+	public DefaultDragListener(@Nullable Dockable dockable) {
 		if (dockable == null) {
 			throw new IllegalArgumentException("Dockable null.");
 		}
@@ -153,7 +159,7 @@ public class DefaultDragListener implements DragListener {
 
 	// Implementations of DragListener.
 
-	public void mousePressed(MouseEvent mouseEvent) {
+	public void mousePressed(@NotNull MouseEvent mouseEvent) {
 
 		// Did we handle this event already?
 		if ((eventID == mouseEvent.getID()) && (eventWhen == mouseEvent.getWhen())) {
@@ -204,7 +210,7 @@ public class DefaultDragListener implements DragListener {
 
 	}
 
-	public void mouseDragged(MouseEvent mouseEvent) {
+	public void mouseDragged(@NotNull MouseEvent mouseEvent) {
 
 		// Did we handle this event already?
 		if ((eventID == mouseEvent.getID()) && (eventWhen == mouseEvent.getWhen())) {
@@ -221,7 +227,7 @@ public class DefaultDragListener implements DragListener {
 
 	}
 
-	public void mouseReleased(MouseEvent mouseEvent) {
+	public void mouseReleased(@NotNull MouseEvent mouseEvent) {
 
 		// Did we handle this event already?
 		if ((eventID == mouseEvent.getID()) && (eventWhen == mouseEvent.getWhen())) {
@@ -368,7 +374,7 @@ public class DefaultDragListener implements DragListener {
 	 *
 	 * @return True if dragging should be started, false otherwise.
 	 */
-	protected boolean canStartDragging(MouseEvent mouseEvent) {
+	protected boolean canStartDragging(@NotNull MouseEvent mouseEvent) {
 		boolean buttonOk = false;
 		boolean modifierOk = false;
 
@@ -404,7 +410,7 @@ public class DefaultDragListener implements DragListener {
 	 *
 	 * @return True if dragging should be started, false otherwise.
 	 */
-	protected boolean canCancelDragging(MouseEvent mouseEvent) {
+	protected boolean canCancelDragging(@NotNull MouseEvent mouseEvent) {
 		boolean buttonOk = false;
 		boolean modifierOk = false;
 
@@ -437,7 +443,7 @@ public class DefaultDragListener implements DragListener {
 	 *
 	 * @return True if dragging should be started, false otherwise.
 	 */
-	protected boolean canShowPopup(MouseEvent mouseEvent) {
+	protected boolean canShowPopup(@NotNull MouseEvent mouseEvent) {
 		return SwingUtilities.isRightMouseButton(mouseEvent);
 	}
 

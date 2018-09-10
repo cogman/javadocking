@@ -8,13 +8,14 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class BorderDockSample extends JPanel {
 
-	public BorderDockSample(JFrame frame) {
+	public BorderDockSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.

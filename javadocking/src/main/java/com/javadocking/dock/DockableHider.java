@@ -1,6 +1,7 @@
 package com.javadocking.dock;
 
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This is an interface for a leaf dock that can hide an restore one of its dockables.
@@ -38,6 +39,7 @@ public interface DockableHider extends LeafDock {
 	 * @param    index                The index of the hidden dockable.
 	 * @return The hidden dockable, if there is one; otherwise null.
 	 */
+	@Nullable
 	Dockable getHiddenDockable(int index);
 
 	/**

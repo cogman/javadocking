@@ -3,6 +3,8 @@ package com.javadocking.drag.painter;
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Dock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +37,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The window that shows the title of the dockable.
 	 */
+	@Nullable
 	private JWindow window;
 	/**
 	 * The content of the window.
@@ -43,14 +46,17 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The dockable that is currently shown in the window. Can be null, when no dockable is shown.
 	 */
+	@Nullable
 	private Dockable dockable;
 	/**
 	 * The position where the window will be placed.
 	 */
+	@NotNull
 	private Point windowLocation = new Point();
 	/**
 	 * The small image of the dragged dockable.
 	 */
+	@Nullable
 	private Image smallImage;
 	/**
 	 * The component that contains the image.
@@ -71,6 +77,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The size of the image is not smaller than this size.
 	 */
+	@NotNull
 	private Dimension minImageSize = new Dimension(50, 50);
 	/**
 	 * The size of the image is not bigger than this size.
@@ -94,7 +101,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 
 	}
 
-	public void paintDockableDrag(Dockable newDockable, Dock dock, Rectangle rectangle, Point locationInDestinationDock) {
+	public void paintDockableDrag(@NotNull Dockable newDockable, @Nullable Dock dock, Rectangle rectangle, @NotNull Point locationInDestinationDock) {
 
 		// Create the window.
 		if (window == null) {
@@ -230,6 +237,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 	 *
 	 * @return The size of the image is not smaller than this size.
 	 */
+	@NotNull
 	public Dimension getMinImageSize() {
 		return minImageSize;
 	}
@@ -240,7 +248,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 	 * @param minImageSize The size of the image is not bigger than this size.
 	 *                     The width or height may not be 0.
 	 */
-	public void setMinImageSize(Dimension minImageSize) {
+	public void setMinImageSize(@NotNull Dimension minImageSize) {
 
 		if ((minImageSize.width == 0) || (minImageSize.height == 0)) {
 			throw new IllegalArgumentException("The width or height may not be 0.");
@@ -276,7 +284,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 	 * The image size will be this size multiplied with the actual reduce factor.
 	 * @return The actual reduce factor to calculate the image size.
 	 */
-	protected float calculateActualReduceFactor(Dimension componentSize) {
+	protected float calculateActualReduceFactor(@NotNull Dimension componentSize) {
 
 		// Take the preferred reduce factor.
 		float actualWidth = componentSize.width * preferredReduceFactor;
@@ -341,7 +349,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 
 		// Overwritten methods from JComponent.
 
-		public void paint(Graphics graphics) {
+		public void paint(@NotNull Graphics graphics) {
 			graphics.drawImage(smallImage, 0, 0, getWidth(), getHeight(), null);
 		}
 

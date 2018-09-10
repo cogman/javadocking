@@ -1,5 +1,6 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -45,6 +46,7 @@ public class Chart extends JPanel {
 		return chartPanel;
 	}
 
+	@NotNull
 	private Plot createPlot() {
 		// create subplot 1...
 		final XYDataset data1 = createDataset1();
@@ -91,6 +93,7 @@ public class Chart extends JPanel {
 	 *
 	 * @return Series 1.
 	 */
+	@NotNull
 	private XYDataset createDataset1() {
 
 		// create dataset 1...

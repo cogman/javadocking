@@ -12,6 +12,8 @@ import com.javadocking.drag.painter.DockableDragPainter;
 import com.javadocking.drag.painter.SwDockableDragPainter;
 import com.javadocking.util.CollectionUtil;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,10 +47,12 @@ public class StaticTabDragger implements Dragger {
 	/**
 	 * The dockRetriever.
 	 */
+	@NotNull
 	private DockRetriever dockRetriever = new StaticDockRetriever();
 	/**
 	 * The dock of the dockable before dragging.
 	 */
+	@Nullable
 	private TabDock originDock;
 	/**
 	 * The root dock of the dock, where the dragged dockable is currently docked.
@@ -57,28 +61,34 @@ public class StaticTabDragger implements Dragger {
 	/**
 	 * The child of the root dock of the dock, where the dragged dockable is currently docked.
 	 */
+	@Nullable
 	private Dock currentChildOfRootDock;
 	/**
 	 * The current location of the mouse in screen coordinates.
 	 */
+	@NotNull
 	private Point screenLocation = new Point();
 	/**
 	 * This is the current location of the mouse in the dock where the dockable will be docked for the current mouse location.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point locationInDestinationDock = new Point();
 	/**
 	 * This is the current location of the mouse in the tabbed pane.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point currentOffsetInTabbedPane = new Point();
 	/**
 	 * The offset of the clicked point.
 	 */
+	@NotNull
 	private Point dockableOffset = new Point();
 	/**
 	 * The dockable that is dragged.
 	 */
+	@Nullable
 	private Dockable draggedDockable;
 
 	// Tabs.
@@ -96,6 +106,7 @@ public class StaticTabDragger implements Dragger {
 	/**
 	 * Manages the cursors used for dragging dockables.
 	 */
+	@NotNull
 	private DragCursorManager cursorManager = new DragCursorManager();
 
 	// For painting.
@@ -106,6 +117,7 @@ public class StaticTabDragger implements Dragger {
 	/**
 	 * The rectangle where the dockable will be docked for the current mouse location.
 	 */
+	@NotNull
 	private Rectangle dockableDragRectangle = new Rectangle();
 
 	// Constructors.
@@ -129,7 +141,7 @@ public class StaticTabDragger implements Dragger {
 
 	// Implementations of Dragger.
 
-	public boolean startDragging(MouseEvent mouseEvent) {
+	public boolean startDragging(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component of the mouse event. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -231,7 +243,7 @@ public class StaticTabDragger implements Dragger {
 	 * A rectangle is painted that shows, where the dockable will be docked.
 	 * The cursor shows, if we can dock, or if we cannot dock for the current location.
 	 */
-	public void drag(MouseEvent mouseEvent) {
+	public void drag(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component of the mouse event. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -411,7 +423,7 @@ public class StaticTabDragger implements Dragger {
 	 * Searches a destination dock for the last mouse location and tries to dock the dragged dockable in
 	 * this dock.
 	 */
-	public void stopDragging(MouseEvent mouseEvent) {
+	public void stopDragging(@NotNull MouseEvent mouseEvent) {
 
 		// Reset the old cursor.
 		cursorManager.resetCursor();
@@ -507,7 +519,7 @@ public class StaticTabDragger implements Dragger {
 		reset();
 	}
 
-	public void showPopupMenu(MouseEvent mouseEvent) {
+	public void showPopupMenu(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component of the mouse event. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -643,7 +655,7 @@ public class StaticTabDragger implements Dragger {
 	 * @return The index of the tab label that is under the mouse. When no tab is under the mouse
 	 * -1 is returned.
 	 */
-	private int tabDragged(MouseEvent mouseEvent) {
+	private int tabDragged(@NotNull MouseEvent mouseEvent) {
 		// we can only drag a tab if one dockable is dragged.
 		if (!(draggedDockable instanceof CompositeDockable) && (sourceTabbedPane != null)) {
 			// Compute the location of the mouse in the tabbed pane.

@@ -6,6 +6,7 @@ import com.javadocking.dockable.CompositeDockable;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -35,6 +36,7 @@ public class ToolBarDockFactory implements DockFactory {
 	 * </ul>
 	 * Otherwise null is returned.
 	 */
+	@Nullable
 	public Dock createDock(Dockable dockable, int dockingMode) {
 
 		// Test if the docking mode is horizontal tool bar.

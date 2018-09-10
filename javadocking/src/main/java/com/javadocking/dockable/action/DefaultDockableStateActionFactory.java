@@ -2,6 +2,7 @@ package com.javadocking.dockable.action;
 
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockableState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
@@ -33,7 +34,7 @@ public class DefaultDockableStateActionFactory implements DockableStateActionFac
 	 * @return The action to change the state of the window in which the dockable is docked.
 	 * @throws IllegalArgumentException    If the given window state is not DockableState.NORMAL, DockableState.MAXIMIZED, DockableState.MINIMIZED, DockableState.CLOSED, or DockableState.EXTERNALIZED.
 	 */
-	public DockableStateAction createDockableStateAction(Dockable dockable, int newDockableState) {
+	public DockableStateAction createDockableStateAction(@NotNull Dockable dockable, int newDockableState) {
 
 		boolean enabled = (dockable.getPossibleStates() & newDockableState) != 0;
 		Icon icon;

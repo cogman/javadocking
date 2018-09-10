@@ -2,6 +2,8 @@ package com.javadocking.event;
 
 import com.javadocking.dock.CompositeDock;
 import com.javadocking.dock.Dock;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * <p>
@@ -25,6 +27,7 @@ public class ChildDockEvent extends DockingEvent {
 	/**
 	 * The child dock that is added, move, or removed.
 	 */
+	@Nullable
 	private Dock childDock;
 
 
@@ -39,7 +42,7 @@ public class ChildDockEvent extends DockingEvent {
 	 * @param childDock       The child dock that is added, moved, or removed.
 	 * @throws IllegalArgumentException If the child dock is null.
 	 */
-	public ChildDockEvent(Object source, CompositeDock originDock, CompositeDock destinationDock, Dock childDock) {
+	public ChildDockEvent(@NotNull Object source, CompositeDock originDock, CompositeDock destinationDock, @Nullable Dock childDock) {
 
 		super(source, originDock, destinationDock);
 
@@ -59,6 +62,7 @@ public class ChildDockEvent extends DockingEvent {
 	 *
 	 * @return The child dock that is added, moved, or removed.
 	 */
+	@Nullable
 	public Dock getChildDock() {
 		return childDock;
 	}

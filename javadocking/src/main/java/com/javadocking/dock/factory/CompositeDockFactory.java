@@ -1,5 +1,7 @@
 package com.javadocking.dock.factory;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * This dock factory creates composite docks. When a composite dock is created, this composite dock needs a child dock
  * factory. This interface provides the methods to get and set the child dock factory for the created composite docks.
@@ -14,6 +16,7 @@ public interface CompositeDockFactory extends DockFactory {
 	 *
 	 * @return The child dock factory for the created composite docks.
 	 */
+	@Nullable
 	DockFactory getChildDockFactory();
 
 	/**

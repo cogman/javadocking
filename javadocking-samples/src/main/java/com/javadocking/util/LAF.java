@@ -2,6 +2,7 @@ package com.javadocking.util;
 
 import com.nilo.plaf.nimrod.NimRODLookAndFeel;
 import com.nilo.plaf.nimrod.NimRODTheme;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.plaf.metal.DefaultMetalTheme;
@@ -48,7 +49,7 @@ public class LAF {
 
 	// Getters / Setters.
 
-	public static void setTheme(LookAndFeel laf, String themeString) {
+	public static void setTheme(LookAndFeel laf, @NotNull String themeString) {
 		if (laf instanceof MetalLookAndFeel) {
 			MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
 		}

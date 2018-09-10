@@ -5,6 +5,7 @@ import com.javadocking.dock.Dock;
 import com.javadocking.dock.Position;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,6 +65,7 @@ public class SelectableDockHeader extends JPanel implements SelectableHeader {
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
 

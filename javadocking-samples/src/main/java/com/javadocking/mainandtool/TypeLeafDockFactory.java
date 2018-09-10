@@ -7,6 +7,8 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -74,7 +76,8 @@ public class TypeLeafDockFactory implements DockFactory {
 
 	// Implementations of DockFactory.
 
-	public Dock createDock(Dockable dockable, int dockingMode) {
+	@Nullable
+	public Dock createDock(@Nullable Dockable dockable, int dockingMode) {
 
 		// Is the dockable null?
 		if (dockable == null) {
@@ -213,6 +216,7 @@ public class TypeLeafDockFactory implements DockFactory {
 		return null;
 	}
 
+	@Nullable
 	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode) {
 
 		// Do we have a composite dockable?
@@ -302,7 +306,7 @@ public class TypeLeafDockFactory implements DockFactory {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		PropertiesUtil.setBoolean(properties, prefix + "useLastDockingMode", useLastDockingMode);
 		PropertiesUtil.setBoolean(properties, prefix + "main", main);
@@ -310,7 +314,7 @@ public class TypeLeafDockFactory implements DockFactory {
 	}
 
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		useLastDockingMode = PropertiesUtil.getBoolean(properties, prefix + "useLastDockingMode", useLastDockingMode);
 		main = PropertiesUtil.getBoolean(properties, prefix + "main", main);

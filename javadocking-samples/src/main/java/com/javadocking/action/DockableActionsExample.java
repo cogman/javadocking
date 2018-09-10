@@ -13,6 +13,7 @@ import com.javadocking.model.FloatDockModel;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.LineMinimizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -169,6 +170,7 @@ public class DockableActionsExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		// Decorate with state actions.

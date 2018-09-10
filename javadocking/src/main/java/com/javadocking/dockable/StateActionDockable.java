@@ -2,6 +2,8 @@ package com.javadocking.dockable;
 
 import com.javadocking.dockable.action.DockableStateAction;
 import com.javadocking.dockable.action.DockableStateActionFactory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class StateActionDockable extends ActionDockable {
 
 	// Fields.
 
+	@Nullable
 	private DockableStateActionFactory dockableStateActionFactory;
 	private int[] newDockableStates;
 	private Dockable delegate;
@@ -44,7 +47,7 @@ public class StateActionDockable extends ActionDockable {
 	 * @param dockableStateActionFactory The factory that creates the {@link DockableStateAction}s.
 	 * @param newDockableStates          The dockable states for which an action has to be added.
 	 */
-	public StateActionDockable(Dockable delegate, DockableStateActionFactory dockableStateActionFactory, int[] newDockableStates) {
+	public StateActionDockable(Dockable delegate, @Nullable DockableStateActionFactory dockableStateActionFactory, @NotNull int[] newDockableStates) {
 
 		super(delegate);
 
@@ -73,6 +76,7 @@ public class StateActionDockable extends ActionDockable {
 	 * @return actions            The actions that will be added to the matrix of actions of the delegate.
 	 * @see    #getActions()
 	 */
+	@NotNull
 	public Action[][] getActionsToAdd() {
 
 		// Remove the action that corresponds with the current state of the dockable.

@@ -1,5 +1,7 @@
 package com.javadocking.event;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class DockingEventSupport {
 	/**
 	 * The listeners that will be notified when a dockable or child dock is added, moved or removed from a dock.
 	 */
+	@NotNull
 	private List dockingListeners = new ArrayList();
 
 	// Public methods.

@@ -13,6 +13,7 @@ import com.javadocking.model.DockingPath;
 import com.javadocking.model.DockingPathModel;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.visualizer.Visualizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,7 +101,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * If the dockable is not in a dock, it is added to a float dock.
 	 * </p>
 	 */
-	private static boolean externalize(Dockable dockableToChange) {
+	private static boolean externalize(@NotNull Dockable dockableToChange) {
 		if (TEST) System.out.println("externalize");
 
 		// Use the wrapper round the dockable, we can find this in the model.
@@ -152,7 +153,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * If the dockable is not in a dock, it is added to minimize panel.
 	 * </p>
 	 */
-	private static boolean minimize(Dockable dockableToChange) {
+	private static boolean minimize(@NotNull Dockable dockableToChange) {
 		if (TEST) System.out.println("minimize");
 
 		// Use the wrapper round the dockable, we can find this in the model.
@@ -208,7 +209,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * The dockable is maximized in the maximize panel.
 	 * </p>
 	 */
-	private static boolean maximize(Dockable dockableToChange) {
+	private static boolean maximize(@NotNull Dockable dockableToChange) {
 
 		if (TEST) System.out.println("maximize");
 
@@ -283,7 +284,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * add the dockable using its docking path.
 	 * </p>
 	 */
-	private static boolean restore(Dockable dockableToChange) {
+	private static boolean restore(@NotNull Dockable dockableToChange) {
 		if (TEST) System.out.println("restore");
 
 		// Use the wrapper round the dockable, we can find this in the model.
@@ -350,7 +351,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 
 	}
 
-	private static boolean dockableIsHidden(Dockable dockableOfModel, DockableHider dock) {
+	private static boolean dockableIsHidden(@NotNull Dockable dockableOfModel, DockableHider dock) {
 		for (int index = 0; index < dock.getHiddenDockableCount(); index++) {
 			if (dockableOfModel.equals(dock.getHiddenDockable(index))) {
 				return true;
@@ -375,7 +376,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * If the dockable is in a minimize panel, it is removed from that panel.
 	 * </p>
 	 */
-	private static boolean close(Dockable dockableToChange) {
+	private static boolean close(@NotNull Dockable dockableToChange) {
 
 		if (TEST) System.out.println("close");
 
@@ -587,7 +588,8 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * @param    dockableState    The visualizer has to be able to visualize that dockable in this state.
 	 * @return An array with the possible visualizers. Cannot be null, but the length can be 0.
 	 */
-	private static Visualizer[] retrieveVisualizersOfDockModel(Dockable dockable, int dockableState) {
+	@NotNull
+	private static Visualizer[] retrieveVisualizersOfDockModel(@NotNull Dockable dockable, int dockableState) {
 
 		// Get the dock model.
 		DockModel dockModel = DockingManager.getDockModel();
@@ -667,6 +669,7 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 	 * @param    dockableState    The visualizer has to be able to visualize a dockable in this state.
 	 * @return An array with the possible visualizers. Cannot be null, but the length can be 0.
 	 */
+	@NotNull
 	private static Visualizer[] retrieveVisualizersOfDockModel(int dockableState) {
 
 		// Get the dock model.

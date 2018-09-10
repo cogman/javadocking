@@ -5,6 +5,8 @@ import com.javadocking.dock.*;
 import com.javadocking.dockable.*;
 import com.javadocking.model.DockModel;
 import com.javadocking.visualizer.Visualizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class DockingUtil {
 	 * @param rootDock  The dock.
 	 * @return True if the given dock is a root dock of the dock model, false otherwise.
 	 */
-	public static boolean containsRootDock(DockModel dockModel, Dock rootDock) {
+	public static boolean containsRootDock(DockModel dockModel, @NotNull Dock rootDock) {
 		for (int index = 0; index < dockModel.getOwnerCount(); index++) {
 			Window owner = dockModel.getOwner(index);
 			Iterator iterator = dockModel.getRootKeys(owner);
@@ -52,7 +54,7 @@ public class DockingUtil {
 	 * If the given dockable is a composite dockable, all of its child dockables
 	 * have to be docked in the leaf dock, otherwise false is returned.
 	 */
-	public static boolean contains(LeafDock leafDock, Dockable dockabe) {
+	public static boolean contains(@NotNull LeafDock leafDock, Dockable dockabe) {
 
 		// Is the dockable a composite?
 		if (dockabe instanceof CompositeDockable) {
@@ -208,7 +210,8 @@ public class DockingUtil {
 	 * @param dockable The dockable that is searched.
 	 * @return The dock in the dock tree in which the given dockable is docked, if it exists, null otherwise.
 	 */
-	public static Dock searchDock(Dock rootDock, Dockable dockable) {
+	@Nullable
+	public static Dock searchDock(Dock rootDock, @NotNull Dockable dockable) {
 		// Do we have a leafdock?
 		if (rootDock instanceof LeafDock) {
 			// Is the given dockable one of the children?
@@ -245,7 +248,7 @@ public class DockingUtil {
 	 * @param rootDock  The root dock of the dock tree.
 	 * @param dockables The list to which all the dockables are added.
 	 */
-	public static void retrieveDockables(Dock rootDock, List dockables) {
+	public static void retrieveDockables(Dock rootDock, @NotNull List dockables) {
 
 		// Do we have a leaf dock?
 		if (rootDock instanceof LeafDock) {
@@ -277,7 +280,7 @@ public class DockingUtil {
 	 * @param rootDockable The root dockable of the dockable tree.
 	 * @param dockables    The list to which all the leaf dockables are added.
 	 */
-	public static void retrieveDockables(Dockable rootDockable, List dockables) {
+	public static void retrieveDockables(Dockable rootDockable, @NotNull List dockables) {
 
 		// Do we have a composite dockable?
 		if (rootDockable instanceof CompositeDockable) {
@@ -302,6 +305,7 @@ public class DockingUtil {
 	 * the dock itself is returned.
 	 * @param    dock    The given dock.
 	 */
+	@NotNull
 	public static Dock getRootDock(Dock dock) {
 
 		// Get the parent of the dock.
@@ -326,7 +330,8 @@ public class DockingUtil {
 	 * Otherwise, the ancestor of the given dock that is the child of the float dock is returned.
 	 * @param    dock    The given dock.
 	 */
-	public static Dock getFloatChildDock(Dock dock) {
+	@Nullable
+	public static Dock getFloatChildDock(@Nullable Dock dock) {
 
 		if (dock == null) {
 			return null;
@@ -450,6 +455,7 @@ public class DockingUtil {
 	 * @param dockingMode This should be DockingMode.TAB, DockingMode.GRID, DockingMode.HORIZONTAL_LINE or DockingMode.VERTICAL_LINE.
 	 * @return The preferred size of a dockable.
 	 */
+	@Nullable
 	public static Dimension getDockablePreferredSize(Dockable dockable, int dockingMode) {
 
 		Dimension size = null;
@@ -475,7 +481,8 @@ public class DockingUtil {
 	 * @param dockingMode       This should be DockingMode.TAB, DockingMode.GRID, DockingMode.HORIZONTAL_LINE or DockingMode.VERTICAL_LINE.
 	 * @return The preferred size of a composite dockable.
 	 */
-	public static Dimension getCompositeDockablePreferredSize(CompositeDockable compositeDockable, int dockingMode) {
+	@NotNull
+	public static Dimension getCompositeDockablePreferredSize(@NotNull CompositeDockable compositeDockable, int dockingMode) {
 
 		if (dockingMode == DockingMode.TAB) {
 			// Compute the union of the preferred sizes of the children.

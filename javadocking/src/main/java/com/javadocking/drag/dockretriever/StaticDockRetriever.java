@@ -10,6 +10,8 @@ import com.javadocking.model.DockModel;
 import com.javadocking.model.DockModelUtil;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +45,8 @@ public class StaticDockRetriever implements DockRetriever {
 
 	// Implementations of DockRetriever.
 
-	public Dock[] retrieveHighestPriorityDock(Point screenLocation, Dockable dockable) {
+	@Nullable
+	public Dock[] retrieveHighestPriorityDock(@NotNull Point screenLocation, @NotNull Dockable dockable) {
 
 		// Get the list with the docks under this position. The deepest docks first.
 		List possibleDocks = retrieveDocksOfPosition(screenLocation, dockable);
@@ -88,7 +91,7 @@ public class StaticDockRetriever implements DockRetriever {
 
 	// Private metods.
 
-	private List retrieveDocksOfPosition(Point screenLocation, Dockable dockable) {
+	private List retrieveDocksOfPosition(@NotNull Point screenLocation, @NotNull Dockable dockable) {
 
 		// Get the dock model.
 		DockModel dockModel = DockingManager.getDockModel();
@@ -157,7 +160,7 @@ public class StaticDockRetriever implements DockRetriever {
 	 * @param dockable       The dockable that has to be added to a new dock.
 	 * @return The list of docks under the given screen location. The deepest docks are first.
 	 */
-	private List retrieveDocksOfPosition(Point screenLocation, Window ownerWindow, Dockable dockable) {
+	private List retrieveDocksOfPosition(@NotNull Point screenLocation, Window ownerWindow, @NotNull Dockable dockable) {
 
 		// Get the dock model.
 		DockModel dockModel = DockingManager.getDockModel();
@@ -279,6 +282,7 @@ public class StaticDockRetriever implements DockRetriever {
 	 * @param component The component of which the dock ancestors are searched.
 	 * @return The list with the components of type {@link Dock} that contain the given component.
 	 */
+	@NotNull
 	private List getDockAncestors(Component component) {
 		// Create the list for the ancestors.
 		List dockAncestors = new ArrayList();

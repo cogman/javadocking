@@ -11,6 +11,7 @@ import com.javadocking.dockable.*;
 import com.javadocking.dockable.action.DefaultDockableStateActionFactory;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -154,6 +155,7 @@ public class DockingMinimizerExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);

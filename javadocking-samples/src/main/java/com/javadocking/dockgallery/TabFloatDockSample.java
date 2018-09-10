@@ -11,6 +11,8 @@ import com.javadocking.model.DefaultFloatDockFactory;
 import com.javadocking.model.FloatDockFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -103,7 +105,8 @@ public class TabFloatDockSample extends JPanel {
 
 	private class MyFloatDockFactory extends DefaultFloatDockFactory {
 
-		public FloatDock createFloatDock(Window owner) {
+		@Nullable
+		public FloatDock createFloatDock(@NotNull Window owner) {
 			FloatDock floatDock = super.createFloatDock(owner);
 
 			// We want a higher priority for making dockables float.

@@ -15,6 +15,7 @@ import com.javadocking.model.DockingPath;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.LineMinimizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -38,7 +39,7 @@ public class MultiTabAndVisualizers3Example extends JPanel {
 
 	// Constructor.
 
-	public MultiTabAndVisualizers3Example(JFrame frame) {
+	public MultiTabAndVisualizers3Example(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model and dock model group.
@@ -249,6 +250,7 @@ public class MultiTabAndVisualizers3Example extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);

@@ -11,6 +11,8 @@ import com.javadocking.model.DockModelUtil;
 import com.javadocking.util.CollectionUtil;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +43,7 @@ public class DynamicDockRetriever implements DockRetriever {
 	/**
 	 * The child of the root dock of the dock, where the dockable is currently docked.
 	 */
+	@Nullable
 	private Dock currentChildOfRootDock;
 	/**
 	 * The current dockable.
@@ -49,7 +52,8 @@ public class DynamicDockRetriever implements DockRetriever {
 
 	// Implementations of DockRetriever.
 
-	public Dock[] retrieveHighestPriorityDock(Point screenLocation, Dockable dockable) {
+	@Nullable
+	public Dock[] retrieveHighestPriorityDock(@NotNull Point screenLocation, @NotNull Dockable dockable) {
 
 		currentDockable = dockable;
 
@@ -86,7 +90,8 @@ public class DynamicDockRetriever implements DockRetriever {
 
 	// Private metods.
 
-	private Dock getHighestPriorityDock(Point screenLocation, Dockable dockable, List possibleDocks) {
+	@Nullable
+	private Dock getHighestPriorityDock(@NotNull Point screenLocation, Dockable dockable, @Nullable List possibleDocks) {
 		// Did we find docks?
 		if ((possibleDocks != null) && (possibleDocks.size() > 0)) {
 			// The dock that has the highest priority of the docks that are scanned already.
@@ -125,7 +130,7 @@ public class DynamicDockRetriever implements DockRetriever {
 	}
 
 
-	private DockPossibilities retrieveDocksOfPosition(Point screenLocation, Dockable dockable) {
+	private DockPossibilities retrieveDocksOfPosition(@NotNull Point screenLocation, @NotNull Dockable dockable) {
 
 		// TODO when a dock is floating, it cannot be docked in a dock of another owner window.
 
@@ -200,7 +205,7 @@ public class DynamicDockRetriever implements DockRetriever {
 	 * @param inOwner        The owner window is the owner of the dockable.
 	 * @return The list of docks under the given screen location. The deepest docks are first.
 	 */
-	private DockPossibilities retrieveDocksOfPosition(Point screenLocation, Window ownerWindow, Dockable dockable, boolean inOwner) {
+	private DockPossibilities retrieveDocksOfPosition(@NotNull Point screenLocation, Window ownerWindow, @NotNull Dockable dockable, boolean inOwner) {
 
 		// Create the result.
 		DockPossibilities dockPossibilities = new DockPossibilities();
@@ -347,6 +352,7 @@ public class DynamicDockRetriever implements DockRetriever {
 	 * @param component The component of which the dock ancestors are searched.
 	 * @return The list with the components of type {@link Dock} that contain the given component.
 	 */
+	@NotNull
 	private List getDockAncestors(Component component) {
 		// Create the list for the ancestors.
 		List dockAncestors = new ArrayList();
@@ -412,7 +418,9 @@ public class DynamicDockRetriever implements DockRetriever {
 	 * @author Heidi Rakels.
 	 */
 	private static class DockPossibilities {
+		@Nullable
 		List preferenceDocks;
+		@Nullable
 		List reserveDocks;
 	}
 

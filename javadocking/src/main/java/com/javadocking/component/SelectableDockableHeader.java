@@ -4,6 +4,8 @@ import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.action.ShowActionMode;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,10 +70,12 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 	/**
 	 * The panel for the actions of the dockable, when the header is not selected.
 	 */
+	@Nullable
 	private JPanel actionPanel;
 	/**
 	 * The panel for the actions of the dockable, when the header is selected.
 	 */
+	@Nullable
 	private JPanel selectedActionPanel;
 	/**
 	 * The preferred size of this header.
@@ -92,6 +96,7 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 	/**
 	 * The listener for changes of the dockable.
@@ -129,7 +134,7 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 	 * <li>{@link com.javadocking.dock.Position#BOTTOM}.</li>
 	 * </ul>
 	 */
-	public SelectableDockableHeader(Dockable dockable, int position) {
+	public SelectableDockableHeader(@NotNull Dockable dockable, int position) {
 		this(dockable, position, ShowActionMode.FIRST_ROW_ACTIONS, ShowActionMode.ALL_ACTIONS);
 	}
 
@@ -298,6 +303,7 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 	 *
 	 * @return The panel with the actions. Can be null.
 	 */
+	@Nullable
 	protected JPanel getActionPanel() {
 		return actionPanel;
 	}
@@ -307,6 +313,7 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 	 *
 	 * @return The panel with the actions when the header is selected. Can be null.
 	 */
+	@Nullable
 	public JPanel getSelectedActionPanel() {
 		return selectedActionPanel;
 	}
@@ -379,6 +386,7 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 	 *
 	 * @param    actionMode                The mode which actions are shown.
 	 */
+	@Nullable
 	private JPanel createActionPanel(ShowActionMode actionMode) {
 
 		// The panel with the actions.
@@ -466,7 +474,7 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 
 	private class DockableChangeListener implements PropertyChangeListener {
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 			if (propertyChangeEvent.getPropertyName().equals(DOCKABLE_DESCRIPTION_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_TITLE_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_ICON_PROPERTY))

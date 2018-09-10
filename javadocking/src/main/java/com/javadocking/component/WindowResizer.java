@@ -1,5 +1,8 @@
 package com.javadocking.component;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -29,6 +32,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 	/**
 	 * The window that will be resized.
 	 */
+	@Nullable
 	private Window window;
 
 	/**
@@ -75,7 +79,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 	 *
 	 * @param window The window that will be resized. Not null.
 	 */
-	public WindowResizer(Window window) {
+	public WindowResizer(@Nullable Window window) {
 
 		if (window == null) {
 			throw new NullPointerException("Window null");
@@ -85,7 +89,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 
 	// Implementations of MouseListener.
 
-	public void mousePressed(MouseEvent mouseEvent) {
+	public void mousePressed(@NotNull MouseEvent mouseEvent) {
 
 		// Initialize.
 		Component component = (Component) mouseEvent.getSource();
@@ -115,7 +119,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 
 	// Implementations of MouseMotionListener.
 
-	public void mouseEntered(MouseEvent mouseEvent) {
+	public void mouseEntered(@NotNull MouseEvent mouseEvent) {
 
 		// Save the cursor.
 		Component component = (Component) mouseEvent.getSource();
@@ -126,7 +130,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 
 	}
 
-	public void mouseExited(MouseEvent mouseEvent) {
+	public void mouseExited(@NotNull MouseEvent mouseEvent) {
 
 		// Reset the cursor.
 		Component component = (Component) mouseEvent.getSource();
@@ -138,7 +142,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 
 	}
 
-	public void mouseMoved(MouseEvent mouseEvent) {
+	public void mouseMoved(@NotNull MouseEvent mouseEvent) {
 
 		// Set the appropriate cursor to show the user which resizing is possible.
 		Component component = (Component) mouseEvent.getSource();
@@ -146,7 +150,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 
 	}
 
-	public void mouseDragged(MouseEvent mouseEvent) {
+	public void mouseDragged(@NotNull MouseEvent mouseEvent) {
 
 		// Are we resizing?
 		if (currentCursorDirection != Cursor.DEFAULT_CURSOR) {
@@ -257,7 +261,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 	 * @param mouseY    The mouse y-position.
 	 * @param minHeight The minimum height of the window.
 	 */
-	private void changeSouth(Rectangle newBounds, int mouseY, int minHeight) {
+	private void changeSouth(@NotNull Rectangle newBounds, int mouseY, int minHeight) {
 
 		// Only the height can change.
 		int newHeight = startHeight + (mouseY - startY);
@@ -275,7 +279,7 @@ class WindowResizer implements MouseMotionListener, MouseListener {
 	 * @param mouseX    The mouse x-position.
 	 * @param minWidth  The minimum width of the window.
 	 */
-	private void changeEast(Rectangle newBounds, int mouseX, int minWidth) {
+	private void changeEast(@NotNull Rectangle newBounds, int mouseX, int minWidth) {
 
 		// Only the width can change.
 		int newWidth = startWidth + (mouseX - startX);

@@ -4,6 +4,7 @@ import com.javadocking.DockingManager;
 import com.javadocking.dock.Dock;
 import com.javadocking.dock.FloatDock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class OldWindowDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The position where the window will be placed.
 	 */
+	@NotNull
 	private Point windowLocation = new Point();
 	/**
 	 * The factory that creates the drag component.
@@ -63,7 +65,7 @@ public class OldWindowDockableDragPainter implements DockableDragPainter {
 		window.setVisible(false);
 	}
 
-	public void paintDockableDrag(Dockable dockable, Dock dock, Rectangle rectangle, Point locationInDestinationDock) {
+	public void paintDockableDrag(Dockable dockable, Dock dock, @NotNull Rectangle rectangle, Point locationInDestinationDock) {
 
 		if (dock instanceof FloatDock) {
 

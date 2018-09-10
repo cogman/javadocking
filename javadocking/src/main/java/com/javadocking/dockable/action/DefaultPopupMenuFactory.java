@@ -5,6 +5,7 @@ import com.javadocking.dockable.DefaultCompositeDockable;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockableState;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -68,7 +69,8 @@ public class DefaultPopupMenuFactory implements PopupMenuFactory {
 
 	// Implementations of PopupMenuFactory.
 
-	public JPopupMenu createPopupMenu(Dockable selectedDockable, CompositeDockable compositeDockable) {
+	@Nullable
+	public JPopupMenu createPopupMenu(@Nullable Dockable selectedDockable, @Nullable CompositeDockable compositeDockable) {
 
 		JPopupMenu popupMenu = new JPopupMenu();
 		int count = 0;

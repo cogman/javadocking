@@ -4,6 +4,7 @@ import com.javadocking.dock.Priority;
 import com.javadocking.dock.TabDock;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class TypeTabDock extends TabDock {
 		this.main = main;
 	}
 
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(Dockable dockable, @NotNull Point relativeLocation) {
 		if (!(dockable instanceof TypeDockable)) {
 			return Priority.CANNOT_DOCK;
 		}
@@ -38,13 +39,13 @@ public class TypeTabDock extends TabDock {
 		return super.getDockPriority(dockable, relativeLocation);
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map childDockIds, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map childDockIds, @NotNull Map dockablesMap, Window owner) throws IOException {
 		main = PropertiesUtil.getBoolean(properties, prefix + "main", main);
 		super.loadProperties(prefix, properties, childDockIds, dockablesMap, owner);
 
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDocks) {
+	public void saveProperties(String prefix, @NotNull Properties properties, Map childDocks) {
 		super.saveProperties(prefix, properties, childDocks);
 		PropertiesUtil.setBoolean(properties, prefix + "main", main);
 	}

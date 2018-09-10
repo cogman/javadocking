@@ -1,5 +1,8 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,7 +45,8 @@ public class PropertiesUtil {
 	 * @throws IOException If creating the input stream, reading the property list from the input stream
 	 *                     or closing the input stream throws an IOException.
 	 */
-	public static Properties loadProperties(String sourceName) throws IOException {
+	@NotNull
+	public static Properties loadProperties(@NotNull String sourceName) throws IOException {
 
 		Properties result = new Properties();
 		FileInputStream inputStream = new FileInputStream(sourceName);
@@ -62,7 +66,7 @@ public class PropertiesUtil {
 	 * @throws IOException          If creating the output stream, writing this property list
 	 *                              to the output stream or closing the output stream throws an IOException.
 	 */
-	public static void saveProperties(Properties properties, String destinationName, String comment) throws IOException {
+	public static void saveProperties(@Nullable Properties properties, @NotNull String destinationName, String comment) throws IOException {
 
 		// Check that the given properties are not null.
 		if (properties == null) {
@@ -143,7 +147,7 @@ public class PropertiesUtil {
 	 * @param name       The name of the property.
 	 * @param value      The default value of the property.
 	 */
-	public static void setString(Properties properties, String name, String value) {
+	public static void setString(@NotNull Properties properties, String name, @Nullable String value) {
 
 		if (value != null) {
 			properties.put(name, value);
@@ -281,7 +285,7 @@ public class PropertiesUtil {
 
 			// Try to make the color without alfa.
 			return new Color(redValue, greenValue, blueValue);
-		} catch (NoSuchElementException | IllegalArgumentException noSuchElementException) {
+		} catch (@NotNull NoSuchElementException | IllegalArgumentException noSuchElementException) {
 			// Exception in the StringTokenizer.
 			return defaultValue;
 		}
@@ -295,7 +299,7 @@ public class PropertiesUtil {
 	 * @param name       The name of the property.
 	 * @param value      The default value of the property.
 	 */
-	public static void setColor(Properties properties, String name, Color value) {
+	public static void setColor(@NotNull Properties properties, String name, @Nullable Color value) {
 
 		// Check if the color is not null.
 		if (value != null) {
@@ -359,7 +363,7 @@ public class PropertiesUtil {
 	 * @param name       The name of the property.
 	 * @param value      The default value of the property.
 	 */
-	public static void setStringArray(Properties properties, String name, String[] value) {
+	public static void setStringArray(@NotNull Properties properties, String name, @Nullable String[] value) {
 
 		// Check if the array is not null or if the size is 0.
 		if ((value != null) && (value.length > 0)) {
@@ -430,7 +434,7 @@ public class PropertiesUtil {
 	 * @param name       The name of the property.
 	 * @param value      The default value of the property.
 	 */
-	public static void setIntegerArray(Properties properties, String name, int[] value) {
+	public static void setIntegerArray(@NotNull Properties properties, String name, @Nullable int[] value) {
 
 		// Check if the array is not null or if the size is 0.
 		if ((value != null) && (value.length > 0)) {
@@ -559,7 +563,7 @@ public class PropertiesUtil {
 	 * @param name       The name of the property.
 	 * @param value      The default value of the property.
 	 */
-	public static void setDoubleArray(Properties properties, String name, double[] value) {
+	public static void setDoubleArray(@NotNull Properties properties, String name, @Nullable double[] value) {
 
 		// Check if the array is not null or if the size is 0.
 		if ((value != null) && (value.length > 0)) {

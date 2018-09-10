@@ -13,6 +13,8 @@ import com.javadocking.drag.painter.DefaultRectanglePainter;
 import com.javadocking.drag.painter.DockableDragPainter;
 import com.javadocking.drag.painter.SwDockableDragPainter;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,23 +42,28 @@ public class StaticSingleDragger implements Dragger {
 	/**
 	 * The dockRetriever.
 	 */
+	@NotNull
 	private DockRetriever dockRetriever = new StaticDockRetriever();
 	/**
 	 * The dock of the dockable before dragging.
 	 */
+	@Nullable
 	private LeafDock originDock;
 	/**
 	 * The current location of the mouse in screen coordinates.
 	 */
+	@NotNull
 	private Point screenLocation = new Point();
 	/**
 	 * This is the location of the mouse in the dock where the dockable will be docked for the current mouse location.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point locationInDestinationDock = new Point();
 	/**
 	 * The offset of the clicked point.
 	 */
+	@NotNull
 	private Point dockableOffset = new Point();
 	/**
 	 * The dockable that is dragged.
@@ -67,6 +74,7 @@ public class StaticSingleDragger implements Dragger {
 	/**
 	 * Manages the cursors used for dragging dockables.
 	 */
+	@NotNull
 	private DragCursorManager cursorManager = new DragCursorManager();
 
 	// For painting.
@@ -77,6 +85,7 @@ public class StaticSingleDragger implements Dragger {
 	/**
 	 * The rectangle where the dockable will be docked for the current mouse location.
 	 */
+	@NotNull
 	private Rectangle dockableDragRectangle = new Rectangle();
 
 	// Constructors.
@@ -100,7 +109,7 @@ public class StaticSingleDragger implements Dragger {
 
 	// Implementations of Dragger.
 
-	public boolean startDragging(MouseEvent mouseEvent) {
+	public boolean startDragging(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component of the mouse event. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -151,7 +160,7 @@ public class StaticSingleDragger implements Dragger {
 	 * A rectangle is painted that shows, where the dockable will be docked.
 	 * The cursor shows, if we can dock, or if we cannot dock for the current location.
 	 */
-	public void drag(MouseEvent mouseEvent) {
+	public void drag(@NotNull MouseEvent mouseEvent) {
 
 		// Get the component of the mouse event.  
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -326,7 +335,7 @@ public class StaticSingleDragger implements Dragger {
 	 * Searches a destination dock for the last mouse location and tries to dock the dragged dockable in
 	 * this dock.
 	 */
-	public void stopDragging(MouseEvent mouseEvent) {
+	public void stopDragging(@NotNull MouseEvent mouseEvent) {
 
 		// Reset the old cursor.
 		cursorManager.resetCursor();
@@ -404,7 +413,7 @@ public class StaticSingleDragger implements Dragger {
 
 	}
 
-	public void showPopupMenu(MouseEvent mouseEvent) {
+	public void showPopupMenu(@NotNull MouseEvent mouseEvent) {
 
 		// Get the component of the mouse event.  
 		Component mouseComponent = (Component) mouseEvent.getSource();

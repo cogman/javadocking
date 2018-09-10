@@ -1,5 +1,8 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,7 +24,7 @@ public class SwingUtil {
 	 *
 	 * @param component The component whose parent will be repainted.
 	 */
-	public static void repaintParent(JComponent component) {
+	public static void repaintParent(@NotNull JComponent component) {
 
 		// Get the parent of the component.
 		JComponent parentComponent = (JComponent) SwingUtilities.getAncestorOfClass(JComponent.class, component);
@@ -45,6 +48,7 @@ public class SwingUtil {
 	 * @param component The component whose root pane is retrieved.
 	 * @return The root pane of the component.
 	 */
+	@Nullable
 	public static JRootPane getRootPane(Component component) {
 
 		if (component instanceof JRootPane) {
@@ -68,7 +72,8 @@ public class SwingUtil {
 	 * @param window The window whose root pane is retrieved.
 	 * @return The root pane of the window of the component.
 	 */
-	public static JRootPane getRootPane(Window window) {
+	@Nullable
+	public static JRootPane getRootPane(@Nullable Window window) {
 
 		if (window == null) {
 			return null;
@@ -95,7 +100,7 @@ public class SwingUtil {
 	 * @param rootPane The root pane whose layered pane is retrieved.
 	 * @return The layered pane.
 	 */
-	public static JLayeredPane getLayeredPane(JRootPane rootPane) {
+	public static JLayeredPane getLayeredPane(@NotNull JRootPane rootPane) {
 
 		// Get the window of the component.
 		Window window = SwingUtilities.getWindowAncestor(rootPane);
@@ -123,6 +128,7 @@ public class SwingUtil {
 	 * If the given window is not a javax.swing.JFrame,
 	 * javax.swing.JDialog or javax.swing.JWindow, null is returned.
 	 */
+	@Nullable
 	public static Container getContentPane(Window window) {
 
 		// Get the layered pane if we can find one.
@@ -144,7 +150,7 @@ public class SwingUtil {
 	 * @param location The given location on the screen.
 	 * @return True if the location is on the screen, false otherwise.
 	 */
-	public static boolean isLocationInScreenBounds(Point location) {
+	public static boolean isLocationInScreenBounds(@NotNull Point location) {
 
 		// Check if the location is in the bounds of one of the graphics devices.
 		GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -185,7 +191,7 @@ public class SwingUtil {
 	 * @param component A component in a window.
 	 * @return True if the component is visible in its window at the given screen location.
 	 */
-	public static boolean locationInComponentVisible(Point location, Component component) {
+	public static boolean locationInComponentVisible(@NotNull Point location, Component component) {
 
 		// Get the root component in the window.
 		JRootPane rootPane = getRootPane(component);

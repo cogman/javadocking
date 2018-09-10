@@ -7,6 +7,8 @@ import com.javadocking.dockable.action.DefaultDockableStateAction;
 import com.javadocking.drag.DragListener;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.visualizer.Visualizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -55,6 +57,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 	/**
 	 * The minimum size of the header.
@@ -67,6 +70,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 	/**
 	 * The small image of the dockable component.
 	 */
+	@Nullable
 	private Image smallImage;
 	/**
 	 * The position of this header.
@@ -99,7 +103,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 	 * <li>{@link com.javadocking.dock.Position#BOTTOM}.</li>
 	 * </ul>
 	 */
-	public ImageMinimzeHeader(Dockable dockable, int position) {
+	public ImageMinimzeHeader(@NotNull Dockable dockable, int position) {
 
 		// Set header size, test OK with border
 		this.dockable = dockable;
@@ -325,7 +329,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 		super.removePropertyChangeListener(listener);
 	}
 
-	protected void paintChildren(Graphics graphics) {
+	protected void paintChildren(@NotNull Graphics graphics) {
 
 		if (smallImage != null) {
 			graphics.drawImage(smallImage, borderWidth, borderWidth, getSize().width - borderWidth, getSize().height - borderWidth,
@@ -359,7 +363,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 
 		// Implementations of MouseListener.
 
-		public void mouseReleased(MouseEvent mouseEvent) {
+		public void mouseReleased(@NotNull MouseEvent mouseEvent) {
 			if (SwingUtilities.isRightMouseButton(mouseEvent)) {
 				react = false;
 
@@ -390,7 +394,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 			}
 		}
 
-		public void mouseClicked(MouseEvent mouseEvent) {
+		public void mouseClicked(@NotNull MouseEvent mouseEvent) {
 
 			if (react) {
 				if (mouseEvent.getClickCount() == 2) {
@@ -417,7 +421,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 
 	private class DockableChangeListener implements PropertyChangeListener {
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 			if (propertyChangeEvent.getPropertyName().equals(DOCKABLE_DESCRIPTION_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_TITLE_PROPERTY)) {
 				addToolTip(dockable);

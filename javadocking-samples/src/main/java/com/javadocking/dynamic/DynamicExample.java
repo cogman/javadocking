@@ -20,6 +20,7 @@ import com.javadocking.util.*;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.LineMinimizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,7 +48,7 @@ public class DynamicExample extends JPanel {
 
 	// Constructors.
 
-	public DynamicExample(JFrame frame) {
+	public DynamicExample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// We want dynamic dockable draggers.
@@ -222,6 +223,7 @@ public class DynamicExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
@@ -237,6 +239,7 @@ public class DynamicExample extends JPanel {
 	 * @param dockables The dockables for which a menu item has to be created.
 	 * @return The created menu bar.
 	 */
+	@NotNull
 	private JMenuBar createMenu(List dockables) {
 		// Create the menu bar.
 		JMenuBar menuBar = new JMenuBar();
@@ -321,7 +324,7 @@ public class DynamicExample extends JPanel {
 
 		}
 
-		public void itemStateChanged(ItemEvent itemEvent) {
+		public void itemStateChanged(@NotNull ItemEvent itemEvent) {
 
 			dockable.removeDockingListener(this);
 			if (itemEvent.getStateChange() == ItemEvent.DESELECTED) {
@@ -335,7 +338,7 @@ public class DynamicExample extends JPanel {
 
 		}
 
-		public void dockingChanged(DockingEvent dockingEvent) {
+		public void dockingChanged(@NotNull DockingEvent dockingEvent) {
 			if (dockingEvent.getDestinationDock() != null) {
 				dockableMenuItem.removeItemListener(this);
 				dockableMenuItem.setSelected(true);

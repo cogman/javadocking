@@ -4,6 +4,8 @@ import com.javadocking.DockingManager;
 import com.javadocking.model.DockModel;
 import com.javadocking.model.DockingPathModel;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,7 +47,7 @@ public class DockModelPropertiesEncoder implements DockModelEncoder {
 
 	// Implementations of DockModelEncoder.
 
-	public boolean canExport(DockModel dockModel, String destinationName) {
+	public boolean canExport(DockModel dockModel, @NotNull String destinationName) {
 		// The name should have extension EXTENSION.
 		return destinationName.endsWith(EXTENSION);
 	}
@@ -56,7 +58,7 @@ public class DockModelPropertiesEncoder implements DockModelEncoder {
 
 	}
 
-	public void export(DockModel dockModel, String destinationName) throws IOException, IllegalArgumentException {
+	public void export(@NotNull DockModel dockModel, @NotNull String destinationName) throws IOException, IllegalArgumentException {
 		// Check if the model can be saved or exported.
 		if (!canExport(dockModel, destinationName)) {
 			throw new IllegalArgumentException("This dock model cannot be saved.");
@@ -70,7 +72,7 @@ public class DockModelPropertiesEncoder implements DockModelEncoder {
 
 	}
 
-	public void save(DockModel dockModel) throws IOException, IllegalArgumentException {
+	public void save(@NotNull DockModel dockModel) throws IOException, IllegalArgumentException {
 		if (dockModel.getSource() == null) {
 			throw new IOException("The source path is null.");
 		}
@@ -83,6 +85,7 @@ public class DockModelPropertiesEncoder implements DockModelEncoder {
 	/**
 	 * Saves the dock model and docking path model in a properties object.
 	 */
+	@NotNull
 	private Properties saveProperties(DockModel dockModel) {
 		// Create the properties object.
 		Properties properties = new Properties();
@@ -105,7 +108,7 @@ public class DockModelPropertiesEncoder implements DockModelEncoder {
 		return properties;
 	}
 
-	protected void saveProperties(DockModel dockModel, DockingPathModel dockingPathModel, Properties properties, Map dockKeys) {
+	protected void saveProperties(@NotNull DockModel dockModel, @Nullable DockingPathModel dockingPathModel, Properties properties, Map dockKeys) {
 
 		// Save the properties of the dock model.
 		dockModel.saveProperties("dockModel.", properties, dockKeys);

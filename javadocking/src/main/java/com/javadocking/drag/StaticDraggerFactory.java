@@ -6,6 +6,8 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.drag.painter.DefaultRectanglePainter;
 import com.javadocking.drag.painter.DockableDragPainter;
 import com.javadocking.drag.painter.SwDockableDragPainter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * <p>
@@ -52,6 +54,7 @@ public class StaticDraggerFactory implements DraggerFactory {
 	 * </ul>
 	 * For other types of docks a {@link StaticDragger} is returned.
 	 */
+	@Nullable
 	public Dragger createDragger(Dock dock) {
 		if (dock instanceof SingleDock) {
 			return new StaticSingleDragger(dockableDragPainter);
@@ -68,6 +71,7 @@ public class StaticDraggerFactory implements DraggerFactory {
 	/**
 	 * It creates a {@link StaticDockableDragger} with the <code>dockableDragPainter</code> of this class.
 	 */
+	@NotNull
 	public Dragger createDragger(Dockable dockable) {
 		return new StaticDockableDragger(dockable, dockableDragPainter);
 	}

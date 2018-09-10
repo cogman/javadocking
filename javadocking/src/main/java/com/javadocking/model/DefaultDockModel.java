@@ -4,6 +4,7 @@ import com.javadocking.dock.Dock;
 import com.javadocking.dock.FloatDock;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.visualizer.Visualizer;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -30,34 +31,41 @@ public class DefaultDockModel implements DockModel {
 	/**
 	 * The mapping between the owner windows and their IDs.
 	 */
+	@NotNull
 	private Map ownerIDsMap = new HashMap();
 	/**
 	 * The owner windows.
 	 */
+	@NotNull
 	private List owners = new ArrayList();
 
 	// For the root docks.
 	/**
 	 * The mapping between keys and root docks.
 	 */
+	@NotNull
 	private Map rootDockKeys = new HashMap();
 	/**
 	 * The mapping between the owner keys and their set of root dock keys.
 	 */
+	@NotNull
 	private Map ownerRootDockKeys = new HashMap();
 	/**
 	 * The mapping between the owner windows and their window focus listeners.
 	 */
+	@NotNull
 	private Map ownerFocusListeners = new HashMap();
 
 	// For the visualizers.
 	/**
 	 * The mapping between keys and visualizers.
 	 */
+	@NotNull
 	private Map visualizerKeys = new HashMap();
 	/**
 	 * The mapping between the owner keys and their set of visualizer keys.
 	 */
+	@NotNull
 	private Map ownerVisualizerKeys = new HashMap();
 
 
@@ -91,7 +99,7 @@ public class DefaultDockModel implements DockModel {
 		return source;
 	}
 
-	public void addOwner(String ownerId, Window window) {
+	public void addOwner(String ownerId, @NotNull Window window) {
 
 		if (owners.contains(ownerId)) {
 			throw new IllegalArgumentException("There is already an owner window with ID [" + ownerId + "].");
@@ -110,6 +118,7 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
+	@NotNull
 	public String getOwnerID(Window owner) {
 		return (String) ownerIDsMap.get(owner);
 	}
@@ -118,6 +127,7 @@ public class DefaultDockModel implements DockModel {
 		return owners.size();
 	}
 
+	@NotNull
 	public Window getOwner(int index) {
 
 		// Check if the index is in the bounds.
@@ -150,7 +160,7 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
-	public void addRootDock(String rootKey, Dock dock, Window owner) {
+	public void addRootDock(String rootKey, @NotNull Dock dock, Window owner) {
 
 		// Check if the owner is a legal owner.
 		if (!owners.contains(owner)) {
@@ -180,6 +190,7 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
+	@NotNull
 	public Dock getRootDock(String rootKey) {
 		return (Dock) rootDockKeys.get(rootKey);
 	}
@@ -212,6 +223,7 @@ public class DefaultDockModel implements DockModel {
 		throw new IllegalArgumentException("The dock is not a root dock of this dock model.");
 	}
 
+	@NotNull
 	public Iterator getRootKeys(Window owner) {
 
 		Set rootDockKeysOfOwner = (Set) ownerRootDockKeys.get(owner);
@@ -238,10 +250,12 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
+	@NotNull
 	public Visualizer getVisualizer(String key) {
 		return (Visualizer) visualizerKeys.get(key);
 	}
 
+	@NotNull
 	public Iterator getVisualizerKeys(Window owner) {
 
 		Set visualizerKeysOfOwner = (Set) ownerVisualizerKeys.get(owner);
@@ -278,6 +292,7 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
+	@NotNull
 	public Set getFloatDockKeys(Window owner) {
 
 		Set keys = new HashSet();
@@ -298,7 +313,7 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
-	public void loadProperties(String sourceName, String prefix, Properties properties, Map dockablesMap, Map ownersMap, Map docksMap, Map visualizersMap) throws IOException {
+	public void loadProperties(String sourceName, String prefix, @NotNull Properties properties, Map dockablesMap, Map ownersMap, Map docksMap, Map visualizersMap) throws IOException {
 
 		//	Set the loadOwnerRectangle property.
 		loadOwnerRectangle = PropertiesUtil.getBoolean(properties, prefix + "loadOwnerRectangle", loadOwnerRectangle);
@@ -308,7 +323,7 @@ public class DefaultDockModel implements DockModel {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map docks) {
+	public void saveProperties(String prefix, @NotNull Properties properties, Map docks) {
 
 		// Save the loadOwnerRectangle property.
 		PropertiesUtil.setBoolean(properties, prefix + "loadOwnerRectangle", loadOwnerRectangle);

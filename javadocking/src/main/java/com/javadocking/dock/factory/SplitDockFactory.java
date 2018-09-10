@@ -5,6 +5,8 @@ import com.javadocking.dock.SplitDock;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -22,16 +24,19 @@ public class SplitDockFactory implements CompositeDockFactory {
 	 * When the dockable cannot be added to a split dock the creation of the dock is delegated
 	 * to this alternative dock factory.
 	 */
+	@Nullable
 	private DockFactory alternativeDockFactory = new LeafDockFactory();
 	/**
 	 * This is the factory that is used in the constructor of the {@link SplitDock#SplitDock(DockFactory, CompositeDockFactory)}
 	 * for creating the leaf docks of the split dock.
 	 */
+	@Nullable
 	private DockFactory childDockFactory = new LeafDockFactory();
 
 	// Implementations of DockFactory.
 
-	public Dock createDock(Dockable dockable, int dockingMode) {
+	@Nullable
+	public Dock createDock(@Nullable Dockable dockable, int dockingMode) {
 
 		// Don't remove. In SplitDock we create a dock with dockable null.
 		if (dockable == null) {
@@ -53,7 +58,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 
 	}
 
-	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode) {
+	public Dimension getDockPreferredSize(@NotNull Dockable dockable, int dockingMode) {
 
 		// Check if the positions of the dockable contains LEFT, RIGHT, TOP or BOTTOM. 
 		int dockPositions = dockable.getDockingModes();
@@ -84,7 +89,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		// Load the class and properties of the leaf child dock factory.
 		try {
@@ -93,7 +98,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 			Class leafChildDockFactoryClazz = Class.forName(leafChildDockFactoryClassName);
 			childDockFactory = (DockFactory) leafChildDockFactoryClazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new TabDockFactory();
@@ -106,7 +111,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 			Class alternativeDockFactoryClazz = Class.forName(alternativeDockFactoryClassName);
 			alternativeDockFactory = (DockFactory) alternativeDockFactoryClazz.newInstance();
 			alternativeDockFactory.loadProperties(prefix + "alternativeDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the alternative dock factory.");
 			exception.printStackTrace();
 			alternativeDockFactory = new LeafDockFactory();
@@ -122,6 +127,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 	 *
 	 * @return The alternative dock factory.
 	 */
+	@Nullable
 	public DockFactory getAlternativeDockFactory() {
 		return alternativeDockFactory;
 	}
@@ -133,7 +139,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 	 * @param alternativeDockFactory The alternative dock factory. Should not be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setAlternativeDockFactory(DockFactory alternativeDockFactory) {
+	public void setAlternativeDockFactory(@Nullable DockFactory alternativeDockFactory) {
 
 		if (alternativeDockFactory == null) {
 			throw new IllegalArgumentException("The alternative dock factory cannot be null.");
@@ -149,6 +155,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 	 *
 	 * @return The leaf child dock factory.
 	 */
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
@@ -160,7 +167,7 @@ public class SplitDockFactory implements CompositeDockFactory {
 	 * @param leafChildDockFactory The leaf child dock factory. Should not be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setChildDockFactory(DockFactory leafChildDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory leafChildDockFactory) {
 
 		if (leafChildDockFactory == null) {
 			throw new IllegalArgumentException("The leaf dock factory cannot be null.");

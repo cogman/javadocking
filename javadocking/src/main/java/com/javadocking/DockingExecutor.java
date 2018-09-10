@@ -10,6 +10,8 @@ import com.javadocking.model.DockModel;
 import com.javadocking.model.DockingPath;
 import com.javadocking.model.DockingPathModel;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,7 +94,7 @@ public class DockingExecutor {
 	 * @param dockableOffset   The mouse location where the dragging started, relatively to the previous dock of the dockable. Can be null, if the destination dock is also null.
 	 * @return True if the docking change was successfull, false otherwise.
 	 */
-	public boolean changeDocking(Dockable dockable, Dock destinationDock, Point relativeLocation, Point dockableOffset) {
+	public boolean changeDocking(@NotNull Dockable dockable, @Nullable Dock destinationDock, Point relativeLocation, Point dockableOffset) {
 
 		// Remember if the change was successfull.
 		boolean result;
@@ -194,7 +196,7 @@ public class DockingExecutor {
 	 * @param position        The position where the dockable will be added. Can be null, if the destination dock is also null.
 	 * @return True if the docking change was successfull, false otherwise.
 	 */
-	public boolean changeDocking(Dockable dockable, LeafDock destinationDock, Position position) {
+	public boolean changeDocking(@NotNull Dockable dockable, @Nullable LeafDock destinationDock, Position position) {
 
 		// Get the current dock of the dockable.
 		LeafDock originDock = dockable.getDock();
@@ -259,7 +261,7 @@ public class DockingExecutor {
 	 * @param rootDock The root of the docks where the dockable will be docked. Can be null, when the dockable only has to be removed.
 	 * @return True if the dockable could be docked in the root dock or in one of its children, false otherwise.
 	 */
-	public boolean changeDocking(Dockable dockable, Dock rootDock) {
+	public boolean changeDocking(@NotNull Dockable dockable, @Nullable Dock rootDock) {
 
 		// Do we only have to remove the dockable?
 		if (rootDock == null) {
@@ -338,7 +340,7 @@ public class DockingExecutor {
 	 * @param dockingPath Contains the model, docks, and positions that define where the dockable should be docked. Not null.
 	 * @return True if the docking change was successfull, false otherwise.
 	 */
-	public boolean changeDocking(Dockable dockable, DockingPath dockingPath) {
+	public boolean changeDocking(@NotNull Dockable dockable, @Nullable DockingPath dockingPath) {
 
 		if (dockingPath == null) {
 			throw new NullPointerException("Docking path null.");
@@ -475,7 +477,8 @@ public class DockingExecutor {
 	 * The dock may not be completely deleted. When false, the dock may be deleted, if empty.
 	 * @return A dock with ghosts. Null when there are no ghosts.
 	 */
-	public CompositeDock cleanDock(Dock dock, boolean ghost) {
+	@Nullable
+	public CompositeDock cleanDock(@NotNull Dock dock, boolean ghost) {
 
 		CompositeDock dockWithGhosts = null;
 		if ((dock.isEmpty()) && (dock.getParentDock() != null)) {

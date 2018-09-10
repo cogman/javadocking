@@ -13,6 +13,7 @@ import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 import com.javadocking.util.ToolBarButton;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +21,7 @@ import java.awt.event.ActionEvent;
 
 public class ButtonSample extends JPanel {
 
-	public ButtonSample(JFrame frame) {
+	public ButtonSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -210,6 +211,7 @@ public class ButtonSample extends JPanel {
 	 * @param message The message that will be displayed when the action is performed.
 	 * @return The dockable with a button as content.
 	 */
+	@NotNull
 	private Dockable createButtonDockable(String id, String title, Icon icon, String message) {
 
 		// Create the action.
@@ -231,7 +233,7 @@ public class ButtonSample extends JPanel {
 	/**
 	 * Adds a drag listener on the content component of a dockable.
 	 */
-	private void createDockableDragger(Dockable dockable) {
+	private void createDockableDragger(@NotNull Dockable dockable) {
 
 		// Create the dragger for the dockable.
 		DragListener dragListener = DockingManager.getDockableDragListenerFactory().createDragListener(dockable);

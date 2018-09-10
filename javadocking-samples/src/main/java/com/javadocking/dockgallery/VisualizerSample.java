@@ -14,13 +14,14 @@ import com.javadocking.util.SmallPanel;
 import com.javadocking.visualizer.DockingMinimizer;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class VisualizerSample extends JPanel {
 
-	public VisualizerSample(JFrame frame) {
+	public VisualizerSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -126,6 +127,7 @@ public class VisualizerSample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);

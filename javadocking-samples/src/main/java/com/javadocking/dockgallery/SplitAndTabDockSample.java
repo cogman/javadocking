@@ -8,13 +8,14 @@ import com.javadocking.dockable.DefaultDockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SplitAndTabDockSample extends JPanel {
 
-	public SplitAndTabDockSample(JFrame frame) {
+	public SplitAndTabDockSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.

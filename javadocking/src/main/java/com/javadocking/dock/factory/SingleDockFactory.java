@@ -6,6 +6,8 @@ import com.javadocking.dockable.CompositeDockable;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -31,6 +33,7 @@ public class SingleDockFactory implements DockFactory {
 	 * docking mode, the creation of the dock is delegated to this alternative dock factory.
 	 * This factory can be null.
 	 */
+	@Nullable
 	private DockFactory alternativeDockFactory = new LeafDockFactory();
 
 	// Constructors.
@@ -56,7 +59,8 @@ public class SingleDockFactory implements DockFactory {
 
 	// Implementations of DockFactory.
 
-	public Dock createDock(Dockable dockable, int dockingMode) {
+	@Nullable
+	public Dock createDock(@NotNull Dockable dockable, int dockingMode) {
 
 		// Get the allowed docking modes of the dockable.
 		int dockingModes = dockable.getDockingModes();
@@ -80,7 +84,7 @@ public class SingleDockFactory implements DockFactory {
 
 	}
 
-	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode) {
+	public Dimension getDockPreferredSize(@NotNull Dockable dockable, int dockingMode) {
 
 		// Get the allowed docking modes of the dockable.
 		int dockingModes = dockable.getDockingModes();
@@ -116,7 +120,7 @@ public class SingleDockFactory implements DockFactory {
 	}
 
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		// Load the class and properties of the alternative dock factory.
 		try {
@@ -129,7 +133,7 @@ public class SingleDockFactory implements DockFactory {
 			} else {
 				alternativeDockFactory = null;
 			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the alternative dock factory.");
 			exception.printStackTrace();
 			alternativeDockFactory = new LeafDockFactory();
@@ -145,6 +149,7 @@ public class SingleDockFactory implements DockFactory {
 	 *
 	 * @return The alternative dock factory. Can be null.
 	 */
+	@Nullable
 	public DockFactory getAlternativeDockFactory() {
 		return alternativeDockFactory;
 	}
@@ -156,7 +161,7 @@ public class SingleDockFactory implements DockFactory {
 	 * @param alternativeDockFactory The alternative dock factory. Can be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setAlternativeDockFactory(DockFactory alternativeDockFactory) {
+	public void setAlternativeDockFactory(@Nullable DockFactory alternativeDockFactory) {
 
 		if (alternativeDockFactory == null) {
 			throw new IllegalArgumentException("The alternative dock factory cannot be null.");

@@ -5,6 +5,8 @@ import com.javadocking.dock.LeafDock;
 import com.javadocking.event.DockableEvent;
 import com.javadocking.event.DockingEventSupport;
 import com.javadocking.event.DockingListener;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,10 +68,12 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 
@@ -85,7 +89,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 *
 	 * @param dockablesArray The array of dockables for the composite dockable.
 	 */
-	public DefaultCompositeDockable(Dockable[] dockablesArray) {
+	public DefaultCompositeDockable(@NotNull Dockable[] dockablesArray) {
 		this(dockablesArray, -1);
 	}
 
@@ -129,6 +133,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 		return dockablesArray.length;
 	}
 
+	@Nullable
 	public Dockable getSelectedDockable() {
 
 		// Do we have a valid selected index?
@@ -148,6 +153,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 * Generates an ID with the IDs of the child dockables (separated by a space).
 	 * </p>
 	 */
+	@NotNull
 	public String getID() {
 
 		// Create the ID. It's the concatenation of the IDs of the children.
@@ -171,6 +177,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public Component getContent() {
 		return null;
 	}
@@ -192,6 +199,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public String getTitle() {
 		return null;
 	}
@@ -201,6 +209,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public String getDescription() {
 		return null;
 	}
@@ -210,6 +219,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public Icon getIcon() {
 		return null;
 	}
@@ -269,6 +279,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public Action[][] getActions() {
 		return null;
 	}
@@ -348,6 +359,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 
 	}
 
+	@Nullable
 	public Object getVisualizer() {
 
 		if (state == DockableState.NORMAL) {
@@ -442,6 +454,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 		return getID().hashCode();
 	}
 
+	@NotNull
 	public String toString() {
 		return "dockable [" + getID() + "]";
 	}

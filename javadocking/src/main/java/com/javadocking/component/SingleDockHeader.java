@@ -5,6 +5,7 @@ import com.javadocking.dock.LeafDock;
 import com.javadocking.dock.Position;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.drag.DragListener;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -198,7 +199,7 @@ public class SingleDockHeader extends JPanel implements DockHeader {
 
 	private class DockableChangeListener implements PropertyChangeListener {
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 			if (propertyChangeEvent.getPropertyName().equals(DOCKABLE_DESCRIPTION_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_TITLE_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_ICON_PROPERTY))

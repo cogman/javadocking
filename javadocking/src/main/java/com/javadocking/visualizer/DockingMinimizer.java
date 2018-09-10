@@ -10,6 +10,8 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockableState;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -59,22 +61,27 @@ public class DockingMinimizer implements Visualizer {
 	/**
 	 * The minimized dockables of this panel.
 	 */
+	@NotNull
 	private List minimizedDockables = new ArrayList();
 	/**
 	 * Mapping between the minimized dockables and their minimized components.
 	 */
+	@NotNull
 	private Map minimizedHeaders = new HashMap();
 	/**
 	 * Mapping between the minimized dockables and the dockables around their minimized components.
 	 */
+	@NotNull
 	private Map minimizedHeaderDockables = new HashMap();
 	/**
 	 * The object that docks the dockables around the minimized headers in docks.
 	 */
+	@Nullable
 	private Docker docker;
 	/**
 	 * Listens to selection changes of the headers.
 	 */
+	@NotNull
 	private SelectionChangeListener selectionChangeListener = new SelectionChangeListener();
 
 	// Constructors.
@@ -85,7 +92,7 @@ public class DockingMinimizer implements Visualizer {
 	 *
 	 * @param    docker     The object that docks the dockables around the minimized headers.
 	 */
-	public DockingMinimizer(Docker docker) {
+	public DockingMinimizer(@Nullable Docker docker) {
 
 		// Check that the docker is not null.
 		if (docker == null) {
@@ -101,7 +108,7 @@ public class DockingMinimizer implements Visualizer {
 		return DockableState.MINIMIZED;
 	}
 
-	public boolean canVisualizeDockable(Dockable dockableToVisualize) {
+	public boolean canVisualizeDockable(@Nullable Dockable dockableToVisualize) {
 
 		// Check the dockable is not null.
 		if (dockableToVisualize == null) {
@@ -113,7 +120,7 @@ public class DockingMinimizer implements Visualizer {
 
 	}
 
-	public void visualizeDockable(Dockable dockableToVisualize) {
+	public void visualizeDockable(@Nullable Dockable dockableToVisualize) {
 
 		// Check the dockable is not null.
 		if (dockableToVisualize == null) {
@@ -148,6 +155,7 @@ public class DockingMinimizer implements Visualizer {
 		}
 	}
 
+	@NotNull
 	public Dockable getVisualizedDockable(int index) throws IndexOutOfBoundsException {
 
 		// Check if the index is in the bounds.
@@ -185,7 +193,7 @@ public class DockingMinimizer implements Visualizer {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map dockablesMap, Window owner) throws IOException {
 
 		// Load the IDs of the dockables.
 		String[] dockableIdArray = new String[0];
@@ -245,7 +253,7 @@ public class DockingMinimizer implements Visualizer {
 	}
 
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		// Save the properties of the border docker.
 		docker.saveProperties(prefix + "docker.", properties);
@@ -277,7 +285,8 @@ public class DockingMinimizer implements Visualizer {
 	 *
 	 * @return The ID for the dockable around the header component of a minimized dockable.
 	 */
-	protected String createMinimizedHeaderDockableID(Dockable dockable) {
+	@NotNull
+	protected String createMinimizedHeaderDockableID(@NotNull Dockable dockable) {
 		return dockable.getID() + MINIMIZED_DOCKABLE_ID_SUFFIX;
 	}
 
@@ -330,6 +339,7 @@ public class DockingMinimizer implements Visualizer {
 	 *
 	 * @return The object that docks the dockables around the minimized headers in docks.
 	 */
+	@Nullable
 	public Docker getDocker() {
 		return docker;
 	}
@@ -349,7 +359,7 @@ public class DockingMinimizer implements Visualizer {
 
 		// Implementations of PropertyChangeListener.
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 
 			if (propertyChangeEvent.getPropertyName().equals("selected")) {
 				Object newValue = propertyChangeEvent.getNewValue();

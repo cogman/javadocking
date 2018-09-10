@@ -10,13 +10,14 @@ import com.javadocking.drag.painter.DefaultRectanglePainter;
 import com.javadocking.drag.painter.SwDockableDragPainter;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DragRectangleSample extends JPanel {
 
-	public DragRectangleSample(JFrame frame) {
+	public DragRectangleSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.

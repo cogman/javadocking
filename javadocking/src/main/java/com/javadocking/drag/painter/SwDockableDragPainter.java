@@ -6,6 +6,8 @@ import com.javadocking.dock.FloatDock;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.model.DockModel;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +49,7 @@ public class SwDockableDragPainter implements DockableDragPainter {
 	/**
 	 * On this component the dragged dockable is shown.
 	 */
+	@Nullable
 	private Component dragComponent;
 	/**
 	 * The factory that creates the drag component.
@@ -55,22 +58,27 @@ public class SwDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The position in the layered pane where the component will be placed.
 	 */
+	@NotNull
 	private Point componentLocation = new Point();
 	/**
 	 * The layered pane of the dock, where the dockable will be docked.
 	 */
+	@Nullable
 	private JLayeredPane layeredPane;
 	/**
 	 * The root pane of the dock, where the dockable will be docked.
 	 */
+	@Nullable
 	private JRootPane rootPane;
 	/**
 	 * The rectangle where the dockable will be docked for the previous mouse location.
 	 */
+	@NotNull
 	private Rectangle previousDockableDragRectangle = new Rectangle();
 	/**
 	 * The dock on which the previous rectangle was painted.
 	 */
+	@Nullable
 	private Dock previousPaintingDock;
 	/**
 	 * When true, the dockable will only be painted when the dock is java.awt.Component.
@@ -132,7 +140,7 @@ public class SwDockableDragPainter implements DockableDragPainter {
 	 * be javax.swing.JFrame, javax.swing.JWindow, or javax.swing.JDialog.
 	 * Otherwise nothing is done.
 	 */
-	public void paintDockableDrag(Dockable dockable, Dock dock, Rectangle rectangle, Point locationInDestinationDock) {
+	public void paintDockableDrag(Dockable dockable, @Nullable Dock dock, @Nullable Rectangle rectangle, Point locationInDestinationDock) {
 
 		// Check that the dock and rectangle are not null.
 		if ((dock == null) && (rectangle == null)) {

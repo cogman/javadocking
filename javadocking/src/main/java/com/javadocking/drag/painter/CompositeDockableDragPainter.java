@@ -2,6 +2,7 @@ package com.javadocking.drag.painter;
 
 import com.javadocking.dock.Dock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class CompositeDockableDragPainter implements DockableDragPainter {
 
+	@NotNull
 	private List painters = new ArrayList();
 
 	public void addPainter(DockableDragPainter dockableDragPainter) {

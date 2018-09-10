@@ -1,5 +1,8 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -47,6 +50,7 @@ public class Book extends JPanel {
 	 * @param picture A picture of the book.
 	 * @return The text pane for the book.
 	 */
+	@NotNull
 	private JTextPane createTextPane(String title, String text, Icon picture) {
 
 		String[] initString = {title + NEWLINE + NEWLINE, " ", NEWLINE + NEWLINE + text};
@@ -74,7 +78,7 @@ public class Book extends JPanel {
 	 * @param doc     The styled document.
 	 * @param picture A picture used in the document.
 	 */
-	protected void addStylesToDocument(StyledDocument doc, Icon picture) {
+	protected void addStylesToDocument(@NotNull StyledDocument doc, @Nullable Icon picture) {
 
 		Style def = StyleContext.getDefaultStyleContext().
 				getStyle(StyleContext.DEFAULT_STYLE);

@@ -8,13 +8,14 @@ import com.javadocking.dockable.DefaultDockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class LineDockSample extends JPanel {
 
-	public LineDockSample(JFrame frame) {
+	public LineDockSample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.

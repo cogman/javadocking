@@ -4,6 +4,8 @@ import com.javadocking.DockingManager;
 import com.javadocking.dock.Dock;
 import com.javadocking.dock.FloatDock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -33,10 +35,12 @@ public class WindowDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The dockable for which the rectangle was painted.
 	 */
+	@Nullable
 	private Dockable previousDockable;
 	/**
 	 * The rectangle that was painted.
 	 */
+	@NotNull
 	private Rectangle previousRectangle = new Rectangle();
 
 	// Constructors.
@@ -74,7 +78,7 @@ public class WindowDockableDragPainter implements DockableDragPainter {
 
 	}
 
-	public void paintDockableDrag(Dockable dockable, Dock dock, Rectangle rectangle, Point locationInDestinationDock) {
+	public void paintDockableDrag(@Nullable Dockable dockable, Dock dock, @Nullable Rectangle rectangle, Point locationInDestinationDock) {
 
 		// Do we have to paint on the float dock?
 		if ((dock instanceof FloatDock) && (rectangle != null)) {

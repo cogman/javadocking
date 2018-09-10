@@ -1,5 +1,8 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -50,6 +53,7 @@ public class ToolBarButton extends JLabel {
 	/**
 	 * The action that will be performed when this button is clicked.
 	 */
+	@Nullable
 	private Action action;
 
 	// Constructors.
@@ -76,6 +80,7 @@ public class ToolBarButton extends JLabel {
 	 *
 	 * @return The action that will be performed when this button is clicked.
 	 */
+	@Nullable
 	public Action getAction() {
 		return action;
 	}
@@ -85,7 +90,7 @@ public class ToolBarButton extends JLabel {
 	 *
 	 * @param action The action that will be performed when this button is clicked.
 	 */
-	public void setAction(Action action) {
+	public void setAction(@Nullable Action action) {
 
 		if (action == null) {
 			throw new IllegalArgumentException("Acion is null.");
@@ -123,7 +128,7 @@ public class ToolBarButton extends JLabel {
 
 		// Overwritten methods of MouseAdapter.
 
-		public void mouseClicked(MouseEvent mouseEvent) {
+		public void mouseClicked(@NotNull MouseEvent mouseEvent) {
 			// Create the action event.
 			ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, (String) action.getValue(Action.SHORT_DESCRIPTION), mouseEvent.getModifiers());
 

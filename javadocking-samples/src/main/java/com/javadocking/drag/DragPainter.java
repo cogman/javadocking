@@ -9,6 +9,8 @@ import com.javadocking.drag.painter.*;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.Book;
 import com.javadocking.util.DeBelloGallico;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +32,7 @@ public class DragPainter extends JPanel {
 
 	// Constructor.
 
-	public DragPainter(JFrame frame) {
+	public DragPainter(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -124,6 +126,7 @@ public class DragPainter extends JPanel {
 	 *
 	 * @return The created menu bar.
 	 */
+	@NotNull
 	private JMenuBar createMenu() {
 		// Create the menu bar.
 		JMenuBar menuBar = new JMenuBar();
@@ -172,7 +175,7 @@ public class DragPainter extends JPanel {
 
 		// Constructor.
 
-		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, DockableDragPainter additionalDockableDragPainter, boolean selected) {
+		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, @Nullable DockableDragPainter additionalDockableDragPainter, boolean selected) {
 			super(title);
 
 			// Create the dockable drag painter and dragger factory.

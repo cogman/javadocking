@@ -19,6 +19,8 @@ import com.javadocking.util.*;
 import com.javadocking.visualizer.DockingMinimizer;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,7 +61,7 @@ public class EmptyDock extends JPanel {
 
 	// Constructors.
 
-	public EmptyDock(JFrame frame) {
+	public EmptyDock(@NotNull JFrame frame) {
 
 		super(new BorderLayout());
 
@@ -305,6 +307,7 @@ public class EmptyDock extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addAllActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
@@ -319,6 +322,7 @@ public class EmptyDock extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addLimitActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
@@ -337,6 +341,7 @@ public class EmptyDock extends JPanel {
 	 * @param message The message that will be displayed when the action is performed.
 	 * @return The dockable with a button as content.
 	 */
+	@NotNull
 	private Dockable createButtonDockable(String id, String title, Icon icon, String message) {
 
 		// Create the action.
@@ -358,7 +363,7 @@ public class EmptyDock extends JPanel {
 	/**
 	 * Adds a drag listener on the content component of a dockable.
 	 */
-	private void createDockableDragger(Dockable dockable) {
+	private void createDockableDragger(@NotNull Dockable dockable) {
 
 		// Create the dragger for the dockable.
 		DragListener dragListener = DockingManager.getDockableDragListenerFactory().createDragListener(dockable);
@@ -377,6 +382,7 @@ public class EmptyDock extends JPanel {
 	 * @throws IllegalArgumentException If the given ID is null.
 	 * @return The created dockable.
 	 */
+	@NotNull
 	private Dockable createDockable(String id, Component content, String title, Icon icon, String description) {
 
 		// Create the dockable.
@@ -395,6 +401,7 @@ public class EmptyDock extends JPanel {
 	 * @param dockables The dockables for which a menu item has to be created.
 	 * @return The created menu bar.
 	 */
+	@NotNull
 	private JMenuBar createMenu(Dockable[] dockables) {
 		// Create the menu bar.
 		JMenuBar menuBar = new JMenuBar();
@@ -482,7 +489,7 @@ public class EmptyDock extends JPanel {
 	 *
 	 * @param lafClassName The class name of the new look and feel.
 	 */
-	private void setLookAndFeel(LAF laf) {
+	private void setLookAndFeel(@NotNull LAF laf) {
 
 		try {
 			UIManager.setLookAndFeel(laf.getClassName());
@@ -636,7 +643,7 @@ public class EmptyDock extends JPanel {
 
 		// Constructor.
 
-		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, DockableDragPainter additionalDockableDragPainter, boolean selected) {
+		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, @Nullable DockableDragPainter additionalDockableDragPainter, boolean selected) {
 			super(title);
 
 			// Create the dockable drag painter and dragger factory.
@@ -705,7 +712,7 @@ public class EmptyDock extends JPanel {
 
 		}
 
-		public void itemStateChanged(ItemEvent itemEvent) {
+		public void itemStateChanged(@NotNull ItemEvent itemEvent) {
 
 			dockable.removeDockingListener(this);
 			if (itemEvent.getStateChange() == ItemEvent.DESELECTED) {
@@ -719,7 +726,7 @@ public class EmptyDock extends JPanel {
 
 		}
 
-		public void dockingChanged(DockingEvent dockingEvent) {
+		public void dockingChanged(@NotNull DockingEvent dockingEvent) {
 			if (dockingEvent.getDestinationDock() != null) {
 				dockableMenuItem.removeItemListener(this);
 				dockableMenuItem.setSelected(true);

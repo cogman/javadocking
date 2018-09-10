@@ -7,6 +7,8 @@ import com.javadocking.drag.DragListener;
 import com.javadocking.event.DockableEvent;
 import com.javadocking.event.DockingEventSupport;
 import com.javadocking.event.DockingListener;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,10 +37,12 @@ public class ButtonDockable implements Dockable {
 	/**
 	 * The ID of the dockable.
 	 */
+	@Nullable
 	private String id;
 	/**
 	 * The content of the dockable.
 	 */
+	@Nullable
 	private Component content;
 	/**
 	 * The possible modes how the dockable can be docked.
@@ -69,10 +73,12 @@ public class ButtonDockable implements Dockable {
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 	/**
 	 * The support for handling the dockable events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 
 
@@ -99,7 +105,7 @@ public class ButtonDockable implements Dockable {
 	 *                     defined by {@link DockingMode}.
 	 * @throws IllegalArgumentException If the given ID is null.
 	 */
-	public ButtonDockable(String id, Component content, int dockingModes) {
+	public ButtonDockable(@Nullable String id, @Nullable Component content, int dockingModes) {
 
 		// Set the ID.
 		if (id == null) {
@@ -124,6 +130,7 @@ public class ButtonDockable implements Dockable {
 
 	// Implementations of Dockable.
 
+	@Nullable
 	public String getID() {
 		return id;
 	}
@@ -140,6 +147,7 @@ public class ButtonDockable implements Dockable {
 
 	}
 
+	@Nullable
 	public Component getContent() {
 		return content;
 	}
@@ -149,6 +157,7 @@ public class ButtonDockable implements Dockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public String getTitle() {
 		return null;
 	}
@@ -158,6 +167,7 @@ public class ButtonDockable implements Dockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public String getDescription() {
 		return null;
 	}
@@ -167,6 +177,7 @@ public class ButtonDockable implements Dockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public Icon getIcon() {
 		return null;
 	}
@@ -230,6 +241,7 @@ public class ButtonDockable implements Dockable {
 
 	}
 
+	@Nullable
 	public Object getVisualizer() {
 
 		if (state == DockableState.NORMAL) {
@@ -278,6 +290,7 @@ public class ButtonDockable implements Dockable {
 	 *
 	 * @return Always null.
 	 */
+	@Nullable
 	public Action[][] getActions() {
 		return null;
 	}

@@ -12,6 +12,7 @@ import com.javadocking.dockable.DraggableContent;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.DefaultDockModel;
 import com.javadocking.model.DockModel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -35,7 +36,7 @@ public class MultiTabAndFloatDockExample extends JPanel {
 
 	// Public methods.
 
-	public MultiTabAndFloatDockExample(JFrame frame) {
+	public MultiTabAndFloatDockExample(@NotNull JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model and dock model group.

@@ -6,6 +6,8 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -70,7 +72,8 @@ public class LeafDockFactory implements DockFactory {
 
 	// Implementations of DockFactory.
 
-	public Dock createDock(Dockable dockable, int dockingMode) {
+	@Nullable
+	public Dock createDock(@Nullable Dockable dockable, int dockingMode) {
 
 		// Is the dockable null?
 		if (dockable == null) {
@@ -209,6 +212,7 @@ public class LeafDockFactory implements DockFactory {
 		return null;
 	}
 
+	@Nullable
 	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode) {
 
 		// Do we have a composite dockable?
@@ -298,14 +302,14 @@ public class LeafDockFactory implements DockFactory {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		PropertiesUtil.setBoolean(properties, prefix + "useLastDockingMode", useLastDockingMode);
 
 	}
 
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		useLastDockingMode = PropertiesUtil.getBoolean(properties, prefix + "useLastDockingMode", useLastDockingMode);
 

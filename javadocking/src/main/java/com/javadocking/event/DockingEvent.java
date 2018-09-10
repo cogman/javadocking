@@ -1,6 +1,7 @@
 package com.javadocking.event;
 
 import com.javadocking.dock.Dock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EventObject;
 
@@ -48,7 +49,7 @@ public class DockingEvent extends EventObject {
 	 *                        Null when the dockable is closed or the child dock is removed.
 	 * @throws IllegalArgumentException If the dock is null.
 	 */
-	public DockingEvent(Object source, Dock originDock, Dock destinationDock) {
+	public DockingEvent(@NotNull Object source, Dock originDock, Dock destinationDock) {
 
 		super(source);
 

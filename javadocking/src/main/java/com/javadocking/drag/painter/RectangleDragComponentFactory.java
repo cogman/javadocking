@@ -2,6 +2,7 @@ package com.javadocking.drag.painter;
 
 import com.javadocking.dock.Dock;
 import com.javadocking.dockable.Dockable;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +55,8 @@ public class RectangleDragComponentFactory implements DragComponentFactory {
 
 	// Implementations of DragComponentFactory.
 
-	public Component createDragComponent(Dockable dockable, Dock dock, Rectangle rectangle) {
+	@NotNull
+	public Component createDragComponent(@NotNull Dockable dockable, Dock dock, @NotNull Rectangle rectangle) {
 		if (drawLabel) {
 			rectanglePainter.setLabel(dockable.getTitle());
 		}

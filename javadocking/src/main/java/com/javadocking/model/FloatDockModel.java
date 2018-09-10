@@ -5,6 +5,7 @@ import com.javadocking.dock.FloatDock;
 import com.javadocking.dock.factory.SingleDockFactory;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.visualizer.FloatExternalizer;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
@@ -120,6 +121,7 @@ public class FloatDockModel extends DefaultDockModel {
 
 	}
 
+	@NotNull
 	public FloatDock getFloatDock(Window owner) {
 		return (FloatDock) getRootDock(getFloatDockKey(owner));
 	}
@@ -128,6 +130,7 @@ public class FloatDockModel extends DefaultDockModel {
 	 * Creates the key for a float dock with the given owner ID.
 	 * This is the concatenation of the <code>ownerId</code> and <code>FLOAT_DOCK_KEY</code>.
 	 */
+	@NotNull
 	public String getFloatDockKey(Window owner) {
 		return getOwnerID(owner) + FLOAT_DOCK_KEY;
 	}
@@ -153,7 +156,7 @@ public class FloatDockModel extends DefaultDockModel {
 		this.floatDockFactory = floatDockProvider;
 	}
 
-	public void loadProperties(String sourceName, String prefix, Properties properties, Map dockablesMap, Map ownersMap, Map docks, Map visualizersMap) throws IOException {
+	public void loadProperties(String sourceName, String prefix, @NotNull Properties properties, Map dockablesMap, Map ownersMap, Map docks, Map visualizersMap) throws IOException {
 
 		// Load the class and properties of the child dock factory.
 		try {
@@ -162,7 +165,7 @@ public class FloatDockModel extends DefaultDockModel {
 			Class clazz = Class.forName(className);
 			floatDockFactory = (FloatDockFactory) clazz.newInstance();
 			floatDockFactory.loadProperties(prefix + "floatDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the float dock factory.");
 			exception.printStackTrace();
 			floatDockFactory = new DefaultFloatDockFactory();
@@ -172,7 +175,7 @@ public class FloatDockModel extends DefaultDockModel {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map docks) {
+	public void saveProperties(String prefix, @NotNull Properties properties, Map docks) {
 
 		// Save the class of the float dock factory and its properties.
 		String className = floatDockFactory.getClass().getName();

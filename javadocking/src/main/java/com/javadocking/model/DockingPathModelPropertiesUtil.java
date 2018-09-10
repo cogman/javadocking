@@ -1,6 +1,7 @@
 package com.javadocking.model;
 
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.*;
@@ -46,7 +47,7 @@ class DockingPathModelPropertiesUtil {
 	 * The keys are the keys that were used for encoding the docks.
 	 * The values are the docks.
 	 */
-	public static void loadDockingProperties(DockingPathModel dockingPathModel, String prefix, Properties properties, Map docks) {
+	public static void loadDockingProperties(@NotNull DockingPathModel dockingPathModel, String prefix, @NotNull Properties properties, Map docks) {
 
 		// Get the IDs of the docking paths.
 		String[] idsArray = null;
@@ -82,7 +83,7 @@ class DockingPathModelPropertiesUtil {
 	 *                   The values are the keys that are used for encoding the docks.
 	 * @param    dockingPathModel    The docking path model whose properties have to be saved.
 	 */
-	public static void saveDockingProperties(DockingPathModel dockingPathModel, String prefix, Properties properties, Map dockKeys) {
+	public static void saveDockingProperties(DockingPathModel dockingPathModel, String prefix, @NotNull Properties properties, Map dockKeys) {
 
 		// Iterate over the docking paths.
 		List ids = new ArrayList();

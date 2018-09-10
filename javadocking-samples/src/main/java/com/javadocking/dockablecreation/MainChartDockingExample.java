@@ -20,6 +20,7 @@ import com.javadocking.util.LookAndFeelUtil;
 import com.javadocking.visualizer.DockingMinimizer;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.SingleMaximizer;
+import org.jetbrains.annotations.NotNull;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -60,7 +61,7 @@ public class MainChartDockingExample extends JPanel {
 
 	// Constructors.
 
-	public MainChartDockingExample(JFrame frame) {
+	public MainChartDockingExample(@NotNull JFrame frame) {
 
 		super(new BorderLayout());
 
@@ -191,6 +192,7 @@ public class MainChartDockingExample extends JPanel {
 		SwingUtilities.invokeLater(doCreateAndShowGUI);
 	}
 
+	@NotNull
 	private JPanel createButtonPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		JButton button = new JButton("Create new chart");
@@ -199,6 +201,7 @@ public class MainChartDockingExample extends JPanel {
 		return panel;
 	}
 
+	@NotNull
 	private JPanel createHelloPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		JButton button = new JButton("Hello, I am another content of a dockable");
@@ -213,6 +216,7 @@ public class MainChartDockingExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addAllActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
@@ -232,6 +236,7 @@ public class MainChartDockingExample extends JPanel {
 	 * @throws IllegalArgumentException If the given ID is null.
 	 * @return The created dockable.
 	 */
+	@NotNull
 	private Dockable createDockable(String id, Component content, String title, Icon icon, String description) {
 
 		// Create the dockable.
@@ -250,6 +255,7 @@ public class MainChartDockingExample extends JPanel {
 	 * @param dockables The dockables for which a menu item has to be created.
 	 * @return The created menu bar.
 	 */
+	@NotNull
 	private JMenuBar createMenu(Dockable[] dockables) {
 		// Create the menu bar.
 		JMenuBar menuBar = new JMenuBar();
@@ -373,7 +379,7 @@ public class MainChartDockingExample extends JPanel {
 
 		}
 
-		public void itemStateChanged(ItemEvent itemEvent) {
+		public void itemStateChanged(@NotNull ItemEvent itemEvent) {
 
 			dockable.removeDockingListener(this);
 			if (itemEvent.getStateChange() == ItemEvent.DESELECTED) {
@@ -387,7 +393,7 @@ public class MainChartDockingExample extends JPanel {
 
 		}
 
-		public void dockingChanged(DockingEvent dockingEvent) {
+		public void dockingChanged(@NotNull DockingEvent dockingEvent) {
 			if (dockingEvent.getDestinationDock() != null) {
 				dockableMenuItem.removeItemListener(this);
 				dockableMenuItem.setSelected(true);
@@ -431,6 +437,7 @@ public class MainChartDockingExample extends JPanel {
 			return chartPanel;
 		}
 
+		@NotNull
 		private Plot createPlot() {
 			// create subplot 1...
 			final XYDataset data1 = createDataset1();
@@ -477,6 +484,7 @@ public class MainChartDockingExample extends JPanel {
 		 *
 		 * @return Series 1.
 		 */
+		@NotNull
 		private XYDataset createDataset1() {
 
 			// create dataset 1...

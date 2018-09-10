@@ -8,6 +8,7 @@ import com.javadocking.dock.Priority;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.util.Properties;
  */
 public class BorderDocker implements Docker {
 
+	@NotNull
 	private static final int[] DEFAULT_CHILD_POSITIONS;
 	private static final Point DEFAULT_LOCATION = new Point(0, 0);
 
@@ -46,6 +48,7 @@ public class BorderDocker implements Docker {
 	/**
 	 * The last dockables that were docked by this object.
 	 */
+	@NotNull
 	private LastDockables lastDockables = new LastDockables();
 
 	// Implementations of Docker.
@@ -132,7 +135,7 @@ public class BorderDocker implements Docker {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map dockablesMap) throws IOException {
 
 		// Load the child positions.
 		childPositions = DEFAULT_CHILD_POSITIONS;
@@ -167,7 +170,7 @@ public class BorderDocker implements Docker {
 	 *
 	 * @param childPositions The positions where the child docks with dockables will be first put.
 	 */
-	public void setChildPositions(int[] childPositions) {
+	public void setChildPositions(@NotNull int[] childPositions) {
 
 		// Check if the positions are valid and make a copy of the positions.
 		int[] childPositionsCopy = new int[childPositions.length];

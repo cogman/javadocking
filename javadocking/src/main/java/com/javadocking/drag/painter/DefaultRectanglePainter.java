@@ -1,5 +1,8 @@
 package com.javadocking.drag.painter;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.*;
 
 /**
@@ -46,6 +49,7 @@ public class DefaultRectanglePainter implements RectanglePainter {
 	/**
 	 * The stroke that is used for painting the border. If it is null, a normal line is painted.
 	 */
+	@Nullable
 	private Stroke stroke = null;
 	/**
 	 * The width of the angle arc.
@@ -79,7 +83,7 @@ public class DefaultRectanglePainter implements RectanglePainter {
 
 	// Implementations of RectanglePainter.
 
-	public void paintRectangle(Graphics graphics, int x, int y, int width, int height) {
+	public void paintRectangle(@NotNull Graphics graphics, int x, int y, int width, int height) {
 		// Set border color.
 		Color oldColor = graphics.getColor();
 		graphics.setColor(borderColor);
@@ -213,6 +217,7 @@ public class DefaultRectanglePainter implements RectanglePainter {
 	 *
 	 * @return The stroke that is used for painting the border. If it is null, a normal line is painted.
 	 */
+	@Nullable
 	public Stroke getStroke() {
 		return stroke;
 	}

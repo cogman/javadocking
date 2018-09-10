@@ -1,5 +1,8 @@
 package com.javadocking.drag.painter;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,10 +18,12 @@ class TransparentWindow extends JWindow {
 	/**
 	 * The image of the screen.
 	 */
+	@Nullable
 	private Image screenImage;
 	/**
 	 * The image with the dimensions of the window. It will be filled with a part of the screen.
 	 */
+	@Nullable
 	private Image windowImage;
 	/**
 	 * The painter that paints the content on the window.
@@ -38,7 +43,7 @@ class TransparentWindow extends JWindow {
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) {
+	public void paint(@NotNull Graphics graphics) {
 
 		if (windowImage == null) {
 			windowImage = createImage(getWidth(), getHeight());

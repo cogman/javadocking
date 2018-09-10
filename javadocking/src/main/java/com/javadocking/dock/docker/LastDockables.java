@@ -2,6 +2,8 @@ package com.javadocking.dock.docker;
 
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.*;
@@ -19,6 +21,7 @@ class LastDockables {
 
 	private static int counter = Integer.MIN_VALUE + 1;
 
+	@NotNull
 	private Map dockables = new WeakHashMap();
 
 	/**
@@ -41,6 +44,7 @@ class LastDockables {
 	 *
 	 * @return The last dockable that was added and that still has a dock.
 	 */
+	@Nullable
 	public Dockable getLastValidDockable() {
 
 		// The list with dockables that can be removed, because they have no dock anymore.
@@ -70,7 +74,7 @@ class LastDockables {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		// Save the dockables in the mapping.
 		int count = 0;
@@ -89,7 +93,7 @@ class LastDockables {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @NotNull Map dockablesMap) throws IOException {
 
 		// Get the number of dockables.
 		int count = 0;

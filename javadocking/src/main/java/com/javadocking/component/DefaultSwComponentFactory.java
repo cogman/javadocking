@@ -8,6 +8,7 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.action.DefaultPopupMenuFactory;
 import com.javadocking.dockable.action.PopupMenuFactory;
 import com.javadocking.visualizer.ExternalizeDock;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -41,6 +42,7 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 
 	}
 
+	@NotNull
 	public JTabbedPane createJTabbedPane() {
 		return new JTabbedPane();
 	}
@@ -77,12 +79,14 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 	/**
 	 * Creates a raised border.
 	 */
+	@NotNull
 	public Border createFloatingBorder() {
 		return BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(Color.lightGray),
 				BorderFactory.createRaisedBevelBorder());
 	}
 
+	@NotNull
 	public JLabel createJLabel() {
 		return new JLabel();
 	}
@@ -90,6 +94,7 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 	/**
 	 * Creates a {@link IconButton}.
 	 */
+	@NotNull
 	public Component createIconButton(Action action) {
 		return new IconButton(action);
 	}
@@ -97,7 +102,8 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 	/**
 	 * Creates a {@link SelectableDockableHeader}.
 	 */
-	public SelectableHeader createTabDockHeader(Dockable dockable, int position) {
+	@NotNull
+	public SelectableHeader createTabDockHeader(@NotNull Dockable dockable, int position) {
 
 		SelectableDockableHeader tabDockHeader = new SelectableDockableHeader(dockable, position);
 		tabDockHeader.setPosition(position);
@@ -108,6 +114,7 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 	/**
 	 * Creates a {@link SelectableDockableHeader}.
 	 */
+	@NotNull
 	public SelectableHeader createCompositeTabDockHeader(Dock childDock, int position) {
 
 		SelectableDockHeader tabDockHeader = new SelectableDockHeader(childDock, position);
@@ -119,7 +126,8 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 	/**
 	 * Creates a {@link SingleDockHeader}.
 	 */
-	public DockHeader createSingleDockHeader(LeafDock dock, int position) {
+	@NotNull
+	public DockHeader createSingleDockHeader(@NotNull LeafDock dock, int position) {
 		return new SingleDockHeader(dock, position);
 	}
 
@@ -133,20 +141,22 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 	/**
 	 * Creates a {@link MaximizeHeader}.
 	 */
-	public Header createMaximizeHeader(Dockable dockable, int position) {
+	@NotNull
+	public Header createMaximizeHeader(@NotNull Dockable dockable, int position) {
 		return new MaximizeHeader(dockable, position);
 	}
 
 	/**
 	 * Creates a {@link MinimzeHeader}.
 	 */
-	public SelectableHeader createMinimizeHeader(Dockable dockable, int position) {
+	public SelectableHeader createMinimizeHeader(@NotNull Dockable dockable, int position) {
 		return new MinimzeHeader(dockable, position);
 	}
 
 	/**
 	 * Creates a {@link SingleDock}.
 	 */
+	@NotNull
 	public ExternalizeDock createExternalizer() {
 		return new SingleDock();
 	}

@@ -7,6 +7,8 @@ import com.javadocking.drag.dockretriever.DockRetriever;
 import com.javadocking.drag.dockretriever.DynamicDockRetriever;
 import com.javadocking.util.CollectionUtil;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -66,6 +68,7 @@ public class DynamicTabDragger implements Dragger {
 	/**
 	 * The dockRetriever.
 	 */
+	@NotNull
 	private DockRetriever dockRetriever = new DynamicDockRetriever();
 	/**
 	 * When dragging starts this is false. Once the dragged dockable is undocked and docked in another
@@ -83,14 +86,17 @@ public class DynamicTabDragger implements Dragger {
 	/**
 	 * The timer to delay the floaing.
 	 */
+	@Nullable
 	private Timer timer;
 	/**
 	 * The origin dock of the dragged dockable.
 	 */
+	@Nullable
 	private TabDock originDock;
 	/**
 	 * The dock where the dragged dockable was before.
 	 */
+	@Nullable
 	private LeafDock previousDock;
 	/**
 	 * True when the mouse has been outside the precious dock.
@@ -99,6 +105,7 @@ public class DynamicTabDragger implements Dragger {
 	/**
 	 * The rectangle of the previous dock in screen coordinates.
 	 */
+	@NotNull
 	private Rectangle previousDockRectangle = new Rectangle();
 	/**
 	 * The dock, where the dragged dockable is currently docked.
@@ -111,36 +118,44 @@ public class DynamicTabDragger implements Dragger {
 	/**
 	 * The child of the root dock of the dock, where the dragged dockable is currently docked.
 	 */
+	@Nullable
 	private Dock currentChildOfRootDock;
 	/**
 	 * The current location of the mouse in screen coordinates.
 	 */
+	@NotNull
 	private Point screenLocation = new Point();
 	/**
 	 * This is the location of the mouse in the dock where the dockable will be docked for the current mouse location.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point locationInDestinationDock = new Point();
 	/**
 	 * This is the current location of the mouse in the tabbed pane.
 	 * We keep it as field because we don't want to create every time a new point.
 	 */
+	@NotNull
 	private Point currentOffsetInTabbedPane = new Point();
 	/**
 	 * The rectangle where the dockable will be docked for the current mouse location.
 	 */
+	@NotNull
 	private Rectangle dockableDragRectangle = new Rectangle();
 	/**
 	 * The offset of the clicked point.
 	 */
+	@NotNull
 	private Point dockableOffset = new Point();
 	/**
 	 * A point that is used in calculations.
 	 */
+	@NotNull
 	private Point helpPoint = new Point();
 	/**
 	 * The dockable that is dragged.
 	 */
+	@Nullable
 	private Dockable draggedDockable;
 	/**
 	 * True when the dockable is removed already at least one time from a dock during dragging.
@@ -150,10 +165,12 @@ public class DynamicTabDragger implements Dragger {
 	 * This field contains the dock that contains ghosts while dragging is performed.
 	 * When dragging is finished, these ghosts should be removed.
 	 */
+	@Nullable
 	private CompositeDock dockWithGhost;
 	/**
 	 * These are the single docks that canhave ghosts.
 	 */
+	@NotNull
 	private Set singleDocksWithGhosts = new HashSet();
 
 	// Tabs.
@@ -166,12 +183,13 @@ public class DynamicTabDragger implements Dragger {
 	/**
 	 * Manages the cursors used for dragging dockables.
 	 */
+	@NotNull
 	private DragCursorManager cursorManager = new DragCursorManager();
 
 
 	// Implementations of Dragger.
 
-	public boolean startDragging(MouseEvent mouseEvent) {
+	public boolean startDragging(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component of the mouse event. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -286,7 +304,7 @@ public class DynamicTabDragger implements Dragger {
 	 * The dockable is docked immediately in this location.
 	 * If we cannot dock for the current location, the 'cannot dock' cursor is shown.
 	 */
-	public void drag(MouseEvent mouseEvent) {
+	public void drag(@NotNull MouseEvent mouseEvent) {
 
 		if (TEST) System.out.println("drag");
 
@@ -510,7 +528,7 @@ public class DynamicTabDragger implements Dragger {
 
 	}
 
-	public void showPopupMenu(MouseEvent mouseEvent) {
+	public void showPopupMenu(@NotNull MouseEvent mouseEvent) {
 
 		// Get the mouse position and the component of the mouse event. 
 		Component mouseComponent = (Component) mouseEvent.getSource();
@@ -612,7 +630,7 @@ public class DynamicTabDragger implements Dragger {
 	 * @return The index of the tab label that is under the mouse. When no tab is under the mouse
 	 * -1 is returned.
 	 */
-	private int tabDragged(MouseEvent mouseEvent) {
+	private int tabDragged(@NotNull MouseEvent mouseEvent) {
 
 		// When we are already undocked, tab dragging is not possible anymore.
 		if (undocked) {
@@ -639,7 +657,7 @@ public class DynamicTabDragger implements Dragger {
 	 * @param tabbedPane The tabbed pane that contains the components of dockables.
 	 *                   The titles of this tabbed pane should be set.
 	 */
-	private void resetTabTitles(JTabbedPane tabbedPane) {
+	private void resetTabTitles(@NotNull JTabbedPane tabbedPane) {
 
 		// Get the dock.
 		TabDock originDock = (TabDock) SwingUtilities.getAncestorOfClass(TabDock.class, tabbedPane);

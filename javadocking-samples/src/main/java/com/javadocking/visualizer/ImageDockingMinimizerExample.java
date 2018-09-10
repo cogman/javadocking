@@ -18,6 +18,7 @@ import com.javadocking.dockable.action.DefaultDockableStateActionFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.Book;
 import com.javadocking.util.DeBelloGallico;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -192,6 +193,7 @@ public class ImageDockingMinimizerExample extends JPanel {
 	 * @param dockable The dockable to decorate.
 	 * @return The wrapper around the given dockable, with actions.
 	 */
+	@NotNull
 	private Dockable addActions(Dockable dockable) {
 
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);
@@ -208,7 +210,8 @@ public class ImageDockingMinimizerExample extends JPanel {
 
 		// Overwritten methods.
 
-		public SelectableHeader createMinimizeHeader(Dockable dockable, int position) {
+		@NotNull
+		public SelectableHeader createMinimizeHeader(@NotNull Dockable dockable, int position) {
 			return new ImageMinimzeHeader(dockable, position);
 		}
 

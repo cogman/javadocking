@@ -9,6 +9,8 @@ import com.javadocking.dockable.DockableState;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,33 +52,40 @@ public class FloatExternalizer implements Externalizer {
 	/**
 	 * The list with the child docks of this dock.
 	 */
+	@NotNull
 	private List externalizeDocks = new LinkedList();
 	/**
 	 * The mapping between the docks and there floating windows.
 	 */
+	@NotNull
 	private Map externalizeDockWindows = new HashMap();
 	/**
 	 * The window that owns the floating windows created by this externalizer.
 	 */
+	@Nullable
 	private Window owner;
 	/**
 	 * This is the listener that will listen to the window closing events of all the floating windows
 	 * created by this class. When the window is closed, the child dock is removed from this dock.
 	 */
+	@NotNull
 	private WindowClosingListener windowClosingListener = new WindowClosingListener();
 	/**
 	 * This is the listener that will listen to the window focus events of all the floating windows
 	 * created by this class.
 	 */
+	@NotNull
 	private List windowFocusListeners = new ArrayList();
 	/**
 	 * Listens to the window events on the owner window of the float dock. Does the appropriate
 	 * actions with the child windows.
 	 */
+	@NotNull
 	private OwnerWindowListener ownerWindowListener = new OwnerWindowListener();
 	/**
 	 * The support for handling the property changes.
 	 */
+	@NotNull
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
 	// Constructors.
@@ -101,7 +110,7 @@ public class FloatExternalizer implements Externalizer {
 	 * @param position       The location, where the dockable will be placed.
 	 * @param dockableOffset The offset of the mouse position in the externalizer.
 	 */
-	public void moveExternalizedDockable(Dockable dockable, Point position, Point dockableOffset) {
+	public void moveExternalizedDockable(@NotNull Dockable dockable, @NotNull Point position, @NotNull Point dockableOffset) {
 
 		if (dockable.getState() != DockableState.EXTERNALIZED) {
 			throw new IllegalStateException("The dockable shoud be in state [com.javadocking.dockable.DockableState.EXTERNALIZED].");
@@ -123,7 +132,7 @@ public class FloatExternalizer implements Externalizer {
 
 	}
 
-	public void visualizeDockable(Dockable dockable) {
+	public void visualizeDockable(@NotNull Dockable dockable) {
 
 		// Check if we can externalize the dockable.
 //		if (!canVisualizeDockable(dockable))
@@ -174,7 +183,7 @@ public class FloatExternalizer implements Externalizer {
 
 	}
 
-	public boolean canVisualizeDockable(Dockable dockableToVisualize) {
+	public boolean canVisualizeDockable(@NotNull Dockable dockableToVisualize) {
 
 		if (hidden) {
 			return false;
@@ -236,7 +245,7 @@ public class FloatExternalizer implements Externalizer {
 		}
 	}
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		// Save if the externalizer is hidden.
 		PropertiesUtil.setBoolean(properties, prefix + PROPERTY_HIDDEN, hidden);
@@ -270,7 +279,7 @@ public class FloatExternalizer implements Externalizer {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map dockablesMap, Window owner) throws IOException {
 
 		//TODO What if the dockable was not found.
 
@@ -335,6 +344,7 @@ public class FloatExternalizer implements Externalizer {
 	 *
 	 * @return The window that owns the floating windows created by this dock.
 	 */
+	@Nullable
 	public Window getOwner() {
 		return owner;
 	}
@@ -344,7 +354,7 @@ public class FloatExternalizer implements Externalizer {
 	 *
 	 * @param newOwner The window that owns the floating windows created by this dock.
 	 */
-	public void setOwner(Window newOwner) {
+	public void setOwner(@Nullable Window newOwner) {
 
 		if (owner != null) {
 			owner.removeWindowListener(ownerWindowListener);
@@ -381,7 +391,7 @@ public class FloatExternalizer implements Externalizer {
 	 * @param dockable The dockable externalize.
 	 * @param position The location, where the dockable will be placed.
 	 */
-	public void externalizeDockable(Dockable dockable, Point position) {
+	public void externalizeDockable(@NotNull Dockable dockable, @NotNull Point position) {
 
 		// Check if we can externalize the dockable.
 //		if (!canVisualizeDockable(dockable))
@@ -434,7 +444,7 @@ public class FloatExternalizer implements Externalizer {
 	 * @param location The location where the floating window will be put,
 	 *                 if the requested location is outside the screen.
 	 */
-	protected void getDefaultFloatingWindowLocation(Point location) {
+	protected void getDefaultFloatingWindowLocation(@NotNull Point location) {
 
 		// Return the position of the defaultWindowLocation.
 		location.move(getOwner().getLocation().x, getOwner().getLocation().y);
@@ -451,7 +461,7 @@ public class FloatExternalizer implements Externalizer {
 	 * @param location The location that contains the normal location for the floating window.
 	 *                 If this location is outside the screen, it is moved to the default floating window location.
 	 */
-	private void checkFloatingWindowLocation(Point location) {
+	private void checkFloatingWindowLocation(@NotNull Point location) {
 		if (!SwingUtil.isLocationInScreenBounds(location)) {
 			getDefaultFloatingWindowLocation(location);
 		}
@@ -481,7 +491,7 @@ public class FloatExternalizer implements Externalizer {
 	 * @param size     The size for the dialog. This may be null. In that case the preferred
 	 *                 size is taken.
 	 */
-	private void addExternalizeDock(ExternalizeDock dock, Point location, Dimension size) {
+	private void addExternalizeDock(@NotNull ExternalizeDock dock, Point location, @Nullable Dimension size) {
 
 //		// Inform the listeners.
 //		dockingEventSupport.fireDockingWillChange(new ChildDockEvent(this, null, this, dock));
@@ -576,7 +586,7 @@ public class FloatExternalizer implements Externalizer {
 	private class WindowClosingListener implements WindowListener {
 		// Implementations of WindowListener.
 
-		public void windowClosing(WindowEvent windowEvent) {
+		public void windowClosing(@NotNull WindowEvent windowEvent) {
 
 			// Get the window.
 			Container contentPane = SwingUtil.getContentPane(windowEvent.getWindow());

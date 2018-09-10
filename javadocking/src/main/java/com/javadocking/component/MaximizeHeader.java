@@ -4,6 +4,7 @@ import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.DockingUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -163,7 +164,7 @@ public class MaximizeHeader extends JPanel implements Header {
 
 	private class DockableChangeListener implements PropertyChangeListener {
 
-		public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+		public void propertyChange(@NotNull PropertyChangeEvent propertyChangeEvent) {
 			if (propertyChangeEvent.getPropertyName().equals(DOCKABLE_DESCRIPTION_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_TITLE_PROPERTY) ||
 					propertyChangeEvent.getPropertyName().equals(DOCKABLE_ICON_PROPERTY))

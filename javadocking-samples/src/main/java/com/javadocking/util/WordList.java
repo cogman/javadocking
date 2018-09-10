@@ -1,5 +1,7 @@
 package com.javadocking.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -51,6 +53,7 @@ public class WordList extends JPanel {
 
 	private class MyTableModel extends AbstractTableModel {
 
+		@NotNull
 		public String getColumnName(int col) {
 			return "Names";
 		}

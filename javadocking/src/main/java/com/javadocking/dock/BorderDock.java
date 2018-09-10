@@ -10,6 +10,8 @@ import com.javadocking.event.DockingEventSupport;
 import com.javadocking.event.DockingListener;
 import com.javadocking.util.PropertiesUtil;
 import com.javadocking.util.SwingUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -165,6 +167,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	/**
 	 * The component in the center of the dock. This is null, when there is a center child dock.
 	 */
+	@Nullable
 	private Component centerComponent;
 	/**
 	 * The child dock in the center of the dock. This is null, when there is a center component.
@@ -173,31 +176,38 @@ public class BorderDock extends JPanel implements CompositeDock {
 	/**
 	 * The child dock at the left side of the dock. This may be null.
 	 */
+	@Nullable
 	private Dock leftChildDock;
 	/**
 	 * The child dock at the right side of the dock. This may be null.
 	 */
+	@Nullable
 	private Dock rightChildDock;
 	/**
 	 * The child dock at the top of the dock. This may be null.
 	 */
+	@Nullable
 	private Dock topChildDock;
 	/**
 	 * The child dock at the bottom of the dock. This may be null.
 	 */
+	@Nullable
 	private Dock bottomChildDock;
 	/**
 	 * This factory creates the child docks at the borders of this dock.
 	 */
+	@Nullable
 	private DockFactory childDockFactory;
 	/**
 	 * The support for handling the docking events.
 	 */
+	@NotNull
 	private DockingEventSupport dockingEventSupport = new DockingEventSupport();
 	/**
 	 * This is the rectangle in which a dockable can be docked with priority. We keep it as field
 	 * because we don't want to create every time a new rectangle.
 	 */
+	@NotNull
 	private Rectangle priorityRectangle = new Rectangle();
 
 	// Ghosts.
@@ -206,6 +216,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * It cannot be removed now because there are still listeners for dragging that are busy.
 	 * We only want to lose the listeners when dragging is finished. This is only used with dynamic dragging.
 	 */
+	@Nullable
 	private Dock ghostChild;
 
 	// Constructors.
@@ -233,7 +244,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 *
 	 * @param childDockFactory The factory for creating the child docks at the borders.
 	 */
-	public BorderDock(DockFactory childDockFactory) {
+	public BorderDock(@Nullable DockFactory childDockFactory) {
 
 		// Set the layout.
 		super(new BorderLayout());
@@ -253,7 +264,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * @param childDockFactory The factory for creating the child docks at the borders.
 	 * @param centerChildDock  The child dock that will be put in the center.
 	 */
-	public BorderDock(DockFactory childDockFactory, Dock centerChildDock) {
+	public BorderDock(@Nullable DockFactory childDockFactory, Dock centerChildDock) {
 
 		// Set the layout.
 		super(new BorderLayout());
@@ -292,7 +303,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * We only can dock if the dock factory can create a child dock for the given dockable.
 	 * </p>
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation) {
+	public int getDockPriority(@NotNull Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Check if the dockable may be docked in a border dock.
 		if (!checkDockingModes(dockable)) {
@@ -327,8 +338,8 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation,
-										Point dockableOffset, Rectangle rectangle) {
+	public int retrieveDockingRectangle(@NotNull Dockable dockable, @NotNull Point relativeLocation,
+										Point dockableOffset, @NotNull Rectangle rectangle) {
 
 		// Can we dock in this dock?
 		int priority = getDockPriority(dockable, relativeLocation);
@@ -375,7 +386,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
-	public boolean addDockable(Dockable dockableToAdd, Point relativeLocation,
+	public boolean addDockable(@NotNull Dockable dockableToAdd, @NotNull Point relativeLocation,
 							   Point dockableOffset) {
 
 		// Verify the conditions for adding the dockable.
@@ -432,7 +443,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 		this.parentDock = parentDock;
 	}
 
-	public void saveProperties(String prefix, Properties properties, Map childDockIds) {
+	public void saveProperties(String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 
 		// Save the class of the child dock factory and its properties.
 		String className = childDockFactory.getClass().getName();
@@ -454,7 +465,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
-	public void loadProperties(String prefix, Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, @Nullable Map childDocks, Map dockablesMap, Window owner) throws IOException {
 
 		// Set the docking modes.
 		int leftDockingMode = DockingMode.LEFT;
@@ -477,7 +488,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 			Class clazz = Class.forName(className);
 			childDockFactory = (DockFactory) clazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new SingleDockFactory();
@@ -642,6 +653,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
+	@Nullable
 	public Dock getChildDock(int index) throws IndexOutOfBoundsException {
 
 		int count = 0;
@@ -679,7 +691,8 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
-	public Position getChildDockPosition(Dock childDock) throws IllegalArgumentException {
+	@NotNull
+	public Position getChildDockPosition(@NotNull Dock childDock) throws IllegalArgumentException {
 
 		if (childDock.equals(centerChildDock)) {
 			return new Position(Position.CENTER);
@@ -781,11 +794,12 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	}
 
+	@Nullable
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
 
-	public void setChildDockFactory(DockFactory childDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory childDockFactory) {
 
 		if (childDockFactory == null) {
 			throw new IllegalArgumentException("The child dock factory cannot be null.");
@@ -811,6 +825,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * <li>{@link Position#BOTTOM}</li>
 	 * </ul>
 	 */
+	@Nullable
 	public Dock getChildDockOfPosition(int position) {
 
 		if (position == Position.CENTER) {
@@ -844,7 +859,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * @param relativePosition The mouse location, where the dockable will be added.
 	 * @return The position where the dockable should be docked in the dock.
 	 */
-	protected int getDockPosition(Point relativePosition) {
+	protected int getDockPosition(@NotNull Point relativePosition) {
 
 		// Get the size of this dock.
 		Dimension dimension = this.getSize();
@@ -903,7 +918,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 *                 </ul>
 	 * @param    rectangle                    Gets the size and position of the calculated priority rectangle.
 	 */
-	protected void getPriorityRectangle(Rectangle rectangle, int position) {
+	protected void getPriorityRectangle(@NotNull Rectangle rectangle, int position) {
 
 		Dimension size = getSize();
 		switch (position) {
@@ -970,7 +985,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 *                 </ul>
 	 * @param    rectangle                    Gets the size and position of the calculated priority rectangle.
 	 */
-	protected void getDockingRectangle(Rectangle rectangle, int position) {
+	protected void getDockingRectangle(@NotNull Rectangle rectangle, int position) {
 
 		Dimension size = getSize();
 		switch (position) {
@@ -1012,7 +1027,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * @param    properties                    The properties where the position should be saved.
 	 * @param    childDockIds                The mapping between child docks and their IDs.
 	 */
-	private void savePosition(Dock childDock, String prefix, Properties properties, Map childDockIds) {
+	private void savePosition(@Nullable Dock childDock, String prefix, @NotNull Properties properties, @NotNull Map childDockIds) {
 
 		if (childDock != null) {
 			// Get the key of this child dock.
@@ -1034,7 +1049,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * If the position is OK, then the original position is returned.
 	 * @throws IllegalStateException        If the dock is full.
 	 */
-	private int verifyPosition(Position position) {
+	private int verifyPosition(@Nullable Position position) {
 
 		// Check if this dock is full.
 		if (isFull()) {
@@ -1107,6 +1122,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 *
 	 * @return The component in the center of the dock.
 	 */
+	@Nullable
 	public Component getCenterComponent() {
 		return centerComponent;
 	}
@@ -1119,7 +1135,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * @throws IllegalStateException    When there is already a dock in the center.
 	 * @throws IllegalStateException    When there is already a component in the center.
 	 */
-	public void setCenterComponent(Component centerComponent) {
+	public void setCenterComponent(@NotNull Component centerComponent) {
 
 		// Check if there is a center child dock.
 		if (centerChildDock != null) {
@@ -1287,7 +1303,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 	 * @return True if the given dockable can be added to this dock with priority,
 	 * false otherwise.
 	 */
-	private boolean canAddDockableWithPriority(Dockable dockable, Point relativeLocation) {
+	private boolean canAddDockableWithPriority(Dockable dockable, @NotNull Point relativeLocation) {
 
 		// Get the possible docking modes of the new dockable.
 		int dockModes = dockable.getDockingModes();

@@ -8,6 +8,8 @@ import com.javadocking.dock.factory.LeafDockFactory;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockingMode;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Properties;
@@ -25,11 +27,13 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 	 * When the dockable cannot be added to a split dock the creation of the dock is delegated
 	 * to this alternative dock factory.
 	 */
+	@Nullable
 	private TypeLeafDockFactory alternativeDockFactory = new TypeLeafDockFactory(true);
 	/**
 	 * This is the factory that is used in the constructor of the {@link SplitDock#SplitDock(DockFactory, CompositeDockFactory)}
 	 * for creating the leaf docks of the split dock.
 	 */
+	@NotNull
 	private TypeLeafDockFactory childDockFactory = new TypeLeafDockFactory(true);
 
 	private boolean main;
@@ -42,7 +46,8 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 
 	// Implementations of DockFactory.
 
-	public Dock createDock(Dockable dockable, int dockingMode) {
+	@Nullable
+	public Dock createDock(@Nullable Dockable dockable, int dockingMode) {
 
 		// Don't remove. In SplitDock we create a dock with dockable null.
 		if (dockable == null) {
@@ -64,7 +69,8 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 
 	}
 
-	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode) {
+	@Nullable
+	public Dimension getDockPreferredSize(@NotNull Dockable dockable, int dockingMode) {
 
 		// Check if the positions of the dockable contains LEFT, RIGHT, TOP or BOTTOM. 
 		int dockPositions = dockable.getDockingModes();
@@ -81,7 +87,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 
 	}
 
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		// Save the class of the leaf child dock factory and its properties.
 		String leafChildDockFactoryClassName = childDockFactory.getClass().getName();
@@ -96,7 +102,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 		PropertiesUtil.setBoolean(properties, prefix + "main", main);
 	}
 
-	public void loadProperties(String prefix, Properties properties) {
+	public void loadProperties(String prefix, @NotNull Properties properties) {
 
 		main = PropertiesUtil.getBoolean(properties, prefix + "main", main);
 
@@ -107,7 +113,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 			Class leafChildDockFactoryClazz = Class.forName(leafChildDockFactoryClassName);
 			childDockFactory = (TypeLeafDockFactory) leafChildDockFactoryClazz.newInstance();
 			childDockFactory.loadProperties(prefix + "childDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the child dock factory.");
 			exception.printStackTrace();
 			childDockFactory = new TypeLeafDockFactory(main);
@@ -120,7 +126,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 			Class alternativeDockFactoryClazz = Class.forName(alternativeDockFactoryClassName);
 			alternativeDockFactory = (TypeLeafDockFactory) alternativeDockFactoryClazz.newInstance();
 			alternativeDockFactory.loadProperties(prefix + "alternativeDockFactory.", properties);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
+		} catch (@NotNull ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
 			System.out.println("Could not create the alternative dock factory.");
 			exception.printStackTrace();
 			alternativeDockFactory = new TypeLeafDockFactory(main);
@@ -136,6 +142,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 	 *
 	 * @return The alternative dock factory.
 	 */
+	@Nullable
 	public TypeLeafDockFactory getAlternativeDockFactory() {
 		return alternativeDockFactory;
 	}
@@ -147,7 +154,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 	 * @param alternativeDockFactory The alternative dock factory. Should not be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setAlternativeDockFactory(TypeLeafDockFactory alternativeDockFactory) {
+	public void setAlternativeDockFactory(@Nullable TypeLeafDockFactory alternativeDockFactory) {
 
 		if (alternativeDockFactory == null) {
 			throw new IllegalArgumentException("The alternative dock factory cannot be null.");
@@ -163,6 +170,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 	 *
 	 * @return The leaf child dock factory.
 	 */
+	@NotNull
 	public DockFactory getChildDockFactory() {
 		return childDockFactory;
 	}
@@ -174,7 +182,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 	 * @param leafChildDockFactory The leaf child dock factory. Should not be null.
 	 * @throws IllegalArgumentException When the alternative dock factory is null.
 	 */
-	public void setChildDockFactory(DockFactory leafChildDockFactory) {
+	public void setChildDockFactory(@Nullable DockFactory leafChildDockFactory) {
 
 		if (leafChildDockFactory == null) {
 			throw new IllegalArgumentException("The leaf dock factory cannot be null.");

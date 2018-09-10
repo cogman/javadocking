@@ -8,6 +8,8 @@ import com.javadocking.dockable.Dockable;
 import com.javadocking.dockable.DockableState;
 import com.javadocking.util.DockingUtil;
 import com.javadocking.util.PropertiesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,10 +56,12 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 	/**
 	 * The content from this panel.
 	 */
+	@Nullable
 	private Component content;
 	/**
 	 * The maximized dockable of this panel.
 	 */
+	@Nullable
 	private Dockable maximizedDockable;
 	/**
 	 * The position where the header is placed.
@@ -89,7 +93,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 
 	// Implementations of Visualizer.
 
-	public boolean canVisualizeDockable(Dockable dockableToVisualize) {
+	public boolean canVisualizeDockable(@Nullable Dockable dockableToVisualize) {
 
 		// Check the dockable is not null.
 		if (dockableToVisualize == null) {
@@ -100,7 +104,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 
 	}
 
-	public void visualizeDockable(Dockable dockableToVisualize) {
+	public void visualizeDockable(@Nullable Dockable dockableToVisualize) {
 
 		// Check if the dockable is not null.
 		if (dockableToVisualize == null) {
@@ -152,6 +156,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 		return DockableState.MAXIMIZED;
 	}
 
+	@Nullable
 	public Dockable getVisualizedDockable(int index) {
 
 		// Check if the index is in the bounds.
@@ -209,7 +214,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 	 * Loads the properties of this maximizer. The dockables that were maximized,
 	 * when the model was saved, are not maximized again.
 	 */
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException {
+	public void loadProperties(String prefix, @NotNull Properties properties, Map dockablesMap, Window owner) throws IOException {
 
 		// Get the position of the header.
 		int headerPosition = Position.TOP;
@@ -222,7 +227,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 	 * Saves the properties of this maximizer. The dockables that are maximized,
 	 * are not saved.
 	 */
-	public void saveProperties(String prefix, Properties properties) {
+	public void saveProperties(String prefix, @NotNull Properties properties) {
 
 		// Save the position of the header.
 		PropertiesUtil.setInteger(properties, prefix + "headerPosition", headerPosition);
@@ -236,6 +241,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 	 *
 	 * @return The content from this panel, if there is one; otherwise null.
 	 */
+	@Nullable
 	public Component getContent() {
 		return content;
 	}
@@ -247,7 +253,7 @@ public class SingleMaximizer extends JPanel implements Visualizer {
 	 * @throws IllegalStateException    If there is already a content.
 	 * @throws NullPointerException    If the component is null.
 	 */
-	public void setContent(Component component) {
+	public void setContent(@Nullable Component component) {
 
 		// Check if the content is not null.
 		if (component == null) {
