@@ -1152,10 +1152,8 @@ public class BorderDock extends JPanel implements CompositeDock {
 			throw new IllegalStateException("There is no component in the center of the border dock.");
 		}
 
-		if (this.centerComponent != null) {
-			remove(centerComponent);
-			this.centerComponent = null;
-		}
+		remove(centerComponent);
+		this.centerComponent = null;
 
 	}
 
