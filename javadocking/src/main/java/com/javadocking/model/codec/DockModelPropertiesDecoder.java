@@ -102,8 +102,8 @@ public class DockModelPropertiesDecoder implements DockModelDecoder {
 		// Create the dock model object with the class name property.
 		String className = null;
 		className = PropertiesUtil.getString(properties, PROPERTY_CLASS, className);
-		Class clazz = null;
-		DockModel dockModel = null;
+		Class clazz;
+		DockModel dockModel;
 		try {
 			clazz = Class.forName(className);
 		} catch (ClassNotFoundException classNotFoundException) {

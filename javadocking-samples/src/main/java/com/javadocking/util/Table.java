@@ -15,7 +15,7 @@ public class Table extends JPanel {
 
 	// Fields.
 
-	private int tableSize = TABLE;
+	private int tableSize;
 
 	// Constructors.
 

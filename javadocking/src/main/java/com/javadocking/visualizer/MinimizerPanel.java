@@ -54,7 +54,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 	/**
 	 * The orientation of the panel.
 	 */
-	private int orientation = ORIENTATION_VERTICAL;
+	private int orientation;
 	/**
 	 * The minimized dockables of this panel.
 	 */

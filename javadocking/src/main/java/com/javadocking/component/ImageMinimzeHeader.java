@@ -71,7 +71,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 	/**
 	 * The position of this header.
 	 */
-	private int position = Position.TOP;
+	private int position;
 	/**
 	 * The listener for changes of the dockable.
 	 */

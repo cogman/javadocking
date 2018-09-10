@@ -909,8 +909,8 @@ public class BorderDock extends JPanel implements CompositeDock {
 		Dimension size = getSize();
 		switch (position) {
 			case Position.LEFT:
-				int y = 0;
-				int height = 0;
+				int y;
+				int height;
 				if (centerChildDock != null) {
 					y = ((Component) centerChildDock).getLocation().y;
 					height = ((Component) centerChildDock).getHeight();
@@ -924,8 +924,6 @@ public class BorderDock extends JPanel implements CompositeDock {
 						height);
 				break;
 			case Position.RIGHT:
-				y = 0;
-				height = 0;
 				if (centerChildDock != null) {
 					y = ((Component) centerChildDock).getLocation().y;
 					height = ((Component) centerChildDock).getHeight();

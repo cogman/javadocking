@@ -406,7 +406,7 @@ public class MainChartDockingExample extends JPanel {
 
 	private class DynamicChart extends JPanel {
 
-		private ChartPanel chartPanel = null;
+		private ChartPanel chartPanel;
 
 		public DynamicChart() {
 			super(new BorderLayout());

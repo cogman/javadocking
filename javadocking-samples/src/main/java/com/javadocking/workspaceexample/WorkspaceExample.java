@@ -261,11 +261,11 @@ public class WorkspaceExample extends JPanel {
 		}
 
 		// These are the root docks.
-		SplitDock totalSplitDock = null;
-		BorderDock toolBarBorderDock = null;
-		BorderDock minimizerBorderDock = null;
+		SplitDock totalSplitDock;
+		BorderDock toolBarBorderDock;
+		BorderDock minimizerBorderDock;
 
-		DockingPath centerDockingPath = null;
+		DockingPath centerDockingPath;
 		if (dockModel == null) {
 
 			// Create the dock model for the docks because they could not be retrieved from a file.

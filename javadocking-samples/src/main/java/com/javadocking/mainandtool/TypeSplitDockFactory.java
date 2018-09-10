@@ -32,7 +32,7 @@ public class TypeSplitDockFactory implements CompositeDockFactory {
 	 */
 	private TypeLeafDockFactory childDockFactory = new TypeLeafDockFactory(true);
 
-	private boolean main = true;
+	private boolean main;
 
 	public TypeSplitDockFactory(boolean main) {
 		this.main = main;

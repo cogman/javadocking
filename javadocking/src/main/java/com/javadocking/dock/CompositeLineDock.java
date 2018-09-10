@@ -91,7 +91,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 	 * The orientation of the line dock. This can be ORIENTATION_HORIZONTAL or ORIENTATION_VERTICAL.
 	 * The default is ORIENTATION_HORIZONTAL.
 	 */
-	private int orientation = ORIENTATION_HORIZONTAL;
+	private int orientation;
 	/**
 	 * When true the child docks have the same size, otherwise their size is
 	 * computed with the preferred sizes of their components.
@@ -101,12 +101,12 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 	 * The docking mode for dockables that will be docked in this composite line dock,
 	 * if the composite line dock has a horizontal orientation (ORIENTATION_HORIZONTAL).
 	 */
-	private int horizontalDockingMode = DockingMode.HORIZONTAL_LINE;
+	private int horizontalDockingMode;
 	/**
 	 * The docking mode for dockables that will be docked in this composite line dock,
 	 * if the composite line dock has a vertical orientation (ORIENTATION_VERTICAL).
 	 */
-	private int verticalDockingMode = DockingMode.VERTICAL_LINE;
+	private int verticalDockingMode;
 
 
 	/**
@@ -331,7 +331,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 
 				if (realSizeRectangle) {
 					if (orientation == ORIENTATION_HORIZONTAL) {
-						int width = 0;
+						int width;
 						if (dockable instanceof CompositeDockable) {
 							width = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.HORIZONTAL_LINE).width;
 						} else {
@@ -339,7 +339,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 						}
 						rectangle.setBounds(0, 0, width, getSize().height);
 					} else {
-						int height = 0;
+						int height;
 						if (dockable instanceof CompositeDockable) {
 							height = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.VERTICAL_LINE).height;
 						} else {
@@ -445,7 +445,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 						dockPosition.setLocation(dockComponent.getLocation().x + dockComponent.getSize().width, dockComponent.getLocation().y);
 
 						// The width of the rectangle.
-						int width = 0;
+						int width;
 						if (dockable instanceof CompositeDockable) {
 							width = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.HORIZONTAL_LINE).width;
 						} else {
@@ -464,7 +464,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 						dockPosition.setLocation(dockComponent.getLocation().x, dockComponent.getLocation().y + dockComponent.getSize().height);
 
 						// The height of the rectangle.
-						int height = 0;
+						int height;
 						if (dockable instanceof CompositeDockable) {
 							height = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.VERTICAL_LINE).height;
 						} else {
@@ -483,7 +483,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					// Do we have horizontal orientation?
 					if (orientation == ORIENTATION_HORIZONTAL) {
 						// Initialize the help fields.
-						int currentDockWidth = 0;
+						int currentDockWidth;
 						int nextDockWidth = ((Component) childDocks.get(0)).getSize().width;
 						int nextDockStart = 0; // The x-value where the next dock starts.
 
@@ -529,7 +529,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					// Do we have vertical orientation?
 					if (orientation == ORIENTATION_VERTICAL) {
 						// Initialize the help fields.
-						int currentDockHeight = 0;
+						int currentDockHeight;
 						int nextDockHeight = ((Component) childDocks.get(0)).getSize().height;
 						int nextDockStart = 0; // The y-value where the next dock starts.
 
@@ -1063,7 +1063,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 			// We have a horizontal orientation.
 
 			// Initialize the help fields.
-			int currentDockWidth = 0;
+			int currentDockWidth;
 			int nextDockWidth = ((Component) childDocks.get(0)).getSize().width;
 			int nextDockStart = 0; // The x-value where the next dock starts.
 
@@ -1109,7 +1109,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 			// We have a vertical orientation.
 
 			// Initialize the help fields.
-			int currentDockHeight = 0;
+			int currentDockHeight;
 			int nextDockHeight = ((Component) childDocks.get(0)).getSize().height;
 			int nextDockStart = 0; // The y-value where the next dock starts.
 

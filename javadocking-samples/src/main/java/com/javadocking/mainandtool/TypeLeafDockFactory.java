@@ -47,9 +47,9 @@ public class TypeLeafDockFactory implements DockFactory {
 	 * When true, this factory tries to create a dock with the same docking mode
 	 * as the last docking mode of the given dockable ({@link Dockable#getLastDockingMode()}).
 	 */
-	private boolean useLastDockingMode = true;
+	private boolean useLastDockingMode;
 
-	private boolean main = true;
+	private boolean main;
 
 	// Constructors.
 

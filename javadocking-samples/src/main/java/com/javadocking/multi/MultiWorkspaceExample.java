@@ -171,12 +171,12 @@ public class MultiWorkspaceExample extends JPanel {
 		}
 
 		// These are the root docks of the dock model.
-		SplitDock splitDock1 = null;
-		SplitDock splitDock2 = null;
-		BorderDock toolBarBorderDock1 = null;
-		BorderDock toolBarBorderDock2 = null;
-		HidableFloatDock float1 = null;
-		HidableFloatDock float2 = null;
+		SplitDock splitDock1;
+		SplitDock splitDock2;
+		BorderDock toolBarBorderDock1;
+		BorderDock toolBarBorderDock2;
+		HidableFloatDock float1;
+		HidableFloatDock float2;
 
 		// Could we decode a dock model?
 		if (dockModel == null) {

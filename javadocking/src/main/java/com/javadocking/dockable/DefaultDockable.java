@@ -55,7 +55,7 @@ public class DefaultDockable implements Dockable {
 	/**
 	 * The possible modes how the dockable can be docked.
 	 */
-	private int dockingModes = DockingMode.ALL;
+	private int dockingModes;
 	/**
 	 * The mode how the dockable is docked in its current dock or how it was docked the last time it was
 	 * in a dock.

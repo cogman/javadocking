@@ -36,8 +36,8 @@ public class DefaultDockableStateActionFactory implements DockableStateActionFac
 	public DockableStateAction createDockableStateAction(Dockable dockable, int newDockableState) {
 
 		boolean enabled = (dockable.getPossibleStates() & newDockableState) != 0;
-		Icon icon = null;
-		DockableStateAction action = null;
+		Icon icon;
+		DockableStateAction action;
 		switch (newDockableState) {
 			case DockableState.CLOSED:
 				if (enabled) {

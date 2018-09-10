@@ -366,7 +366,6 @@ public class StaticTabDragger implements Dragger {
 				}
 			} else {
 				// The destination dock is the current dock and we are floating.
-				destinationDock = currentRootDock;
 				locationInDestinationDock.setLocation(screenLocation.x - dockableOffset.x, screenLocation.y - dockableOffset.y);
 				SwingUtilities.convertPointFromScreen(locationInDestinationDock, originDock);
 				dockableDragRectangle.setLocation(locationInDestinationDock);
@@ -497,7 +496,6 @@ public class StaticTabDragger implements Dragger {
 			} else {
 				// Is the dockable floating?
 				if (isFloating()) {
-					destinationDock = currentRootDock;
 					locationInDestinationDock.setLocation(screenLocation.x, screenLocation.y);
 					((FloatDock) currentRootDock).moveDock(currentChildOfRootDock, locationInDestinationDock, dockableOffset);
 				}
@@ -518,7 +516,7 @@ public class StaticTabDragger implements Dragger {
 
 		// Is the deepest component a JTabbedPane?
 		Component pressedComponent = SwingUtilities.getDeepestComponentAt(mouseComponent, x, y);
-		JTabbedPane pressedTabbedPane = null;
+		JTabbedPane pressedTabbedPane;
 		if (pressedComponent instanceof JTabbedPane) {
 			pressedTabbedPane = (JTabbedPane) pressedComponent;
 		} else {

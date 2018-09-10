@@ -479,7 +479,7 @@ public class FloatDock implements CompositeDock {
 	public void addChildDock(Dock dock, Position position) throws IllegalStateException {
 
 		// Get the (x, y)location.
-		Point point = null;
+		Point point;
 		if (position.getDimensions() >= 2) {
 			point = new Point(position.getPosition(0), position.getPosition(1));
 		} else {

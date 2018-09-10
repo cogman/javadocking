@@ -519,7 +519,7 @@ public class DynamicTabDragger implements Dragger {
 
 		// Is the deepest component a JTabbedPane?
 		Component pressedComponent = SwingUtilities.getDeepestComponentAt(mouseComponent, x, y);
-		JTabbedPane pressedTabbedPane = null;
+		JTabbedPane pressedTabbedPane;
 		if (pressedComponent instanceof JTabbedPane) {
 			pressedTabbedPane = (JTabbedPane) pressedComponent;
 		} else {
@@ -538,7 +538,7 @@ public class DynamicTabDragger implements Dragger {
 				// Get the selected tab and its dockable.
 				int oldTabIndex = pressedTabbedPane.indexAtLocation(dockableOffset.x, dockableOffset.y);
 				// Create the popup menu.
-				JPopupMenu popupMenu = null;
+				JPopupMenu popupMenu;
 				Dockable clickedDockable = null;
 				if (oldTabIndex >= 0) {
 					Component tabComponent = pressedTabbedPane.getComponentAt(oldTabIndex);

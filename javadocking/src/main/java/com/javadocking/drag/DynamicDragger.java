@@ -200,7 +200,7 @@ public class DynamicDragger implements Dragger {
 				// We can start dragging.
 				originDock = ancestorDock;
 				int count = originDock.getDockableCount();
-				Dimension dockableSize = null;
+				Dimension dockableSize;
 				if (count > 0) {
 					// Calculate the dockable offset.
 					dockableOffset.setLocation(x, y);

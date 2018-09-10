@@ -659,8 +659,8 @@ public class SplitDock extends JPanel implements CompositeDock {
 				int firstChildPosition = position.getPosition(0);
 
 				// Get the left and right split child dock.
-				SplitDock leftSplitDock = null;
-				SplitDock rightSplitDock = null;
+				SplitDock leftSplitDock;
+				SplitDock rightSplitDock;
 				if ((firstChildPosition == Position.LEFT) || (firstChildPosition == Position.TOP)) {
 					leftSplitDock = (SplitDock) childDocks.get(firstChildDockId);
 					rightSplitDock = (SplitDock) childDocks.get(secondChildDockId);

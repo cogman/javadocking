@@ -388,8 +388,8 @@ class DockModelPropertiesUtil {
 		// Create the dock object with the class name property.
 		String className = null;
 		className = PropertiesUtil.getString(properties, propertiesPrefix + DOCK_CLASS, className);
-		Class clazz = null;
-		Dock dock = null;
+		Class clazz;
+		Dock dock;
 		try {
 			clazz = Class.forName(className);
 		} catch (ClassNotFoundException classNotFoundException) {

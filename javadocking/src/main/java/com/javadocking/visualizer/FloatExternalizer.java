@@ -290,8 +290,8 @@ public class FloatExternalizer implements Externalizer {
 			// Create the externalize dock object with the class name property.
 			String className = null;
 			className = PropertiesUtil.getString(properties, prefix + EXTERNALIZE_DOCK_PREFIX + "." + index + "." + "class", className);
-			Class clazz = null;
-			ExternalizeDock dock = null;
+			Class clazz;
+			ExternalizeDock dock;
 			try {
 				clazz = Class.forName(className);
 			} catch (ClassNotFoundException classNotFoundException) {

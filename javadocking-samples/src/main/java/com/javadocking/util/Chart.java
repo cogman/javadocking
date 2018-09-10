@@ -22,7 +22,7 @@ import java.awt.*;
 public class Chart extends JPanel {
 
 	private static int chartCount = 0;
-	private ChartPanel chartPanel = null;
+	private ChartPanel chartPanel;
 
 	public Chart() {
 		super(new BorderLayout());

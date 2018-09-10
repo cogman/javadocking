@@ -110,7 +110,7 @@ public class LineDock extends JPanel implements LeafDock {
 	 * The orientation of the line dock. This can be ORIENTATION_HORIZONTAL or ORIENTATION_VERTICAL.
 	 * The default is ORIENTATION_HORIZONTAL.
 	 */
-	private int orientation = ORIENTATION_HORIZONTAL;
+	private int orientation;
 	/**
 	 * When true the components of the dockables have the same size in the dock, otherwise their size is
 	 * computed with the preferred sizes of their components.
@@ -120,12 +120,12 @@ public class LineDock extends JPanel implements LeafDock {
 	 * The docking mode for a dockable that is docked in this line dock,
 	 * if the line dock has a horizontal orientation (ORIENTATION_HORIZONTAL).
 	 */
-	private int horizontalDockingMode = DockingMode.HORIZONTAL_LINE;
+	private int horizontalDockingMode;
 	/**
 	 * The docking mode for a dockable that is docked in this line dock,
 	 * if the line dock has a vertical orientation (ORIENTATION_VERTICAL).
 	 */
-	private int verticalDockingMode = DockingMode.VERTICAL_LINE;
+	private int verticalDockingMode;
 	/**
 	 * True if composite dockables may be added to this dock, when it is not empty. False otherwise.
 	 */
@@ -316,7 +316,7 @@ public class LineDock extends JPanel implements LeafDock {
 			if (childDockables.size() == 0) {
 				if (realSizeRectangle) {
 					if (orientation == ORIENTATION_HORIZONTAL) {
-						int width = 0;
+						int width;
 						if (dockable instanceof CompositeDockable) {
 							width = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.HORIZONTAL_LINE).width;
 						} else {
@@ -324,7 +324,7 @@ public class LineDock extends JPanel implements LeafDock {
 						}
 						rectangle.setBounds(0, 0, width, getSize().height);
 					} else {
-						int height = 0;
+						int height;
 						if (dockable instanceof CompositeDockable) {
 							height = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.VERTICAL_LINE).height;
 						} else {
@@ -456,7 +456,7 @@ public class LineDock extends JPanel implements LeafDock {
 						dockablePosition = SwingUtilities.convertPoint(dockablePanel, dockablePosition, this);
 
 						// The width of the rectangle.
-						int width = 0;
+						int width;
 						if (dockable instanceof CompositeDockable) {
 							width = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.HORIZONTAL_LINE).width;
 						} else {
@@ -475,7 +475,7 @@ public class LineDock extends JPanel implements LeafDock {
 						dockablePosition = SwingUtilities.convertPoint(dockablePanel, dockablePosition, this);
 
 						// The height of the rectangle.
-						int height = 0;
+						int height;
 						if (dockable instanceof CompositeDockable) {
 							height = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) dockable, DockingMode.VERTICAL_LINE).height;
 						} else {

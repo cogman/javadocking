@@ -125,7 +125,7 @@ public class CodecExample extends JPanel {
 		}
 
 		// These are the root docks.
-		SplitDock splitDock = null;
+		SplitDock splitDock;
 
 		if (dockModel == null) {
 

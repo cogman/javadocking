@@ -106,7 +106,7 @@ public class GridDock extends JPanel implements LeafDock {
 	/**
 	 * The docking mode for a dockable that is docked in this grid dock.
 	 */
-	private int dockingMode = DockingMode.GRID;
+	private int dockingMode;
 	/**
 	 * The dockables that are docked in this dock.
 	 */

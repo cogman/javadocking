@@ -95,7 +95,7 @@ public class DockingExecutor {
 	public boolean changeDocking(Dockable dockable, Dock destinationDock, Point relativeLocation, Point dockableOffset) {
 
 		// Remember if the change was successfull.
-		boolean result = true;
+		boolean result;
 		boolean removalSuccessFull = false;
 
 		// Get the current dock of the dockable.

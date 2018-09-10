@@ -40,7 +40,7 @@ public class DefaultCompositeDockable implements CompositeDockable {
 	/**
 	 * The index of the dockable that is selected. If no dockable is selected, it is -1.
 	 */
-	private int selectedIndex = -1;
+	private int selectedIndex;
 	/**
 	 * The mode how the dockable is docked in its current dock or how it was docked the last time it was
 	 * in a dock.

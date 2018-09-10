@@ -120,7 +120,7 @@ public class DecoratedDialogs extends JPanel {
 		public JDialog createJDialog(Window owner) {
 
 			// Create the dialog.
-			JDialog dialog = null;
+			JDialog dialog;
 			if (owner instanceof JDialog) {
 				dialog = new JDialog((JDialog) owner, ((JDialog) owner).getTitle());
 			} else if (owner instanceof JFrame) {
