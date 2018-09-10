@@ -42,17 +42,4 @@ public class ShowActionMode {
 	public String toString() {
 		return name;
 	}
-
-	// Overwritten methods.
-
-	// Prevent subclasses from overriding Object.equals.
-	public boolean equals(Object object) {
-		return super.equals(object);
-	}
-
-	// Prevent subclasses from overriding Object.hashCode.
-	public int hashCode() {
-		return super.hashCode();
-	}
-
 }
