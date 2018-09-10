@@ -519,14 +519,12 @@ public class SplitDock extends JPanel implements CompositeDock {
 			Dimension preferredSize = childDockFactory.getDockPreferredSize(dockableToAdd, dockingMode);
 			int dividerLocation = this.getSize().width / 2;
 			if (position == Position.LEFT) {
-				int dockingWidth = getChildDockWidth(preferredSize.width, currentChildDockPreferredSize.width, getSize().width, position);
-				dividerLocation = dockingWidth;
+				dividerLocation = getChildDockWidth(preferredSize.width, currentChildDockPreferredSize.width, getSize().width, position);
 			} else if (position == Position.RIGHT) {
 				int dockingWidth = getChildDockWidth(preferredSize.width, currentChildDockPreferredSize.width, getSize().width, position);
 				dividerLocation = this.getSize().width - dockingWidth;
 			} else if (position == Position.TOP) {
-				int dockingHeight = getChildDockWidth(preferredSize.height, currentChildDockPreferredSize.height, getSize().height, position);
-				dividerLocation = dockingHeight;
+				dividerLocation = getChildDockWidth(preferredSize.height, currentChildDockPreferredSize.height, getSize().height, position);
 			} else if (position == Position.BOTTOM) {
 				int dockingHeight = getChildDockWidth(preferredSize.height, currentChildDockPreferredSize.height, getSize().height, position);
 				dividerLocation = this.getSize().height - dockingHeight;
@@ -1003,14 +1001,12 @@ public class SplitDock extends JPanel implements CompositeDock {
 			}
 			int dividerLocation = dockWidth / 2;
 			if (splitPosition == Position.LEFT) {
-				int dockingWidth = getChildDockWidth(preferredSize.width, currentChildDockPreferredSize.width, dockWidth, splitPosition);
-				dividerLocation = dockingWidth;
+				dividerLocation = getChildDockWidth(preferredSize.width, currentChildDockPreferredSize.width, dockWidth, splitPosition);
 			} else if (splitPosition == Position.RIGHT) {
 				int dockingWidth = getChildDockWidth(preferredSize.width, currentChildDockPreferredSize.width, dockWidth, splitPosition);
 				dividerLocation = dockWidth - dockingWidth;
 			} else if (splitPosition == Position.TOP) {
-				int dockingHeight = getChildDockWidth(preferredSize.height, currentChildDockPreferredSize.height, dockHeight, splitPosition);
-				dividerLocation = dockingHeight;
+				dividerLocation = getChildDockWidth(preferredSize.height, currentChildDockPreferredSize.height, dockHeight, splitPosition);
 			} else if (splitPosition == Position.BOTTOM) {
 				int dockingHeight = getChildDockWidth(preferredSize.height, currentChildDockPreferredSize.height, dockHeight, splitPosition);
 				dividerLocation = dockHeight - dockingHeight;

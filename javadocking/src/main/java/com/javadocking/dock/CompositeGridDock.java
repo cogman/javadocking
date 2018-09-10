@@ -853,9 +853,8 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 				}
 
 				// Get the number of columns for this row count.
-				int newColCount = (int) Math.ceil(dockCount / (double) newRowCount);
 
-				return newColCount;
+				return (int) Math.ceil(dockCount / (double) newRowCount);
 
 			}
 

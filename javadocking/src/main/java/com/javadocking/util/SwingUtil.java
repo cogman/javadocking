@@ -199,8 +199,7 @@ public class SwingUtil {
 				// Get the deepest visible component at the given location.
 				Component deepestComponent = SwingUtilities.getDeepestComponentAt(rootComponent, locationInRoot.x, locationInRoot.y);
 				if (deepestComponent != null) {
-					boolean result = SwingUtilities.isDescendingFrom(deepestComponent, component);
-					return result;
+					return SwingUtilities.isDescendingFrom(deepestComponent, component);
 				}
 			}
 		}

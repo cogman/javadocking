@@ -1164,24 +1164,19 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 	private int[] getAlternatePositions(int position) {
 		if (position == Position.CENTER) {
-			int[] positions = {Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM};
-			return positions;
+			return new int[]{Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM};
 		}
 		if (position == Position.LEFT) {
-			int[] positions = {Position.RIGHT, Position.TOP, Position.BOTTOM, Position.CENTER};
-			return positions;
+			return new int[]{Position.RIGHT, Position.TOP, Position.BOTTOM, Position.CENTER};
 		}
 		if (position == Position.RIGHT) {
-			int[] positions = {Position.LEFT, Position.TOP, Position.BOTTOM, Position.CENTER};
-			return positions;
+			return new int[]{Position.LEFT, Position.TOP, Position.BOTTOM, Position.CENTER};
 		}
 		if (position == Position.TOP) {
-			int[] positions = {Position.BOTTOM, Position.LEFT, Position.RIGHT, Position.CENTER};
-			return positions;
+			return new int[]{Position.BOTTOM, Position.LEFT, Position.RIGHT, Position.CENTER};
 		}
 		if (position == Position.BOTTOM) {
-			int[] positions = {Position.TOP, Position.LEFT, Position.RIGHT, Position.CENTER};
-			return positions;
+			return new int[]{Position.TOP, Position.LEFT, Position.RIGHT, Position.CENTER};
 		}
 
 		throw new IllegalArgumentException("Illegal position for a border dock [" + position + "].");

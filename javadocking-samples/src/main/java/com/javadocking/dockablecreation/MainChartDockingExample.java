@@ -240,9 +240,7 @@ public class MainChartDockingExample extends JPanel {
 		// Add a description to the dockable. It will be displayed in the tool tip.
 		dockable.setDescription(description);
 
-		Dockable dockableWithActions = addAllActions(dockable);
-
-		return dockableWithActions;
+		return addAllActions(dockable);
 
 	}
 

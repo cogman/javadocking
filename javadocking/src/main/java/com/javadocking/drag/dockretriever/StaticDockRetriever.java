@@ -134,8 +134,7 @@ public class StaticDockRetriever implements DockRetriever {
 			if (currentOwner != null) {
 				Set floatDocks = DockModelUtil.getVisibleFloatDocks(dockModel, currentOwner);
 				if (floatDocks.size() != 0) {
-					List docks = new ArrayList(floatDocks);
-					return docks;
+					return new ArrayList(floatDocks);
 				}
 
 				return null;

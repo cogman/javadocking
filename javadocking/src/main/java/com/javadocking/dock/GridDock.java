@@ -1000,9 +1000,8 @@ public class GridDock extends JPanel implements LeafDock {
 				}
 
 				// Get the number of columns for this row count.
-				int newColCount = (int) Math.ceil(dockableCount / (double) newRowCount);
 
-				return newColCount;
+				return (int) Math.ceil(dockableCount / (double) newRowCount);
 
 			}
 

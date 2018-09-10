@@ -37,8 +37,7 @@ public class DefaultSwComponentFactory implements SwComponentFactory {
 
 	public JSplitPane createJSplitPane() {
 
-		JSplitPane splitPane = new JSplitPane();
-		return splitPane;
+		return new JSplitPane();
 
 	}
 

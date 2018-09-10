@@ -205,14 +205,13 @@ public class DockingExecutor {
 
 		// Remove the dockable.
 		boolean removalSuccessFull = removeDockable(dockable);
-		boolean success = removalSuccessFull;
 
 		// Do we have to add the dockable to a dock?
-		if ((success) && (destinationDock != null)) {
+		if ((removalSuccessFull) && (destinationDock != null)) {
 			// Add the dockable.
 			destinationDock.addDockable(dockable, position);
 
-			if (success) {
+			if (removalSuccessFull) {
 				// Adapt the size of a float child that received a dockable.
 				Dock floatChildDock = DockingUtil.getFloatChildDock(dockable.getDock());
 				if (floatChildDock != null) {
@@ -224,7 +223,7 @@ public class DockingExecutor {
 		}
 
 		// Fire event if the change was successfull.
-		if (success) {
+		if (removalSuccessFull) {
 			// Fire the event that the docking has been changed.
 			DockableEvent dockingChangedEvent = new DockableEvent(this, originDock, destinationDock, dockable);
 			dockable.fireDockingChanged(dockingChangedEvent);
@@ -236,7 +235,7 @@ public class DockingExecutor {
 		}
 
 		// Return if the change was successful.
-		return success;
+		return removalSuccessFull;
 	}
 
 	/**
