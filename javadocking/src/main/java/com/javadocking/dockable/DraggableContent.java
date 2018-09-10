@@ -32,5 +32,5 @@ public interface DraggableContent {
 	 *
 	 * @param dragListener The drag listener for dragging and docking the dockable with this component as content.
 	 */
-	public void addDragListener(DragListener dragListener);
+	void addDragListener(DragListener dragListener);
 }

@@ -23,6 +23,6 @@ public interface DockableStateActionFactory {
 	 * @return The action to change the state of the dockable.
 	 * @throws IllegalArgumentException    If the given dockable state is not valid.
 	 */
-	public DockableStateAction createDockableStateAction(Dockable dockable, int newDockableState);
+	DockableStateAction createDockableStateAction(Dockable dockable, int newDockableState);
 
 }

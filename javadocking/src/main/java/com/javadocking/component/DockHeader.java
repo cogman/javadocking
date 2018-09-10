@@ -31,6 +31,6 @@ public interface DockHeader extends DragHandle, Header {
 	 *
 	 * @return The dock of this header.
 	 */
-	public LeafDock getDock();
+	LeafDock getDock();
 
 }

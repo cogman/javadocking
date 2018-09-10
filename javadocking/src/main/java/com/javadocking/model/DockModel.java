@@ -55,21 +55,21 @@ public interface DockModel {
 	 * @param window  The owner window.
 	 * @throws IllegalArgumentException If there is already a window with this owner ID.
 	 */
-	public void addOwner(String ownerId, Window window);
+	void addOwner(String ownerId, Window window);
 
 	/**
 	 * Gets the ID of the given owner window.
 	 *
 	 * @return The ID of the given owner window.
 	 */
-	public String getOwnerID(Window ownerWindow);
+	String getOwnerID(Window ownerWindow);
 
 	/**
 	 * Gets the number of owner windows in this dock model.
 	 *
 	 * @return The number of owner windows in this dock model.
 	 */
-	public int getOwnerCount();
+	int getOwnerCount();
 
 	/**
 	 * Gets the owner window with the specified index in the dock model.
@@ -79,7 +79,7 @@ public interface DockModel {
 	 * @return The owner with the specified index in the dock model.
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getOwnerCount()).
 	 */
-	public Window getOwner(int index);
+	Window getOwner(int index);
 
 	/**
 	 * Removes the specified window as owner from this dock model.
@@ -88,7 +88,7 @@ public interface DockModel {
 	 * @param owner The owner window to be removed.
 	 * @throws IllegalArgumentException If the given window is not an owner window.
 	 */
-	public void removeOwner(Window owner);
+	void removeOwner(Window owner);
 
 	/**
 	 * Adds a root dock with its key to this dock model.
@@ -100,7 +100,7 @@ public interface DockModel {
 	 * @throws IllegalArgumentException    If the specified dock is already a root dock in the model.
 	 * @throws IllegalArgumentException    If the specified dock is not a root dock.
 	 */
-	public void addRootDock(String rootKey, Dock dock, Window owner);
+	void addRootDock(String rootKey, Dock dock, Window owner);
 
 	/**
 	 * Gets an iterator that iterates over the keys of all the root docks of the given owner window.
@@ -108,7 +108,7 @@ public interface DockModel {
 	 * @return An iterator that iterates over the keys of all the root docks of the given owner window.
 	 * The entries of the iterator are java.lang.String objects.
 	 */
-	public Iterator getRootKeys(Window owner);
+	Iterator getRootKeys(Window owner);
 
 	/**
 	 * Gets the root dock of this dock model that has the given key associated to it.
@@ -117,7 +117,7 @@ public interface DockModel {
 	 * @return The root dock of this dock model that has the given key associated to it.
 	 * If there is no root dock for this key, null is returned.
 	 */
-	public Dock getRootDock(String rootKey);
+	Dock getRootDock(String rootKey);
 
 	/**
 	 * Removes the root dock from the dock model.
@@ -125,7 +125,7 @@ public interface DockModel {
 	 * @param dock The root dock to remove.
 	 * @throws IllegalArgumentException    If the specified dock is not a root dock of this dock model.
 	 */
-	public void removeRootDock(Dock dock);
+	void removeRootDock(Dock dock);
 
 	/**
 	 * Adds a visualizer with its key to this dock model.
@@ -136,7 +136,7 @@ public interface DockModel {
 	 * @throws IllegalArgumentException    If the specified owner is not an owner window of this model.
 	 * @throws IllegalArgumentException    If the specified visualizer is already a visualizer in the model.
 	 */
-	public void addVisualizer(String key, Visualizer visualizer, Window owner);
+	void addVisualizer(String key, Visualizer visualizer, Window owner);
 
 	/**
 	 * Gets an iterator that iterates over the keys of all the visualizers of the given owner window.
@@ -144,7 +144,7 @@ public interface DockModel {
 	 * @return An iterator that iterates over the keys of all the visualizers of the given owner window.
 	 * The entries of the iterator are java.lang.String objects.
 	 */
-	public Iterator getVisualizerKeys(Window owner);
+	Iterator getVisualizerKeys(Window owner);
 
 	/**
 	 * Gets the visualizers of this dock model that has the given key associated to it.
@@ -153,7 +153,7 @@ public interface DockModel {
 	 * @return The visualizer of this dock model that has the given key associated to it.
 	 * If there is no visualier for this key, null is returned.
 	 */
-	public Visualizer getVisualizer(String key);
+	Visualizer getVisualizer(String key);
 
 	/**
 	 * Removes the visualizer from the dock model.
@@ -161,7 +161,7 @@ public interface DockModel {
 	 * @param visualizer The visualizer to remove.
 	 * @throws IllegalArgumentException    If the specified visualizer is not a visualizer of this dock model.
 	 */
-	public void removeVisualizer(Visualizer visualizer);
+	void removeVisualizer(Visualizer visualizer);
 
 	/**
 	 * Gets the keys of the root docks that are float dock of the given owner window.
@@ -170,14 +170,14 @@ public interface DockModel {
 	 * @return The keys of the root docks that are float docks of the given owner window.
 	 * If there are no keys, an empty set is returned.
 	 */
-	public Set getFloatDockKeys(Window owner);
+	Set getFloatDockKeys(Window owner);
 
 	/**
 	 * Gets the name of the data source for this dock model; typically a file name or a URL.
 	 *
 	 * @return The name of the data source for this dock model; typically a file name or a URL.
 	 */
-	public String getSource();
+	String getSource();
 
 
 	/**
@@ -221,7 +221,7 @@ public interface DockModel {
 	 * <li>map value: the visualizer (java.awt.window).</li>
 	 * </ul>
 	 */
-	public void loadProperties(String sourceName, String prefix, Properties properties, Map dockablesMap, Map ownersMap, Map docksMap, Map visualizersMap) throws IOException;
+	void loadProperties(String sourceName, String prefix, Properties properties, Map dockablesMap, Map ownersMap, Map docksMap, Map visualizersMap) throws IOException;
 
 	/**
 	 * <p>
@@ -240,6 +240,6 @@ public interface DockModel {
 	 *                   <li>map value: the key that is used for saving the dock (java.lang.String).</li>
 	 *                   </ul>
 	 */
-	public void saveProperties(String prefix, Properties properties, Map dockKeys);
+	void saveProperties(String prefix, Properties properties, Map dockKeys);
 
 }

@@ -22,12 +22,12 @@ public interface SelectableHeader extends Header {
 	 *
 	 * @return True if the header is elected, false otherwise.
 	 */
-	public boolean isSelected();
+	boolean isSelected();
 
 	/**
 	 * Selects or deselects the header.
 	 *
 	 * @param selected True if the header has to be selected, false otherwise.
 	 */
-	public void setSelected(boolean selected);
+	void setSelected(boolean selected);
 }

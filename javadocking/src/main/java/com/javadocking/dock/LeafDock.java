@@ -33,7 +33,7 @@ public interface LeafDock extends Dock {
 	 * @param position      The position of the dockable.
 	 * @throws IllegalStateException If the dock is full.
 	 */
-	public void addDockable(Dockable dockableToAdd, Position position);
+	void addDockable(Dockable dockableToAdd, Position position);
 
 
 	/**
@@ -42,7 +42,7 @@ public interface LeafDock extends Dock {
 	 * @param dockable The dockable that will be removed.
 	 * @return True if the specified dockable can be removed from this dock, false otherwise.
 	 */
-	public boolean canRemoveDockable(Dockable dockable);
+	boolean canRemoveDockable(Dockable dockable);
 
 	/**
 	 * Removes the specified dockable from this dock.
@@ -50,14 +50,14 @@ public interface LeafDock extends Dock {
 	 * @param dockable The dockable that will be removed.
 	 * @return True if the specified dockable was removed from this dock, false otherwise.
 	 */
-	public boolean removeDockable(Dockable dockable);
+	boolean removeDockable(Dockable dockable);
 
 	/**
 	 * Gets the number of dockables that are docked in this dock.
 	 *
 	 * @return The number of dockables that are docked in this dock.
 	 */
-	public int getDockableCount();
+	int getDockableCount();
 
 	/**
 	 * Gets the dockable with the specified index, that is docked in this dock.
@@ -66,7 +66,7 @@ public interface LeafDock extends Dock {
 	 * @return The dockable with the specified index that is docked in this dock.
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getDockableCount()).
 	 */
-	public Dockable getDockable(int index) throws IndexOutOfBoundsException;
+	Dockable getDockable(int index) throws IndexOutOfBoundsException;
 
 	/**
 	 * Determines if the given dockable is docked in this dock.
@@ -74,7 +74,7 @@ public interface LeafDock extends Dock {
 	 * @param dockable The dockable.
 	 * @return True if if the given dockable is docked in this dock, false otherwise.
 	 */
-	public boolean containsDockable(Dockable dockable);
+	boolean containsDockable(Dockable dockable);
 
 	/**
 	 * Moves a dockable to a new position in this dock.
@@ -84,7 +84,7 @@ public interface LeafDock extends Dock {
 	 * @return True if the position of the dockable changed, false otherwise.
 	 * @throws IllegalArgumentException    If the given dockable is not docked in this dock.
 	 */
-	public boolean moveDockable(Dockable dockable, Point relativeLocation);
+	boolean moveDockable(Dockable dockable, Point relativeLocation);
 
 	/**
 	 * Gets the position where the dockable is docked in this dock.
@@ -94,6 +94,6 @@ public interface LeafDock extends Dock {
 	 * Not null.
 	 * @throws IllegalArgumentException    If the given dockable is not docked in this dock.
 	 */
-	public Position getDockablePosition(Dockable dockable) throws IllegalArgumentException;
+	Position getDockablePosition(Dockable dockable) throws IllegalArgumentException;
 
 }

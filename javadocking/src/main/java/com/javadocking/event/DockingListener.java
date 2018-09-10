@@ -20,7 +20,7 @@ public interface DockingListener {
 	 * @param dockingEvent Gives more information about the origin dock, the destination dock,
 	 *                     and the object whose docking state changed.
 	 */
-	public void dockingWillChange(DockingEvent dockingEvent);
+	void dockingWillChange(DockingEvent dockingEvent);
 
 	/**
 	 * Invoked whenever a dockable has been added to a dock,
@@ -29,6 +29,6 @@ public interface DockingListener {
 	 * @param dockingEvent Gives more information about the origin dock, the destination dock,
 	 *                     and the object whose docking state changed.
 	 */
-	public void dockingChanged(DockingEvent dockingEvent);
+	void dockingChanged(DockingEvent dockingEvent);
 
 }

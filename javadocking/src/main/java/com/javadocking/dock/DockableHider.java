@@ -22,14 +22,14 @@ public interface DockableHider extends LeafDock {
 	 * @throws IllegalArgumentException If the given dockable is not docked in this dock.
 	 * @throws IllegalStateException        If there is already a hidden dockable.
 	 */
-	public void hideDockable(Dockable dockable);
+	void hideDockable(Dockable dockable);
 
 	/**
 	 * Gets the number of hidden dockables of this dock.
 	 *
 	 * @return The number of hidden dockables of this dock.
 	 */
-	public int getHiddenDockableCount();
+	int getHiddenDockableCount();
 
 	/**
 	 * Gets the dockable that is hidden in this dock with the given index.
@@ -38,7 +38,7 @@ public interface DockableHider extends LeafDock {
 	 * @param    index                The index of the hidden dockable.
 	 * @return The hidden dockable, if there is one; otherwise null.
 	 */
-	public Dockable getHiddenDockable(int index);
+	Dockable getHiddenDockable(int index);
 
 	/**
 	 * Restores the dockable that is hidden.
@@ -47,6 +47,6 @@ public interface DockableHider extends LeafDock {
 	 * @throws IllegalStateException        If the dockable is not hidden.
 	 * @throws IllegalArgumentException    If the dockable is not docked in this dock.
 	 */
-	public void restoreDockable(Dockable dockable);
+	void restoreDockable(Dockable dockable);
 
 }

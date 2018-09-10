@@ -30,6 +30,6 @@ public interface DockRetriever {
 	 * @param dockable       The dockable that is dragged and has to be added to a new dock.
 	 * @return The dock that has the highest priority for adding the dockable for the given screen location.
 	 */
-	public Dock[] retrieveHighestPriorityDock(Point screenLocation, Dockable dockable);
+	Dock[] retrieveHighestPriorityDock(Point screenLocation, Dockable dockable);
 
 }

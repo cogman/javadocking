@@ -30,7 +30,7 @@ public interface DockModelEncoder {
 	 * @return True if this encoder can save the given dock model at the specified location,
 	 * false otherwise.
 	 */
-	public boolean canExport(DockModel dockModel, String destinationName);
+	boolean canExport(DockModel dockModel, String destinationName);
 
 	/**
 	 * Checks whether this encoder can save the given dock model in the location, where it originally came from.
@@ -39,7 +39,7 @@ public interface DockModelEncoder {
 	 * @return True if this encoder can save the given dock model in the location, where it originally
 	 * came from, false otherwise.
 	 */
-	public boolean canSave(DockModel dockModel);
+	boolean canSave(DockModel dockModel);
 
 	/**
 	 * Exports the dock model to the specified location.
@@ -49,7 +49,7 @@ public interface DockModelEncoder {
 	 * @throws IllegalArgumentException If the dock model can not be exported to the new location by this encoder.
 	 * @throws IOException              If an error occurs while exporting the data.
 	 */
-	public void export(DockModel dockModel, String destinationName) throws IOException, IllegalArgumentException;
+	void export(DockModel dockModel, String destinationName) throws IOException, IllegalArgumentException;
 
 	/**
 	 * Saves the dock model in the location, where it originally came from.
@@ -58,6 +58,6 @@ public interface DockModelEncoder {
 	 * @throws IllegalArgumentException If the dock model can not be saved by this encoder.
 	 * @throws IOException              If an error occurs while saving the data.
 	 */
-	public void save(DockModel dockModel) throws IOException, IllegalArgumentException;
+	void save(DockModel dockModel) throws IOException, IllegalArgumentException;
 
 }

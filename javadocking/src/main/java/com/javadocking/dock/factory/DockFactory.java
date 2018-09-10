@@ -32,7 +32,7 @@ public interface DockFactory {
 	 * @param    dockingMode    The docking mode that is used for docking the dockable.
 	 * This integer should be a constant defined by {@link DockingMode}.
 	 */
-	public Dock createDock(Dockable dockable, int dockingMode);
+	Dock createDock(Dockable dockable, int dockingMode);
 
 	/**
 	 * Gets the preferred size for the dock that will be created by this factory.
@@ -42,7 +42,7 @@ public interface DockFactory {
 	 * @param    dockingMode    The docking mode that is used for docking the dockable.
 	 * This integer should be a constant defined by {@link DockingMode}.
 	 */
-	public Dimension getDockPreferredSize(Dockable dockable, int dockingMode);
+	Dimension getDockPreferredSize(Dockable dockable, int dockingMode);
 
 	/**
 	 * Saves the properties of this dock factory in the given properties object. The property names for this dock factory
@@ -51,7 +51,7 @@ public interface DockFactory {
 	 * @param prefix     The prefix for the property names.
 	 * @param properties The properties object to which the properties should be added.
 	 */
-	public void saveProperties(String prefix, Properties properties);
+	void saveProperties(String prefix, Properties properties);
 
 	/**
 	 * Sets the properties for this dock factory. The properties can be found in the given properties object
@@ -61,6 +61,6 @@ public interface DockFactory {
 	 * @param properties The properties object that contains the properties for this dock factory. It can contain also
 	 *                   properties for other objects, but they will have another prefix.
 	 */
-	public void loadProperties(String prefix, Properties properties);
+	void loadProperties(String prefix, Properties properties);
 
 }

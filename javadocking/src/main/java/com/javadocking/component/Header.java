@@ -21,7 +21,7 @@ public interface Header {
 	 *
 	 * @return The position of this header.
 	 */
-	public int getPosition();
+	int getPosition();
 
 	/**
 	 * Gets the position of this header.
@@ -35,24 +35,24 @@ public interface Header {
 	 *
 	 * @param position The position of this header.
 	 */
-	public void setPosition(int position);
+	void setPosition(int position);
 
 	/**
 	 * Adds a java.beans.PropertyChangeListener.
 	 *
 	 * @param listener The property change listener to be added.
 	 */
-	public void addPropertyChangeListener(PropertyChangeListener listener);
+	void addPropertyChangeListener(PropertyChangeListener listener);
 
 	/**
 	 * Removes a java.beans.PropertyChangeListener. This removes a listener.
 	 *
 	 * @param listener The property change listener to be removed
 	 */
-	public void removePropertyChangeListener(PropertyChangeListener listener);
+	void removePropertyChangeListener(PropertyChangeListener listener);
 
 	/**
 	 * Disposes the header.
 	 */
-	public void dispose();
+	void dispose();
 }

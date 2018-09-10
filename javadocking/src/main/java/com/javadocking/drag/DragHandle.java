@@ -14,7 +14,7 @@ public interface DragHandle {
 	 *
 	 * @return The drag listener that drags the dockables attached to this handle.
 	 */
-	public DragListener getDragListener();
+	DragListener getDragListener();
 
 	/**
 	 * Sets the drag listener as mouse listener and mouse motion listener
@@ -22,6 +22,6 @@ public interface DragHandle {
 	 *
 	 * @param dragListener The drag listener that will drag the dockables attached to this handle.
 	 */
-	public void setDragListener(DragListener dragListener);
+	void setDragListener(DragListener dragListener);
 
 }

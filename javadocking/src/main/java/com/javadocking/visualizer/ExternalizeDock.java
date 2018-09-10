@@ -15,27 +15,27 @@ public interface ExternalizeDock extends LeafDock {
 	 *
 	 * @param dockableToExternalize The externalized dockable that is added to this dock.
 	 */
-	public void externalizeDockable(Dockable dockableToExternalize);
+	void externalizeDockable(Dockable dockableToExternalize);
 
 	/**
 	 * Determines if a dockable is externalized in this dock.
 	 *
 	 * @return True if the dockables in this dock are externalized.
 	 */
-	public boolean isExternalized();
+	boolean isExternalized();
 
 	/**
 	 * Gets the externalizer that contains this externalize dock.
 	 *
 	 * @return The externalizer of this externalize dock.
 	 */
-	public Externalizer getExternalizer();
+	Externalizer getExternalizer();
 
 	/**
 	 * Sets the externalizer that contains this externalize dock.
 	 *
 	 * @param externalizer The externalizer of this externalize dock.
 	 */
-	public void setExternalizer(Externalizer externalizer);
+	void setExternalizer(Externalizer externalizer);
 
 }

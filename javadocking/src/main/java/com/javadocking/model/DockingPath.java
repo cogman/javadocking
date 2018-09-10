@@ -46,7 +46,7 @@ public interface DockingPath {
 	 *
 	 * @return The ID of the docking path. Not null.
 	 */
-	public String getID();
+	String getID();
 
 	/**
 	 * Gets the key of the root dock of this path in the {@link DockModel}.
@@ -54,7 +54,7 @@ public interface DockingPath {
 	 *
 	 * @return The key of the root dock of this path. Not null.
 	 */
-	public String getRootDockKey();
+	String getRootDockKey();
 
 	/**
 	 * Gets the number of docks in the path.
@@ -62,7 +62,7 @@ public interface DockingPath {
 	 *
 	 * @return The number of docks in the path.
 	 */
-	public int getDockCount();
+	int getDockCount();
 
 	/**
 	 * <p>
@@ -78,7 +78,7 @@ public interface DockingPath {
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getDockCount()).
 	 * @return The dock with the given index in the path. Not null.
 	 */
-	public Dock getDock(int index);
+	Dock getDock(int index);
 
 	/**
 	 * Gets the position of the dockable or child dock in the dock with the given index in the path.
@@ -90,7 +90,7 @@ public interface DockingPath {
 	 * The last position is usually the position of the dockable in the deepest dock of the path, if this
 	 * deepest dock is a leaf dock. Not null.
 	 */
-	public Position getPositionInDock(int index);
+	Position getPositionInDock(int index);
 
 	/**
 	 * <p>
@@ -108,7 +108,7 @@ public interface DockingPath {
 	 *                   <li>map value: the key that is used for saving the dock (java.lang.String).</li>
 	 *                   </ul>
 	 */
-	public void saveProperties(String prefix, Properties properties, Map dockKeys);
+	void saveProperties(String prefix, Properties properties, Map dockKeys);
 
 	/**
 	 * <p>
@@ -132,6 +132,6 @@ public interface DockingPath {
 	 *                   <li>map value: a dock that is already loaded ({@link Dock}).</li>
 	 *                   </ul>
 	 */
-	public void loadProperties(String prefix, Properties properties, Map docks);
+	void loadProperties(String prefix, Properties properties, Map docks);
 
 }

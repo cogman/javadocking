@@ -15,7 +15,7 @@ public interface CompositeDockable extends Dockable {
 	 *
 	 * @return The number of child dockables of this composite dockable.
 	 */
-	public int getDockableCount();
+	int getDockableCount();
 
 	/**
 	 * Gets the child dockable with the specified index.
@@ -23,7 +23,7 @@ public interface CompositeDockable extends Dockable {
 	 * @return The child dockable with the specified index.
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getDockableCount()).
 	 */
-	public Dockable getDockable(int index) throws IndexOutOfBoundsException;
+	Dockable getDockable(int index) throws IndexOutOfBoundsException;
 
 	/**
 	 * Gets the selected dockable. This dockable should be one of the child dockables. If no dockable is
@@ -31,6 +31,6 @@ public interface CompositeDockable extends Dockable {
 	 *
 	 * @return The selected dockable. Null if no dockable is selected.
 	 */
-	public Dockable getSelectedDockable();
+	Dockable getSelectedDockable();
 
 }

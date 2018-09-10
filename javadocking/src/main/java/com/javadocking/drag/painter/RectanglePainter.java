@@ -20,13 +20,13 @@ public interface RectanglePainter {
 	 * @param width    The width of the rectangle.
 	 * @param height   The height of the rectangle.
 	 */
-	public void paintRectangle(Graphics graphics, int x, int y, int width, int height);
+	void paintRectangle(Graphics graphics, int x, int y, int width, int height);
 
 	/**
 	 * Sets the label that has to be painted in the rectangle.
 	 *
 	 * @param label The label that has to be painted in the middle of the rectangle.
 	 */
-	public void setLabel(String label);
+	void setLabel(String label);
 
 }

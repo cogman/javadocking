@@ -75,7 +75,7 @@ public interface Dock {
 	 * be added, CANNOT_DOCK is returned. The higher the integer, the higher the priority for
 	 * docking the dockable in this dock.
 	 */
-	public int getDockPriority(Dockable dockable, Point relativeLocation);
+	int getDockPriority(Dockable dockable, Point relativeLocation);
 
 	/**
 	 * <p>
@@ -94,7 +94,7 @@ public interface Dock {
 	 *                         when it will be docked in this dock. The rectangle is relative to this dock.
 	 * @return If the dockable cannot be added, {@link Priority#CANNOT_DOCK} is returned, otherwise a positive integer.
 	 */
-	public int retrieveDockingRectangle(Dockable dockable, Point relativeLocation, Point dockableOffset, Rectangle rectangle);
+	int retrieveDockingRectangle(Dockable dockable, Point relativeLocation, Point dockableOffset, Rectangle rectangle);
 
 	/**
 	 * <p>
@@ -110,35 +110,35 @@ public interface Dock {
 	 * @param dockableOffset   The mouse location where the dragging started, relatively to the previous dock of the dockable.
 	 * @return True if the dockable was added to this dock, false otherwise.
 	 */
-	public boolean addDockable(Dockable dockable, Point relativeLocation, Point dockableOffset);
+	boolean addDockable(Dockable dockable, Point relativeLocation, Point dockableOffset);
 
 	/**
 	 * Determines if this dock doesn't have any dockables docked in it, or doesn't have any child docks docked in it.
 	 *
 	 * @return True if this dock doesn't have any dockables docked in it, or doesn't have any child docks docked in it, false otherwise.
 	 */
-	public boolean isEmpty();
+	boolean isEmpty();
 
 	/**
 	 * Determines if any more dockables can be added to this dock.
 	 *
 	 * @return True if any more dockables can be added to this dock, false otherwise.
 	 */
-	public boolean isFull();
+	boolean isFull();
 
 	/**
 	 * Gets the parent dock of this dock.
 	 *
 	 * @return The parent dock of this dock.
 	 */
-	public CompositeDock getParentDock();
+	CompositeDock getParentDock();
 
 	/**
 	 * Sets the specified dock as new parent dock of this dock.
 	 *
 	 * @param parentDock The parent dock of this dock.
 	 */
-	public void setParentDock(CompositeDock parentDock);
+	void setParentDock(CompositeDock parentDock);
 
 	/**
 	 * <p>
@@ -156,7 +156,7 @@ public interface Dock {
 	 *                      <li>map value: the key that is used for saving the dock (java.lang.String).</li>
 	 *                      </ul>
 	 */
-	public void saveProperties(String prefix, Properties properties, Map childDockKeys);
+	void saveProperties(String prefix, Properties properties, Map childDockKeys);
 
 	/**
 	 * <p>
@@ -190,7 +190,7 @@ public interface Dock {
 	 * @param owner        The owner window of the dock in the dock model ({@link com.javadocking.model.DockModel}).
 	 * @throws IOException    If an error occures while decoding the properties.
 	 */
-	public void loadProperties(String prefix, Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException;
+	void loadProperties(String prefix, Properties properties, Map childDocks, Map dockablesMap, Window owner) throws IOException;
 
 	/**
 	 * Adds a listener for {@link com.javadocking.event.DockingEvent}s of this dock.
@@ -199,13 +199,13 @@ public interface Dock {
 	 *
 	 * @param listener A docking listener that will be notified when a dockable or child dock is added, moved, or removed.
 	 */
-	public void addDockingListener(DockingListener listener);
+	void addDockingListener(DockingListener listener);
 
 	/**
 	 * Removes a listener for docking events of this dock.
 	 *
 	 * @param listener The docking listener to remove.
 	 */
-	public void removeDockingListener(DockingListener listener);
+	void removeDockingListener(DockingListener listener);
 
 }

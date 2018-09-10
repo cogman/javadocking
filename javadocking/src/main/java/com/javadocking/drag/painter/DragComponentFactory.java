@@ -24,6 +24,6 @@ public interface DragComponentFactory {
 	 *                  if the mouse is released in the current position.
 	 * @return The component that shows where a dockable will be docked in a dock.
 	 */
-	public Component createDragComponent(Dockable dockable, Dock dock, Rectangle rectangle);
+	Component createDragComponent(Dockable dockable, Dock dock, Rectangle rectangle);
 
 }

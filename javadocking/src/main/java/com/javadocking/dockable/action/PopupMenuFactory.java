@@ -21,6 +21,6 @@ public interface PopupMenuFactory {
 	 * @param compositeDockable The dockables in the selected dock.
 	 * @return A popup menu for the selected dockable and the other dockables in the dock.
 	 */
-	public JPopupMenu createPopupMenu(Dockable selectedDockable, CompositeDockable compositeDockable);
+	JPopupMenu createPopupMenu(Dockable selectedDockable, CompositeDockable compositeDockable);
 
 }

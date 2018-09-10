@@ -28,7 +28,7 @@ public interface DockModelDecoder {
 	 *
 	 * @param sourceName The name of a data source; typically a file name or a URL.
 	 */
-	public boolean canDecodeSource(String sourceName);
+	boolean canDecodeSource(String sourceName);
 
 	/**
 	 * Creates a new dock model from the data found in the given data source,
@@ -54,6 +54,6 @@ public interface DockModelDecoder {
 	 * <li>map value: the visualizer (java.awt.window).</li>
 	 * </ul>
 	 */
-	public DockModel decode(String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap) throws IOException;
+	DockModel decode(String sourceName, Map dockablesMap, Map ownersMap, Map visualizersMap) throws IOException;
 
 }

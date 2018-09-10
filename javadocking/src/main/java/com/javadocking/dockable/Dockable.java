@@ -43,7 +43,7 @@ public interface Dockable {
 	 *
 	 * @return The ID of the dockable.
 	 */
-	public String getID();
+	String getID();
 
 	/**
 	 * Gets the dock in which the dockable is docked.
@@ -51,7 +51,7 @@ public interface Dockable {
 	 * @return The dock in which the dockable is docked.
 	 * This can be null, if the dockable is not docked.
 	 */
-	public LeafDock getDock();
+	LeafDock getDock();
 
 	/**
 	 * Sets the dock in which the dockable is docked.
@@ -59,7 +59,7 @@ public interface Dockable {
 	 * @param dock The dock in which the dockable is docked.
 	 *             This can be null, if the dockable is not docked.
 	 */
-	public void setDock(LeafDock dock);
+	void setDock(LeafDock dock);
 
 	/**
 	 * Gets the content of the dockable. This is a graphical component. The dockable is a wrapper around
@@ -67,28 +67,28 @@ public interface Dockable {
 	 *
 	 * @return The content of the dockable.
 	 */
-	public Component getContent();
+	Component getContent();
 
 	/**
 	 * Gets the title of the dockable.
 	 *
 	 * @return The title of the dockable.
 	 */
-	public String getTitle();
+	String getTitle();
 
 	/**
 	 * Gets the description of the dockable.
 	 *
 	 * @return The description of the dockable.
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Gets the icon of the dockable.
 	 *
 	 * @return The icon of the dockable.
 	 */
-	public Icon getIcon();
+	Icon getIcon();
 
 	/**
 	 * <p>
@@ -101,7 +101,7 @@ public interface Dockable {
 	 * @return The possible docking modes of the dockable. This integer should be combination of constants
 	 * defined by {@link DockingMode}.
 	 */
-	public int getDockingModes();
+	int getDockingModes();
 
 	/**
 	 * Gets the mode how the dockable is docked in its current dock or how it was docked the last time it was
@@ -110,7 +110,7 @@ public interface Dockable {
 	 * @return The mode how the dockable is docked in its current dock or how it was docked the last time it was
 	 * in a dock. This integer should be a constant defined by {@link DockingMode}.
 	 */
-	public int getLastDockingMode();
+	int getLastDockingMode();
 
 	/**
 	 * Sets the mode how the dockable is docked in its current dock or how it was docked the last time it was
@@ -119,7 +119,7 @@ public interface Dockable {
 	 * @param dockingMode The mode how the dockable is docked in its current dock or how it was docked the last time it was
 	 *                    in a dock. This integer should be a constant defined by {@link DockingMode}.
 	 */
-	public void setLastDockingMode(int dockingMode);
+	void setLastDockingMode(int dockingMode);
 
 	/**
 	 * Returns whether the dockable will have a header when it is docked alone. With the header the dockable can be dragged.
@@ -127,14 +127,14 @@ public interface Dockable {
 	 *
 	 * @return True if the dockable will have a header when it is docked alone, false otherwise.
 	 */
-	public boolean isWithHeader();
+	boolean isWithHeader();
 
 	/**
 	 * Gets the state of the dockable.
 	 *
 	 * @return The current state of the dockable. This should be a constant defined by {@link DockableState}.
 	 */
-	public int getState();
+	int getState();
 
 	/**
 	 * Tries to set the new state of the dockable. No checking is done, if the state is allowed by
@@ -144,7 +144,7 @@ public interface Dockable {
 	 * @param    visualizer                The object that currently shows the content of the dockable.
 	 * Can be null, i.e. when the state of the dockable is {@link DockableState#CLOSED}.
 	 */
-	public void setState(int state, Object visualizer);
+	void setState(int state, Object visualizer);
 
 	/**
 	 * Gets the possible states of the dockable. This can be a combination of constants defined by {@link DockableState}.
@@ -152,7 +152,7 @@ public interface Dockable {
 	 *
 	 * @return The possible states of the dockable.
 	 */
-	public int getPossibleStates();
+	int getPossibleStates();
 
 	/**
 	 * Gets the object that currently shows the content of the dockable.
@@ -160,7 +160,7 @@ public interface Dockable {
 	 *
 	 * @return The object that currently shows the content of the dockable.
 	 */
-	public Object getVisualizer();
+	Object getVisualizer();
 
 	/**
 	 * <p>
@@ -180,35 +180,35 @@ public interface Dockable {
 	 *
 	 * @return The actions that are associated with the dockable. Can be null.
 	 */
-	public Action[][] getActions();
+	Action[][] getActions();
 
 	/**
 	 * Adds a java.beans.PropertyChangeListener. The listener is registered for the <code>dock</code> property.
 	 *
 	 * @param listener The property change listener to be added.
 	 */
-	public void addPropertyChangeListener(PropertyChangeListener listener);
+	void addPropertyChangeListener(PropertyChangeListener listener);
 
 	/**
 	 * Removes a java.beans.PropertyChangeListener. This removes a listener.
 	 *
 	 * @param listener The property change listener to be removed
 	 */
-	public void removePropertyChangeListener(PropertyChangeListener listener);
+	void removePropertyChangeListener(PropertyChangeListener listener);
 
 	/**
 	 * Adds a listener for docking events of this dockable.
 	 *
 	 * @param listener A docking listener that will be notified, when this dockable is added, moved, or removed.
 	 */
-	public void addDockingListener(DockingListener listener);
+	void addDockingListener(DockingListener listener);
 
 	/**
 	 * Removes a listener for docking events of this dockable.
 	 *
 	 * @param listener A docking listener to remove.
 	 */
-	public void removeDockingListener(DockingListener listener);
+	void removeDockingListener(DockingListener listener);
 
 	/**
 	 * Notifies all listeners that have registered interest for notification on this event type.
@@ -216,7 +216,7 @@ public interface Dockable {
 	 * @param    dockableEvent            Gives more information about the origin dock, the destination dock,
 	 * and the object whose docking state changed.
 	 */
-	public void fireDockingWillChange(DockableEvent dockableEvent);
+	void fireDockingWillChange(DockableEvent dockableEvent);
 
 	/**
 	 * Notifies all listeners that have registered interest for notification on this event type.
@@ -224,6 +224,6 @@ public interface Dockable {
 	 * @param    dockableEvent            Gives more information about the origin dock, the destination dock,
 	 * and the object whose docking state changed.
 	 */
-	public void fireDockingChanged(DockableEvent dockableEvent);
+	void fireDockingChanged(DockableEvent dockableEvent);
 
 }

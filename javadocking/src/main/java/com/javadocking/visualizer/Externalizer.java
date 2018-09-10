@@ -6,6 +6,6 @@ import java.awt.*;
 
 public interface Externalizer extends Visualizer {
 
-	public void moveExternalizedDockable(Dockable dockable, Point position, Point dockableOffset);
+	void moveExternalizedDockable(Dockable dockable, Point position, Point dockableOffset);
 
 }

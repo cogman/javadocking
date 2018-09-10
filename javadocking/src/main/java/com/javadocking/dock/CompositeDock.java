@@ -31,7 +31,7 @@ public interface CompositeDock extends Dock {
 	/**
 	 * The name childDock that will be used to create property names for specifying properties of child docks.
 	 */
-	static final String CHILD_DOCK_PREFIX = "childDock";
+	String CHILD_DOCK_PREFIX = "childDock";
 
 	// Interface methods.
 
@@ -48,14 +48,14 @@ public interface CompositeDock extends Dock {
 	 * @param position The position for the child dock.
 	 * @throws IllegalStateException If the dock is full.
 	 */
-	public void addChildDock(Dock dock, Position position) throws IllegalStateException;
+	void addChildDock(Dock dock, Position position) throws IllegalStateException;
 
 	/**
 	 * Is called when the specified child dock is empty. Normally this child dock will be removed.
 	 *
 	 * @param childDock The child dock that is empty.
 	 */
-	public void emptyChild(Dock childDock);
+	void emptyChild(Dock childDock);
 
 	/**
 	 * Makes the given empty child dock invisible. It may not be removed, because there are still listeners
@@ -64,19 +64,19 @@ public interface CompositeDock extends Dock {
 	 *
 	 * @param childDock The child dock that is empty, but not may be removed.
 	 */
-	public void ghostChild(Dock childDock);
+	void ghostChild(Dock childDock);
 
 	/**
 	 * Clears the ghost child docks from this dock. The ghost child docks are removed.
 	 */
-	public void clearGhosts();
+	void clearGhosts();
 
 	/**
 	 * Gets the number of child docks of this dock.
 	 *
 	 * @return The number of child docks of this dock.
 	 */
-	public int getChildDockCount();
+	int getChildDockCount();
 
 	/**
 	 * Gets the child dock with the specified index.
@@ -85,7 +85,7 @@ public interface CompositeDock extends Dock {
 	 * @return The child dock with the specified index.
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getChildDockCount()).
 	 */
-	public Dock getChildDock(int index) throws IndexOutOfBoundsException;
+	Dock getChildDock(int index) throws IndexOutOfBoundsException;
 
 	/**
 	 * Gets the position, where the child dock is docked in this dock.
@@ -95,14 +95,14 @@ public interface CompositeDock extends Dock {
 	 * Not null.
 	 * @throws IllegalArgumentException    If the given dock is not docked in this dock.
 	 */
-	public Position getChildDockPosition(Dock childDock) throws IllegalArgumentException;
+	Position getChildDockPosition(Dock childDock) throws IllegalArgumentException;
 
 	/**
 	 * Gets the factory that creates the child docks for this composite dock.
 	 *
 	 * @return The factory that creates the child docks for this composite dock.
 	 */
-	public DockFactory getChildDockFactory();
+	DockFactory getChildDockFactory();
 
 	/**
 	 * Sets the factory that creates the child docks for this composite dock.
@@ -110,6 +110,6 @@ public interface CompositeDock extends Dock {
 	 * @param dockFactory The factory that creates the child docks for this composite dock.
 	 * @throws IllegalArgumentException When the child dock factory is null.
 	 */
-	public void setChildDockFactory(DockFactory dockFactory);
+	void setChildDockFactory(DockFactory dockFactory);
 
 }

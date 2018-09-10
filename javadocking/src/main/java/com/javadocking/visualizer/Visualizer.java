@@ -46,28 +46,28 @@ public interface Visualizer {
 	 * @param dockableToVisualize The dockable whose content has to be visualized. May not be nul.
 	 * @return True if the dockable can be visualized, lse otherwise.
 	 */
-	public boolean canVisualizeDockable(Dockable dockableToVisualize);
+	boolean canVisualizeDockable(Dockable dockableToVisualize);
 
 	/**
 	 * Adds a dockable to this visualizer.
 	 *
 	 * @param dockableToVisualize The dockable whose content has to be visualized. May not be nul.
 	 */
-	public void visualizeDockable(Dockable dockableToVisualize);
+	void visualizeDockable(Dockable dockableToVisualize);
 
 	/**
 	 * Removes the visualized dockables from this visualizer.
 	 *
 	 * @throws IllegalArgumentException    If the dockable is not visualized in this visualizer.
 	 */
-	public void removeVisualizedDockable(Dockable dockableToRemove);
+	void removeVisualizedDockable(Dockable dockableToRemove);
 
 	/**
 	 * Gets the number of visualized dockables of this visualizer.
 	 *
 	 * @return The number of visualized dockables of this visualizer.
 	 */
-	public int getVisualizedDockableCount();
+	int getVisualizedDockableCount();
 
 
 	/**
@@ -76,7 +76,7 @@ public interface Visualizer {
 	 * @return The visualized dockable with the specified index.
 	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getvisualizedDockableCount()).
 	 */
-	public Dockable getVisualizedDockable(int index) throws IndexOutOfBoundsException;
+	Dockable getVisualizedDockable(int index) throws IndexOutOfBoundsException;
 
 	/**
 	 * Determines the state of the dockables that are visualized by this visualizer.
@@ -86,7 +86,7 @@ public interface Visualizer {
 	 * but not {@link com.javadocking.dockable.DockableState#NORMAL} or
 	 * {@link com.javadocking.dockable.DockableState#CLOSED}.
 	 */
-	public int getState();
+	int getState();
 
 	/**
 	 * <p>
@@ -99,7 +99,7 @@ public interface Visualizer {
 	 * @param prefix     The prefix for the property names.
 	 * @param properties The properties object to which the properties should be added.
 	 */
-	public void saveProperties(String prefix, Properties properties);
+	void saveProperties(String prefix, Properties properties);
 
 	/**
 	 * <p>
@@ -126,6 +126,6 @@ public interface Visualizer {
 	 * @param owner        The owner window of the visualizer in the dock model ({@link com.javadocking.model.DockModel}).
 	 * @throws IOException        If an error occures while decoding the properties.
 	 */
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException;
+	void loadProperties(String prefix, Properties properties, Map dockablesMap, Window owner) throws IOException;
 
 }

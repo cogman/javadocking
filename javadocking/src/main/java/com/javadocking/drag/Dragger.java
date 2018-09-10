@@ -22,7 +22,7 @@ public interface Dragger {
 	 * @param mouseEvent The mouse event that was triggered.
 	 * @return True if the dragging of a dockable could be started, false otherwise.
 	 */
-	public boolean startDragging(MouseEvent mouseEvent);
+	boolean startDragging(MouseEvent mouseEvent);
 
 	/**
 	 * <p>
@@ -42,7 +42,7 @@ public interface Dragger {
 	 *
 	 * @param mouseEvent The new mouse event that was triggered.
 	 */
-	public void drag(MouseEvent mouseEvent);
+	void drag(MouseEvent mouseEvent);
 
 	/**
 	 * <p>
@@ -61,7 +61,7 @@ public interface Dragger {
 	 *
 	 * @param mouseEvent The last mouse event that was triggered.
 	 */
-	public void stopDragging(MouseEvent mouseEvent);
+	void stopDragging(MouseEvent mouseEvent);
 
 	/**
 	 * <p>
@@ -75,12 +75,12 @@ public interface Dragger {
 	 *
 	 * @param mouseEvent The last mouse event that was triggered.
 	 */
-	public void cancelDragging(MouseEvent mouseEvent);
+	void cancelDragging(MouseEvent mouseEvent);
 
 	/**
 	 * Shows the popup menu for the selected dockable or the selected composite dockable.
 	 *
 	 * @param mouseEvent The last mouse event that was triggered.
 	 */
-	public void showPopupMenu(MouseEvent mouseEvent);
+	void showPopupMenu(MouseEvent mouseEvent);
 }

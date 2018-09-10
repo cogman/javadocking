@@ -17,7 +17,7 @@ public interface DraggerFactory {
 	 * @param dock The dock for which a dragger should be created.
 	 * @return The created dragger.
 	 */
-	public Dragger createDragger(Dock dock);
+	Dragger createDragger(Dock dock);
 
 	/**
 	 * Creates a dragger for the given dockable.
@@ -25,5 +25,5 @@ public interface DraggerFactory {
 	 * @param dockable The dockable for which a dragger should be created.
 	 * @return The created dragger.
 	 */
-	public Dragger createDragger(Dockable dockable);
+	Dragger createDragger(Dockable dockable);
 }

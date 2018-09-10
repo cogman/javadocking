@@ -14,7 +14,7 @@ public interface CompositeDockFactory extends DockFactory {
 	 *
 	 * @return The child dock factory for the created composite docks.
 	 */
-	public DockFactory getChildDockFactory();
+	DockFactory getChildDockFactory();
 
 	/**
 	 * Sets the child dock factory. This is the factory that creates the child docks for the composite docks that
@@ -23,6 +23,6 @@ public interface CompositeDockFactory extends DockFactory {
 	 * @param childDockFactory The child dock factory for the created composite docks. Should not be null.
 	 * @throws IllegalArgumentException When the dock factory is null.
 	 */
-	public void setChildDockFactory(DockFactory childDockFactory);
+	void setChildDockFactory(DockFactory childDockFactory);
 
 }

@@ -22,7 +22,7 @@ public interface DockableStateAction extends Action {
 	 *
 	 * @return The dockable whose state is changed by this action.
 	 */
-	public Dockable getDockable();
+	Dockable getDockable();
 
 	/**
 	 * Gets the state in which the dockable should be after performing the action.
@@ -30,6 +30,6 @@ public interface DockableStateAction extends Action {
 	 *
 	 * @return The state in which the dockable should be after performing the action.
 	 */
-	public int getNewDockableState();
+	int getNewDockableState();
 
 }

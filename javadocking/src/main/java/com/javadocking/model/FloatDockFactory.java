@@ -18,7 +18,7 @@ public interface FloatDockFactory {
 	 * @param owner The owner window of the float dock.
 	 * @return The created float dock.
 	 */
-	public FloatDock createFloatDock(Window owner);
+	FloatDock createFloatDock(Window owner);
 
 	/**
 	 * Saves the properties of this float dock factory in the given properties object. The property names for this float dock factory
@@ -27,7 +27,7 @@ public interface FloatDockFactory {
 	 * @param prefix     The prefix for the property names.
 	 * @param properties The properties object to which the properties should be added.
 	 */
-	public void saveProperties(String prefix, Properties properties);
+	void saveProperties(String prefix, Properties properties);
 
 	/**
 	 * Sets the properties for this float dock factory. The properties can be found in the given properties object
@@ -37,6 +37,6 @@ public interface FloatDockFactory {
 	 * @param properties The properties object that contains the properties for this float dock factory. It can contain also
 	 *                   properties for other objects, but they will have another prefix.
 	 */
-	public void loadProperties(String prefix, Properties properties);
+	void loadProperties(String prefix, Properties properties);
 
 }

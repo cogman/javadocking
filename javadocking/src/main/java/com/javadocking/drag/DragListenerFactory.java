@@ -18,7 +18,7 @@ public interface DragListenerFactory {
 	 * @param    dock        The drag listener will listen to drag events on this dock.
 	 * @return The drag listener.
 	 */
-	public DragListener createDragListener(Dock dock);
+	DragListener createDragListener(Dock dock);
 
 	/**
 	 * Creates a drag listener for the given dockable.
@@ -26,6 +26,6 @@ public interface DragListenerFactory {
 	 * @param    dockable    The drag listener will listen to drag events of this dockable.
 	 * @return The drag listener.
 	 */
-	public DragListener createDragListener(Dockable dockable);
+	DragListener createDragListener(Dockable dockable);
 
 }

@@ -26,7 +26,7 @@ public interface Docker {
 	 * @param dockable The dockable that has to be docked.
 	 * @return True if the dockable could be docked, false otherwise.
 	 */
-	public boolean dock(Dockable dockable);
+	boolean dock(Dockable dockable);
 
 	/**
 	 * <p>
@@ -39,7 +39,7 @@ public interface Docker {
 	 * @param prefix     The prefix for the property names.
 	 * @param properties The properties object to which the properties should be added.
 	 */
-	public void saveProperties(String prefix, Properties properties);
+	void saveProperties(String prefix, Properties properties);
 
 	/**
 	 * <p>
@@ -61,6 +61,6 @@ public interface Docker {
 	 *                     </ul>
 	 * @throws IOException        If an error occures while decoding the properties.
 	 */
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap) throws IOException;
+	void loadProperties(String prefix, Properties properties, Map dockablesMap) throws IOException;
 
 }

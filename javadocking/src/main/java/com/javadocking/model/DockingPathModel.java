@@ -36,7 +36,7 @@ public interface DockingPathModel {
 	 *
 	 * @param dockingPath The docking path that is added to the model.
 	 */
-	public void add(DockingPath dockingPath);
+	void add(DockingPath dockingPath);
 
 	/**
 	 * Gets the docking path of this model that has the given id as ID.
@@ -45,7 +45,7 @@ public interface DockingPathModel {
 	 * @return The docking path of this model that has the given id as ID.
 	 * If there is no docking path for this id, null is returned.
 	 */
-	public DockingPath getDockingPath(String id);
+	DockingPath getDockingPath(String id);
 
 	/**
 	 * Gets an iterator that iterates over the IDs of all the docking paths of the model.
@@ -53,14 +53,14 @@ public interface DockingPathModel {
 	 * @return An iterator that iterates over the IDs of the docking paths.
 	 * The entries of the iterator are java.lang.String objects.
 	 */
-	public Iterator getIDs();
+	Iterator getIDs();
 
 	/**
 	 * Removes the given docking path from the model.
 	 *
 	 * @param dockingPath The docking path that is removed from the model.
 	 */
-	public void remove(DockingPath dockingPath);
+	void remove(DockingPath dockingPath);
 
 	/**
 	 * <p>
@@ -84,7 +84,7 @@ public interface DockingPathModel {
 	 * <li>map value: a dock that is already loaded ({@link Dock}).</li>
 	 * </ul>
 	 */
-	public void loadProperties(String prefix, Properties properties, Map docks);
+	void loadProperties(String prefix, Properties properties, Map docks);
 
 	/**
 	 * <p>
@@ -102,6 +102,6 @@ public interface DockingPathModel {
 	 *                   <li>map value: the key that is used for saving the dock (java.lang.String).</li>
 	 *                   </ul>
 	 */
-	public void saveProperties(String prefix, Properties properties, Map dockKeys);
+	void saveProperties(String prefix, Properties properties, Map dockKeys);
 
 }

@@ -39,11 +39,11 @@ public interface DockableDragPainter {
 	 *                  The position of the rectangle is relative to the given dock.
 	 * @param    mouseLocation    The position of the mouse relative to the given dock.
 	 */
-	public void paintDockableDrag(Dockable dockable, Dock dock, Rectangle rectangle, Point mouseLocation);
+	void paintDockableDrag(Dockable dockable, Dock dock, Rectangle rectangle, Point mouseLocation);
 
 	/**
 	 * Clears everything what was painted by this painter before.
 	 */
-	public void clear();
+	void clear();
 
 }

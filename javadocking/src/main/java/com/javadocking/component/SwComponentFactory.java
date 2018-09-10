@@ -37,14 +37,14 @@ public interface SwComponentFactory {
 	 *
 	 * @return The created tabbed pane.
 	 */
-	public JTabbedPane createJTabbedPane();
+	JTabbedPane createJTabbedPane();
 
 	/**
 	 * Creates a split pane.
 	 *
 	 * @return The created split pane.
 	 */
-	public JSplitPane createJSplitPane();
+	JSplitPane createJSplitPane();
 
 	/**
 	 * Creates a non-modal dialog.
@@ -52,7 +52,7 @@ public interface SwComponentFactory {
 	 * @param owner The owner of the dialog.
 	 * @return The created non-modal dialog.
 	 */
-	public JDialog createJDialog(Window owner);
+	JDialog createJDialog(Window owner);
 
 	/**
 	 * Creates a window.
@@ -60,21 +60,21 @@ public interface SwComponentFactory {
 	 * @param owner The owner of the window.
 	 * @return The created window.
 	 */
-	public Window createWindow(Window owner);
+	Window createWindow(Window owner);
 
 	/**
 	 * Creates a border for a floating window.
 	 *
 	 * @return The created border.
 	 */
-	public Border createFloatingBorder();
+	Border createFloatingBorder();
 
 	/**
 	 * Creates a label.
 	 *
 	 * @return The created label.
 	 */
-	public JLabel createJLabel();
+	JLabel createJLabel();
 
 	/**
 	 * Creates a small icon component to perform the given action.
@@ -82,7 +82,7 @@ public interface SwComponentFactory {
 	 * @param action The action that will be performed when the button is clicked.
 	 * @return The created small icon component to perform the given action.
 	 */
-	public Component createIconButton(Action action);
+	Component createIconButton(Action action);
 
 	/**
 	 * Creates the header for the given dockable that will be displayed in a tab of a dock.
@@ -92,7 +92,7 @@ public interface SwComponentFactory {
 	 * Position.LEFT, Position.RIGHT, Position.TOP or Position.BOTTOM.
 	 * @return A header for the dockable in the tab.
 	 */
-	public SelectableHeader createTabDockHeader(Dockable dockable, int position);
+	SelectableHeader createTabDockHeader(Dockable dockable, int position);
 
 	/**
 	 * Creates the header for the given dock that will be displayed in a tab of a dock.
@@ -102,7 +102,7 @@ public interface SwComponentFactory {
 	 * Position.LEFT, Position.RIGHT, Position.TOP or Position.BOTTOM.
 	 * @return A header for the dockable in the tab.
 	 */
-	public SelectableHeader createCompositeTabDockHeader(Dock childDock, int position);
+	SelectableHeader createCompositeTabDockHeader(Dock childDock, int position);
 
 	/**
 	 * Creates the header for the specified dock with one dockable.
@@ -112,7 +112,7 @@ public interface SwComponentFactory {
 	 * Position.LEFT, Position.RIGHT, Position.TOP or Position.BOTTOM.
 	 * @return A header for a dock with one dockable.
 	 */
-	public DockHeader createSingleDockHeader(LeafDock dock, int position);
+	DockHeader createSingleDockHeader(LeafDock dock, int position);
 
 	/**
 	 * <p>
@@ -130,7 +130,7 @@ public interface SwComponentFactory {
 	 * </ul>
 	 * @return The header for a dock with multiple dockables.
 	 */
-	public DockHeader createDockHeader(LeafDock dock, int position);
+	DockHeader createDockHeader(LeafDock dock, int position);
 
 	/**
 	 * Creates the header for the specified dockable in a maximize panel.
@@ -146,7 +146,7 @@ public interface SwComponentFactory {
 	 * </ul>
 	 * @return A header for a dockable.
 	 */
-	public Header createMaximizeHeader(Dockable dockable, int position);
+	Header createMaximizeHeader(Dockable dockable, int position);
 
 	/**
 	 * Creates the header for the specified dockable in a minimize panel.
@@ -162,14 +162,14 @@ public interface SwComponentFactory {
 	 * </ul>
 	 * @return A header for a dockable.
 	 */
-	public SelectableHeader createMinimizeHeader(Dockable dockable, int position);
+	SelectableHeader createMinimizeHeader(Dockable dockable, int position);
 
 	/**
 	 * Creates a {@link LeafDock} in which a dockable can be externalized.
 	 *
 	 * @return A dock in which a dockable can be externalized.
 	 */
-	public ExternalizeDock createExternalizer();
+	ExternalizeDock createExternalizer();
 
 
 	/**
@@ -181,6 +181,6 @@ public interface SwComponentFactory {
 	 * @param compositeDockable The dockables in the selected dock.
 	 * @return A popup menu for the selected dockable and the other dockables in the dock.
 	 */
-	public JPopupMenu createPopupMenu(Dockable selectedDockable, CompositeDockable compositeDockable);
+	JPopupMenu createPopupMenu(Dockable selectedDockable, CompositeDockable compositeDockable);
 
 }
