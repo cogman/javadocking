@@ -47,9 +47,8 @@ public class DockingEventSupport {
 	 */
 	public void fireDockingWillChange(DockingEvent dockingEvent) {
 
-		Iterator iterator = dockingListeners.iterator();
-		while (iterator.hasNext()) {
-			DockingListener dockingListener = (DockingListener) iterator.next();
+		for (Object dockingListener1 : dockingListeners) {
+			DockingListener dockingListener = (DockingListener) dockingListener1;
 			dockingListener.dockingWillChange(dockingEvent);
 		}
 
@@ -63,9 +62,8 @@ public class DockingEventSupport {
 	 */
 	public void fireDockingChanged(DockingEvent dockingEvent) {
 
-		Iterator iterator = dockingListeners.iterator();
-		while (iterator.hasNext()) {
-			DockingListener dockingListener = (DockingListener) iterator.next();
+		for (Object dockingListener1 : dockingListeners) {
+			DockingListener dockingListener = (DockingListener) dockingListener1;
 			dockingListener.dockingChanged(dockingEvent);
 		}
 

@@ -264,10 +264,9 @@ public class DynamicExample extends JPanel {
 		fileMenu.add(menuItem);
 
 		// Iterate over the dockables.
-		Iterator iterator = dockables.listIterator();
-		while (iterator.hasNext()) {
+		for (Object dockable1 : dockables) {
 			// Get the dockable.
-			Dockable dockable = (Dockable) iterator.next();
+			Dockable dockable = (Dockable) dockable1;
 
 			// Create the checkboxmenu for the dockable.
 			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockable);

@@ -474,9 +474,8 @@ public class DynamicDragger implements Dragger {
 		if (dockWithGhost != null) {
 			dockWithGhost.clearGhosts();
 		}
-		Iterator iterator = singleDocksWithGhosts.iterator();
-		while (iterator.hasNext()) {
-			((SingleDock) iterator.next()).clearGhosts();
+		for (Object singleDocksWithGhost : singleDocksWithGhosts) {
+			((SingleDock) singleDocksWithGhost).clearGhosts();
 		}
 //		if (originDock instanceof SingleDock)
 //		{

@@ -134,8 +134,8 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		dockableHeader.addPropertyChangeListener(selectionChangeListener);
 		minimizedHeaders.put(dockableToVisualize, dockableHeader);
 		removeAll();
-		for (int index = 0; index < minimizedDockables.size(); index++) {
-			add((Component) minimizedHeaders.get(minimizedDockables.get(index)));
+		for (Object minimizedDockable : minimizedDockables) {
+			add((Component) minimizedHeaders.get(minimizedDockable));
 		}
 		revalidate();
 		repaint();
@@ -195,9 +195,9 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		dockableIdArray = PropertiesUtil.getStringArray(properties, prefix + PROPERTY_DOCKABLE_IDS, dockableIdArray);
 
 		// Iterate over the IDs of the dockables.
-		for (int index = 0; index < dockableIdArray.length; index++) {
+		for (final String aDockableIdArray : dockableIdArray) {
 			// Try to get the dockable.
-			Object dockableObject = dockablesMap.get(dockableIdArray[index]);
+			Object dockableObject = dockablesMap.get(aDockableIdArray);
 			if (dockableObject != null) {
 				if (dockableObject instanceof Dockable) {
 					Dockable dockable = (Dockable) dockableObject;
@@ -219,9 +219,9 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		deselectAllMinimizedHeaders(null);
 
 		// Iterate over the IDs of the selected dockables.
-		for (int index = 0; index < selectedDockableIdArray.length; index++) {
+		for (final String aSelectedDockableIdArray : selectedDockableIdArray) {
 			// Try to get the dockable.
-			Object dockableObject = dockablesMap.get(selectedDockableIdArray[index]);
+			Object dockableObject = dockablesMap.get(aSelectedDockableIdArray);
 			if (dockableObject != null) {
 				if (dockableObject instanceof Dockable) {
 					// Select the dockable.
@@ -377,9 +377,9 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		setLayout(new BoxLayout(this, layout));
 
 		// Create all the headers again.
-		for (int index = 0; index < minimizedDockables.size(); index++) {
+		for (Object minimizedDockable : minimizedDockables) {
 			// Get the header.
-			Dockable dockable = (Dockable) minimizedDockables.get(index);
+			Dockable dockable = (Dockable) minimizedDockable;
 			SelectableDockableHeader oldMinimizeHeader = (SelectableDockableHeader) minimizedHeaders.get(dockable);
 			oldMinimizeHeader.removePropertyChangeListener(selectionChangeListener);
 			boolean selected = oldMinimizeHeader.isSelected();
@@ -403,9 +403,8 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 	private void deselectAllMinimizedHeaders(Object notTodeselectObject) {
 
 		// Iterate over all the headers.
-		Iterator headerIterator = minimizedHeaders.values().iterator();
-		while (headerIterator.hasNext()) {
-			SelectableDockableHeader selectableDockableHeader = (SelectableDockableHeader) headerIterator.next();
+		for (Object o : minimizedHeaders.values()) {
+			SelectableDockableHeader selectableDockableHeader = (SelectableDockableHeader) o;
 			if (!selectableDockableHeader.equals(notTodeselectObject)) {
 				selectableDockableHeader.removePropertyChangeListener(selectionChangeListener);
 				selectableDockableHeader.setSelected(false);
@@ -423,9 +422,8 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 	private void selectMinimizedHeader(Object objectToSelect, boolean selected) {
 
 		// Iterate over all the headers.
-		Iterator headerIterator = minimizedHeaders.values().iterator();
-		while (headerIterator.hasNext()) {
-			SelectableDockableHeader selectableDockableHeader = (SelectableDockableHeader) headerIterator.next();
+		for (Object o : minimizedHeaders.values()) {
+			SelectableDockableHeader selectableDockableHeader = (SelectableDockableHeader) o;
 			if (selectableDockableHeader.equals(objectToSelect)) {
 				selectableDockableHeader.removePropertyChangeListener(selectionChangeListener);
 				selectableDockableHeader.setSelected(selected);
@@ -445,7 +443,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 			if (propertyChangeEvent.getPropertyName().equals("selected")) {
 				Object newValue = propertyChangeEvent.getNewValue();
 				if (newValue instanceof Boolean) {
-					boolean newSelected = ((Boolean) newValue).booleanValue();
+					boolean newSelected = (Boolean) newValue;
 					Object source = propertyChangeEvent.getSource();
 					if (newSelected) {
 						// Deselect all the headers a select the selected.

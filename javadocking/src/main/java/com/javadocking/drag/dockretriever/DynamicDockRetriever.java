@@ -99,8 +99,8 @@ public class DynamicDockRetriever implements DockRetriever {
 
 			// Get the first dock in the list with highest priority.
 			// Iterate over the docks.
-			for (int index = 0; index < possibleDocks.size(); index++) {
-				Dock possibleDock = (Dock) possibleDocks.get(index);
+			for (Object possibleDock1 : possibleDocks) {
+				Dock possibleDock = (Dock) possibleDock1;
 
 				// Get the mouse location for the possible dock.
 				Point relativeLocation = new Point(screenLocation.x, screenLocation.y);
@@ -216,9 +216,8 @@ public class DynamicDockRetriever implements DockRetriever {
 		}
 
 		Set floatDocks = DockModelUtil.getVisibleFloatDocks(dockModel, ownerWindow);
-		Iterator floatDockIterator = floatDocks.iterator();
-		while (floatDockIterator.hasNext()) {
-			FloatDock floatDock = (FloatDock) floatDockIterator.next();
+		for (Object floatDock1 : floatDocks) {
+			FloatDock floatDock = (FloatDock) floatDock1;
 
 			// Iterate first over the children of the float dock. These children are the floating windows.
 			// Check first if this dock may float.

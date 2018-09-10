@@ -499,8 +499,8 @@ public class DockingExecutor {
 					emptyChildren.add(childDock);
 				}
 			}
-			for (int index = 0; index < emptyChildren.size(); index++) {
-				compositeDock.emptyChild((Dock) emptyChildren.get(index));
+			for (Object anEmptyChildren : emptyChildren) {
+				compositeDock.emptyChild((Dock) anEmptyChildren);
 			}
 		}
 

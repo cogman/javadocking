@@ -138,11 +138,11 @@ public class MultiWorkspaceExample extends JPanel {
 			try {
 				// Create the map with the dockables, that the decoder needs.
 				Map dockablesMap = new HashMap();
-				for (int index = 0; index < dockables.length; index++) {
-					dockablesMap.put(dockables[index].getID(), dockables[index]);
+				for (final Dockable dockable : dockables) {
+					dockablesMap.put(dockable.getID(), dockable);
 				}
-				for (int index = 0; index < buttonDockables.length; index++) {
-					dockablesMap.put(buttonDockables[index].getID(), buttonDockables[index]);
+				for (final Dockable buttonDockable : buttonDockables) {
+					dockablesMap.put(buttonDockable.getID(), buttonDockable);
 				}
 
 				// Create the map with the owner windows, that the decoder needs.

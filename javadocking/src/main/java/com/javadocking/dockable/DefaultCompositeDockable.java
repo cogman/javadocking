@@ -227,8 +227,8 @@ public class DefaultCompositeDockable implements CompositeDockable {
 		// Calculate the docking modes. It's a bitwise and of the docking modes of every chid dockable.
 		if (dockablesArray.length > 0) {
 			int combinedDockingModes = dockablesArray[0].getDockingModes();
-			for (int index = 0; index < dockablesArray.length; index++) {
-				combinedDockingModes = combinedDockingModes & dockablesArray[index].getDockingModes();
+			for (final Dockable aDockablesArray : dockablesArray) {
+				combinedDockingModes = combinedDockingModes & aDockablesArray.getDockingModes();
 			}
 			return combinedDockingModes;
 		}

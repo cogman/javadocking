@@ -152,10 +152,9 @@ public class SwingUtil {
 		Rectangle graphicsConfigurationBounds = new Rectangle();
 
 		// Iterate over the graphics devices.
-		for (int j = 0; j < graphicsDevices.length; j++) {
+		for (GraphicsDevice graphicsDevice : graphicsDevices) {
 
 			// Get the bounds of the device.
-			GraphicsDevice graphicsDevice = graphicsDevices[j];
 			graphicsConfigurationBounds.setRect(graphicsDevice.getDefaultConfiguration().getBounds());
 
 			// Is the location in this bounds?

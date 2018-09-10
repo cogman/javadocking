@@ -277,9 +277,9 @@ public class MainChartDockingExample extends JPanel {
 		fileMenu.add(menuItem);
 
 		// The JMenuItems for the dockables.
-		for (int index = 0; index < dockables.length; index++) {
+		for (final Dockable dockable : dockables) {
 			// Create the check box menu for the dockable.
-			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockables[index]);
+			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockable);
 			windowMenu.add(cbMenuItem);
 		}
 

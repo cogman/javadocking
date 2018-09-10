@@ -399,10 +399,9 @@ public class CompositeTabDock extends JPanel implements CompositeDock {
 
 		// Create an array with the child docks ids in the right order.
 		String[] childDockIdsArray = new String[newChildDocks.keySet().size()];
-		Iterator keyIterator = newChildDocks.keySet().iterator();
-		while (keyIterator.hasNext()) {
+		for (Object o : newChildDocks.keySet()) {
 			// Get the ID of the child dock.
-			String childDockId = (String) keyIterator.next();
+			String childDockId = (String) o;
 
 			Position position = null;
 			position = Position.getPositionProperty(properties, prefix + CHILD_DOCK_PREFIX + childDockId + "." + Position.PROPERTY_POSITION, position);
@@ -412,9 +411,9 @@ public class CompositeTabDock extends JPanel implements CompositeDock {
 
 		// Add the child docks.
 		int position = 0;
-		for (int index = 0; index < childDockIdsArray.length; index++) {
+		for (final String aChildDockIdsArray : childDockIdsArray) {
 			// Get the child dock.
-			Dock dock = (Dock) newChildDocks.get(childDockIdsArray[index]);
+			Dock dock = (Dock) newChildDocks.get(aChildDockIdsArray);
 
 			// Add only if the child is not empty.
 			if (!dock.isEmpty()) {

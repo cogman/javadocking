@@ -39,10 +39,10 @@ public class DockGallery extends JFrame {
 		startDemoActions[15] = new ImageMinimizeHeaderAction();
 		startDemoActions[16] = new ButtonAction();
 
-		for (int index = 0; index < startDemoActions.length; index++) {
-			JButton button = new JButton(startDemoActions[index]);
+		for (final DockAction startDemoAction : startDemoActions) {
+			JButton button = new JButton(startDemoAction);
 			button.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
-			button.setToolTipText(startDemoActions[index].getDescription());
+			button.setToolTipText(startDemoAction.getDescription());
 			buttonPanel.add(button);
 		}
 

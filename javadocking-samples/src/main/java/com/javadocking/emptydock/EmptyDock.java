@@ -263,11 +263,11 @@ public class EmptyDock extends JPanel {
 		LAFS[8] = new LAF("TinyLaF", "de.muntjak.tinylookandfeel.TinyLookAndFeel", LAF.THEME_DEAULT);
 
 		// Set the first enabled look and feel.
-		for (int index = 0; index < LAFS.length; index++) {
+		for (final com.javadocking.util.LAF LAF : LAFS) {
 			try {
-				if (LAFS[index].isSupported()) {
-					LAFS[index].setSelected(true);
-					UIManager.setLookAndFeel(LAFS[index].getClassName());
+				if (LAF.isSupported()) {
+					LAF.setSelected(true);
+					UIManager.setLookAndFeel(LAF.getClassName());
 					break;
 				}
 			} catch (Exception e) {
@@ -432,16 +432,16 @@ public class EmptyDock extends JPanel {
 		fileMenu.add(menuItem);
 
 		// The JMenuItems for the dockables.
-		for (int index = 0; index < dockables.length; index++) {
+		for (final Dockable dockable : dockables) {
 			// Create the check box menu for the dockable.
-			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockables[index]);
+			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockable);
 			windowMenu.add(cbMenuItem);
 		}
 
 		// The JMenuItems for the look and feels.
 		ButtonGroup group = new ButtonGroup();
-		for (int index = 0; index < LAFS.length; index++) {
-			LafMenuItem lafMenuItem = new LafMenuItem(LAFS[index]);
+		for (final com.javadocking.util.LAF LAF : LAFS) {
+			LafMenuItem lafMenuItem = new LafMenuItem(LAF);
 			lookAndFeelMenu.add(lafMenuItem);
 			group.add(lafMenuItem);
 		}
@@ -467,9 +467,9 @@ public class EmptyDock extends JPanel {
 		draggingMenuItems[5] = new DraggingMenuItem("Labeled rectangle with labeled window", swDockableDragPainterWithLabelNoFloat, windowDockableDragPainterWithLabel, false);
 		draggingMenuItems[6] = new DraggingMenuItem("Rectangle with transparent window (only fast computers)", swDockableDragPainterWithoutLabelNoFloat, transparentWindowDockableDragPainterWithoutLabel, false);
 		draggingMenuItems[7] = new DraggingMenuItem("Labeled rectangle with labeled transparent window (only fast computers)", swDockableDragPainterWithLabelNoFloat, transparentWindowDockableDragPainterWithLabel, false);
-		for (int index = 0; index < draggingMenuItems.length; index++) {
-			draggingMenu.add(draggingMenuItems[index]);
-			group.add(draggingMenuItems[index]);
+		for (final DraggingMenuItem draggingMenuItem : draggingMenuItems) {
+			draggingMenu.add(draggingMenuItem);
+			group.add(draggingMenuItem);
 		}
 
 		return menuBar;
@@ -501,9 +501,8 @@ public class EmptyDock extends JPanel {
 
 				// Set the LaF on the floating windows.
 				Set floatDocks = DockModelUtil.getVisibleFloatDocks(dockModel, owner);
-				Iterator iterator = floatDocks.iterator();
-				while (iterator.hasNext()) {
-					FloatDock floatDock = (FloatDock) iterator.next();
+				for (Object floatDock1 : floatDocks) {
+					FloatDock floatDock = (FloatDock) floatDock1;
 					for (int childIndex = 0; childIndex < floatDock.getChildDockCount(); childIndex++) {
 						Component floatingComponent = (Component) floatDock.getChildDock(childIndex);
 						SwingUtilities.updateComponentTreeUI(SwingUtilities.getWindowAncestor(floatingComponent));
@@ -511,8 +510,8 @@ public class EmptyDock extends JPanel {
 				}
 
 				// Set the LaF on all the dockable components.
-				for (int dockableIndex = 0; dockableIndex < dockables.length; dockableIndex++) {
-					SwingUtilities.updateComponentTreeUI(dockables[dockableIndex].getContent());
+				for (final Dockable dockable : dockables) {
+					SwingUtilities.updateComponentTreeUI(dockable.getContent());
 				}
 
 
@@ -622,8 +621,8 @@ public class EmptyDock extends JPanel {
 		// Implementations of ItemListener.
 
 		public void actionPerformed(ActionEvent arg0) {
-			for (int index = 0; index < LAFS.length; index++) {
-				LAFS[index].setSelected(false);
+			for (final com.javadocking.util.LAF LAF : LAFS) {
+				LAF.setSelected(false);
 			}
 			setLookAndFeel(laf);
 			laf.setSelected(true);

@@ -284,9 +284,9 @@ public class FloatDock implements CompositeDock {
 
 		// Iterate over the child docks.
 		int[] dim = new int[2];
-		for (int index = 0; index < childDocks.size(); index++) {
+		for (Object childDock : childDocks) {
 			// Get the child dock.
-			Dock dock = (Dock) childDocks.get(index);
+			Dock dock = (Dock) childDock;
 
 			// Get the ID of the childDock.
 			String childDockId = (String) childDockIds.get(dock);
@@ -330,10 +330,9 @@ public class FloatDock implements CompositeDock {
 
 		// Create an array with the child dock IDs in the right order.
 		String[] childDockIdsArray = new String[newChildDocks.keySet().size()];
-		Iterator keyIterator = newChildDocks.keySet().iterator();
-		while (keyIterator.hasNext()) {
+		for (Object o : newChildDocks.keySet()) {
 			// Get the ID of the child dock.
-			String childDockId = (String) keyIterator.next();
+			String childDockId = (String) o;
 
 			// Get the position of this child in the list of child docks.
 			Position position = null;
@@ -571,9 +570,8 @@ public class FloatDock implements CompositeDock {
 	 */
 	public void removeWindowFocusListener(WindowFocusListener windowFocusListener) {
 		windowFocusListeners.remove(windowFocusListener);
-		Iterator iterator = childDockWindows.values().iterator();
-		while (iterator.hasNext()) {
-			Window window = (Window) iterator.next();
+		for (Object o : childDockWindows.values()) {
+			Window window = (Window) o;
 			window.removeWindowFocusListener(windowFocusListener);
 		}
 
@@ -652,9 +650,8 @@ public class FloatDock implements CompositeDock {
 
 		// Add the listeners.
 		dialog.addWindowFocusListener(new MoveToFrontListener(dock));
-		Iterator iterator = windowFocusListeners.iterator();
-		while (iterator.hasNext()) {
-			dialog.addWindowFocusListener((WindowFocusListener) iterator.next());
+		for (Object windowFocusListener : windowFocusListeners) {
+			dialog.addWindowFocusListener((WindowFocusListener) windowFocusListener);
 		}
 		dialog.addWindowListener(windowClosingListener);
 
@@ -737,9 +734,8 @@ public class FloatDock implements CompositeDock {
 			DockingUtil.retrieveDockables(childDock, childDockables);
 
 			// The dockables have no dock anymore.
-			Iterator iterator = childDockables.iterator();
-			while (iterator.hasNext()) {
-				Dockable dockable = (Dockable) iterator.next();
+			for (Object childDockable : childDockables) {
+				Dockable dockable = (Dockable) childDockable;
 				dockable.setState(DockableState.CLOSED, null);
 			}
 

@@ -231,11 +231,11 @@ public class WorkspaceExample extends JPanel {
 			try {
 				// Create the map with the dockables, that the decoder needs.
 				Map dockablesMap = new HashMap();
-				for (int index = 0; index < dockables.length; index++) {
-					dockablesMap.put(dockables[index].getID(), dockables[index]);
+				for (final Dockable dockable : dockables) {
+					dockablesMap.put(dockable.getID(), dockable);
 				}
-				for (int index = 0; index < buttonDockables.length; index++) {
-					dockablesMap.put(buttonDockables[index].getID(), buttonDockables[index]);
+				for (final Dockable buttonDockable : buttonDockables) {
+					dockablesMap.put(buttonDockable.getID(), buttonDockable);
 				}
 
 				// Create the map with the owner windows, that the decoder needs.
@@ -661,9 +661,9 @@ public class WorkspaceExample extends JPanel {
 		fileMenu.add(menuItem);
 
 		// The JMenuItems for the dockables.
-		for (int index = 0; index < dockables.length; index++) {
+		for (final Dockable dockable : dockables) {
 			// Create the check box menu for the dockable.
-			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockables[index]);
+			JCheckBoxMenuItem cbMenuItem = new DockableMenuItem(dockable);
 			windowMenu.add(cbMenuItem);
 		}
 
@@ -673,8 +673,8 @@ public class WorkspaceExample extends JPanel {
 
 		// The JMenuItems for the look and feels.
 		ButtonGroup group = new ButtonGroup();
-		for (int index = 0; index < LAFS.length; index++) {
-			LafMenuItem lafMenuItem = new LafMenuItem(LAFS[index]);
+		for (final com.javadocking.util.LAF LAF : LAFS) {
+			LafMenuItem lafMenuItem = new LafMenuItem(LAF);
 			lookAndFeelMenu.add(lafMenuItem);
 			group.add(lafMenuItem);
 		}
@@ -700,9 +700,9 @@ public class WorkspaceExample extends JPanel {
 		draggingMenuItems[5] = new DraggingMenuItem("Labeled rectangle with labeled window", swDockableDragPainterWithLabelNoFloat, windowDockableDragPainterWithLabel, false);
 		draggingMenuItems[6] = new DraggingMenuItem("Rectangle with transparent window (only fast computers)", swDockableDragPainterWithoutLabelNoFloat, transparentWindowDockableDragPainterWithoutLabel, false);
 		draggingMenuItems[7] = new DraggingMenuItem("Labeled rectangle with labeled transparent window (only fast computers)", swDockableDragPainterWithLabelNoFloat, transparentWindowDockableDragPainterWithLabel, false);
-		for (int index = 0; index < draggingMenuItems.length; index++) {
-			draggingMenu.add(draggingMenuItems[index]);
-			group.add(draggingMenuItems[index]);
+		for (final DraggingMenuItem draggingMenuItem : draggingMenuItems) {
+			draggingMenu.add(draggingMenuItem);
+			group.add(draggingMenuItem);
 		}
 
 		return menuBar;
@@ -736,11 +736,11 @@ public class WorkspaceExample extends JPanel {
 				}
 
 				// Set the LaF on all the dockable components.
-				for (int dockableIndex = 0; dockableIndex < dockables.length; dockableIndex++) {
-					SwingUtilities.updateComponentTreeUI(dockables[dockableIndex].getContent());
+				for (final Dockable dockable : dockables) {
+					SwingUtilities.updateComponentTreeUI(dockable.getContent());
 				}
-				for (int dockableIndex = 0; dockableIndex < buttonDockables.length; dockableIndex++) {
-					SwingUtilities.updateComponentTreeUI(buttonDockables[dockableIndex].getContent());
+				for (final Dockable buttonDockable : buttonDockables) {
+					SwingUtilities.updateComponentTreeUI(buttonDockable.getContent());
 				}
 
 			}
@@ -965,8 +965,8 @@ public class WorkspaceExample extends JPanel {
 		// Implementations of ItemListener.
 
 		public void actionPerformed(ActionEvent arg0) {
-			for (int index = 0; index < LAFS.length; index++) {
-				LAFS[index].setSelected(false);
+			for (final com.javadocking.util.LAF LAF : LAFS) {
+				LAF.setSelected(false);
 			}
 			setLookAndFeel(laf);
 			laf.setSelected(true);

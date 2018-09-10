@@ -94,9 +94,8 @@ public class DefaultPopupMenuFactory implements PopupMenuFactory {
 
 			// Iterate over the rows.
 			boolean firstGroup = true;
-			for (int group = 0; group < actionMatrix.length; group++) {
+			for (Action[] actionGroup : actionMatrix) {
 
-				Action[] actionGroup = actionMatrix[group];
 				if ((actionGroup != null) && (actionGroup.length > 0)) {
 					// Are we in the first group?
 					if (firstGroup) {
@@ -106,8 +105,8 @@ public class DefaultPopupMenuFactory implements PopupMenuFactory {
 					}
 
 					// Add all the actions of the group.
-					for (int index = 0; index < actionGroup.length; index++) {
-						popupMenu.add(new JMenuItem(actionGroup[index]));
+					for (final Action anActionGroup : actionGroup) {
+						popupMenu.add(new JMenuItem(anActionGroup));
 						count++;
 					}
 				}
@@ -279,11 +278,9 @@ public class DefaultPopupMenuFactory implements PopupMenuFactory {
 		if (actionMatrix == null) {
 			return false;
 		}
-		for (int row = 0; row < actionMatrix.length; row++) {
-			Action[] actionRow = actionMatrix[row];
+		for (Action[] actionRow : actionMatrix) {
 			if (actionRow != null) {
-				for (int column = 0; column < actionRow.length; column++) {
-					Action action = actionRow[column];
+				for (Action action : actionRow) {
 					if (action instanceof DockableStateAction) {
 						DockableStateAction dockableStateAction = (DockableStateAction) action;
 						if (dockableStateAction.getNewDockableState() == newState) {

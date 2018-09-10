@@ -27,7 +27,7 @@ class LastDockables {
 	 * @param dockable The dockable to add.
 	 */
 	public void add(Dockable dockable) {
-		dockables.put(dockable, new Integer(counter));
+		dockables.put(dockable, counter);
 
 		if (counter < Integer.MAX_VALUE) {
 			counter++;
@@ -46,12 +46,11 @@ class LastDockables {
 		// The list with dockables that can be removed, because they have no dock anymore.
 		List dockablesToRemove = new ArrayList();
 		Dockable lastDockable = null;
-		Integer lastDockableValue = new Integer(Integer.MIN_VALUE);
+		Integer lastDockableValue = Integer.MIN_VALUE;
 
 		// Iterate over all the dockables.
-		Iterator dockableIterator = dockables.keySet().iterator();
-		while (dockableIterator.hasNext()) {
-			Dockable dockable = (Dockable) dockableIterator.next();
+		for (Object o : dockables.keySet()) {
+			Dockable dockable = (Dockable) o;
 			if (dockable.getDock() == null) {
 				// The dock of the dockable is null, so it can be removed.
 				dockablesToRemove.add(dockable);
@@ -63,9 +62,8 @@ class LastDockables {
 		}
 
 		// Remove the dockables, we don't need anymore.
-		Iterator removeIterator = dockablesToRemove.iterator();
-		while (removeIterator.hasNext()) {
-			dockables.remove(removeIterator.next());
+		for (Object aDockablesToRemove : dockablesToRemove) {
+			dockables.remove(aDockablesToRemove);
 		}
 
 		return lastDockable;
@@ -76,13 +74,12 @@ class LastDockables {
 
 		// Save the dockables in the mapping.
 		int count = 0;
-		Iterator iterator = dockables.keySet().iterator();
-		while (iterator.hasNext()) {
-			Dockable dockable = (Dockable) iterator.next();
+		for (Object o : dockables.keySet()) {
+			Dockable dockable = (Dockable) o;
 			Integer value = (Integer) dockables.get(dockable);
 			if (value != null) {
 				PropertiesUtil.setString(properties, prefix + "dockable" + count, dockable.getID());
-				PropertiesUtil.setInteger(properties, prefix + "value" + count, value.intValue());
+				PropertiesUtil.setInteger(properties, prefix + "value" + count, value);
 				count++;
 			}
 		}
@@ -106,7 +103,7 @@ class LastDockables {
 			if (id != null) {
 				Dockable dockable = (Dockable) dockablesMap.get(id);
 				if (dockable != null) {
-					dockables.put(dockable, new Integer(value));
+					dockables.put(dockable, value);
 				}
 				if (value > maxValue) {
 					maxValue = value;

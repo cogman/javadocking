@@ -22,9 +22,8 @@ public class CompositeDockableDragPainter implements DockableDragPainter {
 
 	public void clear() {
 
-		Iterator iterator = painters.iterator();
-		while (iterator.hasNext()) {
-			DockableDragPainter dockableDragPainter = (DockableDragPainter) iterator.next();
+		for (Object painter : painters) {
+			DockableDragPainter dockableDragPainter = (DockableDragPainter) painter;
 			dockableDragPainter.clear();
 		}
 
@@ -32,9 +31,8 @@ public class CompositeDockableDragPainter implements DockableDragPainter {
 
 	public void paintDockableDrag(Dockable dockable, Dock dock, Rectangle rectangle, Point locationInDestinationDock) {
 
-		Iterator iterator = painters.iterator();
-		while (iterator.hasNext()) {
-			DockableDragPainter dockableDragPainter = (DockableDragPainter) iterator.next();
+		for (Object painter : painters) {
+			DockableDragPainter dockableDragPainter = (DockableDragPainter) painter;
 			dockableDragPainter.paintDockableDrag(dockable, dock, rectangle, locationInDestinationDock);
 		}
 	}

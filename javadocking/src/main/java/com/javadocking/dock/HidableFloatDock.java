@@ -110,9 +110,8 @@ public class HidableFloatDock extends FloatDock {
 	private void hide(boolean hidden) {
 
 		Map childDockWindows = getChildDockWindows();
-		Iterator iterator = getChildDockWindows().values().iterator();
-		while (iterator.hasNext()) {
-			Window window = (Window) iterator.next();
+		for (Object o : getChildDockWindows().values()) {
+			Window window = (Window) o;
 			window.setVisible(!hidden);
 		}
 

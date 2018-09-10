@@ -1472,9 +1472,9 @@ public class SplitDock extends JPanel implements CompositeDock {
 		}
 
 		// Iterate over the elements of the first list.
-		for (int index = 0; index < firstList.size(); index++) {
+		for (Object aFirstList : firstList) {
 			// Check if the element is also in the second list.
-			if (!secondList.contains(firstList.get(index))) {
+			if (!secondList.contains(aFirstList)) {
 				return false;
 			}
 		}

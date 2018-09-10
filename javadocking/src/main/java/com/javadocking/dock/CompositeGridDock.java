@@ -378,9 +378,9 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 		childDockFactory.saveProperties(prefix + "childDockFactory.", properties);
 
 		// Iterate over the child docks.
-		for (int index = 0; index < childDocks.size(); index++) {
+		for (Object childDock : childDocks) {
 			// Get the child dock.
-			Dock dock = (Dock) childDocks.get(index);
+			Dock dock = (Dock) childDock;
 
 			// Get the ID of the childDock.
 			String childDockId = (String) childDockIds.get(dock);
@@ -413,10 +413,9 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 		// Create an array with the child docks ids in the right order.
 		String[] childDockIdsArray = new String[newChildDocks.keySet().size()];
-		Iterator keyIterator = newChildDocks.keySet().iterator();
-		while (keyIterator.hasNext()) {
+		for (Object o : newChildDocks.keySet()) {
 			// Get the ID of the child dock.
-			String childDockId = (String) keyIterator.next();
+			String childDockId = (String) o;
 
 			// Get the position of this child.
 			Position position = null;
@@ -427,9 +426,9 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 		// Add the child docks.
 		int position = 0;
-		for (int index = 0; index < childDockIdsArray.length; index++) {
+		for (final String aChildDockIdsArray : childDockIdsArray) {
 			// Get the child dock.
-			Dock dock = (Dock) newChildDocks.get(childDockIdsArray[index]);
+			Dock dock = (Dock) newChildDocks.get(aChildDockIdsArray);
 
 			// Add only if the child is not empty.
 			if (!dock.isEmpty()) {
@@ -566,8 +565,8 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 			initializeUi(calculateColumnCount());
 
 			// Iterate over the remaining child docks.
-			for (int index = 0; index < childDocks.size(); index++) {
-				Dock childDock = (Dock) childDocks.get(index);
+			for (Object childDock1 : childDocks) {
+				Dock childDock = (Dock) childDock1;
 
 				// Remove the dock from the ghost panel.
 				ghostDockPanel.remove((Component) childDock);
@@ -721,10 +720,10 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 		// When we are here, there are already dockables in this dock.
 
 		// Iterate over the dockables.
-		for (int index = 0; index < childDocks.size(); index++) {
+		for (Object childDock1 : childDocks) {
 
 			// Get the child.
-			Component childDock = (Component) childDocks.get(index);
+			Component childDock = (Component) childDock1;
 			helpRectangle.setBounds(childDock.getLocation().x,
 					childDock.getLocation().y,
 					childDock.getSize().width,
@@ -816,9 +815,9 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 
 			// Calculate the maximum component size of the children.
 			Dimension maxPreferredSize = new Dimension(0, 0);
-			for (int index = 0; index < dockCount; index++) {
+			for (Object childDock : childDocks) {
 				// Get the preferred size of the child.
-				Dimension childSize = ((Component) childDocks.get(index)).getPreferredSize();
+				Dimension childSize = ((Component) childDock).getPreferredSize();
 
 				// Adjust the union size.
 				maxPreferredSize.setSize(Math.max(maxPreferredSize.width, childSize.width), Math.max(maxPreferredSize.height, childSize.height));
@@ -934,9 +933,9 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 		initializeUi(newColumnCount);
 
 		// Add all the docks.
-		for (int index = 0; index < childDocks.size(); index++) {
+		for (Object childDock1 : childDocks) {
 			// Add the child to the panel.
-			Dock childDock = (Dock) childDocks.get(index);
+			Dock childDock = (Dock) childDock1;
 			dockPanel.add((Component) childDock);
 		}
 

@@ -155,9 +155,9 @@ public class DragPainter extends JPanel {
 		draggingMenuItems[5] = new DraggingMenuItem("Labeled rectangle with labeled window", swDockableDragPainterWithLabelNoFloat, windowDockableDragPainterWithLabel, false);
 		draggingMenuItems[6] = new DraggingMenuItem("Rectangle with transparent window (only fast computers)", swDockableDragPainterWithoutLabelNoFloat, transparentWindowDockableDragPainterWithoutLabel, false);
 		draggingMenuItems[7] = new DraggingMenuItem("Labeled rectangle with labeled transparent window (only fast computers)", swDockableDragPainterWithLabelNoFloat, transparentWindowDockableDragPainterWithLabel, false);
-		for (int index = 0; index < draggingMenuItems.length; index++) {
-			draggingMenu.add(draggingMenuItems[index]);
-			group.add(draggingMenuItems[index]);
+		for (final DraggingMenuItem draggingMenuItem : draggingMenuItems) {
+			draggingMenu.add(draggingMenuItem);
+			group.add(draggingMenuItem);
 		}
 
 		return menuBar;

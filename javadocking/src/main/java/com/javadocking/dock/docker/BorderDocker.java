@@ -82,8 +82,8 @@ public class BorderDocker implements Docker {
 
 		// Try to add the dockable to a child toolbar.
 		Dock childDock = null;
-		for (int index = 0; index < childPositions.length; index++) {
-			Dock dockInPosition = borderDock.getChildDockOfPosition(childPositions[index]);
+		for (final int childPosition : childPositions) {
+			Dock dockInPosition = borderDock.getChildDockOfPosition(childPosition);
 			if (dockInPosition != null) {
 				childDock = dockInPosition;
 				break;
@@ -99,9 +99,8 @@ public class BorderDocker implements Docker {
 
 		// Check if there is still free place in the border dock.
 		if (!borderDock.isFull()) {
-			for (int index = 0; index < childPositions.length; index++) {
+			for (int positionToAdd : childPositions) {
 				// Get the docking mode.
-				int positionToAdd = childPositions[index];
 				int dockingMode = borderDock.getDockingMode(positionToAdd);
 
 				// Create a new child toolbar.

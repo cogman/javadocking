@@ -666,9 +666,9 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 		childDockFactory.saveProperties(prefix + "childDockFactory.", properties);
 
 		// Iterate over the child docks.
-		for (int index = 0; index < childDocks.size(); index++) {
+		for (Object childDock : childDocks) {
 			// Get the child dock.
-			Dock dock = (Dock) childDocks.get(index);
+			Dock dock = (Dock) childDock;
 
 			// Get the ID of the childDock.
 			String childDockId = (String) childDockIds.get(dock);
@@ -710,10 +710,9 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 
 		// Create an array with the child docks ids in the right order.
 		String[] childDockIdsArray = new String[newChildDocks.keySet().size()];
-		Iterator keyIterator = newChildDocks.keySet().iterator();
-		while (keyIterator.hasNext()) {
+		for (Object o : newChildDocks.keySet()) {
 			// Get the ID of the child dock.
-			String childDockId = (String) keyIterator.next();
+			String childDockId = (String) o;
 
 			Position position = null;
 			position = Position.getPositionProperty(properties, prefix + CHILD_DOCK_PREFIX + childDockId + "." + Position.PROPERTY_POSITION, position);
@@ -723,9 +722,9 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 
 		// Add the child docks.
 		int position = 0;
-		for (int index = 0; index < childDockIdsArray.length; index++) {
+		for (final String aChildDockIdsArray : childDockIdsArray) {
 			// Get the child dock.
-			Dock dock = (Dock) newChildDocks.get(childDockIdsArray[index]);
+			Dock dock = (Dock) newChildDocks.get(aChildDockIdsArray);
 
 			// Add only if the child is not empty.
 			if (!dock.isEmpty()) {
@@ -765,8 +764,8 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 
 		// Remove and add all the childdocks from the dock panel.
 		dockPanel.removeAll();
-		for (int index = 0; index < childDocks.size(); index++) {
-			dockPanel.add((Component) childDocks.get(index));
+		for (Object childDock : childDocks) {
+			dockPanel.add((Component) childDock);
 		}
 
 		// Inform the listeners.
@@ -851,8 +850,8 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 			initializeUi();
 
 			// Iterate over the remaining child docks.
-			for (int index = 0; index < childDocks.size(); index++) {
-				Dock childDock = (Dock) childDocks.get(index);
+			for (Object childDock1 : childDocks) {
+				Dock childDock = (Dock) childDock1;
 
 				// Remove the dock from the ghost panel.
 				ghostDockPanel.remove((Component) childDock);
@@ -1197,7 +1196,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					priorityBorder * 2, dockPanel.getSize().height - priorityBorder * 2);
 
 			// Iterate over all the dockables.
-			for (int index = 0; index < childDocks.size(); index++) {
+			for (Object childDock : childDocks) {
 				// Is the location in this priority rectangle?
 				if (priorityRectangle.contains(relativeLocation)) {
 					// We are in a priority rectangle. We can dock with priority.
@@ -1205,7 +1204,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 				}
 
 				// Shift the rectangle horizontally to the left side of the next dockable.
-				int childWidth = ((Component) childDocks.get(index)).getSize().width;
+				int childWidth = ((Component) childDock).getSize().width;
 				priorityRectangle.translate(childWidth, 0);
 			}
 
@@ -1227,7 +1226,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					dockPanel.getSize().width - priorityBorder * 2, priorityBorder * 2);
 
 			// Iterate over all the dockables.
-			for (int index = 0; index < childDocks.size(); index++) {
+			for (Object childDock : childDocks) {
 				// Is the location in this priority rectangle?
 				if (priorityRectangle.contains(relativeLocation)) {
 					// We are in a priority rectangle. We can dock with priority.
@@ -1235,7 +1234,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 				}
 
 				// Shift the rectangle vertically to the top of the next dockable.
-				int childHeight = ((Component) childDocks.get(index)).getSize().height;
+				int childHeight = ((Component) childDock).getSize().height;
 				priorityRectangle.translate(0, childHeight);
 			}
 
@@ -1312,9 +1311,9 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 		initializeUi();
 
 		// Add all the child docks.
-		for (int index = 0; index < childDocks.size(); index++) {
+		for (Object childDock1 : childDocks) {
 			// Add the child to the panel.
-			Dock childDock = (Dock) childDocks.get(index);
+			Dock childDock = (Dock) childDock1;
 			dockPanel.add((Component) childDock);
 		}
 

@@ -503,9 +503,8 @@ public class DynamicTabDragger implements Dragger {
 		if (dockWithGhost != null) {
 			dockWithGhost.clearGhosts();
 		}
-		Iterator iterator = singleDocksWithGhosts.iterator();
-		while (iterator.hasNext()) {
-			((SingleDock) iterator.next()).clearGhosts();
+		for (Object singleDocksWithGhost : singleDocksWithGhosts) {
+			((SingleDock) singleDocksWithGhost).clearGhosts();
 		}
 
 		// Reset dragging fields.

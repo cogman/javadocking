@@ -395,8 +395,8 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 				for (int group = actionMatrix.length - 1; group >= 0; group--) {
 					Action[] actionGroup = actionMatrix[group];
 					if (actionGroup != null) {
-						for (int index = 0; index < actionGroup.length; index++) {
-							actionPanel.add(DockingManager.getComponentFactory().createIconButton(actionGroup[index]));
+						for (final Action anActionGroup : actionGroup) {
+							actionPanel.add(DockingManager.getComponentFactory().createIconButton(anActionGroup));
 						}
 					}
 				}
@@ -408,8 +408,8 @@ public class SelectableDockableHeader extends JPanel implements SelectableHeader
 					actionPanel = new JPanel();
 					actionPanel.setOpaque(false);
 					actionPanel.setLayout(new BoxLayout(actionPanel, BoxLayout.X_AXIS));
-					for (int index = 0; index < actionGroup.length; index++) {
-						actionPanel.add(DockingManager.getComponentFactory().createIconButton(actionGroup[index]));
+					for (final Action anActionGroup : actionGroup) {
+						actionPanel.add(DockingManager.getComponentFactory().createIconButton(anActionGroup));
 					}
 				}
 			}

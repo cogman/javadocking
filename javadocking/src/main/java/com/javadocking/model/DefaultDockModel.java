@@ -187,10 +187,9 @@ public class DefaultDockModel implements DockModel {
 	public void removeRootDock(Dock dock) {
 
 		// Get the key of the root dock.
-		Iterator rootDockKeyIterator = rootDockKeys.keySet().iterator();
-		while (rootDockKeyIterator.hasNext()) {
+		for (Object o1 : rootDockKeys.keySet()) {
 			// Get the key and its root dock.
-			String rootDockKey = (String) rootDockKeyIterator.next();
+			String rootDockKey = (String) o1;
 			Dock rootDock = getRootDock(rootDockKey);
 
 			// Is the root dock the given dock?
@@ -199,10 +198,9 @@ public class DefaultDockModel implements DockModel {
 				rootDockKeys.remove(rootDockKey);
 
 				// Iterate over the owner windows.
-				Iterator ownerRootDocksIterator = ownerRootDockKeys.values().iterator();
-				while (ownerRootDocksIterator.hasNext()) {
+				for (Object o : ownerRootDockKeys.values()) {
 					// Try to remove the key of the root dock from this owner.
-					Set ownerRootDocks = (Set) ownerRootDocksIterator.next();
+					Set ownerRootDocks = (Set) o;
 					if (ownerRootDocks.remove(rootDockKey)) {
 						// Success, we could remove the key.
 						return;
@@ -254,10 +252,9 @@ public class DefaultDockModel implements DockModel {
 	public void removeVisualizer(Visualizer visualizerToRemove) {
 
 		// Get the key of the visualizer.
-		Iterator visualizerKeyIterator = visualizerKeys.keySet().iterator();
-		while (visualizerKeyIterator.hasNext()) {
+		for (Object o1 : visualizerKeys.keySet()) {
 			// Get the key and its visualizer.
-			String visualizerKey = (String) visualizerKeyIterator.next();
+			String visualizerKey = (String) o1;
 			Visualizer visualizer = getVisualizer(visualizerKey);
 
 			// Is the visualizer the given visualizer?
@@ -266,10 +263,9 @@ public class DefaultDockModel implements DockModel {
 				visualizerKeys.remove(visualizerKey);
 
 				// Iterate over the owner windows.
-				Iterator ownerVisualizerIterator = ownerVisualizerKeys.values().iterator();
-				while (ownerVisualizerIterator.hasNext()) {
+				for (Object o : ownerVisualizerKeys.values()) {
 					// Try to remove the key of the visualizer from this owner.
-					Set ownerVisualizers = (Set) ownerVisualizerIterator.next();
+					Set ownerVisualizers = (Set) o;
 					if (ownerVisualizers.remove(visualizerKey)) {
 						// Success, we could remove the key.
 						return;

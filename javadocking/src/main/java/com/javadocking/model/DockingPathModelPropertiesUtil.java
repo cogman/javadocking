@@ -52,9 +52,7 @@ class DockingPathModelPropertiesUtil {
 		String[] idsArray = null;
 		idsArray = PropertiesUtil.getStringArray(properties, prefix + PROPERTY_DOCKING_PATH_IDS, idsArray);
 		if ((idsArray != null) && (idsArray.length > 0)) {
-			for (int index = 0; index < idsArray.length; index++) {
-				String pathId = idsArray[index];
-
+			for (String pathId : idsArray) {
 				// Load the properties of the docking path.
 				//TODO general class
 				String pathPrefix = prefix + PROPERTY_DOCKING_PATH + "." + pathId;

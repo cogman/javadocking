@@ -193,9 +193,8 @@ class DockModelPropertiesUtil {
 		ownerIdsArray = PropertiesUtil.getStringArray(properties, prefix + PROPERTY_OWNER_IDS, ownerIdsArray);
 
 		// Iterate over the owner windows.
-		for (int ownerWindowIndex = 0; ownerWindowIndex < ownerIdsArray.length; ownerWindowIndex++) {
+		for (String ownerId : ownerIdsArray) {
 			// Add the owner to the dock model.
-			String ownerId = ownerIdsArray[ownerWindowIndex];
 			Object ownerObject = ownersMap.get(ownerId);
 			if (!(ownerObject instanceof Window)) {
 				throw new IOException("The values in the owner windows mapping should be of type java.awt.Window.");
@@ -218,9 +217,7 @@ class DockModelPropertiesUtil {
 			visualizerKeysArray = PropertiesUtil.getStringArray(properties, prefix + ownerId + "." + PROPERTY_VISUALIZER_KEYS, visualizerKeysArray);
 			if ((visualizerKeysArray != null) && (visualizerKeysArray.length > 0)) {
 				// Iterate over the visualizer keys.
-				for (int index = 0; index < visualizerKeysArray.length; index++) {
-					String visualizerKey = visualizerKeysArray[index];
-
+				for (String visualizerKey : visualizerKeysArray) {
 					// Create the visualizer with its dockables for the key with the properties.
 					Visualizer visualizer = loadVisualizer(visualizerKey, prefix, properties, dockablesMap, owner, visualizersMap);
 					if (visualizer != null) {
@@ -237,9 +234,7 @@ class DockModelPropertiesUtil {
 			if ((rootDockIdsArray != null) && (rootDockIdsArray.length > 0)) {
 
 				// Iterate over the root dock keys.
-				for (int index = 0; index < rootDockIdsArray.length; index++) {
-					String rootDockId = rootDockIdsArray[index];
-
+				for (String rootDockId : rootDockIdsArray) {
 					// Create the dock with its children and dockables for the ID with the properties.
 					DockWithKey rootDockWithId = loadDock(rootDockId, prefix, properties, dockablesMap, owner, docksMap);
 					Dock rootDock = rootDockWithId.getDock();
@@ -422,12 +417,12 @@ class DockModelPropertiesUtil {
 			// Load the children.
 			String[] childIdArray = new String[0];
 			childIdArray = PropertiesUtil.getStringArray(properties, propertiesPrefix + PROPERTY_CHILD_DOCK_KEYS, childIdArray);
-			for (int index = 0; index < childIdArray.length; index++) {
-				DockWithKey childDockWithId = loadDock(childIdArray[index], prefix, properties, dockablesMap, ownersMap, docksMap);
+			for (final String aChildIdArray : childIdArray) {
+				DockWithKey childDockWithId = loadDock(aChildIdArray, prefix, properties, dockablesMap, ownersMap, docksMap);
 				Dock childDock = childDockWithId.getDock();
 				if (childDock != null) {
 					childDock.setParentDock(parentDock);
-					childDocks.put(childIdArray[index], childDock);
+					childDocks.put(aChildIdArray, childDock);
 				}
 			}
 

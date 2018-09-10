@@ -423,9 +423,8 @@ public class FloatExternalizer implements Externalizer {
 	 */
 	public void removeWindowFocusListener(WindowFocusListener windowFocusListener) {
 		windowFocusListeners.remove(windowFocusListener);
-		Iterator iterator = externalizeDockWindows.values().iterator();
-		while (iterator.hasNext()) {
-			Window window = (Window) iterator.next();
+		for (Object o : externalizeDockWindows.values()) {
+			Window window = (Window) o;
 			window.removeWindowFocusListener(windowFocusListener);
 		}
 
@@ -509,9 +508,8 @@ public class FloatExternalizer implements Externalizer {
 
 		// Add the listeners.
 		dialog.addWindowFocusListener(new MoveToFrontListener(dock));
-		Iterator iterator = windowFocusListeners.iterator();
-		while (iterator.hasNext()) {
-			dialog.addWindowFocusListener((WindowFocusListener) iterator.next());
+		for (Object windowFocusListener : windowFocusListeners) {
+			dialog.addWindowFocusListener((WindowFocusListener) windowFocusListener);
 		}
 		dialog.addWindowListener(windowClosingListener);
 
@@ -562,9 +560,8 @@ public class FloatExternalizer implements Externalizer {
 
 	private void hide(boolean hidden) {
 
-		Iterator iterator = externalizeDockWindows.values().iterator();
-		while (iterator.hasNext()) {
-			Window window = (Window) iterator.next();
+		for (Object o : externalizeDockWindows.values()) {
+			Window window = (Window) o;
 			window.setVisible(!hidden);
 			//window.repaint();
 		}
@@ -600,9 +597,8 @@ public class FloatExternalizer implements Externalizer {
 			DockingUtil.retrieveDockables(childDock, childDockables);
 
 			// The dockables have no dock anymore.
-			Iterator iterator = childDockables.iterator();
-			while (iterator.hasNext()) {
-				Dockable dockable = (Dockable) iterator.next();
+			for (Object childDockable : childDockables) {
+				Dockable dockable = (Dockable) childDockable;
 				dockable.setState(DockableState.CLOSED, null);
 			}
 

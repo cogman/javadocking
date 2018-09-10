@@ -131,8 +131,8 @@ public class SingleDockHeader extends JPanel implements DockHeader {
 			for (int group = actionMatrix.length - 1; group >= 0; group--) {
 				Action[] actionGroup = actionMatrix[group];
 				if (actionGroup != null) {
-					for (int index = 0; index < actionGroup.length; index++) {
-						actionPanel.add(DockingManager.getComponentFactory().createIconButton(actionGroup[index]));
+					for (final Action anActionGroup : actionGroup) {
+						actionPanel.add(DockingManager.getComponentFactory().createIconButton(anActionGroup));
 					}
 					if (group != 0) {
 						actionPanel.add(Box.createRigidArea(new Dimension(DIVIDER_WIDTH / 2, 0)));

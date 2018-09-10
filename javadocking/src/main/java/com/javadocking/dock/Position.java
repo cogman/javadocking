@@ -167,13 +167,13 @@ public class Position {
 			while (tokenizer.hasMoreElements()) {
 				String positionString = tokenizer.nextToken();
 				int position = Integer.parseInt(positionString);
-				positionList.add(new Integer(position));
+				positionList.add(position);
 			}
 
 			// Create the array with the positions.
 			int[] positions = new int[positionList.size()];
 			for (int index = 0; index < positionList.size(); index++) {
-				positions[index] = ((Integer) positionList.get(index)).intValue();
+				positions[index] = (Integer) positionList.get(index);
 			}
 
 			// Make the position.

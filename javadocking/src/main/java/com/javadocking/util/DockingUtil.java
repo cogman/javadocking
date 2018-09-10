@@ -137,9 +137,8 @@ public class DockingUtil {
 				retrieveDockables(rootDock, dockablesOfTree);
 
 				// Is there a dockable in the list with the given ID?
-				Iterator dockableIterator = dockablesOfTree.iterator();
-				while (dockableIterator.hasNext()) {
-					Dockable dockableOfTree = (Dockable) dockableIterator.next();
+				for (Object aDockablesOfTree : dockablesOfTree) {
+					Dockable dockableOfTree = (Dockable) aDockablesOfTree;
 					if (dockableOfTree.getID().equals(dockableID)) {
 						// Succes, we found the dockable with the given ID.
 						return dockableOfTree;
@@ -196,8 +195,8 @@ public class DockingUtil {
 		}
 
 		// Remove all the child docks that are empty.
-		for (int index = 0; index < emptyChildDockList.size(); index++) {
-			compositeDock.emptyChild((Dock) emptyChildDockList.get(index));
+		for (Object anEmptyChildDockList : emptyChildDockList) {
+			compositeDock.emptyChild((Dock) anEmptyChildDockList);
 		}
 
 	}

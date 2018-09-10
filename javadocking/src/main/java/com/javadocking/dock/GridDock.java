@@ -544,9 +544,9 @@ public class GridDock extends JPanel implements LeafDock {
 
 		// Iterate over the IDs of the dockables.
 		int position = 0;
-		for (int index = 0; index < dockableIdArray.length; index++) {
+		for (final String aDockableIdArray : dockableIdArray) {
 			// Try to get the dockable.
-			Object dockableObject = dockablesMap.get(dockableIdArray[index]);
+			Object dockableObject = dockablesMap.get(aDockableIdArray);
 			if (dockableObject != null) {
 				if (dockableObject instanceof Dockable) {
 					Dockable dockable = (Dockable) dockableObject;
@@ -867,9 +867,9 @@ public class GridDock extends JPanel implements LeafDock {
 		dockablePanelPosition = SwingUtilities.convertPoint(this, dockablePanelPosition, dockablePanel);
 
 		// Iterate over the dockables.
-		for (int index = 0; index < childDockables.size(); index++) {
+		for (Object childDockable : childDockables) {
 			// Get the component of the current dockable.
-			Component dockableComponent = (Component) ((Dockable) childDockables.get(index)).getContent();
+			Component dockableComponent = (Component) ((Dockable) childDockable).getContent();
 			dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y);
 
 			// Set the rectangle on the center of this dockable.
@@ -964,9 +964,9 @@ public class GridDock extends JPanel implements LeafDock {
 
 			// Calculate the maximum component size of the children.
 			Dimension maxPreferredSize = new Dimension(0, 0);
-			for (int index = 0; index < dockableCount; index++) {
+			for (Object childDockable : childDockables) {
 				// Get the preferred size of the child.
-				Dimension childSize = ((Dockable) childDockables.get(index)).getContent().getPreferredSize();
+				Dimension childSize = ((Dockable) childDockable).getContent().getPreferredSize();
 
 				// Adjust the union size.
 				maxPreferredSize.setSize(Math.max(maxPreferredSize.width, childSize.width), Math.max(maxPreferredSize.height, childSize.height));
@@ -1058,8 +1058,8 @@ public class GridDock extends JPanel implements LeafDock {
 		initializeUi(columnCount);
 
 		// Add all the dockables.
-		for (int index = 0; index < childDockables.size(); index++) {
-			Dockable childDockable = (Dockable) childDockables.get(index);
+		for (Object childDockable1 : childDockables) {
+			Dockable childDockable = (Dockable) childDockable1;
 			dockablePanel.add((Component) childDockable.getContent());
 		}
 
@@ -1081,9 +1081,9 @@ public class GridDock extends JPanel implements LeafDock {
 		}
 
 		// Iterate over the elements of the first list.
-		for (int index = 0; index < firstList.size(); index++) {
+		for (Object aFirstList : firstList) {
 			// Check if the element is also in the second list.
-			if (!secondList.contains(firstList.get(index))) {
+			if (!secondList.contains(aFirstList)) {
 				return false;
 			}
 		}

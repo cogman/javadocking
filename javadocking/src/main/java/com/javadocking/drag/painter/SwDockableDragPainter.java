@@ -40,7 +40,7 @@ public class SwDockableDragPainter implements DockableDragPainter {
 	/**
 	 * The integer the represents layer 0 in the layered pane.
 	 */
-	private static final Integer LAYER_0 = new Integer(0);
+	private static final Integer LAYER_0 = 0;
 
 	// Fields.
 

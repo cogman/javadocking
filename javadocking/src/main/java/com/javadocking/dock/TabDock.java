@@ -474,9 +474,9 @@ public class TabDock extends JPanel implements LeafDock, DockableHider {
 		dockableIdArray = PropertiesUtil.getStringArray(properties, prefix + PROPERTY_DOCKABLE_IDS, dockableIdArray);
 
 		// Iterate over the IDs of the dockables.
-		for (int index = 0; index < dockableIdArray.length; index++) {
+		for (final String aDockableIdArray : dockableIdArray) {
 			// Try to get the dockable.
-			Object dockableObject = dockablesMap.get(dockableIdArray[index]);
+			Object dockableObject = dockablesMap.get(aDockableIdArray);
 			if (dockableObject != null) {
 				if (dockableObject instanceof Dockable) {
 					Dockable dockable = (Dockable) dockableObject;

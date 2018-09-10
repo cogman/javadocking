@@ -510,17 +510,17 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 
 			// Can we find a visualizer in the dock model for the dockable.
 			Visualizer[] visualizers = retrieveVisualizersOfDockModel(dockableOfModel, dockableState);
-			for (int index = 0; index < visualizers.length; index++) {
-				if (visualizers[index].canVisualizeDockable(dockableOfModel)) {
-					return visualizers[index];
+			for (final Visualizer visualizer1 : visualizers) {
+				if (visualizer1.canVisualizeDockable(dockableOfModel)) {
+					return visualizer1;
 				}
 			}
 
 			// Can we find a general visualizer in the dock model.
 			visualizers = retrieveVisualizersOfDockModel(dockableState);
-			for (int index = 0; index < visualizers.length; index++) {
-				if (visualizers[index].canVisualizeDockable(dockableOfModel)) {
-					return visualizers[index];
+			for (final Visualizer visualizer : visualizers) {
+				if (visualizer.canVisualizeDockable(dockableOfModel)) {
+					return visualizer;
 				}
 			}
 
@@ -535,17 +535,17 @@ public class DefaultDockableStateAction extends AbstractAction implements Dockab
 
 			// Can we find a visualizer in the dock model for the dockable.
 			Visualizer[] visualizers = retrieveVisualizersOfDockModel(dockableOfModel, dockableState);
-			for (int index = 0; index < visualizers.length; index++) {
-				if (visualizers[index].canVisualizeDockable(dockableOfModel)) {
-					return visualizers[index];
+			for (final Visualizer visualizer2 : visualizers) {
+				if (visualizer2.canVisualizeDockable(dockableOfModel)) {
+					return visualizer2;
 				}
 			}
 
 			// Can we find a general visualizer in the dock model.
 			visualizers = retrieveVisualizersOfDockModel(dockableState);
-			for (int index = 0; index < visualizers.length; index++) {
-				if (visualizers[index].canVisualizeDockable(dockableOfModel)) {
-					return visualizers[index];
+			for (final Visualizer visualizer1 : visualizers) {
+				if (visualizer1.canVisualizeDockable(dockableOfModel)) {
+					return visualizer1;
 				}
 			}
 

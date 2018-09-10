@@ -486,10 +486,9 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 		if (childDocks != null) {
 			// Iterate over the childDocks.
-			Iterator iterator = childDocks.keySet().iterator();
-			while (iterator.hasNext()) {
+			for (Object o : childDocks.keySet()) {
 				// Get the child.
-				String childDockId = (String) iterator.next();
+				String childDockId = (String) o;
 				Dock childDock = (Dock) childDocks.get(childDockId);
 
 				// Get the position of the child.
@@ -1066,9 +1065,9 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 		// Find an alternate position.
 		int[] alternatePositions = getAlternatePositions(borderPosition);
-		for (int index = 0; index < alternatePositions.length; index++) {
-			if (isFree(alternatePositions[index])) {
-				return alternatePositions[index];
+		for (final int alternatePosition : alternatePositions) {
+			if (isFree(alternatePosition)) {
+				return alternatePosition;
 			}
 		}
 

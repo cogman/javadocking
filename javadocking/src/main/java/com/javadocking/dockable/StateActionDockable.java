@@ -79,11 +79,10 @@ public class StateActionDockable extends ActionDockable {
 		int currentDockableState = this.getState();
 
 		List dockableStateActions = new ArrayList();
-		for (int stateIndex = 0; stateIndex < newDockableStates.length; stateIndex++) {
-			int dockableState = newDockableStates[stateIndex];
+		for (int dockableState : newDockableStates) {
 			if (currentDockableState != dockableState) {
 				Action dockableStateAction = dockableStateActionFactory.createDockableStateAction(
-						delegate, newDockableStates[stateIndex]);
+						delegate, dockableState);
 				dockableStateActions.add(dockableStateAction);
 			}
 		}
