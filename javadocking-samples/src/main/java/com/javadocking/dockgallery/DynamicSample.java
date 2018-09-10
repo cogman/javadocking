@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.LineDock;
 import com.javadocking.dock.Position;
@@ -18,11 +10,12 @@ import com.javadocking.drag.DynamicDraggerFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class DynamicSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public DynamicSample(JFrame frame)
-	{
+public class DynamicSample extends JPanel {
+
+	public DynamicSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -90,7 +83,7 @@ public class DynamicSample extends JPanel
 		tabSplitPane.setRightComponent(rightDock);
 		splitPane.setLeftComponent(topDock);
 		splitPane.setRightComponent(tabSplitPane);
-		
+
 		// Add the split pane to the panel.
 		add(splitPane, BorderLayout.CENTER);
 
@@ -100,7 +93,7 @@ public class DynamicSample extends JPanel
 		int height = 600;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 }

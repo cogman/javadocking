@@ -2,27 +2,27 @@
 <html>
 <body bgcolor="white">
 <p>
-Contains the functionality for painting a representation of the {@link com.javadocking.dockable.Dockable}, 
-when it is dragged. The basic interface is {@link com.javadocking.drag.painter.DockableDragPainter}.
+    Contains the functionality for painting a representation of the {@link com.javadocking.dockable.Dockable},
+    when it is dragged. The basic interface is {@link com.javadocking.drag.painter.DockableDragPainter}.
 </p>
 <p>
-Information on using dockable drag painters is in 
-<a href="http://www.javadocking.com/developerguide/drag.html" target="_blank">How to Use Dragging</a> in
-<i>The Sanaware Developer Guide</i>.
+    Information on using dockable drag painters is in
+    <a href="http://www.javadocking.com/developerguide/drag.html" target="_blank">How to Use Dragging</a> in
+    <i>The Sanaware Developer Guide</i>.
 </p>
 <p>
-Usually the representation for a dragged dockable is a rectangle.
-It shows where the dockable will be docked in a {@link com.javadocking.dock.Dock}, 
-if the mouse would be released at the current mouse position.
-This rectangle can be painted with a {@link com.javadocking.drag.painter.RectanglePainter}:
+    Usually the representation for a dragged dockable is a rectangle.
+    It shows where the dockable will be docked in a {@link com.javadocking.dock.Dock},
+    if the mouse would be released at the current mouse position.
+    This rectangle can be painted with a {@link com.javadocking.drag.painter.RectanglePainter}:
 <ul>
-<li>on the glass pane ({@link com.javadocking.drag.painter.SwDockableDragPainter}),</li>
-<li>on a window ({@link com.javadocking.drag.painter.WindowDockableDragPainter}),</li>
-<li>or on a transparent window ({@link com.javadocking.drag.painter.TransparentWindowDockableDragPainter}).</li>
+    <li>on the glass pane ({@link com.javadocking.drag.painter.SwDockableDragPainter}),</li>
+    <li>on a window ({@link com.javadocking.drag.painter.WindowDockableDragPainter}),</li>
+    <li>or on a transparent window ({@link com.javadocking.drag.painter.TransparentWindowDockableDragPainter}).</li>
 </ul>
 </p>
 <p>
-Different drag painters can be combined with the {@link com.javadocking.drag.painter.CompositeDockableDragPainter}.
+    Different drag painters can be combined with the {@link com.javadocking.drag.painter.CompositeDockableDragPainter}.
 <p>
 </body>
 </html>

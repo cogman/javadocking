@@ -1,19 +1,19 @@
 <!doctype html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta http-equiv="content-script-type" content="text/javascript">
-		<meta http-equiv="content-style-type" content="text/css">
-		<meta name="author" content="Heidi Rakels">
-		<meta name="description" content="Sanaware Java Docking - Developer guide - Composite Docks">
-		<link rel="stylesheet" type="text/css" href="../style.css">
-		<title>How to Use Composite Docks</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta name="author" content="Heidi Rakels">
+    <meta name="description" content="Sanaware Java Docking - Developer guide - Composite Docks">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>How to Use Composite Docks</title>
+</head>
 <body>
 
 <div class="nextprev">
-<nobr><a href="adddockable.html">&laquo; prev</a></nobr>
-<nobr><a href="visualizer.html">next &raquo;</a></nobr>
+    <nobr><a href="adddockable.html">&laquo; prev</a></nobr>
+    <nobr><a href="visualizer.html">next &raquo;</a></nobr>
 </div>
 
 <span class="item"><a href="../main/index.html">Java Docking Home</a></span>&gt;
@@ -21,39 +21,40 @@
 <span class="selected item">How to Use Composite Docks</span>
 
 <h2>
-How to Use Composite Docks
+    How to Use Composite Docks
 </h2>
 
 <a name="CompositeDock"><!-- --></a>
 <h3>
-:: Composite Dock ::
+    :: Composite Dock ::
 </h3>
 <p>
-A <a href="../javadoc/com/javadocking/dock/CompositeDock.html" target="_blank">
-CompositeDock</a> is a <a href="../javadoc/com/javadocking/dock/Dock.html" target="_blank">
-Dock</a> that contains other docks. It does not contain dockables.
-The child docks can also be composite docks.
+    A <a href="../javadoc/com/javadocking/dock/CompositeDock.html" target="_blank">
+    CompositeDock</a> is a <a href="../javadoc/com/javadocking/dock/Dock.html" target="_blank">
+    Dock</a> that contains other docks. It does not contain dockables.
+    The child docks can also be composite docks.
 </p>
 <p>
-If you want to use a composite dock, you have to do the folowing things:
+    If you want to use a composite dock, you have to do the folowing things:
 <ul>
-	<li>Create your dockables.</li>
-	<li>Create the child docks for the composite dock.</li>
-	<li>Add the dockables to the child docks.</li>
-	<li>Add the child docks to the composite dock.</li>
+    <li>Create your dockables.</li>
+    <li>Create the child docks for the composite dock.</li>
+    <li>Add the dockables to the child docks.</li>
+    <li>Add the child docks to the composite dock.</li>
 </ul>
 </p>
 
 <a name="SplitDock"><!-- --></a>
 <h3>
-:: Split Dock ::
+    :: Split Dock ::
 </h3>
 <p>
-The most frequently used composite dock is the <a href="../javadoc/com/javadocking/dock/SplitDock.html" target="_blank">
-SplitDock</a>. This composite dock can contain
-0, 1, or 2 child docks. When there are 2 child docks, they are split by a divider.
+    The most frequently used composite dock is the <a href="../javadoc/com/javadocking/dock/SplitDock.html"
+                                                      target="_blank">
+    SplitDock</a>. This composite dock can contain
+    0, 1, or 2 child docks. When there are 2 child docks, they are split by a divider.
 
-In the folowing example a split dock is created with one child dock:
+    In the folowing example a split dock is created with one child dock:
 <blockquote><pre>
 		// Create the child tab dock.
 		TabDock tabDock = new TabDock();
@@ -69,11 +70,12 @@ In the folowing example a split dock is created with one child dock:
 		
 		// Add the child dock in the center of the split dock.
 		splitDock.addChildDock(tabDock, new Position(Position.CENTER));
-</pre></blockquote>
+</pre>
+</blockquote>
 The only child dock is put in the center of the split dock.
 </p>
 <p>
-In the folowing example a split dock is created with two child docks:
+    In the folowing example a split dock is created with two child docks:
 <blockquote><pre>
 		// Create the child tab dock.
 		TabDock leftTabDock = new TabDock();
@@ -92,91 +94,101 @@ In the folowing example a split dock is created with two child docks:
 		splitDock.addChildDock(leftTabDock, new Position(Position.LEFT));
 		splitDock.addChildDock(rightTabDock, new Position(Position.RIGHT));
 		splitDock.setDividerLocation(290);
-</pre></blockquote>
+</pre>
+</blockquote>
 You can also put the children at the top and bottom:
 <blockquote><pre>
 		// Add the child docks to the split dock.
 		splitDock.addChildDock(leftTabDock, new Position(Position.TOP));
 		splitDock.addChildDock(rightTabDock, new Position(Position.BOTTOM));
 		splitDock.setDividerLocation(190);
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <a name="FloatDock"><!-- --></a>
 <h3>
-:: Float Dock ::
+    :: Float Dock ::
 </h3>
 <p>
-A special composite dock is the <a href="../javadoc/com/javadocking/dock/FloatDock.html" target="_blank">
-FloatDock</a>. This dock is not a java.awt.Component.
-Its child docks are the docks in floating windows.
+    A special composite dock is the <a href="../javadoc/com/javadocking/dock/FloatDock.html" target="_blank">
+    FloatDock</a>. This dock is not a java.awt.Component.
+    Its child docks are the docks in floating windows.
 </p>
 <p>
-If you are working with a <a href="../javadoc/com/javadocking/model/FloatDockModel.html" target="_blank">
-FloatDockModel</a>, then you don't have to create the float dock 
-by yourself. This model creates a float dock for every owner window that you add.
-You can retrieve this float dock with the folowing code:
+    If you are working with a <a href="../javadoc/com/javadocking/model/FloatDockModel.html" target="_blank">
+    FloatDockModel</a>, then you don't have to create the float dock
+    by yourself. This model creates a float dock for every owner window that you add.
+    You can retrieve this float dock with the folowing code:
 <blockquote><pre>
 		// Get the float dock. This is a standard dock of the floating dock model.
 		FloatDock floatDock = dockModel.getFloatDock(windowId);
-</pre></blockquote>
-Add the child docks to the floatdock. The positions in float docks are 3-dimensional 
+</pre>
+</blockquote>
+Add the child docks to the floatdock. The positions in float docks are 3-dimensional
 (x-position, y-position, z-order).
 <blockquote><pre>
 		// Add the child docks to the float dock.
 		floatDock.addChildDock(singleDock1, new Position(x, y, 0));
 		floatDock.addChildDock(singleDock2, new Position(x + 50, y + 50, 1));
-</pre></blockquote>
+</pre>
+</blockquote>
 When a dockable is dragged, and when no other dock is found to dock the dockable, only then
 the dockable will be docked in the float dock. If you want a higher priority
 to let dockables float, then you have to augment the dock priority of the float dock:
 <blockquote><pre>
 		floatDock.setDockPriority(DockPriority.CAN_DOCK_WITH_PRIORITY);
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <a name="ChildDockFactory"><!-- --></a>
 <h3>
-:: The Child Dock Factory of the Composite Dock ::
+    :: The Child Dock Factory of the Composite Dock ::
 </h3>
 <p>
-A composite dock has always a <a href="../javadoc/com/javadocking/dock/factory/DockFactory.html" target="_blank">
-DockFactory</a> to create its child docks.
+    A composite dock has always a <a href="../javadoc/com/javadocking/dock/factory/DockFactory.html" target="_blank">
+    DockFactory</a> to create its child docks.
 </p>
 <p>
-When you drag a dockable above a composite dock and you release the mouse,
-then the dockable can be added to the composite dock.
-The folowing things will be done by the docking functionality:
+    When you drag a dockable above a composite dock and you release the mouse,
+    then the dockable can be added to the composite dock.
+    The folowing things will be done by the docking functionality:
 <ul>
-	<li>A child dock is created with the child dock factory.</li>
-	<li>The dockable is added to the child dock.</li>
-	<li>The child dock is added to the composite dock.</li>
+    <li>A child dock is created with the child dock factory.</li>
+    <li>The dockable is added to the child dock.</li>
+    <li>The child dock is added to the composite dock.</li>
 </ul>
 All the composite docks have a default child dock factory:
 <ul>
-	<li>The child dock factory of a FloatDock is a <a href="../javadoc/com/javadocking/dock/factory/SplitDockFactory.html" target="_blank">SplitDockFactory</a>.</li>
-	<li>The child dock factory of a SplitDock is a <a href="../javadoc/com/javadocking/dock/factory/LeafDockFactory.html" target="_blank">LeafDockFactory</a>.</li>
-</ul>	
+    <li>The child dock factory of a FloatDock is a <a
+            href="../javadoc/com/javadocking/dock/factory/SplitDockFactory.html" target="_blank">SplitDockFactory</a>.
+    </li>
+    <li>The child dock factory of a SplitDock is a <a
+            href="../javadoc/com/javadocking/dock/factory/LeafDockFactory.html" target="_blank">LeafDockFactory</a>.
+    </li>
+</ul>
 If you need other factories, then you have to set them by yourself.
 In the folowing code the child dock factory of the float dock creates single docks
 (<a href="../javadoc/com/javadocking/dock/factory/SingleDockFactory.html" target="_blank">SingleDockFactory</a>):
 <blockquote><pre>
 	floatDock.setChildDockFactory(new SingleDockFactory());
-</pre></blockquote>
+</pre>
+</blockquote>
 
 </p>
 
 <a name="CompositeLineDock"><!-- --></a>
 <h3>
-:: Composite Line Dock ::
+    :: Composite Line Dock ::
 </h3>
 <p>
-A special composite dock is a <a href="../javadoc/com/javadocking/dock/CompositeLineDock.html" target="_blank">
-CompositeLineDock</a>. It organizes its child docks in a line.
+    A special composite dock is a <a href="../javadoc/com/javadocking/dock/CompositeLineDock.html" target="_blank">
+    CompositeLineDock</a>. It organizes its child docks in a line.
 </p>
 <p>
-In the folowing example 2 horizontal composite line docks are created.
-They have a TabDockFactory as child dock factory.
+    In the folowing example 2 horizontal composite line docks are created.
+    They have a TabDockFactory as child dock factory.
 <blockquote><pre>
 		// Create the composite line docks.
 		CompositeLineDock lineDock1 = new CompositeLineDock(
@@ -191,20 +203,22 @@ They have a TabDockFactory as child dock factory.
 		lineDock2.addChildDock(tabDock4, new Position(0));
 		lineDock2.addChildDock(tabDock5, new Position(1));
 		lineDock2.addChildDock(tabDock6, new Position(2));
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <a name="CompositeGridDock"><!-- --></a>
 <h3>
-:: Composite Grid Dock ::
+    :: Composite Grid Dock ::
 </h3>
 <p>
-Another special composite dock is a <a href="../javadoc/com/javadocking/dock/CompositeGridDock.html" target="_blank">
-CompositeGridDock</a>. It organizes its child docks in a grid.
+    Another special composite dock is a <a href="../javadoc/com/javadocking/dock/CompositeGridDock.html"
+                                           target="_blank">
+    CompositeGridDock</a>. It organizes its child docks in a grid.
 </p>
 <p>
-In the folowing example a composite grid dock is created.
-It has a SingleDockFactory as child dock factory.
+    In the folowing example a composite grid dock is created.
+    It has a SingleDockFactory as child dock factory.
 <blockquote><pre>
 		// Create the grid dock.
 		CompositeGridDock gridDock = new CompositeGridDock(new SingleDockFactory());
@@ -216,22 +230,23 @@ It has a SingleDockFactory as child dock factory.
 		gridDock.addChildDock(dock4, new Position(3));
 		gridDock.addChildDock(dock5, new Position(4));
 		gridDock.addChildDock(dock6, new Position(5));
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <a name="CompositeTabDock"><!-- --></a>
 <h3>
-:: Composite Tab Dock ::
+    :: Composite Tab Dock ::
 </h3>
 <p>
-If you want nested tabs as docks you have to use
-<a href="../javadoc/com/javadocking/dock/CompositeTabDock.html" target="_blank">
-CompositeTabDock</a>s.
+    If you want nested tabs as docks you have to use
+    <a href="../javadoc/com/javadocking/dock/CompositeTabDock.html" target="_blank">
+        CompositeTabDock</a>s.
 </p>
 <p>
-In the folowing example composite tab docks are created. The dockables are added to a dock created by the
-child dock factory. These docks are added to the composite tab docks.
-compositeTabDock3 is added as child dock to compositeTabDock2.
+    In the folowing example composite tab docks are created. The dockables are added to a dock created by the
+    child dock factory. These docks are added to the composite tab docks.
+    compositeTabDock3 is added as child dock to compositeTabDock2.
 <blockquote><pre>
 		// Create the composite tab docks.
 		CompositeTabDock compositeTabDock1 = new CompositeTabDock();
@@ -273,7 +288,8 @@ compositeTabDock3 is added as child dock to compositeTabDock2.
 		compositeTabDock3.addChildDock(dock8, new Position(2));
 		compositeTabDock2.addChildDock(compositeTabDock3, new Position(2));
 
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 <hr>
 
@@ -281,24 +297,30 @@ compositeTabDock3 is added as child dock to compositeTabDock2.
 The source code of the samples can be found in:
 <br/><br/>
 <table>
-<tr>
-	<td><a href="code/SplitDockWithOneChild.java.html">SplitDockWithOneChild</a></td><td>Shows the use of split docks.</td>
-</tr>
-<tr>
-	<td><a href="code/SplitDockWithTwoChildren.java.html">SplitDockWithTwoChildren</a></td><td>Shows the use of split docks.</td>
-</tr>
-<tr>
-	<td><a href="code/FloatChildDocks.java.html">FloatChildDocks</a></td><td>Shows the use of float docks.</td>
-</tr>
-<tr>
-	<td><a href="code/CompositeLineDocks.java.html">CompositeLineDocks</a></td><td>Shows the use of composite line docks.</td>
-</tr>
-<tr>
-	<td><a href="code/CompositeGridDocks.java.html">CompositeGridDocks</a></td><td>Shows the use of composite grid docks.</td>
-</tr>
-<tr>
-	<td><a href="code/CompositeTabDocks.java.html">CompositeTabDocks</a></td><td>Shows the use of composite tab docks.</td>
-</tr>
+    <tr>
+        <td><a href="code/SplitDockWithOneChild.java.html">SplitDockWithOneChild</a></td>
+        <td>Shows the use of split docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/SplitDockWithTwoChildren.java.html">SplitDockWithTwoChildren</a></td>
+        <td>Shows the use of split docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/FloatChildDocks.java.html">FloatChildDocks</a></td>
+        <td>Shows the use of float docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/CompositeLineDocks.java.html">CompositeLineDocks</a></td>
+        <td>Shows the use of composite line docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/CompositeGridDocks.java.html">CompositeGridDocks</a></td>
+        <td>Shows the use of composite grid docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/CompositeTabDocks.java.html">CompositeTabDocks</a></td>
+        <td>Shows the use of composite tab docks.</td>
+    </tr>
 </table>
 
 <br/>
@@ -306,8 +328,8 @@ The source code of the samples can be found in:
 <br/>
 
 <div class="nextprevbottom">
-<nobr><a href="adddockable.html">&laquo; prev</a></nobr>
-<nobr><a href="visualizer.html">next &raquo;</a></nobr>
+    <nobr><a href="adddockable.html">&laquo; prev</a></nobr>
+    <nobr><a href="visualizer.html">next &raquo;</a></nobr>
 </div>
 
 </body>

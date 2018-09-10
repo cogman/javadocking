@@ -1,30 +1,27 @@
 package com.javadocking.drag.painter;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Window;
+import java.awt.*;
 
 /**
  * This is a window on which a rectangle can be painted with a {@link com.javadocking.drag.painter.RectanglePainter}.
- * 
+ *
  * @author Heidi Rakels.
  */
-class PaintWindow extends Window 
-{
-	
-	/** The painter that paints the content on the window. */
+class PaintWindow extends Window {
+
+	/**
+	 * The painter that paints the content on the window.
+	 */
 	private RectanglePainter rectanglePainter = new DefaultRectanglePainter();
 
 	// Constructors.
 
 	/**
 	 * Constructs a transparent window.
-	 * 
-	 * @param	rectanglePainter	The painter that paints the content on the window.
+	 *
+	 * @param    rectanglePainter    The painter that paints the content on the window.
 	 */
-	public PaintWindow(RectanglePainter rectanglePainter, Window owner)
-	{
+	public PaintWindow(RectanglePainter rectanglePainter, Window owner) {
 		super(owner);
 		this.rectanglePainter = rectanglePainter;
 		setBackground(Color.white);
@@ -33,9 +30,8 @@ class PaintWindow extends Window
 
 	// Overwritten methods.
 
-	public void paint(Graphics graphics) 
-	{
-		
+	public void paint(Graphics graphics) {
+
 		Image windowImage = createImage(getWidth(), getHeight());
 		Graphics windowImageGraphics = windowImage.getGraphics();
 		rectanglePainter.paintRectangle(windowImageGraphics, 0, 0, getWidth(), getHeight());
@@ -49,17 +45,14 @@ class PaintWindow extends Window
 
 	/**
 	 * Repaints the window.
-	 *
 	 */
-	public void doRepaint() 
-	{
-		
+	public void doRepaint() {
+
 		Graphics graphics = getGraphics();
-		if (graphics != null)
-		{
+		if (graphics != null) {
 			paint(graphics);
 		}
-		
+
 	}
-	
+
 }

@@ -1,11 +1,7 @@
 package com.javadocking.drag;
 
 
-import com.javadocking.dock.CompositeTabDock;
-import com.javadocking.dock.Dock;
-import com.javadocking.dock.LeafDock;
-import com.javadocking.dock.SingleDock;
-import com.javadocking.dock.TabDock;
+import com.javadocking.dock.*;
 import com.javadocking.dockable.Dockable;
 import com.javadocking.drag.painter.DefaultRectanglePainter;
 import com.javadocking.drag.painter.DockableDragPainter;
@@ -13,40 +9,39 @@ import com.javadocking.drag.painter.SwDockableDragPainter;
 
 /**
  * <p>
- * This dragger factory creates draggers that show with rectangles during dragging, where the 
- * {@link com.javadocking.dockable.Dockable}s will be docked, if the mouse button is 
+ * This dragger factory creates draggers that show with rectangles during dragging, where the
+ * {@link com.javadocking.dockable.Dockable}s will be docked, if the mouse button is
  * released in that position.
  * </p>
- * 
+ *
  * @author Heidi Rakels.
  */
-public class StaticDraggerFactory implements DraggerFactory
-{
+public class StaticDraggerFactory implements DraggerFactory {
 
 	// Fields.
 
-	/** Paints the rectangle where the dockable will be docked for the current mouse location. */
-	private DockableDragPainter 	dockableDragPainter 			= new SwDockableDragPainter(new DefaultRectanglePainter());
+	/**
+	 * Paints the rectangle where the dockable will be docked for the current mouse location.
+	 */
+	private DockableDragPainter dockableDragPainter = new SwDockableDragPainter(new DefaultRectanglePainter());
 
 	// Constructors.
 
 	/**
 	 * Constructs a dragger factory with a default painter for painting the dragged dockables.
 	 */
-	public StaticDraggerFactory()
-	{
+	public StaticDraggerFactory() {
 	}
 
 	/**
 	 * Constructs a dragger factory with the given painter for painting the dragged dockables.
-	 * 
-	 * @param	dockableDragPainter 		The painter for painting the dragged dockables.
+	 *
+	 * @param    dockableDragPainter The painter for painting the dragged dockables.
 	 */
-	public StaticDraggerFactory(DockableDragPainter dockableDragPainter)
-	{
+	public StaticDraggerFactory(DockableDragPainter dockableDragPainter) {
 		this.dockableDragPainter = dockableDragPainter;
 	}
-	
+
 	// Implementations of DraggerFactory.
 
 	/**
@@ -57,32 +52,23 @@ public class StaticDraggerFactory implements DraggerFactory
 	 * </ul>
 	 * For other types of docks a {@link StaticDragger} is returned.
 	 */
-	public Dragger createDragger(Dock dock)
-	{
-		if (dock instanceof SingleDock)
-		{
+	public Dragger createDragger(Dock dock) {
+		if (dock instanceof SingleDock) {
 			return new StaticSingleDragger(dockableDragPainter);
-		}
-		else if (dock instanceof TabDock)
-		{
+		} else if (dock instanceof TabDock) {
 			return new StaticTabDragger(dockableDragPainter);
-		}
-		else if (dock instanceof LeafDock)
-		{
+		} else if (dock instanceof LeafDock) {
 			return new StaticDragger(dockableDragPainter);
-		}
-		else if (dock instanceof CompositeTabDock)
-		{
+		} else if (dock instanceof CompositeTabDock) {
 			return new StaticCompositeTabDragger(dockableDragPainter);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * It creates a {@link StaticDockableDragger} with the <code>dockableDragPainter</code> of this class.
 	 */
-	public Dragger createDragger(Dockable dockable)
-	{
+	public Dragger createDragger(Dockable dockable) {
 		return new StaticDockableDragger(dockable, dockableDragPainter);
 	}
 
@@ -95,21 +81,19 @@ public class StaticDraggerFactory implements DraggerFactory
 	 * <p>
 	 * The default is a {@link SwDockableDragPainter} with a {@link DefaultRectanglePainter}.
 	 * </p>
-	 * 
-	 * @return	dockableDragPainter 		The painter for painting the dragged dockables.
+	 *
+	 * @return dockableDragPainter The painter for painting the dragged dockables.
 	 */
-	public DockableDragPainter getDockableDragPainter()
-	{
+	public DockableDragPainter getDockableDragPainter() {
 		return dockableDragPainter;
 	}
 
 	/**
 	 * Sets the painter for painting the dragged dockables.
-	 * 
-	 * @param dockableDragPainter 			The painter for painting the dragged dockables.
+	 *
+	 * @param dockableDragPainter The painter for painting the dragged dockables.
 	 */
-	public void setDockableDragPainter(DockableDragPainter dockableDragPainter)
-	{
+	public void setDockableDragPainter(DockableDragPainter dockableDragPainter) {
 		this.dockableDragPainter = dockableDragPainter;
 	}
 

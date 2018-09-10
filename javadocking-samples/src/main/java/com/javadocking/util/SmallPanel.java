@@ -1,39 +1,31 @@
 package com.javadocking.util;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import com.javadocking.dockable.DraggableContent;
 import com.javadocking.drag.DragListener;
 
-public class SmallPanel extends JPanel implements DraggableContent
-{
+import javax.swing.*;
+import java.awt.*;
+
+public class SmallPanel extends JPanel implements DraggableContent {
 
 	// Fields.
 
 	private JLabel label;
-	
+
 	// Constructors.
 
-	public SmallPanel()
-	{
+	public SmallPanel() {
 		this("");
 	}
-	
-	public SmallPanel(String text)
-	{
+
+	public SmallPanel(String text) {
 		super(new FlowLayout());
-		
-		setMinimumSize(new Dimension(80,80));
-		setPreferredSize(new Dimension(150,150));
+
+		setMinimumSize(new Dimension(80, 80));
+		setPreferredSize(new Dimension(150, 150));
 		setBackground(Color.white);
 		setBorder(BorderFactory.createLineBorder(Color.lightGray));
-		
+
 		label = new JLabel(text);
 		label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		add(label);
@@ -41,15 +33,13 @@ public class SmallPanel extends JPanel implements DraggableContent
 
 	// Public methods.
 
-	public void setText(String text)
-	{
+	public void setText(String text) {
 		label.setText(text);
 	}
 
 	// Implementations of DraggableComponent.
 
-	public void addDragListener(DragListener dragListener)
-	{
+	public void addDragListener(DragListener dragListener) {
 		addMouseListener(dragListener);
 		addMouseMotionListener(dragListener);
 		label.addMouseListener(dragListener);

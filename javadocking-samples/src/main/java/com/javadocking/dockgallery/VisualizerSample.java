@@ -1,12 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.BorderDock;
 import com.javadocking.dock.Position;
@@ -14,11 +7,7 @@ import com.javadocking.dock.SplitDock;
 import com.javadocking.dock.TabDock;
 import com.javadocking.dock.docker.BorderDocker;
 import com.javadocking.dock.factory.ToolBarDockFactory;
-import com.javadocking.dockable.DefaultDockable;
-import com.javadocking.dockable.Dockable;
-import com.javadocking.dockable.DockableState;
-import com.javadocking.dockable.DockingMode;
-import com.javadocking.dockable.StateActionDockable;
+import com.javadocking.dockable.*;
 import com.javadocking.dockable.action.DefaultDockableStateActionFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
@@ -26,11 +15,12 @@ import com.javadocking.visualizer.DockingMinimizer;
 import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.SingleMaximizer;
 
-public class VisualizerSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public VisualizerSample(JFrame frame)
-	{
+public class VisualizerSample extends JPanel {
+
+	public VisualizerSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -73,7 +63,7 @@ public class VisualizerSample extends JPanel
 		// Create the child tab dock.
 		TabDock leftTabDock = new TabDock();
 		TabDock rightTabDock = new TabDock();
-		
+
 		// Add the dockables to the tab dock.
 		leftTabDock.addDockable(dockable1, new Position(0));
 		leftTabDock.addDockable(dockable2, new Position(1));
@@ -82,7 +72,7 @@ public class VisualizerSample extends JPanel
 
 		// Create the split dock.
 		SplitDock splitDock = new SplitDock();
-		
+
 		// Add the child docks to the split dock at the left and right.
 		splitDock.addChildDock(leftTabDock, new Position(Position.LEFT));
 		splitDock.addChildDock(rightTabDock, new Position(Position.RIGHT));
@@ -90,7 +80,7 @@ public class VisualizerSample extends JPanel
 
 		// Add the root dock to the dock model.
 		dockModel.addRootDock("splitDock", splitDock, frame);
-		
+
 		// Create a docking minimizer.
 		BorderDock borderDock = new BorderDock(new ToolBarDockFactory());
 		borderDock.setMode(BorderDock.MODE_MINIMIZE_BAR);
@@ -98,7 +88,7 @@ public class VisualizerSample extends JPanel
 		BorderDocker borderDocker = new BorderDocker();
 		borderDocker.setBorderDock(borderDock);
 		DockingMinimizer minimizer = new DockingMinimizer(borderDocker);
-		
+
 		// Create an externalizer.
 		FloatExternalizer externalizer = new FloatExternalizer(frame);
 		dockModel.addVisualizer("externalizer", externalizer, frame);
@@ -106,14 +96,14 @@ public class VisualizerSample extends JPanel
 		// Create a maximizer and add it to the dock model.
 		SingleMaximizer maximizePanel = new SingleMaximizer(borderDock);
 		dockModel.addVisualizer("maximizePanel", maximizePanel, frame);
-		
+
 		// Add the minimizer to the dock model, add also the border dock used by the minimizer to the dock model.
 		dockModel.addVisualizer("minimizePanel", minimizer, frame);
 		dockModel.addRootDock("minimizerBorderDock", borderDock, frame);
-		
+
 		// Add the border dock of the minimizer to this panel.
 		this.add(maximizePanel, BorderLayout.CENTER);
-		
+
 		// Minimize dockables.
 		minimizer.visualizeDockable(dockable5);
 		minimizer.visualizeDockable(dockable6);
@@ -126,23 +116,22 @@ public class VisualizerSample extends JPanel
 		int height = 400;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
-	
+
 	/**
 	 * Decorates the given dockable with a state actions.
-	 * 
-	 * @param dockable	The dockable to decorate.
-	 * @return			The wrapper around the given dockable, with actions.
+	 *
+	 * @param dockable The dockable to decorate.
+	 * @return The wrapper around the given dockable, with actions.
 	 */
-	private Dockable addActions(Dockable dockable)
-	{
-		
+	private Dockable addActions(Dockable dockable) {
+
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);
 		wrapper = new StateActionDockable(wrapper, new DefaultDockableStateActionFactory(), DockableState.statesAll());
 		return wrapper;
 
 	}
-	
+
 }

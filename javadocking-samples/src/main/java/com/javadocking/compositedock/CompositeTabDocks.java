@@ -1,19 +1,5 @@
 package com.javadocking.compositedock;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.SwingUtilities;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.CompositeTabDock;
 import com.javadocking.dock.Dock;
@@ -25,13 +11,15 @@ import com.javadocking.dockable.DraggableContent;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * This example shows composite tab docks.
- * 
+ *
  * @author Heidi Rakels
  */
-public class CompositeTabDocks extends JPanel
-{
+public class CompositeTabDocks extends JPanel {
 
 	// Static fields.
 
@@ -40,8 +28,7 @@ public class CompositeTabDocks extends JPanel
 
 	// Constructor.
 
-	public CompositeTabDocks(JFrame frame)
-	{
+	public CompositeTabDocks(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -60,7 +47,7 @@ public class CompositeTabDocks extends JPanel
 		TextPanel textPanel6 = new TextPanel("I am window 6.");
 		TextPanel textPanel7 = new TextPanel("I am window 7.");
 		TextPanel textPanel8 = new TextPanel("I am window 8.");
-		
+
 		// Create the dockables around the content components.
 		DefaultDockable dockable1 = new DefaultDockable("Window1", textPanel1, "Window 1");
 		DefaultDockable dockable2 = new DefaultDockable("Window2", textPanel2, "Window 2");
@@ -78,7 +65,7 @@ public class CompositeTabDocks extends JPanel
 		dockable6.setWithHeader(false);
 		dockable7.setWithHeader(false);
 		dockable8.setWithHeader(false);
-		
+
 		// Create the composite tab docks.
 		CompositeTabDock compositeTabDock1 = new CompositeTabDock();
 		CompositeTabDock compositeTabDock2 = new CompositeTabDock();
@@ -86,7 +73,7 @@ public class CompositeTabDocks extends JPanel
 
 		// Get the child dock factory.
 		DockFactory dockFactory = compositeTabDock1.getChildDockFactory();
-		
+
 		// Create the deepest single docks.
 		Dock dock1 = dockFactory.createDock(dockable1, DockingMode.SINGLE);
 		Dock dock2 = dockFactory.createDock(dockable2, DockingMode.SINGLE);
@@ -107,7 +94,7 @@ public class CompositeTabDocks extends JPanel
 		dock6.addDockable(dockable6, position, position);
 		dock7.addDockable(dockable7, position, position);
 		dock8.addDockable(dockable8, position, position);
-		
+
 		// Add the child docks to the composite dock.
 		compositeTabDock1.addChildDock(dock1, new Position(0));
 		compositeTabDock1.addChildDock(dock2, new Position(1));
@@ -118,12 +105,12 @@ public class CompositeTabDocks extends JPanel
 		compositeTabDock3.addChildDock(dock7, new Position(1));
 		compositeTabDock3.addChildDock(dock8, new Position(2));
 		compositeTabDock2.addChildDock(compositeTabDock3, new Position(2));
-		
-		
+
+
 		// Add the 2 root docks to the dock model.
 		dockModel.addRootDock("compositeTabDock1", compositeTabDock1, frame);
 		dockModel.addRootDock("compositeTabDock2", compositeTabDock2, frame);
-			
+
 		// Create the split panes.
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
@@ -132,40 +119,66 @@ public class CompositeTabDocks extends JPanel
 		// Add the root docks to the split pane.
 		splitPane.setLeftComponent(compositeTabDock1);
 		splitPane.setRightComponent(compositeTabDock2);
-		
+
 		// Add the split pane to the panel.
 		add(splitPane, BorderLayout.CENTER);
-		
+
 	}
-	
+
+	public static void createAndShowGUI() {
+
+		// Create the frame.
+		JFrame frame = new JFrame("Composite Tab Docks");
+
+		// Create the panel and add it to the frame.
+		CompositeTabDocks panel = new CompositeTabDocks(frame);
+		frame.getContentPane().add(panel);
+
+		// Set the frame properties and show it.
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setVisible(true);
+
+	}
+
+	// Main method.
+
+	public static void main(String args[]) {
+		Runnable doCreateAndShowGUI = new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		};
+		SwingUtilities.invokeLater(doCreateAndShowGUI);
+	}
+
 	/**
 	 * This is the class for the content.
 	 */
-	private class TextPanel extends JPanel implements DraggableContent
-	{
-		
-		private JLabel label; 
-		
-		public TextPanel(String text)
-		{
+	private class TextPanel extends JPanel implements DraggableContent {
+
+		private JLabel label;
+
+		public TextPanel(String text) {
 			super(new FlowLayout());
-			
+
 			// The panel.
-			setMinimumSize(new Dimension(80,80));
-			setPreferredSize(new Dimension(150,150));
+			setMinimumSize(new Dimension(80, 80));
+			setPreferredSize(new Dimension(150, 150));
 			setBackground(Color.white);
 			setBorder(BorderFactory.createLineBorder(Color.lightGray));
-			
+
 			// The label.
 			label = new JLabel(text);
 			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			add(label);
 		}
-		
+
 		// Implementations of DraggableContent.
 
-		public void addDragListener(DragListener dragListener)
-		{
+		public void addDragListener(DragListener dragListener) {
 			addMouseListener(dragListener);
 			addMouseMotionListener(dragListener);
 			label.addMouseListener(dragListener);
@@ -173,38 +186,5 @@ public class CompositeTabDocks extends JPanel
 		}
 	}
 
-	// Main method.
-	
-	public static void createAndShowGUI()
-	{
-		
-		// Create the frame.
-		JFrame frame = new JFrame("Composite Tab Docks");
-
-		// Create the panel and add it to the frame.
-		CompositeTabDocks panel = new CompositeTabDocks(frame);
-		frame.getContentPane().add(panel);
-		
-		// Set the frame properties and show it.
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.setVisible(true);
-		
-	}
-
-	public static void main(String args[]) 
-	{
-        Runnable doCreateAndShowGUI = new Runnable() 
-        {
-            public void run() 
-            {
-                createAndShowGUI();
-            }
-        };
-        SwingUtilities.invokeLater(doCreateAndShowGUI);
-    }
-	
 }
 

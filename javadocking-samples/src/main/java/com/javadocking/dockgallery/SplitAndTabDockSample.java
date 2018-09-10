@@ -1,12 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SplitDock;
@@ -16,13 +9,14 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class SplitAndTabDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public SplitAndTabDockSample(JFrame frame)
-	{
+public class SplitAndTabDockSample extends JPanel {
+
+	public SplitAndTabDockSample(JFrame frame) {
 		super(new BorderLayout());
-		
+
 		// Create the dock model for the docks.
 		FloatDockModel dockModel = new FloatDockModel();
 		dockModel.addOwner("frame0", frame);
@@ -64,19 +58,19 @@ public class SplitAndTabDockSample extends JPanel
 		SplitDock southEastDock = new SplitDock();
 		SplitDock eastDock = new SplitDock();
 		SplitDock rootDock = new SplitDock();
-		
+
 		// Add the root dock to the panel.
 		add(rootDock);
 
 		// A TabDockFactory is the default dock factory for a split dock.
-		
+
 		// Create the tab docks.
 		TabDock tabDock1 = new TabDock();
 		TabDock tabDock2 = new TabDock();
 		TabDock tabDock3 = new TabDock();
 		TabDock tabDock4 = new TabDock();
 		TabDock tabDock5 = new TabDock();
-		
+
 		// Add the dockables
 		tabDock1.addDockable(dockable1, new Position(0));
 		tabDock1.addDockable(dockable2, new Position(1));
@@ -86,7 +80,7 @@ public class SplitAndTabDockSample extends JPanel
 		tabDock3.addDockable(dockable6, new Position(0));
 		tabDock4.addDockable(dockable7, new Position(0));
 		tabDock5.addDockable(dockable8, new Position(0));
-		
+
 		// Add the single leaf docks to the split docks.
 		rootDock.addChildDock(tabDock1, new Position(Position.LEFT));
 		rootDock.addChildDock(eastDock, new Position(Position.RIGHT));

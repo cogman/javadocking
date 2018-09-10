@@ -1,22 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SplitDock;
@@ -24,24 +7,20 @@ import com.javadocking.dock.TabDock;
 import com.javadocking.dockable.DefaultDockable;
 import com.javadocking.drag.DraggerFactory;
 import com.javadocking.drag.StaticDraggerFactory;
-import com.javadocking.drag.painter.CompositeDockableDragPainter;
-import com.javadocking.drag.painter.DefaultRectanglePainter;
-import com.javadocking.drag.painter.DockableDragPainter;
-import com.javadocking.drag.painter.ImageDockableDragPainter;
-import com.javadocking.drag.painter.LabelDockableDragPainter;
-import com.javadocking.drag.painter.RectangleDragComponentFactory;
-import com.javadocking.drag.painter.SwDockableDragPainter;
-import com.javadocking.drag.painter.TransparentWindowDockableDragPainter;
-import com.javadocking.drag.painter.WindowDockableDragPainter;
+import com.javadocking.drag.painter.*;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.Book;
 import com.javadocking.util.DeBelloGallico;
 
-public class DragPainterSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-	public DragPainterSample(JFrame frame)
-	{
+public class DragPainterSample extends JPanel {
+
+	public DragPainterSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -52,18 +31,18 @@ public class DragPainterSample extends JPanel
 		DockingManager.setDockModel(dockModel);
 
 		// Create the content for the dockable.
-		Book book1 = new Book(	"De Bello Gallico: " + DeBelloGallico.LIBER1.getTitle(), 
-								DeBelloGallico.getText(DeBelloGallico.LIBER1),
-								new ImageIcon(getClass().getResource("/com/javadocking/resources/images/mapbelgae150.gif")));
-		Book book2 = new Book(	"De Bello Gallico: " + DeBelloGallico.LIBER2.getTitle(), 
-								DeBelloGallico.getText(DeBelloGallico.LIBER2),
-								new ImageIcon(getClass().getResource("/com/javadocking/resources/images/mapmaas150.gif")));
-		Book book3 = new Book(	"De Bello Gallico: " + DeBelloGallico.LIBER3.getTitle(), 
-								DeBelloGallico.getText(DeBelloGallico.LIBER3),
-								new ImageIcon(getClass().getResource("/com/javadocking/resources/images/caesar100.jpg")));
-		Book book4 = new Book(	"De Bello Gallico: " + DeBelloGallico.LIBER4.getTitle(), 
-								DeBelloGallico.getText(DeBelloGallico.LIBER4),
-								new ImageIcon(getClass().getResource("/com/javadocking/resources/images/mapbelgae150.gif")));
+		Book book1 = new Book("De Bello Gallico: " + DeBelloGallico.LIBER1.getTitle(),
+				DeBelloGallico.getText(DeBelloGallico.LIBER1),
+				new ImageIcon(getClass().getResource("/com/javadocking/resources/images/mapbelgae150.gif")));
+		Book book2 = new Book("De Bello Gallico: " + DeBelloGallico.LIBER2.getTitle(),
+				DeBelloGallico.getText(DeBelloGallico.LIBER2),
+				new ImageIcon(getClass().getResource("/com/javadocking/resources/images/mapmaas150.gif")));
+		Book book3 = new Book("De Bello Gallico: " + DeBelloGallico.LIBER3.getTitle(),
+				DeBelloGallico.getText(DeBelloGallico.LIBER3),
+				new ImageIcon(getClass().getResource("/com/javadocking/resources/images/caesar100.jpg")));
+		Book book4 = new Book("De Bello Gallico: " + DeBelloGallico.LIBER4.getTitle(),
+				DeBelloGallico.getText(DeBelloGallico.LIBER4),
+				new ImageIcon(getClass().getResource("/com/javadocking/resources/images/mapbelgae150.gif")));
 
 
 		// Create the dockable with the content.
@@ -76,7 +55,7 @@ public class DragPainterSample extends JPanel
 		// Create the child tab docks.
 		TabDock leftTabDock = new TabDock();
 		TabDock rightTabDock = new TabDock();
-		
+
 		// Add the dockables to the tab dock.
 		leftTabDock.addDockable(dockable1, new Position(0));
 		leftTabDock.addDockable(dockable2, new Position(1));
@@ -85,7 +64,7 @@ public class DragPainterSample extends JPanel
 
 		// Create the split dock.
 		SplitDock splitDock = new SplitDock();
-		
+
 		// Add the child docks to the split dock at the left and right.
 		splitDock.addChildDock(leftTabDock, new Position(Position.LEFT));
 		splitDock.addChildDock(rightTabDock, new Position(Position.RIGHT));
@@ -93,7 +72,7 @@ public class DragPainterSample extends JPanel
 
 		// Add the root dock to the dock model.
 		dockModel.addRootDock("splitDock", splitDock, frame);
-		
+
 		// Add the split dock to the panel.
 		add(splitDock, BorderLayout.CENTER);
 
@@ -103,21 +82,20 @@ public class DragPainterSample extends JPanel
 		int height = 500;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
-		
+
 		// Create the menubar.
 		JMenuBar menuBar = createMenu();
 		frame.setJMenuBar(menuBar);
 	}
-	
+
 	/**
 	 * Creates the menubar with menus: File and Drag Painting.
-	 * 
-	 * @return				The created menu bar.
+	 *
+	 * @return The created menu bar.
 	 */
-	private JMenuBar createMenu()
-	{
+	private JMenuBar createMenu() {
 		// Create the menu bar.
 		JMenuBar menuBar = new JMenuBar();
 
@@ -126,7 +104,7 @@ public class DragPainterSample extends JPanel
 		fileMenu.setMnemonic(KeyEvent.VK_F);
 		fileMenu.getAccessibleContext().setAccessibleDescription("The File Menu");
 		menuBar.add(fileMenu);
-		
+
 		// Build the Dragging menu.
 		JMenu draggingMenu = new JMenu("Drag Painting");
 		draggingMenu.setMnemonic(KeyEvent.VK_D);
@@ -137,13 +115,11 @@ public class DragPainterSample extends JPanel
 		JMenuItem menuItem = new JMenuItem("Exit", KeyEvent.VK_E);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		menuItem.getAccessibleContext().setAccessibleDescription("Exit te application");
-		menuItem.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent arg0)
-					{
-						System.exit(0);
-					}
-				});
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		fileMenu.add(menuItem);
 
 		// The JMenuItems for the draggers.
@@ -167,75 +143,67 @@ public class DragPainterSample extends JPanel
 		draggingMenuItems[5] = new DraggingMenuItem("Labeled rectangle with labeled window", swDockableDragPainterWithLabelNoFloat, windowDockableDragPainterWithLabel, false);
 		draggingMenuItems[6] = new DraggingMenuItem("Rectangle with transparent window (only fast computers)", swDockableDragPainterWithoutLabelNoFloat, transparentWindowDockableDragPainterWithoutLabel, false);
 		draggingMenuItems[7] = new DraggingMenuItem("Labeled rectangle with labeled transparent window (only fast computers)", swDockableDragPainterWithLabelNoFloat, transparentWindowDockableDragPainterWithLabel, false);
-		for (int index = 0; index < draggingMenuItems.length; index++)
-		{
+		for (int index = 0; index < draggingMenuItems.length; index++) {
 			draggingMenu.add(draggingMenuItems[index]);
 			group.add(draggingMenuItems[index]);
 		}
-		
+
 		return menuBar;
-		
-	} 
-	
+
+	}
+
 	/**
 	 * A check box menu item to enable a dragger.
 	 */
-	private class DraggingMenuItem extends JRadioButtonMenuItem
-	{
-		
+	private class DraggingMenuItem extends JRadioButtonMenuItem {
+
 		// Constructor.
 
-		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, DockableDragPainter additionalDockableDragPainter, boolean selected)
-		{
+		public DraggingMenuItem(String title, DockableDragPainter basicDockableDragPainter, DockableDragPainter additionalDockableDragPainter, boolean selected) {
 			super(title);
-	
+
 			// Create the dockable drag painter and dragger factory.
 			CompositeDockableDragPainter compositeDockableDragPainter = new CompositeDockableDragPainter();
 			compositeDockableDragPainter.addPainter(basicDockableDragPainter);
-			if (additionalDockableDragPainter != null)
-			{
+			if (additionalDockableDragPainter != null) {
 				compositeDockableDragPainter.addPainter(additionalDockableDragPainter);
 			}
-			DraggerFactory draggerFactory 	= new StaticDraggerFactory(compositeDockableDragPainter);
-			
+			DraggerFactory draggerFactory = new StaticDraggerFactory(compositeDockableDragPainter);
+
 			// Give this dragger factory to the docking manager.
-			if (selected)
-			{
+			if (selected) {
 				DockingManager.setDraggerFactory(draggerFactory);
 				setSelected(true);
 			}
 
 			// Add a dragging listener as action listener.
 			addActionListener(new DraggingListener(draggerFactory));
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * A listener that installs a dragger factory.
 	 */
-	private class DraggingListener implements ActionListener
-	{
+	private class DraggingListener implements ActionListener {
 
 		// Fields.
 
 		private DraggerFactory draggerFactory;
-		
+
 		// Constructor.
 
-		public DraggingListener(DraggerFactory draggerFactory)
-		{
+		public DraggingListener(DraggerFactory draggerFactory) {
 			this.draggerFactory = draggerFactory;
 		}
-		
+
 		// Implementations of ItemListener.
 
-		public void actionPerformed(ActionEvent actionEvent)
-		{
+		public void actionPerformed(ActionEvent actionEvent) {
 			DockingManager.setDraggerFactory(draggerFactory);
 		}
-		
+
 	}
-	
+
 }

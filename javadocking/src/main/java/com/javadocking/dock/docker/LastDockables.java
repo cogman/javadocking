@@ -1,150 +1,125 @@
 package com.javadocking.dock.docker;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.WeakHashMap;
-
 import com.javadocking.dockable.Dockable;
 import com.javadocking.util.PropertiesUtil;
 
+import java.io.IOException;
+import java.util.*;
+
 /**
  * This is a weak collection of dockables.
- * This means that dockables that are added to this class, will not be prevented from being 
+ * This means that dockables that are added to this class, will not be prevented from being
  * discarded by the garbage collector.
  * Dockables that don't have a dock any more, are not kept in the collection.
  * The last dockable that is added to this class, and that is still docked in a dock, can be retrieved.
- * 
- * 
+ *
  * @author Heidi Rakels.
  */
-class LastDockables
-{
+class LastDockables {
 
 	private static int counter = Integer.MIN_VALUE + 1;
-	
+
 	private Map dockables = new WeakHashMap();
-	
+
 	/**
 	 * Adds the dockable.
-	 * 
-	 * @param 	dockable	The dockable to add.
+	 *
+	 * @param dockable The dockable to add.
 	 */
-	public void add(Dockable dockable)
-	{
+	public void add(Dockable dockable) {
 		dockables.put(dockable, new Integer(counter));
-		
-		if (counter < Integer.MAX_VALUE)
-		{
+
+		if (counter < Integer.MAX_VALUE) {
 			counter++;
-		}
-		else
-		{
+		} else {
 			counter = Integer.MIN_VALUE + 1;
 		}
 	}
-	
+
 	/**
 	 * Gets the last dockable that was added and that still has a dock.
-	 * 
-	 * @return	The last dockable that was added and that still has a dock.
+	 *
+	 * @return The last dockable that was added and that still has a dock.
 	 */
-	public Dockable getLastValidDockable()
-	{
-		
+	public Dockable getLastValidDockable() {
+
 		// The list with dockables that can be removed, because they have no dock anymore.
 		List dockablesToRemove = new ArrayList();
 		Dockable lastDockable = null;
 		Integer lastDockableValue = new Integer(Integer.MIN_VALUE);
-		
+
 		// Iterate over all the dockables.
 		Iterator dockableIterator = dockables.keySet().iterator();
-		while (dockableIterator.hasNext())
-		{
-			Dockable dockable =  (Dockable)dockableIterator.next();
-			if (dockable.getDock() == null)
-			{
+		while (dockableIterator.hasNext()) {
+			Dockable dockable = (Dockable) dockableIterator.next();
+			if (dockable.getDock() == null) {
 				// The dock of the dockable is null, so it can be removed.
 				dockablesToRemove.add(dockable);
-			}
-			else if (lastDockableValue.compareTo((Integer)dockables.get(dockable)) <= 0)
-			{
+			} else if (lastDockableValue.compareTo((Integer) dockables.get(dockable)) <= 0) {
 				// This dockable was added later.
 				lastDockable = dockable;
-				lastDockableValue = (Integer)dockables.get(dockable);
+				lastDockableValue = (Integer) dockables.get(dockable);
 			}
 		}
-		
+
 		// Remove the dockables, we don't need anymore.
 		Iterator removeIterator = dockablesToRemove.iterator();
-		while (removeIterator.hasNext())
-		{
+		while (removeIterator.hasNext()) {
 			dockables.remove(removeIterator.next());
 		}
-		
+
 		return lastDockable;
-		
+
 	}
-	
-	public void saveProperties(String prefix, Properties properties)
-	{
-		
+
+	public void saveProperties(String prefix, Properties properties) {
+
 		// Save the dockables in the mapping.
 		int count = 0;
 		Iterator iterator = dockables.keySet().iterator();
-		while (iterator.hasNext())
-		{
-			Dockable dockable = (Dockable)iterator.next();
-			Integer value = (Integer)dockables.get(dockable);
-			if (value != null)
-			{
+		while (iterator.hasNext()) {
+			Dockable dockable = (Dockable) iterator.next();
+			Integer value = (Integer) dockables.get(dockable);
+			if (value != null) {
 				PropertiesUtil.setString(properties, prefix + "dockable" + count, dockable.getID());
 				PropertiesUtil.setInteger(properties, prefix + "value" + count, value.intValue());
 				count++;
 			}
 		}
-		
+
 		// Save the number of dockables.
 		PropertiesUtil.setInteger(properties, prefix + "count", count);
 
 	}
-	
-	public void loadProperties(String prefix, Properties properties, Map dockablesMap) throws IOException
-	{
-		
+
+	public void loadProperties(String prefix, Properties properties, Map dockablesMap) throws IOException {
+
 		// Get the number of dockables.
 		int count = 0;
 		count = PropertiesUtil.getInteger(properties, prefix + "count", count);
-		
+
 		// Load the dockables.
 		int maxValue = Integer.MIN_VALUE + 1;
-		for (int index = 0; index < count; index++)
-		{
+		for (int index = 0; index < count; index++) {
 			String id = PropertiesUtil.getString(properties, prefix + "dockable" + index, null);
 			int value = PropertiesUtil.getInteger(properties, prefix + "value" + index, Integer.MIN_VALUE + 1);
-			if (id != null)
-			{
-				Dockable dockable = (Dockable)dockablesMap.get(id);
-				if (dockable != null)
-				{
+			if (id != null) {
+				Dockable dockable = (Dockable) dockablesMap.get(id);
+				if (dockable != null) {
 					dockables.put(dockable, new Integer(value));
 				}
-				if (value > maxValue)
-				{
+				if (value > maxValue) {
 					maxValue = value;
 				}
 			}
 		}
 
 		counter = maxValue + 1;
-		
+
 	}
-	
+
 	// Test.
-	
+
 //	public static void main(String[] args)
 //	{
 //		
@@ -179,5 +154,5 @@ class LastDockables
 //		System.out.println("size " + lastDockables.dockables.size());
 //
 //	}
-	
+
 }

@@ -8,14 +8,13 @@ import com.javadocking.dockable.Dockable;
 
 /**
  * <p>
- * This dragger factory creates draggers that remove and add the dragged {@link com.javadocking.dockable.Dockable}s 
+ * This dragger factory creates draggers that remove and add the dragged {@link com.javadocking.dockable.Dockable}s
  * to new {@link com.javadocking.dock.Dock}s dynamically during dragging.
  * </p>
- * 
+ *
  * @author Heidi Rakels.
  */
-public class DynamicDraggerFactory implements DraggerFactory
-{
+public class DynamicDraggerFactory implements DraggerFactory {
 
 	// Implementations of DockableDraggerFactory.
 
@@ -23,14 +22,11 @@ public class DynamicDraggerFactory implements DraggerFactory
 	 * It creates for a {@link com.javadocking.dock.TabDock} a {@link DynamicTabDragger}.
 	 * For other types of docks a {@link DynamicDragger} is returned.
 	 */
-	public Dragger createDragger(Dock dock)
-	{
-		if (dock instanceof TabDock)
-		{
+	public Dragger createDragger(Dock dock) {
+		if (dock instanceof TabDock) {
 			return new DynamicTabDragger();
 		}
-		if (dock instanceof LeafDock)
-		{
+		if (dock instanceof LeafDock) {
 			return new DynamicDragger();
 		}
 		return null;
@@ -39,8 +35,7 @@ public class DynamicDraggerFactory implements DraggerFactory
 	/**
 	 * It creates a {@link DynamicDragger}.
 	 */
-	public Dragger createDragger(Dockable dockable)
-	{
+	public Dragger createDragger(Dockable dockable) {
 		return new DynamicDockableDragger(dockable);
 	}
 

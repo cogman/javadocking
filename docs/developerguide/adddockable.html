@@ -1,19 +1,19 @@
 <!doctype html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta http-equiv="content-script-type" content="text/javascript">
-		<meta http-equiv="content-style-type" content="text/css">
-		<meta name="author" content="Heidi Rakels">
-		<meta name="description" content="Sanaware Java Docking - Developer guide - Adding and Removing Dockables">
-		<link rel="stylesheet" type="text/css" href="../style.css">
-		<title>How to Add, Move, and Remove Dockables</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta name="author" content="Heidi Rakels">
+    <meta name="description" content="Sanaware Java Docking - Developer guide - Adding and Removing Dockables">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>How to Add, Move, and Remove Dockables</title>
+</head>
 <body>
 
 <div class="nextprev">
-<nobr><a href="leafdock.html">&laquo; prev</a></nobr>
-<nobr><a href="compositedock.html">next &raquo;</a></nobr>
+    <nobr><a href="leafdock.html">&laquo; prev</a></nobr>
+    <nobr><a href="compositedock.html">next &raquo;</a></nobr>
 </div>
 
 <span class="item"><a href="../main/index.html">Java Docking Home</a></span>&gt;
@@ -21,53 +21,70 @@
 <span class="selected item">How to Add, Move, and Remove Dockables</span>
 
 <h2>
-How to Add, Move, and Remove Dockables
+    How to Add, Move, and Remove Dockables
 </h2>
 
 <h3>
-:: Adding, moving and removing dockables ::
+    :: Adding, moving and removing dockables ::
 </h3>
 <p>
-If you want to add, move or remove a dockable, you can use the methods from 
-<a href="../javadoc/com/javadocking/dock/Dock.html" target="_blank">Dock</a>,
-<a href="../javadoc/com/javadocking/dock/LeafDock.html" target="_blank">LeafDock</a>, and
-<a href="../javadoc/com/javadocking/dock/CompositeDock.html" target="_blank">CompositeDock</a>:
+    If you want to add, move or remove a dockable, you can use the methods from
+    <a href="../javadoc/com/javadocking/dock/Dock.html" target="_blank">Dock</a>,
+    <a href="../javadoc/com/javadocking/dock/LeafDock.html" target="_blank">LeafDock</a>, and
+    <a href="../javadoc/com/javadocking/dock/CompositeDock.html" target="_blank">CompositeDock</a>:
 <ul>
-<li><a href="../javadoc/com/javadocking/dock/Dock.html#addDockable(com.javadocking.dockable.Dockable, java.awt.Point, java.awt.Point)" target="_blank">Dock.addDockable(Dockable, Dock, Point, Point)</a></li>
-<li><a href="../javadoc/com/javadocking/dock/LeafDock.html#addDockable(com.javadocking.dockable.Dockable, com.javadocking.dock.Position)" target="_blank">LeafDock.addDockable(Dockable, Position)</a></li>
-<li><a href="../javadoc/com/javadocking/dock/LeafDock.html#moveDockable(com.javadocking.dockable.Dockable, java.awt.Point)" target="_blank">LeafDock.moveDockable(Dockable, Point)</a></li>
-<li><a href="../javadoc/com/javadocking/dock/LeafDock.html#removeDockable(com.javadocking.dockable.Dockable)" target="_blank">LeafDock.removeDockable(Dockable)</a></li>
-<li><a href="../javadoc/com/javadocking/dock/CompositeDock.html#addChildDock(com.javadocking.dock.Dock, com.javadocking.dock.Position)" target="_blank">CompositeDock.addChildDock(Dock, Position)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/dock/Dock.html#addDockable(com.javadocking.dockable.Dockable, java.awt.Point, java.awt.Point)"
+           target="_blank">Dock.addDockable(Dockable, Dock, Point, Point)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/dock/LeafDock.html#addDockable(com.javadocking.dockable.Dockable, com.javadocking.dock.Position)"
+           target="_blank">LeafDock.addDockable(Dockable, Position)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/dock/LeafDock.html#moveDockable(com.javadocking.dockable.Dockable, java.awt.Point)"
+           target="_blank">LeafDock.moveDockable(Dockable, Point)</a></li>
+    <li><a href="../javadoc/com/javadocking/dock/LeafDock.html#removeDockable(com.javadocking.dockable.Dockable)"
+           target="_blank">LeafDock.removeDockable(Dockable)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/dock/CompositeDock.html#addChildDock(com.javadocking.dock.Dock, com.javadocking.dock.Position)"
+           target="_blank">CompositeDock.addChildDock(Dock, Position)</a></li>
 </ul>
-A better possibility is to use one of the following methods from the 
+A better possibility is to use one of the following methods from the
 <a href="../javadoc/com/javadocking/DockingExecutor.html" target="_blank">DockingExecutor</a>:
 <ul>
-<li><a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.dock.Dock)" target="_blank">changeDocking(Dockable, Dock)</a></li>
-<li><a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.dock.Dock, java.awt.Point, java.awt.Point)" target="_blank">changeDocking(Dockable, Dock, Point, Point)</a></li>
-<li><a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.dock.LeafDock, com.javadocking.dock.Position)" target="_blank">changeDocking(Dockable, LeafDock, Position)</a></li>
-<li><a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.model.DockingPath)" target="_blank">changeDocking(Dockable, DockingPath)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.dock.Dock)"
+           target="_blank">changeDocking(Dockable, Dock)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.dock.Dock, java.awt.Point, java.awt.Point)"
+           target="_blank">changeDocking(Dockable, Dock, Point, Point)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.dock.LeafDock, com.javadocking.dock.Position)"
+           target="_blank">changeDocking(Dockable, LeafDock, Position)</a></li>
+    <li>
+        <a href="../javadoc/com/javadocking/DockingExecutor.html#changeDocking(com.javadocking.dockable.Dockable, com.javadocking.model.DockingPath)"
+           target="_blank">changeDocking(Dockable, DockingPath)</a></li>
 </ul>
 </p>
 <p>
-The docking executor fires also a 
-<a href="../javadoc/com/javadocking/event/DockableEvent.html" target="_blank">DockableEvent</a> on the dockable.
-An event is fired before and after the docking change.
-Once there are listeners in your application that listen to dockable events, you should always use
-the methods from the docking executor.
+    The docking executor fires also a
+    <a href="../javadoc/com/javadocking/event/DockableEvent.html" target="_blank">DockableEvent</a> on the dockable.
+    An event is fired before and after the docking change.
+    Once there are listeners in your application that listen to dockable events, you should always use
+    the methods from the docking executor.
 </p>
 <p>
-With the docking executor you can combine a removal and an addition. If you use the method
-<code>changeDocking()</code> for a dockable that is already docked in a dock, the dockable is removed from
-its old dock, before adding it to the new dock. An event is fired before the removal of the dockable
-and after the addition of the dockable.
+    With the docking executor you can combine a removal and an addition. If you use the method
+    <code>changeDocking()</code> for a dockable that is already docked in a dock, the dockable is removed from
+    its old dock, before adding it to the new dock. An event is fired before the removal of the dockable
+    and after the addition of the dockable.
 </p>
 <h3>
-:: Closing and restoring dockables with a dockable state action ::
+    :: Closing and restoring dockables with a dockable state action ::
 </h3>
 <p>
-The easiest way to close and restore a dockable is using a 
-<a href="../javadoc/com/javadocking/dockable/action/DefaultDockableStateAction.html" target="_blank">DefaultDockableStateAction</a>.
-These actions are doing everything for you:
+    The easiest way to close and restore a dockable is using a
+    <a href="../javadoc/com/javadocking/dockable/action/DefaultDockableStateAction.html" target="_blank">DefaultDockableStateAction</a>.
+    These actions are doing everything for you:
 <blockquote><pre>
 		...
 		
@@ -94,18 +111,20 @@ These actions are doing everything for you:
 			
 		}
 			
-</pre></blockquote>
-When a dockable is closed with a dockable state action, a 
+</pre>
+</blockquote>
+When a dockable is closed with a dockable state action, a
 <a href="../javadoc/com/javadocking/model/DockingPath.html" target="_blank">DockingPath</a> is created for the dockable.
-This docking path is added to the 
-<a href="../javadoc/com/javadocking/model/DockingPathModel.html" target="_blank">DockingPathModel</a> of the docking manager.
+This docking path is added to the
+<a href="../javadoc/com/javadocking/model/DockingPathModel.html" target="_blank">DockingPathModel</a> of the docking
+manager.
 When the dockable is restored, the docking path is used to restore the dockable as good as possible
 where the dockable was docked before.
 </p>
 <p>
-If you want to restore a dockable that was not already docked, you better add first a docking path for the dockable
-to the docking path model by your self 
-(see <a href="dockingpath.html">How to Use Docking Paths</a>).
+    If you want to restore a dockable that was not already docked, you better add first a docking path for the dockable
+    to the docking path model by your self
+    (see <a href="dockingpath.html">How to Use Docking Paths</a>).
 </p>
 
 
@@ -115,12 +134,14 @@ to the docking path model by your self
 The source code of the samples can be found in:
 <br/><br/>
 <table>
-<tr>
-	<td><a href="code/CodecExample.java.html">CodecExample</a></td><td>Shows the usage, the encoding, and the decoding of dock models.</td>
-</tr>
-<tr>
-	<td><a href="code/WorkspaceExample.java.html">WorkspaceExample</a></td><td>Shows the usage, the encoding, and the decoding of dock models.</td>
-</tr>
+    <tr>
+        <td><a href="code/CodecExample.java.html">CodecExample</a></td>
+        <td>Shows the usage, the encoding, and the decoding of dock models.</td>
+    </tr>
+    <tr>
+        <td><a href="code/WorkspaceExample.java.html">WorkspaceExample</a></td>
+        <td>Shows the usage, the encoding, and the decoding of dock models.</td>
+    </tr>
 </table>
 
 <br/>
@@ -128,8 +149,8 @@ The source code of the samples can be found in:
 <br/>
 
 <div class="nextprevbottom">
-<nobr><a href="leafdock.html">&laquo; prev</a></nobr>
-<nobr><a href="compositedock.html">next &raquo;</a></nobr>
+    <nobr><a href="leafdock.html">&laquo; prev</a></nobr>
+    <nobr><a href="compositedock.html">next &raquo;</a></nobr>
 </div>
 
 </body>

@@ -1,19 +1,19 @@
 <!doctype html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta http-equiv="content-script-type" content="text/javascript">
-		<meta http-equiv="content-style-type" content="text/css">
-		<meta name="author" content="Heidi Rakels">
-		<meta name="description" content="Sanaware Java Docking - Developer guide - Dockable Actions">
-		<link rel="stylesheet" type="text/css" href="../style.css">
-		<title>How to Use Dockable Actions</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta name="author" content="Heidi Rakels">
+    <meta name="description" content="Sanaware Java Docking - Developer guide - Dockable Actions">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>How to Use Dockable Actions</title>
+</head>
 <body>
 
 <div class="nextprev">
-<nobr><a href="componentfactory.html">&laquo; prev</a></nobr>
-<nobr><a href="toolbar.html">next &raquo;</a></nobr>
+    <nobr><a href="componentfactory.html">&laquo; prev</a></nobr>
+    <nobr><a href="toolbar.html">next &raquo;</a></nobr>
 </div>
 
 <span class="item"><a href="../main/index.html">Java Docking Home</a></span>&gt;
@@ -21,21 +21,21 @@
 <span class="selected item">How to Use Dockable Actions</span>
 
 <h2>
-How to Use Dockable Actions
+    How to Use Dockable Actions
 </h2>
 
 <h3>
-:: Custom dockable actions ::
+    :: Custom dockable actions ::
 </h3>
 <p>
-You can decorate a <a href="../javadoc/com/javadocking/dockable/Dockable.html" target="_blank">Dockable</a>
-with actions by using an <a href="../javadoc/com/javadocking/dockable/ActionDockable.html" target="_blank">
-ActionDockable</a>.
-First you have to create your basic dockable. Then you create the wrapper action dockable around the dockable,
-that adds actions to it.
+    You can decorate a <a href="../javadoc/com/javadocking/dockable/Dockable.html" target="_blank">Dockable</a>
+    with actions by using an <a href="../javadoc/com/javadocking/dockable/ActionDockable.html" target="_blank">
+    ActionDockable</a>.
+    First you have to create your basic dockable. Then you create the wrapper action dockable around the dockable,
+    that adds actions to it.
 </p>
 <p>
-In the folowing example the dockable is decorated with 2 actions.
+    In the folowing example the dockable is decorated with 2 actions.
 <blockquote><pre>
 		// Create the dockable around the content component.
 		Dockable dockable = new DefaultDockable("Window1", textPanel, "Window", new ImageIcon("resources/images/text12.gif"));
@@ -50,18 +50,21 @@ In the folowing example the dockable is decorated with 2 actions.
 		actions[0][0] = helloAction;
 		actions[0][1] = cautionAction;
 		dockable = new ActionDockable(dockable, actions);
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <h3>
-:: Actions for closing, minimizing, maximizing, and externalizing a dockable ::
+    :: Actions for closing, minimizing, maximizing, and externalizing a dockable ::
 </h3>
 <p>
-You can decorate a dockable with special actions to change the state of the dockable by using a <a href="../javadoc/com/javadocking/dockable/StateActionDockable.html" target="_blank">
-StateActionDockable</a>.
+    You can decorate a dockable with special actions to change the state of the dockable by using a <a
+        href="../javadoc/com/javadocking/dockable/StateActionDockable.html" target="_blank">
+    StateActionDockable</a>.
 </p>
 <p>
-In the folowing example the dockable is decorated with actions to normalize, minimize, maximize, and externalize the dockable. 
+    In the folowing example the dockable is decorated with actions to normalize, minimize, maximize, and externalize the
+    dockable.
 <blockquote><pre>
 	// Add minimize, maximize, externalize, and close actions to the dockables.
 	dockable1 = addActions(dockable1);
@@ -77,27 +80,30 @@ In the folowing example the dockable is decorated with actions to normalize, min
 		return wrapper;
 	}
 		
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <h3>
-:: Popup menus for dockables ::
+    :: Popup menus for dockables ::
 </h3>
 <p>
-The <a href="../javadoc/com/javadocking/dockable/action/PopupMenuFactory.html" target="_blank">
-PopupMenuFactory</a> is used to create popup menus for the dockables.
-A popup menu for one dockable is shown, when you right click on the tab header of a dockable in a tab dock.
-A popup menu for a group of dockables is shown, when you right click on the header of a dock, but outside the header
-of one specific dockable.
+    The <a href="../javadoc/com/javadocking/dockable/action/PopupMenuFactory.html" target="_blank">
+    PopupMenuFactory</a> is used to create popup menus for the dockables.
+    A popup menu for one dockable is shown, when you right click on the tab header of a dockable in a tab dock.
+    A popup menu for a group of dockables is shown, when you right click on the header of a dock, but outside the header
+    of one specific dockable.
 </p>
 <p>
-The popup menu factory has to be given to the <a href="../javadoc/com/javadocking/component/SwComponentFactory.html" target="_blank">
-SwComponentFactory</a> of the docking manager, otherwise the default popup menu factory <a href="../javadoc/com/javadocking/dockable/action/DefaultPopupMenuFactory.html" target="_blank">
-DefaultPopupMenuFactory</a> is used. 
+    The popup menu factory has to be given to the <a href="../javadoc/com/javadocking/component/SwComponentFactory.html"
+                                                     target="_blank">
+    SwComponentFactory</a> of the docking manager, otherwise the default popup menu factory <a
+        href="../javadoc/com/javadocking/dockable/action/DefaultPopupMenuFactory.html" target="_blank">
+    DefaultPopupMenuFactory</a> is used.
 </p>
 <p>
-In the folowing example the actions of a dockable are shown in the popup menu, but also
-a close all and close others action. 
+    In the folowing example the actions of a dockable are shown in the popup menu, but also
+    a close all and close others action.
 <blockquote><pre>
 		// We only want to see the dockable actions, the close all, and close others actions in the popup menu.
 		DefaultPopupMenuFactory popupMenuFactory = new DefaultPopupMenuFactory();
@@ -105,7 +111,8 @@ a close all and close others action.
 		DefaultSwComponentFactory componentFactory = new DefaultSwComponentFactory();
 		componentFactory.setPopupMenuFactory(popupMenuFactory);
 		DockingManager.setComponentFactory(componentFactory);
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <hr>
@@ -113,12 +120,14 @@ a close all and close others action.
 The source code of the samples can be found in:
 <br/><br/>
 <table>
-<tr>
-	<td><a href="code/ActionsDockable.java.html">ActionsDockable</a></td><td>Shows a dockable with actions.</td>
-</tr>
-<tr>
-	<td><a href="code/DockableActionsExample.java.html">DockableActionsExample</a></td><td>Shows a dockables with actions and custom popup menus.</td>
-</tr>
+    <tr>
+        <td><a href="code/ActionsDockable.java.html">ActionsDockable</a></td>
+        <td>Shows a dockable with actions.</td>
+    </tr>
+    <tr>
+        <td><a href="code/DockableActionsExample.java.html">DockableActionsExample</a></td>
+        <td>Shows a dockables with actions and custom popup menus.</td>
+    </tr>
 </table>
 
 
@@ -127,8 +136,8 @@ The source code of the samples can be found in:
 <br/>
 
 <div class="nextprevbottom">
-<nobr><a href="componentfactory.html">&laquo; prev</a></nobr>
-<nobr><a href="toolbar.html">next &raquo;</a></nobr>
+    <nobr><a href="componentfactory.html">&laquo; prev</a></nobr>
+    <nobr><a href="toolbar.html">next &raquo;</a></nobr>
 </div>
 
 </body>

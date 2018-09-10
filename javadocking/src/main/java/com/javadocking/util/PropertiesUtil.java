@@ -1,374 +1,343 @@
 package com.javadocking.util;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Properties;
-import java.util.StringTokenizer;
 
 /**
  * This class contains a collection of static utility methods for creating, retrieving, saving and loading properties.
- * 
+ *
  * @author Heidi Rakels.
  */
-public class PropertiesUtil
-{
-	
+public class PropertiesUtil {
+
 	// Static fields.
-	
-	/** The string representation for the boolean TRUE value. */
+
+	/**
+	 * The string representation for the boolean TRUE value.
+	 */
 	public static final String TRUE = "true";
-	/** The string representation for the boolean FALSE value. */
+	/**
+	 * The string representation for the boolean FALSE value.
+	 */
 	public static final String FALSE = "false";
-	/** The char ','. */
-	private static final char 	COMMA = ',';
+	/**
+	 * The char ','.
+	 */
+	private static final char COMMA = ',';
 
 	// Public static methods.
 
+	private PropertiesUtil() {
+	}
+
 	/**
 	 * Reads the file with the given name into a java.util.Properties object.
-	 * 
-	 * @param 	sourceName 			The name of the source file for the properties.
-	 * @return 						The properties that are retrieved from the source file.
-	 * @throws 	IOException			If creating the input stream, reading the property list from the input stream
-	 * 								or closing the input stream throws an IOException. 
+	 *
+	 * @param sourceName The name of the source file for the properties.
+	 * @return The properties that are retrieved from the source file.
+	 * @throws IOException If creating the input stream, reading the property list from the input stream
+	 *                     or closing the input stream throws an IOException.
 	 */
-	public static Properties loadProperties(String sourceName) throws IOException
-	{
-		
+	public static Properties loadProperties(String sourceName) throws IOException {
+
 		Properties result = new Properties();
 		FileInputStream inputStream = new FileInputStream(sourceName);
 		result.load(inputStream);
 		inputStream.close();
 		return result;
-		
+
 	}
-	
+
 	/**
 	 * Saves the given java.util.Properties object in a destination file with the given name.
-	 * 
-	 * @param 	properties			The properties that have to be saved in the destination file.
-	 * @param 	destinationName		The name of the destination file for the properties.
-	 * @param 	comment				The saved file will start with the given text as comment.
-	 * @throws 	NullPointerException	If the given properties are null.
-	 * @throws  IOException				If creating the output stream, writing this property list 
-	 * 									to the output stream or closing the output stream throws an IOException. 
+	 *
+	 * @param properties      The properties that have to be saved in the destination file.
+	 * @param destinationName The name of the destination file for the properties.
+	 * @param comment         The saved file will start with the given text as comment.
+	 * @throws NullPointerException If the given properties are null.
+	 * @throws IOException          If creating the output stream, writing this property list
+	 *                              to the output stream or closing the output stream throws an IOException.
 	 */
-	public static void saveProperties(Properties properties, String destinationName, String comment) throws IOException
-	{
-		
+	public static void saveProperties(Properties properties, String destinationName, String comment) throws IOException {
+
 		// Check that the given properties are not null.
-		if (properties == null)
-		{
+		if (properties == null) {
 			throw new NullPointerException("Properties null.");
 		}
-		
+
 		FileOutputStream outputStream = new FileOutputStream(destinationName);
 		properties.store(outputStream, comment);
 		outputStream.close();
-		
+
 	}
-	
+
 	/**
 	 * Gets the boolean property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The boolean property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The boolean property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static boolean getBoolean(Properties properties, String name, boolean defaultValue)
-	{
-		
+	public static boolean getBoolean(Properties properties, String name, boolean defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
 
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
-		
+
 		// Trim the string value.
 		stringValue = stringValue.trim();
 
 		// Return true if the string starts with 'true'.
 		return stringValue.startsWith(TRUE);
-		
-	}
-	
-	/**
-	 * Adds the boolean property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
-	 */
-	public static void setBoolean(Properties properties, String name, boolean value)
-	{
-		properties.put(name, (new Boolean(value)).toString());
-	}
-	
-	/**
-	 * Gets the string property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The string property with the given name. 
-	 * 								If the property is not found, the default value is returned.
-	 */
-	public static String getString(Properties properties, String name, String defaultValue)
-	{
-		
-		// Get the property from the given properties list.
-		String stringValue = properties.getProperty(name);
-		
-		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
-			return defaultValue;
-		}
-		
-		return stringValue;
-		
+
 	}
 
 	/**
-	 * Adds the string property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
+	 * Adds the boolean property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
 	 */
-	public static void setString(Properties properties, String name, String value)
-	{
-		
-		if (value != null)
-		{
+	public static void setBoolean(Properties properties, String name, boolean value) {
+		properties.put(name, (new Boolean(value)).toString());
+	}
+
+	/**
+	 * Gets the string property with the given name. If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The string property with the given name.
+	 * If the property is not found, the default value is returned.
+	 */
+	public static String getString(Properties properties, String name, String defaultValue) {
+
+		// Get the property from the given properties list.
+		String stringValue = properties.getProperty(name);
+
+		// Return the default value if the value is invalid.
+		if ((stringValue == null) || (stringValue.length() == 0)) {
+			return defaultValue;
+		}
+
+		return stringValue;
+
+	}
+
+	/**
+	 * Adds the string property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
+	 */
+	public static void setString(Properties properties, String name, String value) {
+
+		if (value != null) {
 			properties.put(name, value);
 		}
-		
+
 	}
 
 	/**
 	 * Gets the integer property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The integer property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The integer property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static int getInteger(Properties properties, String name, int defaultValue)
-	{
-		
+	public static int getInteger(Properties properties, String name, int defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
-		
+
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
-		
-		try
-		{
+
+		try {
 			// Trim the string value.
 			stringValue = stringValue.trim();
 
 			// Try to parse the string to an integer.
 			return Integer.parseInt(stringValue);
-		}
-		catch (NumberFormatException numberFormatException)
-		{
+		} catch (NumberFormatException numberFormatException) {
 			return defaultValue;
 		}
-		
+
 	}
-	
+
 	/**
-	 * Adds the integer property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
+	 * Adds the integer property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
 	 */
-	public static void setInteger(Properties properties, String name, int value)
-	{
+	public static void setInteger(Properties properties, String name, int value) {
 		properties.put(name, (new Integer(value)).toString());
 	}
 
 	/**
 	 * Gets the double property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The double property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The double property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static double getDouble(Properties properties, String name, double defaultValue)
-	{
-		
+	public static double getDouble(Properties properties, String name, double defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
-		
+
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
-		
-		try
-		{
+
+		try {
 			// Trim the string value.
 			stringValue = stringValue.trim();
 
 			// Try to parse the string to an double.
 			return Double.parseDouble(stringValue);
-		}
-		catch (NumberFormatException numberFormatException)
-		{
+		} catch (NumberFormatException numberFormatException) {
 			return defaultValue;
 		}
-		
+
 	}
-	
+
 	/**
-	 * Adds the double property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
+	 * Adds the double property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
 	 */
-	public static void setDouble(Properties properties, String name, double value)
-	{
+	public static void setDouble(Properties properties, String name, double value) {
 		properties.put(name, (new Double(value)).toString());
 	}
 
 	/**
 	 * Gets the color property with the given name. If the property is not found, the default value is returned.
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The color property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The color property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static Color getColor(Properties properties, String name, Color defaultValue)
-	{
-		
+	public static Color getColor(Properties properties, String name, Color defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
-		
+
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
-		
-		try
-		{
+
+		try {
 			// Trim the string value.
 			stringValue = stringValue.trim();
-			
+
 			// Get red, green and blue strings.
 			StringTokenizer tokenizer = new StringTokenizer(stringValue, "[{(,/)}]");
 			String red = tokenizer.nextToken();
 			String green = tokenizer.nextToken();
 			String blue = tokenizer.nextToken();
-			
+
 			// Parse the strings to integers.
 			int redValue = Integer.parseInt(red);
 			int greenValue = Integer.parseInt(green);
 			int blueValue = Integer.parseInt(blue);
-			
+
 			// Do we have an alfa?
-			if (tokenizer.hasMoreTokens())
-			{
+			if (tokenizer.hasMoreTokens()) {
 				// Get the alfa string and parse it to an integer value.
 				String alfa = tokenizer.nextToken();
 				int alfaValue = Integer.parseInt(alfa);
-				
+
 				// Try to make the color with an alfa.
 				return new Color(redValue, greenValue, blueValue, alfaValue);
 			}
 
 			// Try to make the color without alfa.
-			return new Color(redValue,greenValue,blueValue);
-		}
-		catch (NumberFormatException numberFormatException)			
-		{
+			return new Color(redValue, greenValue, blueValue);
+		} catch (NumberFormatException numberFormatException) {
 			// Exception while parsing the integers.
 			return defaultValue;
-		}
-		catch (NoSuchElementException noSuchElementException)		
-		{
+		} catch (NoSuchElementException noSuchElementException) {
 			// Exception in the StringTokenizer.
 			return defaultValue;
-		}
-		catch (IllegalArgumentException illegalArgumentException) 	
-		{
+		} catch (IllegalArgumentException illegalArgumentException) {
 			// Exception while creating the color.
 			return defaultValue;
 		}
-		
+
 	}
 
 	/**
-	 * Adds the color property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
+	 * Adds the color property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
 	 */
-	public static void setColor(Properties properties, String name, Color value)
-	{
-		
+	public static void setColor(Properties properties, String name, Color value) {
+
 		// Check if the color is not null.
-		if (value != null)
-		{
+		if (value != null) {
 			// Create the string for the color.
-			String colorString = 	"(" + 
-									value.getRed() + COMMA +
-									value.getGreen() + COMMA +
-									value.getBlue() + COMMA +
-									value.getAlpha() +
-									")";
-			
+			String colorString = "(" +
+					value.getRed() + COMMA +
+					value.getGreen() + COMMA +
+					value.getBlue() + COMMA +
+					value.getAlpha() +
+					")";
+
 			// Add the property.
 			properties.put(name, colorString);
 		}
-		
+
 	}
 
-	
 	/**
 	 * Gets the string array property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The string array property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The string array property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static String[] getStringArray(Properties properties, String name, String[] defaultValue)
-	{
-		
+	public static String[] getStringArray(Properties properties, String name, String[] defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
-		
+
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
-		
+
 
 		// Trim the string value.
 		stringValue = stringValue.trim();
@@ -376,69 +345,62 @@ public class PropertiesUtil
 		// Get the strings in a list.
 		StringTokenizer tokenizer = new StringTokenizer(stringValue, "(,)");
 		List stringList = new ArrayList();
-		while (tokenizer.hasMoreElements())
-		{
-			stringList.add(tokenizer.nextElement());	
+		while (tokenizer.hasMoreElements()) {
+			stringList.add(tokenizer.nextElement());
 		}
-			
+
 		// Create an array of strings.
 		String[] stringArray = new String[stringList.size()];
-		for (int index = 0; index < stringArray.length; index++)
-		{
-			stringArray[index] = (String)stringList.get(index);
+		for (int index = 0; index < stringArray.length; index++) {
+			stringArray[index] = (String) stringList.get(index);
 		}
 		return stringArray;
 
 	}
-	
+
 	/**
-	 * Adds the string array property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
+	 * Adds the string array property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
 	 */
-	public static void setStringArray(Properties properties, String name, String[] value)
-	{
-		
+	public static void setStringArray(Properties properties, String name, String[] value) {
+
 		// Check if the array is not null or if the size is 0.
-		if ((value != null) && (value.length > 0))
-		{
+		if ((value != null) && (value.length > 0)) {
 			// Create the string for the string array.
 			StringBuffer totalString = new StringBuffer(value[0]);
-			for (int index = 1; index < value.length; index++)
-			{
+			for (int index = 1; index < value.length; index++) {
 				// Separate the strings with a comma.
 				totalString.append(COMMA);
-				
+
 				// Add the next string.
 				totalString.append(value[index]);
 			}
-			
-			// Add the property and its value. 
+
+			// Add the property and its value.
 			properties.put(name, totalString.toString());
 		}
-		
+
 	}
 
 	/**
 	 * Gets the integer array property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The integer array property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The integer array property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static int[] getIntegerArray(Properties properties, String name, int[] defaultValue)
-	{
-		
+	public static int[] getIntegerArray(Properties properties, String name, int[] defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
-		
+
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0)) 
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
 
@@ -448,21 +410,16 @@ public class PropertiesUtil
 		// Get the strings of the integers in a list.
 		StringTokenizer tokenizer = new StringTokenizer(stringValue, "[{(,/)}]");
 		List intList = new ArrayList();
-		while (tokenizer.hasMoreElements())
-		{
+		while (tokenizer.hasMoreElements()) {
 			intList.add(tokenizer.nextElement());
 		}
 
 		// Create an array of integers.
 		int[] intArray = new int[intList.size()];
-		for (int index = 0; index < intArray.length; index++)
-		{
-			try
-			{
+		for (int index = 0; index < intArray.length; index++) {
+			try {
 				intArray[index] = Integer.parseInt((String) intList.get(index));
-			}
-			catch (NumberFormatException numberFormatException)
-			{
+			} catch (NumberFormatException numberFormatException) {
 				return defaultValue;
 			}
 		}
@@ -470,121 +427,78 @@ public class PropertiesUtil
 		return intArray;
 
 	}
-	
+
 	/**
 	 * Adds the integer array property with the given name and value to the
 	 * given properties.
-	 * 
-	 * @param properties
-	 *            The given properties to which the property is added.
-	 * @param name
-	 *            The name of the property.
-	 * @param value
-	 *            The default value of the property.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
 	 */
-	public static void setIntegerArray(Properties properties, String name, int[] value)
-	{
-		
+	public static void setIntegerArray(Properties properties, String name, int[] value) {
+
 		// Check if the array is not null or if the size is 0.
-		if ((value != null) && (value.length > 0))
-		{
+		if ((value != null) && (value.length > 0)) {
 			// Create the string for the integer array.
 			StringBuffer totalString = new StringBuffer();
 			totalString.append(value[0]);
-			for (int index = 1; index < value.length; index++)
-			{
+			for (int index = 1; index < value.length; index++) {
 				// Separate the strings with a comma.
 				totalString.append(COMMA);
-				
+
 				// Add the next integer.
 				totalString.append(value[index]);
 			}
-			
-			// Add the property and its value. 
+
+			// Add the property and its value.
 			properties.put(name, totalString.toString());
 		}
-		
+
 	}
-	
+
 	/**
 	 * Gets the double array property with the given name. If the property is not found, the default value is returned.
-	 * 
-	 * @param 	properties			The given properties where the property is searched.
-	 * @param 	name				The name of the property.
-	 * @param 	defaultValue		The default value of the property.
-	 * @return						The double array property with the given name. 
-	 * 								If the property is not found, the default value is returned.
+	 *
+	 * @param properties   The given properties where the property is searched.
+	 * @param name         The name of the property.
+	 * @param defaultValue The default value of the property.
+	 * @return The double array property with the given name.
+	 * If the property is not found, the default value is returned.
 	 */
-	public static double[] getDoubleArray(Properties properties, String name, double[] defaultValue)
-	{
-		
+	public static double[] getDoubleArray(Properties properties, String name, double[] defaultValue) {
+
 		// Get the property from the given properties list.
 		String stringValue = properties.getProperty(name);
-		
+
 		// Return the default value if the value is invalid.
-		if ((stringValue == null) || (stringValue.length() == 0))
-		{
+		if ((stringValue == null) || (stringValue.length() == 0)) {
 			return defaultValue;
 		}
-		
+
 		// Trim the string value.
 		stringValue = stringValue.trim();
 
 		// Get the strings of the doubles in a list.
 		StringTokenizer tokenizer = new StringTokenizer(stringValue, "[{(,/)}]");
 		List doubleList = new ArrayList();
-		while (tokenizer.hasMoreElements())
-		{
-			doubleList.add(tokenizer.nextElement());	
+		while (tokenizer.hasMoreElements()) {
+			doubleList.add(tokenizer.nextElement());
 		}
-			
+
 		// Create an array of doubles.
 		double[] doubleArray = new double[doubleList.size()];
-		for (int index = 0; index < doubleArray.length; index++)
-		{
-			try
-			{
-				doubleArray[index] = Integer.parseInt((String)doubleList.get(index));
-			}
-			catch (NumberFormatException numberFormatException)		
-			{
+		for (int index = 0; index < doubleArray.length; index++) {
+			try {
+				doubleArray[index] = Integer.parseInt((String) doubleList.get(index));
+			} catch (NumberFormatException numberFormatException) {
 				return defaultValue;
 			}
 		}
 		return doubleArray;
 
 	}
-	
-	/**
-	 * Adds the double array property with the given name and value to the given properties. 
-	 * 
-	 * @param 	properties			The given properties to which the property is added.
-	 * @param 	name				The name of the property.
-	 * @param 	value				The default value of the property.
-	 */
-	public static void setDoubleArray(Properties properties, String name, double[] value)
-	{
-		
-		// Check if the array is not null or if the size is 0.
-		if ((value != null) && (value.length > 0))
-		{
-			// Create the string for the double array.
-			StringBuffer totalString = new StringBuffer("" + value[0]);
-			for (int index = 1; index < value.length; index++)
-			{
-				// Separate the strings with a comma.
-				totalString.append(COMMA);
-				
-				// Add the next double.
-				totalString.append(value[index]);
-			}
-			
-			// Add the property and its value. 
-			properties.put(name, totalString.toString());
-		}
-		
-	}
-	
+
 //	/**
 //	 * Tests the static methods of this class.
 //	 * 
@@ -641,10 +555,33 @@ public class PropertiesUtil
 //		System.out.println(mystringarray[0]);
 //
 //	}
-	
+
 	// Private constructor.
-	
-	private PropertiesUtil()
-	{
+
+	/**
+	 * Adds the double array property with the given name and value to the given properties.
+	 *
+	 * @param properties The given properties to which the property is added.
+	 * @param name       The name of the property.
+	 * @param value      The default value of the property.
+	 */
+	public static void setDoubleArray(Properties properties, String name, double[] value) {
+
+		// Check if the array is not null or if the size is 0.
+		if ((value != null) && (value.length > 0)) {
+			// Create the string for the double array.
+			StringBuffer totalString = new StringBuffer("" + value[0]);
+			for (int index = 1; index < value.length; index++) {
+				// Separate the strings with a comma.
+				totalString.append(COMMA);
+
+				// Add the next double.
+				totalString.append(value[index]);
+			}
+
+			// Add the property and its value.
+			properties.put(name, totalString.toString());
+		}
+
 	}
 }

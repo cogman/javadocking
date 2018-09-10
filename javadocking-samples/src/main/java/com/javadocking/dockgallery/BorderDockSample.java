@@ -1,19 +1,7 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
-import com.javadocking.dock.BorderDock;
-import com.javadocking.dock.FloatDock;
-import com.javadocking.dock.Position;
-import com.javadocking.dock.Priority;
-import com.javadocking.dock.SingleDock;
-import com.javadocking.dock.TabDock;
+import com.javadocking.dock.*;
 import com.javadocking.dock.factory.TabDockFactory;
 import com.javadocking.dockable.DefaultDockable;
 import com.javadocking.dockable.Dockable;
@@ -21,11 +9,12 @@ import com.javadocking.dockable.DockingMode;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class BorderDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public BorderDockSample(JFrame frame)
-	{
+public class BorderDockSample extends JPanel {
+
+	public BorderDockSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -75,19 +64,19 @@ public class BorderDockSample extends JPanel
 
 		// Add the only root dock to the dock model.
 		dockModel.addRootDock("borderDock", borderDock, frame);
-		
+
 		// Give more priority for floating.
 		FloatDock floatDock = dockModel.getFloatDock(frame);
 		floatDock.setDockPriority(Priority.CAN_DOCK_WITH_PRIORITY);
-	
+
 		// Set the frame properties.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = 800;
 		int height = 600;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
-	
+
 }

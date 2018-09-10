@@ -1,29 +1,10 @@
 package com.javadocking.multi;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SplitDock;
 import com.javadocking.dock.TabDock;
-import com.javadocking.dockable.DefaultDockable;
-import com.javadocking.dockable.Dockable;
-import com.javadocking.dockable.DockableState;
-import com.javadocking.dockable.DockingMode;
-import com.javadocking.dockable.DraggableContent;
-import com.javadocking.dockable.StateActionDockable;
+import com.javadocking.dockable.*;
 import com.javadocking.dockable.action.DefaultDockableStateActionFactory;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
@@ -31,20 +12,22 @@ import com.javadocking.visualizer.FloatExternalizer;
 import com.javadocking.visualizer.LineMinimizer;
 import com.javadocking.visualizer.SingleMaximizer;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * This example shows root docks in different tabs of a javax.swing.JTabbedPane.
- * 
+ * <p>
  * This example shows the usage of a minimizer, a maximizer and an externalizer.
  * The minimizer is a com.javadocking.visualizer.LineMinimizer.
  * The maximizer is a com.javadocking.visualizer.SingleMaximizer.
  * The externalizer is a com.javadocking.visualizer.FloatExternalizer.
  * The dockables have actions to minimize, maximize, and restore itself.
  * Some dockables are already minimized, when the application is started.
- * 
+ *
  * @author Heidi Rakels
  */
-public class MultiTabAndVisualizers1Example extends JPanel
-{
+public class MultiTabAndVisualizers1Example extends JPanel {
 
 	// Static fields.
 
@@ -53,14 +36,13 @@ public class MultiTabAndVisualizers1Example extends JPanel
 
 	// Constructor.
 
-	public MultiTabAndVisualizers1Example(JFrame frame)
-	{
+	public MultiTabAndVisualizers1Example(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model and dock model group.
 		FloatDockModel dockModel = new FloatDockModel("no source");
 		dockModel.addOwner("frame", frame);
-				
+
 		// Give the dock model to the docking manager.
 		DockingManager.setDockModel(dockModel);
 
@@ -93,7 +75,7 @@ public class MultiTabAndVisualizers1Example extends JPanel
 		Dockable dockable11 = new DefaultDockable("Window11", textPanel8, "Window 11", null, DockingMode.ALL);
 		Dockable dockable12 = new DefaultDockable("Window12", textPanel8, "Window 12", null, DockingMode.ALL);
 		Dockable dockable13 = new DefaultDockable("Window13", textPanel8, "Window 13", null, DockingMode.ALL);
-		
+
 		// Add minimize, maximize, externalize, and close actions to the dockables.
 		dockable1 = addActions(dockable1);
 		dockable2 = addActions(dockable2);
@@ -108,13 +90,13 @@ public class MultiTabAndVisualizers1Example extends JPanel
 		dockable11 = addActions(dockable11);
 		dockable12 = addActions(dockable12);
 		dockable13 = addActions(dockable13);
-		
+
 		// Create the child tab docks.
 		TabDock leftTabDock1 = new TabDock();
 		TabDock rightTabDock1 = new TabDock();
 		TabDock leftTabDock2 = new TabDock();
 		TabDock rightTabDock2 = new TabDock();
-		
+
 		// Add the dockables to these tab docks.
 		leftTabDock1.addDockable(dockable1, new Position(0));
 		leftTabDock1.addDockable(dockable2, new Point(), new Point());
@@ -146,7 +128,7 @@ public class MultiTabAndVisualizers1Example extends JPanel
 		add(tabbedPane, BorderLayout.CENTER);
 		tabbedPane.addTab("Workspace 1", splitDock1);
 		tabbedPane.addTab("Workspace 2", splitDock2);
-		
+
 //		// Create the dock model for the docks.
 //		FloatDockModel dockModel = new FloatDockModel();
 //		dockModel.addOwner("frame0", frame);
@@ -208,7 +190,7 @@ public class MultiTabAndVisualizers1Example extends JPanel
 //
 //		// Add the root dock to the dock model.
 //		dockModel.addRootDock("splitDock", splitDock, frame);
-		
+
 		// Create an externalizer.
 		FloatExternalizer externalizer = new FloatExternalizer(frame);
 		dockModel.addVisualizer("externalizer", externalizer, frame);
@@ -216,72 +198,99 @@ public class MultiTabAndVisualizers1Example extends JPanel
 		// Create a minimizer.
 		LineMinimizer minimizer = new LineMinimizer(tabbedPane);
 		dockModel.addVisualizer("minimizer", minimizer, frame);
-		
+
 		// Create a maximizer.
 		SingleMaximizer maximizer = new SingleMaximizer(minimizer);
 		dockModel.addVisualizer("maximizer", maximizer, frame);
-		
+
 		// Add the maximizer to the panel.
 		this.add(maximizer, BorderLayout.CENTER);
-		
+
 		// Minimize dockables.
 		minimizer.visualizeDockable(dockable9);
 		minimizer.visualizeDockable(dockable10);
 		minimizer.visualizeDockable(dockable11);
 		minimizer.visualizeDockable(dockable12);
-		
+
 		// Externalize dockable.
 		//externalizer.visualizeDockable(dockable13);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Point location = new Point((screenSize.width - 200) / 2, (screenSize.height - 200) / 2);
 		externalizer.externalizeDockable(dockable13, location);
-		
+
 	}
-	
+
+	public static void createAndShowGUI() {
+
+		// Create the frame.
+		JFrame frame = new JFrame("Docks in multiple tabs and visualizers");
+
+		// Set the frame properties and show it.
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+
+		// Create the panel and add it to the frame.
+		MultiTabAndVisualizers1Example panel = new MultiTabAndVisualizers1Example(frame);
+		frame.getContentPane().add(panel);
+
+		// Show.
+		frame.setVisible(true);
+
+	}
+
+	public static void main(String args[]) {
+		Runnable doCreateAndShowGUI = new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		};
+		SwingUtilities.invokeLater(doCreateAndShowGUI);
+	}
+
+	// Main method.
+
 	/**
 	 * Decorates the given dockable with a state actions.
-	 * 
-	 * @param dockable	The dockable to decorate.
-	 * @return			The wrapper around the given dockable, with actions.
+	 *
+	 * @param dockable The dockable to decorate.
+	 * @return The wrapper around the given dockable, with actions.
 	 */
-	private Dockable addActions(Dockable dockable)
-	{
-		
+	private Dockable addActions(Dockable dockable) {
+
 		Dockable wrapper = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), new int[0]);
 		int[] states = {DockableState.NORMAL, DockableState.MINIMIZED, DockableState.MAXIMIZED, DockableState.EXTERNALIZED};
 		wrapper = new StateActionDockable(wrapper, new DefaultDockableStateActionFactory(), states);
 		return wrapper;
 
 	}
-	
+
 	/**
 	 * This is the class for the content.
 	 */
-	private class TextPanel extends JPanel implements DraggableContent
-	{
-		
-		private JLabel label; 
-		
-		public TextPanel(String text)
-		{
+	private class TextPanel extends JPanel implements DraggableContent {
+
+		private JLabel label;
+
+		public TextPanel(String text) {
 			super(new FlowLayout());
-			
+
 			// The panel.
-			setMinimumSize(new Dimension(80,80));
-			setPreferredSize(new Dimension(150,150));
+			setMinimumSize(new Dimension(80, 80));
+			setPreferredSize(new Dimension(150, 150));
 			setBackground(Color.white);
 			setBorder(BorderFactory.createLineBorder(Color.lightGray));
-			
+
 			// The label.
 			label = new JLabel(text);
 			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			add(label);
 		}
-		
+
 		// Implementations of DraggableContent.
 
-		public void addDragListener(DragListener dragListener)
-		{
+		public void addDragListener(DragListener dragListener) {
 			addMouseListener(dragListener);
 			addMouseMotionListener(dragListener);
 			label.addMouseListener(dragListener);
@@ -289,40 +298,5 @@ public class MultiTabAndVisualizers1Example extends JPanel
 		}
 	}
 
-	// Main method.
-	
-	public static void createAndShowGUI()
-	{
-		
-		// Create the frame.
-		JFrame frame = new JFrame("Docks in multiple tabs and visualizers");
-		
-		// Set the frame properties and show it.
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((screenSize.width - FRAME_WIDTH) / 2, (screenSize.height - FRAME_HEIGHT) / 2);
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		
-		// Create the panel and add it to the frame.
-		MultiTabAndVisualizers1Example panel = new MultiTabAndVisualizers1Example(frame);
-		frame.getContentPane().add(panel);
-
-		// Show.
-		frame.setVisible(true);
-		
-	}
-
-	public static void main(String args[]) 
-	{
-        Runnable doCreateAndShowGUI = new Runnable() 
-        {
-            public void run() 
-            {
-                createAndShowGUI();
-            }
-        };
-        SwingUtilities.invokeLater(doCreateAndShowGUI);
-    }
-	
 }
 

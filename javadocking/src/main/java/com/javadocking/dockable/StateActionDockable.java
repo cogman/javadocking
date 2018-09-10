@@ -1,12 +1,11 @@
 package com.javadocking.dockable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.Action;
-
 import com.javadocking.dockable.action.DockableStateAction;
 import com.javadocking.dockable.action.DockableStateActionFactory;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -15,22 +14,21 @@ import com.javadocking.dockable.action.DockableStateActionFactory;
  * The actions that are added, are created by the {@link DockableStateActionFactory}.
  * </p>
  * <p>
- * Information on using dockables with state actions is in 
- * <a href="http://www.javadocking.com/developerguide/dockable.html#ActionDockable" target="_blank">How to Use Dockables</a> in 
+ * Information on using dockables with state actions is in
+ * <a href="http://www.javadocking.com/developerguide/dockable.html#ActionDockable" target="_blank">How to Use Dockables</a> in
  * <i>The Sanaware Developer Guide</i>.
  * </p>
- * 
+ *
  * @author Heidi Rakels.
  */
-public class StateActionDockable extends ActionDockable
-{
+public class StateActionDockable extends ActionDockable {
 
 	// Fields.
 
-	private DockableStateActionFactory 	dockableStateActionFactory;
-	private int[] 						newDockableStates;
-	private Dockable					delegate;
-	
+	private DockableStateActionFactory dockableStateActionFactory;
+	private int[] newDockableStates;
+	private Dockable delegate;
+
 	/**
 	 * <p>
 	 * Constructs a decorator for the given delegate dockable.
@@ -41,18 +39,16 @@ public class StateActionDockable extends ActionDockable
 	 * <p>
 	 * For every state in the given array <code>newDockableStates</code> an action is created with the method {@link DockableStateActionFactory#createDockableStateAction(Dockable, int)}.
 	 * </p>
-	 * 
-	 * @param delegate						The decorated dockable.
-	 * @param dockableStateActionFactory	The factory that creates the {@link DockableStateAction}s.
-	 * @param newDockableStates				The dockable states for which an action has to be added.
+	 *
+	 * @param delegate                   The decorated dockable.
+	 * @param dockableStateActionFactory The factory that creates the {@link DockableStateAction}s.
+	 * @param newDockableStates          The dockable states for which an action has to be added.
 	 */
-	public StateActionDockable(Dockable delegate, DockableStateActionFactory dockableStateActionFactory, int[] newDockableStates)
-	{
-		
+	public StateActionDockable(Dockable delegate, DockableStateActionFactory dockableStateActionFactory, int[] newDockableStates) {
+
 		super(delegate);
 
-		if (dockableStateActionFactory == null)
-		{
+		if (dockableStateActionFactory == null) {
 			throw new IllegalArgumentException("The DockableStateActionFactory is null.");
 		}
 
@@ -61,35 +57,31 @@ public class StateActionDockable extends ActionDockable
 		this.delegate = delegate;
 
 		Action[] dockableStateActions = new DockableStateAction[newDockableStates.length];
-		for (int stateIndex = 0; stateIndex < dockableStateActions.length; stateIndex++)
-		{
+		for (int stateIndex = 0; stateIndex < dockableStateActions.length; stateIndex++) {
 			dockableStateActions[stateIndex] = dockableStateActionFactory.createDockableStateAction(
 					delegate, newDockableStates[stateIndex]);
 		}
 
 		Action[][] actionsToAdd = new Action[1][];
 		actionsToAdd[0] = dockableStateActions;
-		
+
 	}
 
 	/**
 	 * Sets the actions that will be added by this wrapper to the matrix of actions of the delegate.
-	 * 
-	 * @return	actions			The actions that will be added to the matrix of actions of the delegate.
-	 * @see	#getActions()
+	 *
+	 * @return actions            The actions that will be added to the matrix of actions of the delegate.
+	 * @see    #getActions()
 	 */
-	public Action[][] getActionsToAdd()
-	{
-		
+	public Action[][] getActionsToAdd() {
+
 		// Remove the action that corresponds with the current state of the dockable.
 		int currentDockableState = this.getState();
-		
+
 		List dockableStateActions = new ArrayList();
-		for (int stateIndex = 0; stateIndex < newDockableStates.length; stateIndex++)
-		{
+		for (int stateIndex = 0; stateIndex < newDockableStates.length; stateIndex++) {
 			int dockableState = newDockableStates[stateIndex];
-			if (currentDockableState != dockableState)
-			{
+			if (currentDockableState != dockableState) {
 				Action dockableStateAction = dockableStateActionFactory.createDockableStateAction(
 						delegate, newDockableStates[stateIndex]);
 				dockableStateActions.add(dockableStateAction);
@@ -97,11 +89,11 @@ public class StateActionDockable extends ActionDockable
 		}
 
 		Action[] dockableStateActionsArray = new DockableStateAction[dockableStateActions.size()];
-		dockableStateActionsArray = (Action[])dockableStateActions.toArray(dockableStateActionsArray);
+		dockableStateActionsArray = (Action[]) dockableStateActions.toArray(dockableStateActionsArray);
 		Action[][] actionsToAdd = new Action[1][];
 		actionsToAdd[0] = dockableStateActionsArray;
 
 		return actionsToAdd;
-		
+
 	}
 }

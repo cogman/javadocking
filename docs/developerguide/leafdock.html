@@ -1,19 +1,19 @@
 <!doctype html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta http-equiv="content-script-type" content="text/javascript">
-		<meta http-equiv="content-style-type" content="text/css">
-		<meta name="author" content="Heidi Rakels">
-		<meta name="description" content="Sanaware Java Docking - Developer guide - Leaf Docks">
-		<link rel="stylesheet" type="text/css" href="../style.css">
-		<title>How to Use Leaf Docks</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta name="author" content="Heidi Rakels">
+    <meta name="description" content="Sanaware Java Docking - Developer guide - Leaf Docks">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>How to Use Leaf Docks</title>
+</head>
 <body>
 
 <div class="nextprev">
-<nobr><a href="dockable.html">&laquo; prev</a></nobr>
-<nobr><a href="adddockable.html">next &raquo;</a></nobr>
+    <nobr><a href="dockable.html">&laquo; prev</a></nobr>
+    <nobr><a href="adddockable.html">next &raquo;</a></nobr>
 </div>
 
 <span class="item"><a href="../main/index.html">Java Docking Home</a></span>&gt;
@@ -21,30 +21,30 @@
 <span class="selected item">How to Use Leaf Docks</span>
 
 <h2>
-How to Use Leaf Docks
+    How to Use Leaf Docks
 </h2>
 
 <a name="LeafDock"><!-- --></a>
 <h3>
-:: Leaf Dock ::
+    :: Leaf Dock ::
 </h3>
 <p>
-A <a href="../javadoc/com/javadocking/dock/LeafDock.html" target="_blank">LeafDock</a> is a 
-<a href="../javadoc/com/javadocking/dock/Dock.html" target="_blank">Dock</a> that contains 
-<a href="../javadoc/com/javadocking/dockable/Dockable.html" target="_blank">Dockable</a> objects.
+    A <a href="../javadoc/com/javadocking/dock/LeafDock.html" target="_blank">LeafDock</a> is a
+    <a href="../javadoc/com/javadocking/dock/Dock.html" target="_blank">Dock</a> that contains
+    <a href="../javadoc/com/javadocking/dockable/Dockable.html" target="_blank">Dockable</a> objects.
 </p>
 
 <a name="SingleDock"><!-- --></a>
 <h3>
-:: Single Dock ::
+    :: Single Dock ::
 </h3>
 <p>
-The most simple leaf dock is a <a href="../javadoc/com/javadocking/dock/SingleDock.html" target="_blank">
-SingleDock</a>. This type of dock can contain 0 or one dockables.
-When the dock has already a dockable, no other dockable can be docked in this dock anymore.
+    The most simple leaf dock is a <a href="../javadoc/com/javadocking/dock/SingleDock.html" target="_blank">
+    SingleDock</a>. This type of dock can contain 0 or one dockables.
+    When the dock has already a dockable, no other dockable can be docked in this dock anymore.
 </p>
 <p>
-In the folowing example the single dock is created and the dockable is added:
+    In the folowing example the single dock is created and the dockable is added:
 <blockquote><pre>
 		// Create the single docks.
 		SingleDock leftDock = new SingleDock();
@@ -52,21 +52,22 @@ In the folowing example the single dock is created and the dockable is added:
 
 		// Add the dockable to the dock.
 		leftDock.addDockable(dockable1, new Position(0));
-</pre></blockquote>
+</pre>
+</blockquote>
 The dockable can be dragged from the left dock to the right and back.
 </p>
 
 <a name="TabDock"><!-- --></a>
 <h3>
-:: Tab Dock ::
+    :: Tab Dock ::
 </h3>
 <p>
-The most useful leaf dock is the <a href="../javadoc/com/javadocking/dock/TabDock.html" target="_blank">
-TabDock</a>. This dock can contain multiple dockables.
-There is tab for every dockable.
+    The most useful leaf dock is the <a href="../javadoc/com/javadocking/dock/TabDock.html" target="_blank">
+    TabDock</a>. This dock can contain multiple dockables.
+    There is tab for every dockable.
 </p>
 <p>
-In the folowing example 2 tab docks are created and the dockables are added to the left tab dock:
+    In the folowing example 2 tab docks are created and the dockables are added to the left tab dock:
 <blockquote><pre>
 		// Create the tab docks.
 		TabDock leftDock = new TabDock();
@@ -75,21 +76,23 @@ In the folowing example 2 tab docks are created and the dockables are added to t
 		// Add the dockables to the left tab dock.
 		leftDock.addDockable(dockable1, new Position(0));
 		leftDock.addDockable(dockable2, new Position(1));
-</pre></blockquote>
+</pre>
+</blockquote>
 The dockables can be dragged to the other dock. They can be dragged alone or together.
 The tabs can also be moved in the same tab dock.
 </p>
 
 <a name="LineDock"><!-- --></a>
 <h3>
-:: Line Dock ::
+    :: Line Dock ::
 </h3>
 <p>
-A special leaf dock that organizes its dockables in a line, is a <a href="../javadoc/com/javadocking/dock/LineDock.html" target="_blank">
-LineDock</a>.
+    A special leaf dock that organizes its dockables in a line, is a <a
+        href="../javadoc/com/javadocking/dock/LineDock.html" target="_blank">
+    LineDock</a>.
 </p>
 <p>
-In the folowing example 2 line docks are created:
+    In the folowing example 2 line docks are created:
 <blockquote><pre>
 		// Create the line docks.
 		LineDock topDock = new LineDock();
@@ -102,19 +105,21 @@ In the folowing example 2 line docks are created:
 		bottomDock.addDockable(dockable4, new Position(0));
 		bottomDock.addDockable(dockable5, new Position(1));
 		bottomDock.addDockable(dockable6, new Position(2));
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <a name="GridDock"><!-- --></a>
 <h3>
-:: Grid Dock ::
+    :: Grid Dock ::
 </h3>
 <p>
-Another special leaf dock that organizes its dockables in a grid, is a <a href="../javadoc/com/javadocking/dock/GridDock.html" target="_blank">
-GridDock</a>.
+    Another special leaf dock that organizes its dockables in a grid, is a <a
+        href="../javadoc/com/javadocking/dock/GridDock.html" target="_blank">
+    GridDock</a>.
 </p>
 <p>
-In the folowing example 1 grid dock is created:
+    In the folowing example 1 grid dock is created:
 <blockquote><pre>
 		// Create the grid dock.
 		GridDock dock = new GridDock();
@@ -126,7 +131,8 @@ In the folowing example 1 grid dock is created:
 		dock.addDockable(dockable4, new Position(3));
 		dock.addDockable(dockable5, new Position(4));
 		dock.addDockable(dockable6, new Position(5));
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <hr>
@@ -135,18 +141,22 @@ In the folowing example 1 grid dock is created:
 The source code of the samples can be found in:
 <br/><br/>
 <table>
-<tr>
-	<td><a href="code/SingleDocks.java.html">SingleDocks</a></td><td>Shows the use of single docks.</td>
-</tr>
-<tr>
-	<td><a href="code/TabDocks.java.html">TabDocks</a></td><td>Shows the use of tab docks.</td>
-</tr>
-<tr>
-	<td><a href="code/LineDocks.java.html">LineDocks</a></td><td>Shows the use of line docks.</td>
-</tr>
-<tr>
-	<td><a href="code/GridDocks.java.html">GridDocks</a></td><td>Shows the use of grid docks.</td>
-</tr>
+    <tr>
+        <td><a href="code/SingleDocks.java.html">SingleDocks</a></td>
+        <td>Shows the use of single docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/TabDocks.java.html">TabDocks</a></td>
+        <td>Shows the use of tab docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/LineDocks.java.html">LineDocks</a></td>
+        <td>Shows the use of line docks.</td>
+    </tr>
+    <tr>
+        <td><a href="code/GridDocks.java.html">GridDocks</a></td>
+        <td>Shows the use of grid docks.</td>
+    </tr>
 </table>
 
 <br/>
@@ -154,8 +164,8 @@ The source code of the samples can be found in:
 <br/>
 
 <div class="nextprevbottom">
-<nobr><a href="dockable.html">&laquo; prev</a></nobr>
-<nobr><a href="adddockable.html">next &raquo;</a></nobr>
+    <nobr><a href="dockable.html">&laquo; prev</a></nobr>
+    <nobr><a href="adddockable.html">next &raquo;</a></nobr>
 </div>
 
 </body>

@@ -1,19 +1,19 @@
 <!doctype html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-		<meta http-equiv="content-script-type" content="text/javascript">
-		<meta http-equiv="content-style-type" content="text/css">
-		<meta name="author" content="Heidi Rakels">
-		<meta name="description" content="Sanaware Java Docking - Developer guide - Buttons and Tool Bars">
-		<link rel="stylesheet" type="text/css" href="../style.css">
-		<title>How to Use Buttons and Tool Bars</title>
-	</head>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta name="author" content="Heidi Rakels">
+    <meta name="description" content="Sanaware Java Docking - Developer guide - Buttons and Tool Bars">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>How to Use Buttons and Tool Bars</title>
+</head>
 <body>
 
 <div class="nextprev">
-<nobr><a href="actions.html">&laquo; prev</a></nobr>
-<nobr style="visibility:hidden">next &raquo;</nobr>
+    <nobr><a href="actions.html">&laquo; prev</a></nobr>
+    <nobr style="visibility:hidden">next &raquo;</nobr>
 </div>
 
 <span class="item"><a href="../main/index.html">Java Docking Home</a></span>&gt;
@@ -21,23 +21,25 @@
 <span class="selected item">How to Use Buttons and Tool Bars</span>
 
 <h2>
-How to Use Buttons and Tool Bars
+    How to Use Buttons and Tool Bars
 </h2>
 
 <h3>
-:: Button Dockables ::
+    :: Button Dockables ::
 </h3>
 <p>
-If you need a button that can be moved in its tool bar, that can be dragged to other tool bars, or that
-can be made floating, you have to create a <a href="../javadoc/com/javadocking/dockable/ButtonDockable.html" target="_blank">
-ButtonDockable</a> around your button:
+    If you need a button that can be moved in its tool bar, that can be dragged to other tool bars, or that
+    can be made floating, you have to create a <a href="../javadoc/com/javadocking/dockable/ButtonDockable.html"
+                                                  target="_blank">
+    ButtonDockable</a> around your button:
 <blockquote><pre>
 		// Create the button.
 		JButton button = new JButton(action);
 
 		// Create the dockable with the button as component.
 		ButtonDockable buttonDockable = new ButtonDockable(id, button);
-</pre></blockquote>
+</pre>
+</blockquote>
 You can also use other components in the button dockable:
 <blockquote><pre>
 		// Create the button.
@@ -45,62 +47,75 @@ You can also use other components in the button dockable:
 
 		// Create the dockable with the button as component.
 		ButtonDockable buttonDockable = new ButtonDockable(id, button);
-</pre></blockquote>
+</pre>
+</blockquote>
 The main difference between button dockables and normal dockables is their docking mode:
 <ul>
-<li>Normal dockables usually have 
-<a href="../javadoc/com/javadocking/dockable/DockingMode.html#ALL" target="_blank">DockingMode.ALL</a> as possible docking modes.</li>
-<li>Button dockables have 
-<a href="../javadoc/com/javadocking/dockable/DockingMode.html#HORIZONTAL_TOOLBAR" target="_blank">DockingMode.HORIZONTAL_TOOLBAR</a>, 
-<a href="../javadoc/com/javadocking/dockable/DockingMode.html#VERTICAL_TOOLBAR" target="_blank">DockingMode.VERTICAL_TOOLBAR</a>,
-<a href="../javadoc/com/javadocking/dockable/DockingMode.html#TOOL_GRID" target="_blank">DockingMode.TOOL_GRID</a>, and 
-<a href="../javadoc/com/javadocking/dockable/DockingMode.html#FLOAT" target="_blank">DockingMode.FLOAT</a> as possible docking modes.</li>
+    <li>Normal dockables usually have
+        <a href="../javadoc/com/javadocking/dockable/DockingMode.html#ALL" target="_blank">DockingMode.ALL</a> as
+        possible docking modes.
+    </li>
+    <li>Button dockables have
+        <a href="../javadoc/com/javadocking/dockable/DockingMode.html#HORIZONTAL_TOOLBAR" target="_blank">DockingMode.HORIZONTAL_TOOLBAR</a>,
+        <a href="../javadoc/com/javadocking/dockable/DockingMode.html#VERTICAL_TOOLBAR" target="_blank">DockingMode.VERTICAL_TOOLBAR</a>,
+        <a href="../javadoc/com/javadocking/dockable/DockingMode.html#TOOL_GRID"
+           target="_blank">DockingMode.TOOL_GRID</a>, and
+        <a href="../javadoc/com/javadocking/dockable/DockingMode.html#FLOAT" target="_blank">DockingMode.FLOAT</a> as
+        possible docking modes.
+    </li>
 </ul>
 
 If you want to create a button that can't float, you have to specify its docking modes explicitely:
 <blockquote><pre>
 		// Create the dockable with the button as component and that can't float.
 		ButtonDockable buttonDockable = new ButtonDockable(id, button, DockingMode.TOOL_BAR);
-</pre></blockquote>
+</pre>
+</blockquote>
 The normal docks don't accept the docking modes of a button dockable, so button dockables
 will not be docked in these docks. Their are special docks that accept the docking modes
 for button dockables.
 </p>
 <p>
-Button dockables can also not be maximized or minimized.
+    Button dockables can also not be maximized or minimized.
 </p>
 
 <h3>
-:: Using special Line Docks and Grid Docks for Buttons ::
+    :: Using special Line Docks and Grid Docks for Buttons ::
 </h3>
 <p>
-You can create a horizontal or vertical <a href="../javadoc/com/javadocking/dock/LineDock.html" target="_blank">LineDock</a> for buttons like this:
+    You can create a horizontal or vertical <a href="../javadoc/com/javadocking/dock/LineDock.html" target="_blank">LineDock</a>
+    for buttons like this:
 <blockquote><pre>
 		LineDock toolBarDock1 = new LineDock(LineDock.ORIENTATION_HORIZONTAL, false, DockingMode.HORIZONTAL_TOOLBAR, DockingMode.VERTICAL_TOOLBAR);
 		...
 		LineDock toolBarDock5 = new LineDock(LineDock.ORIENTATION_VERTICAL, false, DockingMode.HORIZONTAL_TOOLBAR, DockingMode.VERTICAL_TOOLBAR);
-</pre></blockquote>
-The third parameter is the docking mode that is used when the orientation is horizontal, 	
-the fourth parameter is the docking mode that is used when the orientation is vertical.	
+</pre>
+</blockquote>
+The third parameter is the docking mode that is used when the orientation is horizontal,
+the fourth parameter is the docking mode that is used when the orientation is vertical.
 </p>
-<p>	
-You can create a <a href="../javadoc/com/javadocking/dock/GridDock.html" target="_blank">GridDock</a> for buttons like this:
+<p>
+    You can create a <a href="../javadoc/com/javadocking/dock/GridDock.html" target="_blank">GridDock</a> for buttons
+    like this:
 <blockquote><pre>
 		GridDock toolGridDock = new GridDock(DockingMode.TOOL_GRID);
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 
 <h3>
-:: Using special Border Docks and composite Line Docks for Buttons ::
+    :: Using special Border Docks and composite Line Docks for Buttons ::
 </h3>
 <p>
-You can create a horizontal or vertical <a href="../javadoc/com/javadocking/dock/CompositeLineDock.html" target="_blank">CompositeLineDock</a> for buttons like this:
+    You can create a horizontal or vertical <a href="../javadoc/com/javadocking/dock/CompositeLineDock.html"
+                                               target="_blank">CompositeLineDock</a> for buttons like this:
 <blockquote><pre>
 		CompositeLineDock compositeToolBarDock1 = new CompositeLineDock(CompositeLineDock.ORIENTATION_HORIZONTAL, false,
 				new ToolBarDockFactory(), DockingMode.HORIZONTAL_TOOLBAR, DockingMode.VERTICAL_TOOLBAR);
 		CompositeLineDock compositeToolBarDock2 = new CompositeLineDock(CompositeLineDock.ORIENTATION_VERTICAL, false,
 				new ToolBarDockFactory(), DockingMode.HORIZONTAL_TOOLBAR, DockingMode.VERTICAL_TOOLBAR);
-</pre></blockquote>
+</pre>
+</blockquote>
 Add the line docks with the button dockables:
 <blockquote><pre>
 		compositeToolBarDock1.addChildDock(toolBarDock1, new Position(0));
@@ -110,21 +125,27 @@ Add the line docks with the button dockables:
 		compositeToolBarDock2.addChildDock(toolBarDock5, new Position(0));
 		compositeToolBarDock2.addChildDock(toolBarDock6, new Position(1));
 		compositeToolBarDock2.addChildDock(toolBarDock7, new Position(2));
-</pre></blockquote>
-You can create a <a href="../javadoc/com/javadocking/dock/BorderDock.html" target="_blank">BorderDock</a> for tool bars like this:
+</pre>
+</blockquote>
+You can create a <a href="../javadoc/com/javadocking/dock/BorderDock.html" target="_blank">BorderDock</a> for tool bars
+like this:
 <blockquote><pre>
 		BorderDock toolBarBorderDock = new BorderDock(new CompositeToolBarDockFactory(), splitDock);
 		toolBarBorderDock.setMode(BorderDock.MODE_TOOL_BAR);
-</pre></blockquote>
-If this dock is the root dock, it has to be added to the <a href="../javadoc/com/javadocking/model/DockModel.html" target="_blank">DockModel</a>:
+</pre>
+</blockquote>
+If this dock is the root dock, it has to be added to the <a href="../javadoc/com/javadocking/model/DockModel.html"
+                                                            target="_blank">DockModel</a>:
 <blockquote><pre>
 		dockModel.addRootDock("borderDock", toolBarBorderDock, frame);
-</pre></blockquote>
+</pre>
+</blockquote>
 Add the composite line docks at the borders:
 <blockquote><pre>
 		toolBarBorderDock.setDock(compositeToolBarDock1, Position.TOP);
 		toolBarBorderDock.setDock(compositeToolBarDock2, Position.LEFT);
-</pre></blockquote>
+</pre>
+</blockquote>
 </p>
 <br/>
 
@@ -134,12 +155,14 @@ Add the composite line docks at the borders:
 The source code of the samples can be found in:
 <br/><br/>
 <table>
-<tr>
-	<td><a href="code/JButtonExample.java.html">JButtonExample</a></td><td>Shows JButtons in a tool bar at the borders of a window.</td>
-</tr>
-<tr>
-	<td><a href="code/ToolBarButtonExample.java.html">ToolBarButtonExample</a></td><td>Shows custom buttons in a tool bar at the borders of a window and in a floating grid.</td>
-</tr>
+    <tr>
+        <td><a href="code/JButtonExample.java.html">JButtonExample</a></td>
+        <td>Shows JButtons in a tool bar at the borders of a window.</td>
+    </tr>
+    <tr>
+        <td><a href="code/ToolBarButtonExample.java.html">ToolBarButtonExample</a></td>
+        <td>Shows custom buttons in a tool bar at the borders of a window and in a floating grid.</td>
+    </tr>
 </table>
 
 <br/>
@@ -147,8 +170,8 @@ The source code of the samples can be found in:
 <br/>
 
 <div class="nextprevbottom">
-<nobr><a href="actions.html">&laquo; prev</a></nobr>
-<nobr style="visibility:hidden">next &raquo;</nobr>
+    <nobr><a href="actions.html">&laquo; prev</a></nobr>
+    <nobr style="visibility:hidden">next &raquo;</nobr>
 </div>
 
 </body>

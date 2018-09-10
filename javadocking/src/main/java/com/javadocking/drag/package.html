@@ -2,30 +2,30 @@
 <html>
 <body bgcolor="white">
 <p>
-Contains the functionality for dragging a {@link com.javadocking.dockable.Dockable} from one 
-{@link com.javadocking.dock.Dock} and docking it into another dock.
+    Contains the functionality for dragging a {@link com.javadocking.dockable.Dockable} from one
+    {@link com.javadocking.dock.Dock} and docking it into another dock.
 </p>
 <p>
-Information on using dragging is in 
-<a href="http://www.javadocking.com/developerguide/drag.html" target="_blank">How to Use the Dragging</a> in
-<i>The Sanaware Developer Guide</i>.
+    Information on using dragging is in
+    <a href="http://www.javadocking.com/developerguide/drag.html" target="_blank">How to Use the Dragging</a> in
+    <i>The Sanaware Developer Guide</i>.
 </p>
 <p>
-There are 2 main interfaces: {@link com.javadocking.drag.DragListener} and 
-{@link com.javadocking.drag.Dragger}. <br/>
-A drag listener listens to mouse events and decides what should be done:
+    There are 2 main interfaces: {@link com.javadocking.drag.DragListener} and
+    {@link com.javadocking.drag.Dragger}. <br/>
+    A drag listener listens to mouse events and decides what should be done:
 <ul>
-<li>start dragging 
-<li>drag
-<li>stop dragging
-<li>cancel dragging
+    <li>start dragging
+    <li>drag
+    <li>stop dragging
+    <li>cancel dragging
 </ul>
 This functionality is delegated to the dragger.
-The drag listener should be added to the components where dragging can be started, e.g. tab labels or 
+The drag listener should be added to the components where dragging can be started, e.g. tab labels or
 dock headers.
 </p>
 <p>
-The dragger contains the real drag functionality.
+    The dragger contains the real drag functionality.
 </p>
 </body>
 </html>

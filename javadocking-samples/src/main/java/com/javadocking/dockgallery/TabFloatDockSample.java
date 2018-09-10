@@ -1,13 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Window;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.FloatDock;
 import com.javadocking.dock.Position;
@@ -20,17 +12,18 @@ import com.javadocking.model.FloatDockFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class TabFloatDockSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
+
+public class TabFloatDockSample extends JPanel {
 
 	private static final int WINDOW_OFFSET = 50;
 	private static final int FLOAT_WINDOW_X = 150;
 	private static final int FLOAT_WINDOW_Y = 60;
-	
-	public TabFloatDockSample(JFrame frame)
-	{
+
+	public TabFloatDockSample(JFrame frame) {
 		super(new BorderLayout());
-		
+
 		// Set the frame properties.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = 600;
@@ -40,7 +33,7 @@ public class TabFloatDockSample extends JPanel
 		frame.setLocation(locationX, locationY);
 		frame.setSize(width, height);
 		frame.getContentPane().add(this);
-		
+
 		// Create the factory for the float docks.
 		FloatDockFactory floatDockFactory = new MyFloatDockFactory();
 
@@ -91,7 +84,7 @@ public class TabFloatDockSample extends JPanel
 		tabDock6.addDockable(dockable6, new Position(0));
 		tabDock7.addDockable(dockable7, new Position(0));
 		tabDock8.addDockable(dockable8, new Position(0));
-		
+
 		// Add the root dock to the dock model.
 		dockModel.addRootDock("dock", rootDock, frame);
 
@@ -103,24 +96,22 @@ public class TabFloatDockSample extends JPanel
 		floatDock.addChildDock(tabDock6, new Position(floatLocationX + WINDOW_OFFSET, floatLocationY + WINDOW_OFFSET, 1));
 		floatDock.addChildDock(tabDock7, new Position(floatLocationX + WINDOW_OFFSET * 2, floatLocationY + WINDOW_OFFSET * 2, 2));
 		floatDock.addChildDock(tabDock8, new Position(floatLocationX + WINDOW_OFFSET * 3, floatLocationY + WINDOW_OFFSET * 3, 3));
-		
+
 		frame.setVisible(true);
 
 	}
-	
-	private class MyFloatDockFactory extends DefaultFloatDockFactory
-	{
 
-		public FloatDock createFloatDock(Window owner)
-		{
+	private class MyFloatDockFactory extends DefaultFloatDockFactory {
+
+		public FloatDock createFloatDock(Window owner) {
 			FloatDock floatDock = super.createFloatDock(owner);
-			
+
 			// We want a higher priority for making dockables float.
 			floatDock.setDockPriority(Priority.CAN_DOCK_WITH_PRIORITY);
-			
+
 			return floatDock;
 		}
-		
+
 	}
 
 }

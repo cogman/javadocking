@@ -1,15 +1,5 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Stroke;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SplitDock;
@@ -21,11 +11,12 @@ import com.javadocking.drag.painter.SwDockableDragPainter;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class DragRectangleSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
-	public DragRectangleSample(JFrame frame)
-	{
+public class DragRectangleSample extends JPanel {
+
+	public DragRectangleSample(JFrame frame) {
 		super(new BorderLayout());
 
 		// Create the dock model for the docks.
@@ -66,7 +57,7 @@ public class DragRectangleSample extends JPanel
 		// Create the child tab docks.
 		TabDock leftTabDock = new TabDock();
 		TabDock rightTabDock = new TabDock();
-		
+
 		// Add the dockables to the tab dock.
 		leftTabDock.addDockable(dockable1, new Position(0));
 		leftTabDock.addDockable(dockable2, new Position(1));
@@ -75,7 +66,7 @@ public class DragRectangleSample extends JPanel
 
 		// Create the split dock.
 		SplitDock splitDock = new SplitDock();
-		
+
 		// Add the child docks to the split dock at the left and right.
 		splitDock.addChildDock(leftTabDock, new Position(Position.LEFT));
 		splitDock.addChildDock(rightTabDock, new Position(Position.RIGHT));
@@ -83,7 +74,7 @@ public class DragRectangleSample extends JPanel
 
 		// Add the root dock to the dock model.
 		dockModel.addRootDock("splitDock", splitDock, frame);
-		
+
 		// Add the split dock to the panel.
 		add(splitDock, BorderLayout.CENTER);
 
@@ -93,7 +84,7 @@ public class DragRectangleSample extends JPanel
 		int height = 400;
 		frame.setLocation((screenSize.width - width) / 2, (screenSize.height - height) / 2);
 		frame.setSize(width, height);
-		
+
 		frame.getContentPane().add(this);
 	}
 }

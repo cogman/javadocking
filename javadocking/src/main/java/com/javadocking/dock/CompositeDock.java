@@ -5,11 +5,11 @@ import com.javadocking.dock.factory.DockFactory;
 
 /**
  * <p>
- * This is a {@link com.javadocking.dock.Dock} that can contain other child docks. 
+ * This is a {@link com.javadocking.dock.Dock} that can contain other child docks.
  * </p>
  * <p>
- * Information on using composite docks is in 
- * <a href="http://www.javadocking.com/developerguide/compositedock.html" target="_blank">How to Use Composite Docks</a> in 
+ * Information on using composite docks is in
+ * <a href="http://www.javadocking.com/developerguide/compositedock.html" target="_blank">How to Use Composite Docks</a> in
  * <i>The Sanaware Developer Guide</i>.
  * </p>
  * <p>
@@ -18,53 +18,54 @@ import com.javadocking.dock.factory.DockFactory;
  * </p>
  * <p>
  * Dockables can also be added with the method {@link Dock#addDockable(com.javadocking.dockable.Dockable, java.awt.Point, java.awt.Point)}.
- * When this dockable is added, a child dock is created with the child dock factory, retrieved by 
- * {@link #getChildDockFactory()}. The dockable is added to this child dock, and the child dock is added to this composite dock. 
+ * When this dockable is added, a child dock is created with the child dock factory, retrieved by
+ * {@link #getChildDockFactory()}. The dockable is added to this child dock, and the child dock is added to this composite dock.
  * </p>
- * 
+ *
  * @author Heidi Rakels.
  */
-public interface CompositeDock extends Dock
-{
-	
+public interface CompositeDock extends Dock {
+
 	// Fields for the properties of a dock.
 
-	/** The name childDock that will be used to create property names for specifying properties of child docks. */
+	/**
+	 * The name childDock that will be used to create property names for specifying properties of child docks.
+	 */
 	static final String CHILD_DOCK_PREFIX = "childDock";
-	
+
 	// Interface methods.
 
 	/**
 	 * <p>
-	 * Adds the given dock as child dock at the given position. 
+	 * Adds the given dock as child dock at the given position.
 	 * </p>
 	 * <p>
 	 * If there is already a dock at the given position, the child is added at the first free position.
 	 * If the given position is illegal, then the dock is added at the first free position.
 	 * </p>
-	 * 
-	 * @param dock 			The new child dock for this dock.
-	 * @param position 		The position for the child dock. 
-	 * @throws 	IllegalStateException 	If the dock is full.
+	 *
+	 * @param dock     The new child dock for this dock.
+	 * @param position The position for the child dock.
+	 * @throws IllegalStateException If the dock is full.
 	 */
 	public void addChildDock(Dock dock, Position position) throws IllegalStateException;
 
 	/**
 	 * Is called when the specified child dock is empty. Normally this child dock will be removed.
-	 * 
-	 * @param 	childDock 		The child dock that is empty.
+	 *
+	 * @param childDock The child dock that is empty.
 	 */
 	public void emptyChild(Dock childDock);
-	
+
 	/**
 	 * Makes the given empty child dock invisible. It may not be removed, because there are still listeners
 	 * attached to the child dock, that are currently dragging the dockable. The dock is becoming a ghost. It is still
 	 * there, but it is invisible.
-	 * 
-	 * @param 	childDock 		The child dock that is empty, but not may be removed.
+	 *
+	 * @param childDock The child dock that is empty, but not may be removed.
 	 */
 	public void ghostChild(Dock childDock);
-	
+
 	/**
 	 * Clears the ghost child docks from this dock. The ghost child docks are removed.
 	 */
@@ -72,43 +73,43 @@ public interface CompositeDock extends Dock
 
 	/**
 	 * Gets the number of child docks of this dock.
-	 * 
-	 * @return 					The number of child docks of this dock.
+	 *
+	 * @return The number of child docks of this dock.
 	 */
 	public int getChildDockCount();
-	
+
 	/**
 	 * Gets the child dock with the specified index.
-	 * 
-	 * @param 	index 			The index of the child dock.
-	 * @return 					The child dock with the specified index.
-	 * @throws 	IndexOutOfBoundsException 	If the index is out of range (index &lt; 0 || index &gt;= getChildDockCount()).
+	 *
+	 * @param index The index of the child dock.
+	 * @return The child dock with the specified index.
+	 * @throws IndexOutOfBoundsException If the index is out of range (index &lt; 0 || index &gt;= getChildDockCount()).
 	 */
 	public Dock getChildDock(int index) throws IndexOutOfBoundsException;
 
 	/**
 	 * Gets the position, where the child dock is docked in this dock.
-	 * 
-	 * @param 	childDock			The dockable that is docked in this dock.
-	 * @return						The position where the child dock is docked in this dock.
-	 * 								Not null.
-	 * @throws	IllegalArgumentException	If the given dock is not docked in this dock.
+	 *
+	 * @param childDock The dockable that is docked in this dock.
+	 * @return The position where the child dock is docked in this dock.
+	 * Not null.
+	 * @throws IllegalArgumentException    If the given dock is not docked in this dock.
 	 */
 	public Position getChildDockPosition(Dock childDock) throws IllegalArgumentException;
-	
+
 	/**
 	 * Gets the factory that creates the child docks for this composite dock.
-	 * 
-	 * @return						The factory that creates the child docks for this composite dock.
+	 *
+	 * @return The factory that creates the child docks for this composite dock.
 	 */
 	public DockFactory getChildDockFactory();
-	
+
 	/**
 	 * Sets the factory that creates the child docks for this composite dock.
-	 * 
-	 * @param dockFactory			The factory that creates the child docks for this composite dock.
-	 * @throws 	IllegalArgumentException	When the child dock factory is null.
+	 *
+	 * @param dockFactory The factory that creates the child docks for this composite dock.
+	 * @throws IllegalArgumentException When the child dock factory is null.
 	 */
 	public void setChildDockFactory(DockFactory dockFactory);
-	
+
 }

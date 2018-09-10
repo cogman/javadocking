@@ -1,42 +1,25 @@
 package com.javadocking.dockgallery;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SingleDock;
 import com.javadocking.dock.SplitDock;
 import com.javadocking.dock.factory.DockFactory;
 import com.javadocking.dock.factory.SingleDockFactory;
-import com.javadocking.dockable.ActionDockable;
-import com.javadocking.dockable.DefaultDockable;
-import com.javadocking.dockable.Dockable;
-import com.javadocking.dockable.DockableState;
-import com.javadocking.dockable.DockingMode;
-import com.javadocking.dockable.StateActionDockable;
+import com.javadocking.dockable.*;
 import com.javadocking.dockable.action.DefaultDockableStateActionFactory;
 import com.javadocking.model.FloatDockModel;
 import com.javadocking.util.SmallPanel;
 
-public class DecoratedDockableSample extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
-	public DecoratedDockableSample(JFrame frame)
-	{
+public class DecoratedDockableSample extends JPanel {
+
+	public DecoratedDockableSample(JFrame frame) {
 		super(new BorderLayout());
-		
+
 		// Create the dock model for the docks.
 		FloatDockModel dockModel = new FloatDockModel();
 		dockModel.addOwner("frame0", frame);
@@ -73,16 +56,16 @@ public class DecoratedDockableSample extends JPanel
 		dockable3 = decorateDockable(dockable3);
 		dockable4 = decorateDockable(dockable4);
 		dockable5 = decorateDockable(dockable5);
-		
+
 		// Create the split docks.
 		SplitDock northEastDock = new SplitDock();
 		SplitDock southEastDock = new SplitDock();
 		SplitDock eastDock = new SplitDock();
 		SplitDock rootDock = new SplitDock();
-		
+
 		// Add the root dock to the panel.
 		add(rootDock);
-		
+
 		// Create a single dock factory as leaf child dock factory for the split docks (because you don't want tabs).
 		DockFactory leafChildDockFactory = new SingleDockFactory();
 		northEastDock.setChildDockFactory(leafChildDockFactory);
@@ -105,7 +88,7 @@ public class DecoratedDockableSample extends JPanel
 		singleDock3.addDockable(dockable3, SingleDock.SINGLE_POSITION);
 		singleDock4.addDockable(dockable4, SingleDock.SINGLE_POSITION);
 		singleDock5.addDockable(dockable5, SingleDock.SINGLE_POSITION);
-		
+
 		// Add the single leaf docks to the split docks.
 		rootDock.addChildDock(singleDock1, new Position(Position.LEFT));
 		rootDock.addChildDock(eastDock, new Position(Position.RIGHT));
@@ -124,21 +107,19 @@ public class DecoratedDockableSample extends JPanel
 		dockModel.addRootDock("dock", rootDock, frame);
 
 	}
-	
-	private Dockable decorateDockable(Dockable dockable)
-	{
-		
+
+	private Dockable decorateDockable(Dockable dockable) {
+
 		// Add an icon and a description for the tooltip.
-		if (dockable instanceof DefaultDockable)
-		{
+		if (dockable instanceof DefaultDockable) {
 			Icon icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/text12.gif"));
-			((DefaultDockable)dockable).setIcon(icon);
-			((DefaultDockable)dockable).setDescription("Small window");
+			((DefaultDockable) dockable).setIcon(icon);
+			((DefaultDockable) dockable).setDescription("Small window");
 		}
-		
+
 		// Decorate the dockable with a close action.		
 		dockable = new StateActionDockable(dockable, new DefaultDockableStateActionFactory(), DockableState.statesClosed());
-		
+
 		// Decorate the dockable other actions.
 		MessageAction helloAction = new MessageAction(this, "Hello", new ImageIcon(getClass().getResource("/com/javadocking/resources/images/hello12.gif")), "Hello world!");
 		MessageAction cautionAction = new MessageAction(this, "Caution", new ImageIcon(getClass().getResource("/com/javadocking/resources/images/caution12.gif")), "Be Careful!");
@@ -149,30 +130,27 @@ public class DecoratedDockableSample extends JPanel
 		dockable = new ActionDockable(dockable, actions);
 
 		return dockable;
-		
+
 	}
-	
-	private class MessageAction extends AbstractAction
-	{
+
+	private class MessageAction extends AbstractAction {
 
 		private Component parentComponent;
 		private String message;
 		private String name;
-		
-		public MessageAction(Component parentComponent, String name, Icon icon, String message)
-		{
+
+		public MessageAction(Component parentComponent, String name, Icon icon, String message) {
 			super(name, icon);
 			this.message = message;
 			this.name = name;
 			this.parentComponent = parentComponent;
 		}
 
-		public void actionPerformed(ActionEvent actionEvent)
-		{
+		public void actionPerformed(ActionEvent actionEvent) {
 			JOptionPane.showMessageDialog(parentComponent,
 					message, name, JOptionPane.INFORMATION_MESSAGE);
 		}
-		
+
 	}
 
 }

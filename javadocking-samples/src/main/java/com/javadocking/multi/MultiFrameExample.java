@@ -1,19 +1,5 @@
 package com.javadocking.multi;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Point;
-import java.awt.Toolkit;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import com.javadocking.DockingManager;
 import com.javadocking.dock.Position;
 import com.javadocking.dock.SplitDock;
@@ -25,33 +11,34 @@ import com.javadocking.dockable.DraggableContent;
 import com.javadocking.drag.DragListener;
 import com.javadocking.model.FloatDockModel;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
- * This example shows root docks in different windows. The dockables can be dragged from one frame 
+ * This example shows root docks in different windows. The dockables can be dragged from one frame
  * to the other.
- * 
+ *
  * @author Heidi Rakels
  */
-public class MultiFrameExample
-{
-	
+public class MultiFrameExample {
+
 	// Static fields.
 
-	public static final int FRAME_WIDTH  = 440;
+	public static final int FRAME_WIDTH = 440;
 	public static final int FRAME_HEIGHT = 300;
 
 	// Fields.
 
 	private Component component1;
 	private Component component2;
-	
+
 	// Public methods.
 
-	public MultiFrameExample(JFrame frame1, JFrame frame2)
-	{
-		
+	public MultiFrameExample(JFrame frame1, JFrame frame2) {
+
 		// Create the dock model for the docks.
 		FloatDockModel dockModel = new FloatDockModel("no source");
-		
+
 		// There are 2 owner windows.
 		dockModel.addOwner("frame1", frame1);
 		dockModel.addOwner("frame2", frame2);
@@ -78,13 +65,13 @@ public class MultiFrameExample
 		Dockable dockable6 = new DefaultDockable("Window6", textPanel6, "Window 6", null, DockingMode.ALL);
 		Dockable dockable7 = new DefaultDockable("Window7", textPanel7, "Window 7", null, DockingMode.ALL);
 		Dockable dockable8 = new DefaultDockable("Window8", textPanel8, "Window 8", null, DockingMode.ALL);
-		
+
 		// Create the child tab docks.
 		TabDock leftTabDock1 = new TabDock();
 		TabDock rightTabDock1 = new TabDock();
 		TabDock leftTabDock2 = new TabDock();
 		TabDock rightTabDock2 = new TabDock();
-		
+
 		// Add the dockables to these tab docks.
 		leftTabDock1.addDockable(dockable1, new Position(0));
 		leftTabDock1.addDockable(dockable2, new Point(), new Point());
@@ -114,59 +101,21 @@ public class MultiFrameExample
 		panel2.add(splitDock2, BorderLayout.CENTER);
 		component1 = panel1;
 		component2 = panel2;
-				
+
 		// Add the 2 root docks to the dock model.
 		dockModel.addRootDock("dock1", splitDock1, frame1);
 		dockModel.addRootDock("dock2", splitDock2, frame2);
-		
+
 	}
 
-	/**
-	 * This is the class for the content.
-	 */
-	private class TextPanel extends JPanel implements DraggableContent
-	{
-		
-		private JLabel label; 
-		
-		public TextPanel(String text)
-		{
-			super(new FlowLayout());
-			
-			// The panel.
-			setMinimumSize(new Dimension(80,80));
-			setPreferredSize(new Dimension(150,150));
-			setBackground(Color.white);
-			setBorder(BorderFactory.createLineBorder(Color.lightGray));
-			
-			// The label.
-			label = new JLabel(text);
-			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-			add(label);
-		}
-		
-		// Implementations of DraggableContent.
-
-		public void addDragListener(DragListener dragListener)
-		{
-			addMouseListener(dragListener);
-			addMouseMotionListener(dragListener);
-			label.addMouseListener(dragListener);
-			label.addMouseMotionListener(dragListener);
-		}
-	}
-	
-	// Main method.
-
-	public static void createAndShowGUI()
-	{
+	public static void createAndShowGUI() {
 		// Create the frame.
 		JFrame frame1 = new JFrame("Frame 1");
 		JFrame frame2 = new JFrame("Frame 2");
 
 		// Create the split panel.
 		MultiFrameExample test = new MultiFrameExample(frame1, frame2);
-		
+
 		// Get the screen size.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -176,7 +125,7 @@ public class MultiFrameExample
 		frame1.setLocation(screenSize.width / 2 - FRAME_WIDTH - 10, screenSize.height / 2 - FRAME_HEIGHT / 2);
 		frame1.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame1.setVisible(true);
-		
+
 		// Create the frame 2.
 		frame2.getContentPane().add(test.component2);
 		frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -185,17 +134,48 @@ public class MultiFrameExample
 		frame2.setVisible(true);
 	}
 
-	public static void main(String args[]) 
-	{
-        Runnable doCreateAndShowGUI = new Runnable() 
-        {
-            public void run() 
-            {
-                createAndShowGUI();
-            }
-        };
-        SwingUtilities.invokeLater(doCreateAndShowGUI);
-    }
-	
+	// Main method.
+
+	public static void main(String args[]) {
+		Runnable doCreateAndShowGUI = new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		};
+		SwingUtilities.invokeLater(doCreateAndShowGUI);
+	}
+
+	/**
+	 * This is the class for the content.
+	 */
+	private class TextPanel extends JPanel implements DraggableContent {
+
+		private JLabel label;
+
+		public TextPanel(String text) {
+			super(new FlowLayout());
+
+			// The panel.
+			setMinimumSize(new Dimension(80, 80));
+			setPreferredSize(new Dimension(150, 150));
+			setBackground(Color.white);
+			setBorder(BorderFactory.createLineBorder(Color.lightGray));
+
+			// The label.
+			label = new JLabel(text);
+			label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			add(label);
+		}
+
+		// Implementations of DraggableContent.
+
+		public void addDragListener(DragListener dragListener) {
+			addMouseListener(dragListener);
+			addMouseMotionListener(dragListener);
+			label.addMouseListener(dragListener);
+			label.addMouseMotionListener(dragListener);
+		}
+	}
+
 }
 
