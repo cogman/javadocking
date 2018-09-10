@@ -47,11 +47,7 @@ public class DockModelPropertiesEncoder implements DockModelEncoder {
 
 	public boolean canExport(DockModel dockModel, String destinationName) {
 		// The name should have extension EXTENSION.
-		if (!(destinationName.endsWith(EXTENSION))) {
-			return false;
-		}
-
-		return true;
+		return destinationName.endsWith(EXTENSION);
 	}
 
 	public boolean canSave(DockModel dockModel) {

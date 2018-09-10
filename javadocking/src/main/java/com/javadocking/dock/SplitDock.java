@@ -1311,9 +1311,7 @@ public class SplitDock extends JPanel implements CompositeDock {
 		if (((dockModes & DockingMode.BOTTOM) != 0) &&
 				((otherDockModes & DockingMode.TOP) != 0)) {
 			getPriorityRectangle(priorityRectangle, Position.BOTTOM);
-			if (priorityRectangle.contains(relativeLocation)) {
-				return true;
-			}
+			return priorityRectangle.contains(relativeLocation);
 		}
 
 		// We can't dock with priority.

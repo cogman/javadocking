@@ -397,9 +397,7 @@ public class DynamicDockRetriever implements DockRetriever {
 			List childrenOfDock = new ArrayList();
 			DockingUtil.retrieveDockables(currentDockable, childrenOfDockable);
 			DockingUtil.retrieveDockables(currentChildOfRootDock, childrenOfDock);
-			if (CollectionUtil.sameElements(childrenOfDockable, childrenOfDock)) {
-				return true;
-			}
+			return CollectionUtil.sameElements(childrenOfDockable, childrenOfDock);
 		}
 
 		return false;

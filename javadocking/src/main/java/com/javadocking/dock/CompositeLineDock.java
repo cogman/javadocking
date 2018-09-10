@@ -1016,11 +1016,8 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 				((dockPositions & horizontalDockingMode) == 0)) {
 			return false;
 		}
-		if ((getOrientation() == ORIENTATION_VERTICAL) &&
-				((dockPositions & verticalDockingMode) == 0)) {
-			return false;
-		}
-		return true;
+		return (getOrientation() != ORIENTATION_VERTICAL) ||
+				((dockPositions & verticalDockingMode) != 0);
 	}
 
 	/**
@@ -1173,13 +1170,10 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 			// There is priority if we are not near the border of the dock.
 			priorityRectangle.setBounds(priorityBorder, priorityBorder,
 					getSize().width - priorityBorder * 2, getSize().height - priorityBorder * 2);
-			if (priorityRectangle.contains(relativeLocation)) {
-				// Inside the priority rectangle we can dock with priority.
-				return true;
-			}
+			// Inside the priority rectangle we can dock with priority.
+			return priorityRectangle.contains(relativeLocation);
 
 			// Outside the priority rectangle.
-			return false;
 		}
 
 		// When we are here, there are already dockables in this dock.
@@ -1210,10 +1204,8 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 
 			// Now we are at the right side of the last dockable.
 			// Is the location in this priority rectangle?
-			if (priorityRectangle.contains(relativeLocation)) {
-				// We are in a priority rectangle. We can dock with priority.
-				return true;
-			}
+			// We are in a priority rectangle. We can dock with priority.
+			return priorityRectangle.contains(relativeLocation);
 
 		} else {
 			// We have a vertical orientation.
@@ -1239,16 +1231,13 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 			}
 
 			// Is the location in this priority rectangle?
-			if (priorityRectangle.contains(relativeLocation)) {
-				// We are in a priority rectangle. We can dock with priority.
-				return true;
-			}
+			// We are in a priority rectangle. We can dock with priority.
+			return priorityRectangle.contains(relativeLocation);
 
 		}
 
 
 		// We can't dock with priority.
-		return false;
 	}
 
 	// Private metods.

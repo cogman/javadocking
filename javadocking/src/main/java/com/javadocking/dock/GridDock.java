@@ -422,13 +422,10 @@ public class GridDock extends JPanel implements LeafDock {
 		// If we are here, we don't have a composite dockable.
 
 		// Is the dockable docked in this dock?
-		if (childDockables.contains(dockable)) {
-			// We could find the dockable.
-			return true;
-		}
+		// We could find the dockable.
+		return childDockables.contains(dockable);
 
 		// The dockable is not docked in this dock.
-		return false;
 
 	}
 
@@ -849,13 +846,10 @@ public class GridDock extends JPanel implements LeafDock {
 					(int) (size.height * priorityRectangleRelativeOffset),
 					(int) (size.width * (1 - 2 * priorityRectangleRelativeOffset)),
 					(int) (size.height * (1 - 2 * priorityRectangleRelativeOffset)));
-			if (priorityRectangle.contains(relativeLocation)) {
-				// Inside the priority rectangle we can dock with priority.
-				return true;
-			}
+			// Inside the priority rectangle we can dock with priority.
+			return priorityRectangle.contains(relativeLocation);
 
 			// Outside the priority rectangle.
-			return false;
 		}
 
 		// When we are here, there are already dockables in this dock.
@@ -892,10 +886,8 @@ public class GridDock extends JPanel implements LeafDock {
 			priorityRectangle.setLocation(dockableComponent.getLocation().x + priorityBorder + dockableComponent.getSize().width, dockableComponent.getLocation().y + priorityBorder);
 
 			// Is the mouse above this recangle?
-			if (priorityRectangle.contains(dockablePanelPosition)) {
-				// Inside the priority rectangle we can dock with priority.
-				return true;
-			}
+			// Inside the priority rectangle we can dock with priority.
+			return priorityRectangle.contains(dockablePanelPosition);
 		}
 
 
@@ -1105,11 +1097,8 @@ public class GridDock extends JPanel implements LeafDock {
 	private boolean checkDockingModes(Dockable dockable) {
 
 		int dockPositions = dockable.getDockingModes();
-		if ((dockPositions & dockingMode) != 0) {
-			return true;
-		}
+		return (dockPositions & dockingMode) != 0;
 
-		return false;
 	}
 
 	/**

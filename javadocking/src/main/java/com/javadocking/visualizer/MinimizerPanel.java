@@ -105,11 +105,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 		}
 
 		// Is the dockable already minimized in this panel?
-		if (minimizedDockables.contains(dockableToVisualize)) {
-			return false;
-		}
-
-		return true;
+		return !minimizedDockables.contains(dockableToVisualize);
 
 	}
 

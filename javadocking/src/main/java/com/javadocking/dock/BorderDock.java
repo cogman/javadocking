@@ -1283,14 +1283,10 @@ public class BorderDock extends JPanel implements CompositeDock {
 
 		// Check if the dockable may be docked in a border dock.
 		int dockPositions = dockable.getDockingModes();
-		if (((dockPositions & topDockingMode) == 0) &&
-				((dockPositions & rightDockingMode) == 0) &&
-				((dockPositions & leftDockingMode) == 0) &&
-				((dockPositions & bottomDockingMode) == 0)) {
-			return false;
-		}
-
-		return true;
+		return ((dockPositions & topDockingMode) != 0) ||
+				((dockPositions & rightDockingMode) != 0) ||
+				((dockPositions & leftDockingMode) != 0) ||
+				((dockPositions & bottomDockingMode) != 0);
 	}
 
 	/**
@@ -1340,9 +1336,7 @@ public class BorderDock extends JPanel implements CompositeDock {
 		if ((dockModes & bottomDockingMode) != 0) {
 			if (getChildDockOfPosition(Position.BOTTOM) == null) {
 				getPriorityRectangle(priorityRectangle, Position.BOTTOM);
-				if (priorityRectangle.contains(relativeLocation)) {
-					return true;
-				}
+				return priorityRectangle.contains(relativeLocation);
 			}
 		}
 

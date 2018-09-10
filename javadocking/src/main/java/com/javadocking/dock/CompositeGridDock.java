@@ -708,13 +708,10 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 					(int) (size.height * centerPriorityRectangleRelativeOffset),
 					(int) (size.width * (1 - 2 * centerPriorityRectangleRelativeOffset)),
 					(int) (size.height * (1 - 2 * centerPriorityRectangleRelativeOffset)));
-			if (priorityRectangle.contains(relativeLocation)) {
-				// Inside the priority rectangle we can dock with priority.
-				return true;
-			}
+			// Inside the priority rectangle we can dock with priority.
+			return priorityRectangle.contains(relativeLocation);
 
 			// Outside the priority rectangle.
-			return false;
 		}
 
 		// When we are here, there are already dockables in this dock.
@@ -748,11 +745,8 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 						(int) (childDock.getSize().width * rightPriorityRectangleRelativeOffset),
 						childDock.getSize().height);
 
-				if (priorityRectangle.contains(relativeLocation)) {
-					return true;
-				}
+				return priorityRectangle.contains(relativeLocation);
 
-				return false;
 			}
 		}
 
@@ -879,11 +873,8 @@ public class CompositeGridDock extends JPanel implements CompositeDock {
 	 */
 	protected boolean checkDockingModes(Dockable dockable) {
 		int dockPositions = dockable.getDockingModes();
-		if ((dockPositions & DockingMode.GRID) != 0) {
-			return true;
-		}
+		return (dockPositions & DockingMode.GRID) != 0;
 
-		return false;
 	}
 
 	/**

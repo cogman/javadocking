@@ -309,10 +309,8 @@ public class DockingExecutor {
 
 		// Can we add the dockable?
 		if (rootDock.getDockPriority(dockable, location) != Priority.CANNOT_DOCK) {
-			if (DockingManager.getDockingExecutor().changeDocking(dockable, rootDock, location, new Point())) {
-				// Succes.
-				return true;
-			}
+			// Succes.
+			return DockingManager.getDockingExecutor().changeDocking(dockable, rootDock, location, new Point());
 		}
 
 		// We couldn't add the dockable.

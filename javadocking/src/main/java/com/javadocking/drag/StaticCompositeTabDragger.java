@@ -711,9 +711,7 @@ public class StaticCompositeTabDragger implements Dragger {
 			List childrenOfDock = new ArrayList();
 			DockingUtil.retrieveDockables(draggedDockable, childrenOfDockable);
 			DockingUtil.retrieveDockables(currentChildOfRootDock, childrenOfDock);
-			if (CollectionUtil.sameElements(childrenOfDockable, childrenOfDock)) {
-				return true;
-			}
+			return CollectionUtil.sameElements(childrenOfDockable, childrenOfDock);
 		}
 
 		return false;

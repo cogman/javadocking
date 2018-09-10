@@ -179,11 +179,7 @@ public class FloatExternalizer implements Externalizer {
 		if (hidden) {
 			return false;
 		}
-		if ((dockableToVisualize.getPossibleStates() & DockableState.EXTERNALIZED) == 0) {
-			return false;
-		}
-
-		return true;
+		return (dockableToVisualize.getPossibleStates() & DockableState.EXTERNALIZED) != 0;
 
 	}
 
