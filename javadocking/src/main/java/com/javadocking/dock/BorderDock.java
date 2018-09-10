@@ -673,7 +673,6 @@ public class BorderDock extends JPanel implements CompositeDock {
 			if (index == count) {
 				return bottomChildDock;
 			}
-			count++;
 		}
 
 		throw new IndexOutOfBoundsException("Index " + index);

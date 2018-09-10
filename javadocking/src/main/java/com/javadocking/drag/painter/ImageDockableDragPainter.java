@@ -295,7 +295,6 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 		// Check that the image will not be too big
 		if ((actualHeight > maxImageSize.height)) {
 			actualWidth = actualWidth * maxImageSize.height / actualHeight;
-			actualHeight = maxImageSize.height;
 		}
 		if ((actualWidth > maxImageSize.width)) {
 			actualWidth = maxImageSize.width;
