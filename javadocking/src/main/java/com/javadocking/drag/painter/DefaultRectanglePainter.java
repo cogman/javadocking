@@ -116,7 +116,7 @@ public class DefaultRectanglePainter implements RectanglePainter {
 
 		// Draw the label.
 		if (label != null) {
-			FontMetrics fm = ((Graphics2D) graphics).getFontMetrics();
+			FontMetrics fm = graphics.getFontMetrics();
 			int textWidth = fm.stringWidth(label);
 			int stringAscent = fm.getAscent();
 			int textHeight = stringAscent - fm.getLeading();

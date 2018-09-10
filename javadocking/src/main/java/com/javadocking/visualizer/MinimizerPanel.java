@@ -166,7 +166,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 
 		SelectableDockableHeader minimizedComponent = (SelectableDockableHeader) minimizedHeaders.get(dockableToRemove);
 		minimizedComponent.removePropertyChangeListener(selectionChangeListener);
-		remove((Component) minimizedComponent);
+		remove(minimizedComponent);
 		minimizedHeaders.remove(dockableToRemove);
 		minimizedDockables.remove(dockableToRemove);
 		revalidate();
@@ -391,7 +391,7 @@ public class MinimizerPanel extends JPanel implements Visualizer {
 			minimizedHeaders.put(dockable, minimizeHeader);
 
 			// Add the header.
-			add((Component) minimizeHeader);
+			add(minimizeHeader);
 		}
 	}
 

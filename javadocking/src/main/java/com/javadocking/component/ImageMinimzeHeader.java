@@ -328,7 +328,7 @@ public class ImageMinimzeHeader extends JComponent implements DraggableContent, 
 	protected void paintChildren(Graphics graphics) {
 
 		if (smallImage != null) {
-			((Graphics2D) graphics).drawImage(smallImage, borderWidth, borderWidth, getSize().width - borderWidth, getSize().height - borderWidth,
+			graphics.drawImage(smallImage, borderWidth, borderWidth, getSize().width - borderWidth, getSize().height - borderWidth,
 					0, 0, getSize().width - borderWidth * 2, getSize().height - borderWidth * 2, null);
 		}
 		super.paintChildren(graphics);

@@ -117,7 +117,7 @@ public class StaticDragger implements Dragger {
 		// Does the dock has dockables docked in it?
 		if (ancestorDock.getDockableCount() > 0) {
 			// We can start dragging.
-			originDock = (LeafDock) ancestorDock;
+			originDock = ancestorDock;
 
 			// Calculate the dockable offset.
 			dockableOffset.setLocation(x, y);
@@ -132,7 +132,7 @@ public class StaticDragger implements Dragger {
 			draggedDockable.setState(DockableState.NORMAL, originDock);
 
 			// Make sure the offset is not larger than the dockable size.
-			Dimension size = DockingUtil.getCompositeDockablePreferredSize((CompositeDockable) draggedDockable, DockingMode.TAB);
+			Dimension size = DockingUtil.getCompositeDockablePreferredSize(draggedDockable, DockingMode.TAB);
 			if (dockableOffset.x > size.getWidth()) {
 				dockableOffset.x = (int) (Math.round(size.getWidth()));
 			}

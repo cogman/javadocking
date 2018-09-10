@@ -148,7 +148,7 @@ public class StaticCompositeTabDragger implements Dragger {
 		// Is the mouse component a JTabbedPane?
 		if (mouseComponent instanceof JTabbedPane) {
 			// Is the ancestor component a CompositeTabDock?
-			Component ancestorComponent = (Component) SwingUtilities.getAncestorOfClass(Component.class, mouseComponent);
+			Component ancestorComponent = SwingUtilities.getAncestorOfClass(Component.class, mouseComponent);
 			if (ancestorComponent instanceof CompositeTabDock) {
 				// Does the dock has child docks docked in it?
 				CompositeTabDock tabDock = (CompositeTabDock) ancestorComponent;
@@ -374,7 +374,7 @@ public class StaticCompositeTabDragger implements Dragger {
 				// The destination dock is the current dock and we are floating.
 				destinationDock = currentRootDock;
 				locationInDestinationDock.setLocation(screenLocation.x - dockableOffset.x, screenLocation.y - dockableOffset.y);
-				SwingUtilities.convertPointFromScreen(locationInDestinationDock, (Component) originDock);
+				SwingUtilities.convertPointFromScreen(locationInDestinationDock, originDock);
 				dockableDragRectangle.setLocation(locationInDestinationDock);
 				Window window = SwingUtilities.getWindowAncestor((Component) currentChildOfRootDock);
 				dockableDragRectangle.setSize(window.getSize());
@@ -433,7 +433,7 @@ public class StaticCompositeTabDragger implements Dragger {
 			// Move the tabs.
 			if ((oldTabIndex >= 0) && (tabIndex != oldTabIndex)) {
 				Point locationInOriginDock = new Point(mouseEvent.getPoint().x, mouseEvent.getPoint().y);
-				locationInOriginDock = SwingUtilities.convertPoint((Component) mouseEvent.getSource(), locationInOriginDock, (Component) originDock);
+				locationInOriginDock = SwingUtilities.convertPoint((Component) mouseEvent.getSource(), locationInOriginDock, originDock);
 				DockingManager.getDockingExecutor().changeDocking(draggedDockable, originDock, locationInOriginDock, new Point(0, 0));
 			}
 
@@ -526,7 +526,7 @@ public class StaticCompositeTabDragger implements Dragger {
 		}
 		if (pressedTabbedPane != null) {
 			// Is the ancestor component a TabbedDock?
-			Component ancestorComponent = (Component) SwingUtilities.getAncestorOfClass(Component.class, pressedTabbedPane);
+			Component ancestorComponent = SwingUtilities.getAncestorOfClass(Component.class, pressedTabbedPane);
 			if (ancestorComponent instanceof TabDock) {
 				TabDock clickedDock = (TabDock) ancestorComponent;
 

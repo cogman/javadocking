@@ -64,7 +64,7 @@ public class DockableState {
 	 * DockableState.MAXIMIZED, DockableState.NORMAL, and DockableState.CLOSED.
 	 */
 	public static int[] statesAll() {
-		return (int[]) STATES_ALL.clone();
+		return STATES_ALL.clone();
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class DockableState {
 	 * @return An array with the constant DockableState.CLOSED.
 	 */
 	public static int[] statesClosed() {
-		return (int[]) STATES_CLOSED.clone();
+		return STATES_CLOSED.clone();
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class DockableState {
 	 * @return An array with the constants DockableState.EXTERNALIZED, DockableState.MINIMIZED, DockableState.MAXIMIZED, and DockableState.NORMAL.
 	 */
 	public static int[] statesAllExceptClosed() {
-		return (int[]) STATES_ALL_EXCEPT_CLOSED.clone();
+		return STATES_ALL_EXCEPT_CLOSED.clone();
 	}
 
 }

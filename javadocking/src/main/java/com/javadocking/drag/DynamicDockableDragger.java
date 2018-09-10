@@ -168,7 +168,7 @@ public class DynamicDockableDragger implements Dragger {
 		// Does the dock has dockables docked in it?
 		if (ancestorDock.getDockableCount() > 0) {
 			// Control that the dragged dockable belongs to this dock.
-			originDock = (LeafDock) ancestorDock;
+			originDock = ancestorDock;
 			if (originDock.containsDockable(fixedDockable)) {
 				draggedDockable = fixedDockable;
 

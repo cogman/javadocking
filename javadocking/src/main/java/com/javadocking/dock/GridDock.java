@@ -293,7 +293,7 @@ public class GridDock extends JPanel implements LeafDock {
 				// Iterate over the dockables.
 				for (int index = 0; index < childDockables.size(); index++) {
 					// Get the component of the current dockable.
-					Component dockableComponent = (Component) ((Dockable) childDockables.get(index)).getContent();
+					Component dockableComponent = ((Dockable) childDockables.get(index)).getContent();
 					dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y);
 
 					// Set the rectangle on this dockable.
@@ -329,7 +329,7 @@ public class GridDock extends JPanel implements LeafDock {
 
 				// The last half dock if it is full, otherwise the empty space.
 				// Get the last dockable.
-				Component dockableComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
+				Component dockableComponent = ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
 
 				// Is the grid full?
 				if ((childDockables.size() % columnCount) == 0) {
@@ -345,7 +345,7 @@ public class GridDock extends JPanel implements LeafDock {
 					rectangle.setLocation(dockablePosition);
 					int width = dockableComponent.getSize().width;
 					if (childDockables.size() - columnCount >= 0) {
-						Component previousRowComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - columnCount)).getContent();
+						Component previousRowComponent = ((Dockable) childDockables.get(childDockables.size() - columnCount)).getContent();
 						width = previousRowComponent.getSize().width;
 					}
 					rectangle.setSize(width, dockableComponent.getSize().height);
@@ -451,7 +451,7 @@ public class GridDock extends JPanel implements LeafDock {
 				// Inform the listeners about the removal.
 				dockingEventSupport.fireDockingWillChange(new DockableEvent(this, this, null, childDockable));
 
-				dockablePanel.remove((Component) childDockable.getContent());
+				dockablePanel.remove(childDockable.getContent());
 				childDockables.remove(childDockable);
 				childDockable.setState(DockableState.CLOSED, null);
 
@@ -476,7 +476,7 @@ public class GridDock extends JPanel implements LeafDock {
 		// Inform the listeners about the removal.
 		dockingEventSupport.fireDockingWillChange(new DockableEvent(this, this, null, dockable));
 
-		dockablePanel.remove((Component) dockable.getContent());
+		dockablePanel.remove(dockable.getContent());
 		childDockables.remove(dockable);
 		dockable.setState(DockableState.CLOSED, null);
 
@@ -799,7 +799,7 @@ public class GridDock extends JPanel implements LeafDock {
 		// Iterate over the dockables.
 		for (int index = 0; index < childDockables.size(); index++) {
 			// Get the component of the current dockable.
-			Component dockableComponent = (Component) ((Dockable) childDockables.get(index)).getContent();
+			Component dockableComponent = ((Dockable) childDockables.get(index)).getContent();
 			dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y);
 
 			// Set the rectangle on the dockable.
@@ -869,7 +869,7 @@ public class GridDock extends JPanel implements LeafDock {
 		// Iterate over the dockables.
 		for (Object childDockable : childDockables) {
 			// Get the component of the current dockable.
-			Component dockableComponent = (Component) ((Dockable) childDockable).getContent();
+			Component dockableComponent = ((Dockable) childDockable).getContent();
 			dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y);
 
 			// Set the rectangle on the center of this dockable.
@@ -884,7 +884,7 @@ public class GridDock extends JPanel implements LeafDock {
 		}
 
 		// Set the rectangle on the center of the last dockable.
-		Component dockableComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
+		Component dockableComponent = ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
 		priorityRectangle.setBounds(dockableComponent.getLocation().x + priorityBorder, dockableComponent.getLocation().y + priorityBorder,
 				dockableComponent.getSize().width - 2 * priorityBorder, dockableComponent.getSize().height - 2 * priorityBorder);
 
@@ -1060,7 +1060,7 @@ public class GridDock extends JPanel implements LeafDock {
 		// Add all the dockables.
 		for (Object childDockable1 : childDockables) {
 			Dockable childDockable = (Dockable) childDockable1;
-			dockablePanel.add((Component) childDockable.getContent());
+			dockablePanel.add(childDockable.getContent());
 		}
 
 	}

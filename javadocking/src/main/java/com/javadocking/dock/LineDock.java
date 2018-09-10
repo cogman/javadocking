@@ -344,7 +344,7 @@ public class LineDock extends JPanel implements LeafDock {
 				// Iterate over the dockables.
 				for (int index = 0; index < childDockables.size(); index++) {
 					// Get the component of the current dockable.
-					Component dockableComponent = (Component) ((Dockable) childDockables.get(index)).getContent();
+					Component dockableComponent = ((Dockable) childDockables.get(index)).getContent();
 					dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y);
 
 					// Set the position of the rectangle on this dockable.
@@ -415,7 +415,7 @@ public class LineDock extends JPanel implements LeafDock {
 								Dimension rectangleSize = new Dimension(dockableComponent.getSize().width, dockableComponent.getSize().height);
 								int childIndex = 1;
 								while ((childIndex < compositeDockable.getDockableCount()) && (childIndex + index < childDockables.size())) {
-									Component nextDockableComponent = (Component) ((Dockable) childDockables.get(index + childIndex)).getContent();
+									Component nextDockableComponent = ((Dockable) childDockables.get(index + childIndex)).getContent();
 									if (orientation == ORIENTATION_HORIZONTAL) {
 										rectangleSize.setSize(rectangleSize.getSize().width + nextDockableComponent.getSize().width,
 												rectangleSize.getSize().height);
@@ -451,7 +451,7 @@ public class LineDock extends JPanel implements LeafDock {
 				if (realSizeRectangle) {
 					if (orientation == ORIENTATION_HORIZONTAL) {
 						// Get the component of the current dockable.
-						Component dockableComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
+						Component dockableComponent = ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
 						dockablePosition.setLocation(dockableComponent.getLocation().x + dockableComponent.getSize().width, dockableComponent.getLocation().y);
 						dockablePosition = SwingUtilities.convertPoint(dockablePanel, dockablePosition, this);
 
@@ -470,7 +470,7 @@ public class LineDock extends JPanel implements LeafDock {
 						return priority;
 					} else {
 						// Get the component of the current dockable.
-						Component dockableComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
+						Component dockableComponent = ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
 						dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y + dockableComponent.getSize().height);
 						dockablePosition = SwingUtilities.convertPoint(dockablePanel, dockablePosition, this);
 
@@ -492,7 +492,7 @@ public class LineDock extends JPanel implements LeafDock {
 				} else {
 					if (orientation == ORIENTATION_HORIZONTAL) {
 						// Get the component of the current dockable.
-						Component dockableComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
+						Component dockableComponent = ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
 						dockablePosition.setLocation(dockableComponent.getLocation().x + dockableComponent.getSize().width / 2, dockableComponent.getLocation().y);
 						dockablePosition = SwingUtilities.convertPoint(dockablePanel, dockablePosition, this);
 
@@ -503,7 +503,7 @@ public class LineDock extends JPanel implements LeafDock {
 						return priority;
 					} else {
 						// Get the component of the current dockable.
-						Component dockableComponent = (Component) ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
+						Component dockableComponent = ((Dockable) childDockables.get(childDockables.size() - 1)).getContent();
 						dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y + dockableComponent.getSize().height / 2);
 						dockablePosition = SwingUtilities.convertPoint(dockablePanel, dockablePosition, this);
 
@@ -612,7 +612,7 @@ public class LineDock extends JPanel implements LeafDock {
 				// Inform the listeners about the removal.
 				dockingEventSupport.fireDockingWillChange(new DockableEvent(this, this, null, childDockable));
 
-				dockablePanel.remove((Component) childDockable.getContent());
+				dockablePanel.remove(childDockable.getContent());
 				childDockables.remove(childDockable);
 				childDockable.setState(DockableState.CLOSED, null);
 
@@ -635,7 +635,7 @@ public class LineDock extends JPanel implements LeafDock {
 		// Inform the listeners about the removal.
 		dockingEventSupport.fireDockingWillChange(new DockableEvent(this, this, null, dockable));
 
-		dockablePanel.remove((Component) dockable.getContent());
+		dockablePanel.remove(dockable.getContent());
 		childDockables.remove(dockable);
 		dockable.setState(DockableState.CLOSED, null);
 
@@ -852,7 +852,7 @@ public class LineDock extends JPanel implements LeafDock {
 		// Remove and add all the dockables from the dockable panel.
 		dockablePanel.removeAll();
 		for (Object childDockable : childDockables) {
-			dockablePanel.add((Component) ((Dockable) childDockable).getContent());
+			dockablePanel.add(((Dockable) childDockable).getContent());
 		}
 
 		// Repaint.
@@ -1040,7 +1040,7 @@ public class LineDock extends JPanel implements LeafDock {
 		// Iterate over the dockables.
 		for (int index = 0; index < childDockables.size(); index++) {
 			// Get the component of the current dockable.
-			Component dockableComponent = (Component) ((Dockable) childDockables.get(index)).getContent();
+			Component dockableComponent = ((Dockable) childDockables.get(index)).getContent();
 			dockablePosition.setLocation(dockableComponent.getLocation().x, dockableComponent.getLocation().y);
 
 			// Set the rectangle on the dockable.
@@ -1114,7 +1114,7 @@ public class LineDock extends JPanel implements LeafDock {
 		// Iterate over the dockables.
 		for (Object childDockable : childDockables) {
 			// Get the component of the current dockable.
-			Component dockableComponent = (Component) ((Dockable) childDockable).getContent();
+			Component dockableComponent = ((Dockable) childDockable).getContent();
 			dockablePosition.setLocation(dockableComponent.getLocation().x + priorityBorder, dockableComponent.getLocation().y + priorityBorder);
 
 			// Set the rectangle on the dockable.
@@ -1184,7 +1184,7 @@ public class LineDock extends JPanel implements LeafDock {
 		// Add all the dockables.
 		for (Object childDockable1 : childDockables) {
 			Dockable childDockable = (Dockable) childDockable1;
-			dockablePanel.add((Component) childDockable.getContent());
+			dockablePanel.add(childDockable.getContent());
 		}
 
 	}

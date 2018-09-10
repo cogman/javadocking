@@ -359,13 +359,13 @@ public class DynamicDockRetriever implements DockRetriever {
 		}
 
 		// Get the first ancestor of type Dock.
-		Component dockAncestor = (Component) SwingUtilities.getAncestorOfClass(Dock.class, component);
+		Component dockAncestor = SwingUtilities.getAncestorOfClass(Dock.class, component);
 		while (dockAncestor != null) {
 			// Add to the list of ancestors.
 			dockAncestors.add(dockAncestor);
 
 			// Get the next ancestor of type Dock.
-			dockAncestor = (Component) SwingUtilities.getAncestorOfClass(Dock.class, dockAncestor);
+			dockAncestor = SwingUtilities.getAncestorOfClass(Dock.class, dockAncestor);
 		}
 
 		return dockAncestors;

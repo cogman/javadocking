@@ -296,7 +296,7 @@ class DockModelPropertiesUtil {
 		String propertiesPrefix = visualizerKey + ".";
 
 		// Try to get the visualizer.
-		Object visualizerObject = (Visualizer) visualizersMap.get(visualizerKey);
+		Object visualizerObject = visualizersMap.get(visualizerKey);
 		if (visualizerObject != null) {
 			if (visualizerObject instanceof Visualizer) {
 				Visualizer visualizer = (Visualizer) visualizerObject;

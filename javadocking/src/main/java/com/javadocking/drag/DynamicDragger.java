@@ -199,7 +199,7 @@ public class DynamicDragger implements Dragger {
 		if (ancestorDock.getDockableCount() > 0) {
 			if (fixedDockable == null) {
 				// We can start dragging.
-				originDock = (LeafDock) ancestorDock;
+				originDock = ancestorDock;
 				int count = originDock.getDockableCount();
 				Dimension dockableSize = null;
 				if (count > 0) {
@@ -241,7 +241,7 @@ public class DynamicDragger implements Dragger {
 				}
 			} else {
 				// Control that the dragged dockable belongs to this dock.
-				originDock = (LeafDock) ancestorDock;
+				originDock = ancestorDock;
 				if (originDock.containsDockable(fixedDockable)) {
 					draggedDockable = fixedDockable;
 

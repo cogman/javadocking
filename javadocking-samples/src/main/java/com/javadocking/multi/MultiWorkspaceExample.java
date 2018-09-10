@@ -159,7 +159,7 @@ public class MultiWorkspaceExample extends JPanel {
 				visualizersMap.put("externalizer2", externalizer2);
 
 				// Decode the file.
-				dockModel = (DockModel) dockModelDecoder.decode(SOURCE, dockablesMap, ownersMap, visualizersMap);
+				dockModel = dockModelDecoder.decode(SOURCE, dockablesMap, ownersMap, visualizersMap);
 			} catch (FileNotFoundException fileNotFoundException) {
 				System.out.println("Could not find the file [" + SOURCE + "] with the saved dock model.");
 				System.out.println("Continuing with the default dock model.");

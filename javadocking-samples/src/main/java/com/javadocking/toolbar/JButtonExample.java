@@ -105,7 +105,7 @@ public class JButtonExample extends JPanel {
 		toolBarDock2.addDockable(buttonDockables[11], new Position(5));
 
 		// Add the docks.
-		add((Component) borderDock, BorderLayout.CENTER);
+		add(borderDock, BorderLayout.CENTER);
 
 		dockModel.addRootDock("borderDock", borderDock, frame);
 

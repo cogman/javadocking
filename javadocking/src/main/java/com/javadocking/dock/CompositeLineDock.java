@@ -362,7 +362,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					// Iterate over the docks.
 					for (int index = 0; index < childDocks.size(); index++) {
 						// Get the component of the current dock.
-						Component dockComponent = (Component) ((Dock) childDocks.get(index));
+						Component dockComponent = (Component) childDocks.get(index);
 						Point dockPosition = new Point();
 						dockPosition.setLocation(dockComponent.getLocation().x, dockComponent.getLocation().y);
 
@@ -441,7 +441,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					if (orientation == ORIENTATION_HORIZONTAL) {
 						// Get the component of the current dock.
 						Point dockPosition = new Point();
-						Component dockComponent = (Component) ((Dock) childDocks.get(childDocks.size() - 1));
+						Component dockComponent = (Component) childDocks.get(childDocks.size() - 1);
 						dockPosition.setLocation(dockComponent.getLocation().x + dockComponent.getSize().width, dockComponent.getLocation().y);
 
 						// The width of the rectangle.
@@ -460,7 +460,7 @@ public class CompositeLineDock extends JPanel implements CompositeDock {
 					} else {
 						// Get the component of the current dock.
 						Point dockPosition = new Point();
-						Component dockComponent = (Component) ((Dock) childDocks.get(childDocks.size() - 1));
+						Component dockComponent = (Component) childDocks.get(childDocks.size() - 1);
 						dockPosition.setLocation(dockComponent.getLocation().x, dockComponent.getLocation().y + dockComponent.getSize().height);
 
 						// The height of the rectangle.

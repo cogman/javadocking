@@ -388,7 +388,7 @@ public class FloatDock implements CompositeDock {
 			childDockWindows.remove(childDock);
 
 			// Get the window of the child and dispose it.
-			Window window = (Window) SwingUtilities.windowForComponent((Component) childDock);
+			Window window = SwingUtilities.windowForComponent((Component) childDock);
 			window.setVisible(false);
 			window.dispose();
 
@@ -411,7 +411,7 @@ public class FloatDock implements CompositeDock {
 			ghostChildDock = childDock;
 
 			// Get the window of the child and make it invisible.
-			Window window = (Window) SwingUtilities.windowForComponent((Component) childDock);
+			Window window = SwingUtilities.windowForComponent((Component) childDock);
 			window.setVisible(false);
 		}
 
@@ -422,7 +422,7 @@ public class FloatDock implements CompositeDock {
 		// Do we have a ghost?
 		if (ghostChildDock != null) {
 			// Get the window of the child and dispose it.
-			Window window = (Window) SwingUtilities.windowForComponent((Component) ghostChildDock);
+			Window window = SwingUtilities.windowForComponent((Component) ghostChildDock);
 			window.setVisible(false);
 			window.dispose();
 			Dock oldGhostChildDock = ghostChildDock;

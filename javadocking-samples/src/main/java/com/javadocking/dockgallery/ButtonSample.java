@@ -187,7 +187,7 @@ public class ButtonSample extends JPanel {
 		floatDock.addChildDock(toolGridDock, new Position(400, 300));
 
 		// Add the root dock.
-		add((Component) toolBarBorderDock, BorderLayout.CENTER);
+		add(toolBarBorderDock, BorderLayout.CENTER);
 		dockModel.addRootDock("borderDock", toolBarBorderDock, frame);
 
 		// Set the frame properties.

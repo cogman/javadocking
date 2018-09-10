@@ -207,7 +207,7 @@ public class DockingMinimizer implements Visualizer {
 					dockable.setState(DockableState.MINIMIZED, this);
 					minimizedDockables.add(dockable);
 //					SelectableDockableHeader dockableHeader = (SelectableDockableHeader)DockingManager.getComponentFactory().createMinimizeHeader(dockable, Position.TOP);
-					SelectableHeader dockableHeader = (SelectableHeader) DockingManager.getComponentFactory().createMinimizeHeader(dockable, Position.TOP);
+					SelectableHeader dockableHeader = DockingManager.getComponentFactory().createMinimizeHeader(dockable, Position.TOP);
 					dockableHeader.addPropertyChangeListener(selectionChangeListener);
 					minimizedHeaders.put(dockable, dockableHeader);
 					ButtonDockable buttonDockable = new ButtonDockable(createMinimizedHeaderDockableID(dockable),

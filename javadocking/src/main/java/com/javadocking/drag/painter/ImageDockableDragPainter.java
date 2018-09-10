@@ -344,7 +344,7 @@ public class ImageDockableDragPainter implements DockableDragPainter {
 		// Overwritten methods from JComponent.
 
 		public void paint(Graphics graphics) {
-			((Graphics2D) graphics).drawImage(smallImage, 0, 0, getWidth(), getHeight(), null);
+			graphics.drawImage(smallImage, 0, 0, getWidth(), getHeight(), null);
 		}
 
 		// Public methods.
