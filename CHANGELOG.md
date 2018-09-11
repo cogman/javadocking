@@ -3,6 +3,7 @@
 - Misc code cleanup
 - Intellij formatting
 - Fixed a bug where icon resources weren't properly being loaded
+- Adding first unit tests
 
 # 1.6.0
 - Removed version sniffing logic.

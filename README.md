@@ -9,7 +9,7 @@ To use this library, add the following maven dependency to your pom file
     <dependency>
       <groupId>com.github.cogman</groupId>
       <artifactId>javadocking</artifactId>
-      <version>1.6.0</version>
+      <version>1.7.0</version>
     </dependency>
 
 ### Original Readme
