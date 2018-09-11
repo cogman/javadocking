@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.cogman</groupId>
 	<artifactId>javadocking-samples</artifactId>
-	<version>1.7.0-SNAPSHOT</version>
+	<version>1.7.0</version>
 	<packaging>jar</packaging>
 	<name>javadocking-samples</name>
 	<properties>
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.github.cogman</groupId>
 			<artifactId>javadocking</artifactId>
-			<version>1.7.0-SNAPSHOT</version>
+			<version>1.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
