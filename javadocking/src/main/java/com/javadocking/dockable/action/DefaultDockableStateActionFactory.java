@@ -5,6 +5,7 @@ import com.javadocking.dockable.DockableState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.net.URL;
 
 /**
  * <p>
@@ -37,48 +38,23 @@ public class DefaultDockableStateActionFactory implements DockableStateActionFac
 	public DockableStateAction createDockableStateAction(@NotNull Dockable dockable, int newDockableState) {
 
 		boolean enabled = (dockable.getPossibleStates() & newDockableState) != 0;
-		Icon icon;
 		DockableStateAction action;
+		final Icon icon = getIcon(newDockableState, enabled);
 		switch (newDockableState) {
 			case DockableState.CLOSED:
-				if (enabled) {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/close12.gif"));
-				} else {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/closeDisabled12.gif"));
-				}
-				action = new DefaultDockableStateAction(dockable, DockableState.CLOSED, "Close", icon);
+				action = new DefaultDockableStateAction(dockable, newDockableState, "Close", icon);
 				break;
 			case DockableState.NORMAL:
-				if (enabled) {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/normal12.gif"));
-				} else {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/normalDisabled12.gif"));
-				}
-				action = new DefaultDockableStateAction(dockable, DockableState.NORMAL, "Restore", icon);
+				action = new DefaultDockableStateAction(dockable, newDockableState, "Restore", icon);
 				break;
 			case DockableState.MAXIMIZED:
-				if (enabled) {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/maximize12.gif"));
-				} else {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/maximizeDisabled12.gif"));
-				}
-				action = new DefaultDockableStateAction(dockable, DockableState.MAXIMIZED, "Maximize", icon);
+				action = new DefaultDockableStateAction(dockable, newDockableState, "Maximize", icon);
 				break;
 			case DockableState.MINIMIZED:
-				if (enabled) {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/minimize12.gif"));
-				} else {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/minimizeDisabled12.gif"));
-				}
-				action = new DefaultDockableStateAction(dockable, DockableState.MINIMIZED, "Minimize", icon);
+				action = new DefaultDockableStateAction(dockable, newDockableState, "Minimize", icon);
 				break;
 			case DockableState.EXTERNALIZED:
-				if (enabled) {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/externalize12.gif"));
-				} else {
-					icon = new ImageIcon(getClass().getResource("/com/javadocking/resources/images/externalizeDisabled12.gif"));
-				}
-				action = new DefaultDockableStateAction(dockable, DockableState.EXTERNALIZED, "Externalize", icon);
+				action = new DefaultDockableStateAction(dockable, newDockableState, "Externalize", icon);
 				break;
 			default:
 				throw new IllegalArgumentException("Cannot create a DockableStateAction for the state [" + newDockableState + "]");
@@ -89,4 +65,51 @@ public class DefaultDockableStateActionFactory implements DockableStateActionFac
 
 	}
 
+	static Icon getIcon(int dockableState, boolean enabled)
+	{
+		final ClassLoader classLoader = DefaultDockableStateActionFactory.class.getClassLoader();
+		final URL resource;
+		switch (dockableState) {
+			case DockableState.CLOSED:
+				if (enabled) {
+					resource = classLoader.getResource("images/close12.gif");
+				} else {
+					resource = classLoader.getResource("images/closeDisabled12.gif");
+				}
+				break;
+			case DockableState.NORMAL:
+				if (enabled) {
+					resource = classLoader.getResource("images/normal12.gif");
+				} else {
+					resource = classLoader.getResource("images/normalDisabled12.gif");
+				}
+				break;
+			case DockableState.MAXIMIZED:
+				if (enabled) {
+					resource = classLoader.getResource("images/maximize12.gif");
+				} else {
+					resource = classLoader.getResource("images/maximizeDisabled12.gif");
+				}
+				break;
+			case DockableState.MINIMIZED:
+				if (enabled) {
+					resource = classLoader.getResource("images/minimize12.gif");
+				} else {
+					resource = classLoader.getResource("images/minimizeDisabled12.gif");
+				}
+				break;
+			case DockableState.EXTERNALIZED:
+				if (enabled) {
+					resource = classLoader.getResource("images/externalize12.gif");
+				} else {
+					resource = classLoader.getResource("images/externalizeDisabled12.gif");
+				}
+				break;
+			default:
+				throw new IllegalArgumentException("Cannot create a Icon for the state [" + dockableState + "] enabled [" + enabled + "]");
+		}
+		if (resource == null)
+			throw new IllegalArgumentException("Unable to load icon resource for dockable [" + dockableState + "] enabled [" + enabled + "]");
+		return new ImageIcon(resource);
+	}
 }
