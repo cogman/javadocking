@@ -110,7 +110,7 @@ public class DefaultDragListener implements DragListener {
 	/**
 	 * When these buttons are pressed when the mouse is pressed, dragging is started.
 	 */
-	private int startButtonMask = InputEvent.BUTTON3_DOWN_MASK;
+	private int startButtonMask = InputEvent.BUTTON1_DOWN_MASK;
 	/**
 	 * When these buttons are pressed when the mouse is pressed, dragging is started.
 	 */

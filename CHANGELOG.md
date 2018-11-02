@@ -1,3 +1,6 @@
+# 1.7.1
+Issue 3
+
 # 1.7.0
 - Using more java 8 features
 - Misc code cleanup
